@@ -32,6 +32,7 @@ namespace ErpSystem.Data
         public DbSet<WarehouseBoxSpace> WarehouseBoxes { get; set; }
         public DbSet<WarehouseProduct> WarehouseProducts { get; set; }
         public DbSet<SaleAccumulator> SaleAccumulators { get; set; }
+        public DbSet<User> Users { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

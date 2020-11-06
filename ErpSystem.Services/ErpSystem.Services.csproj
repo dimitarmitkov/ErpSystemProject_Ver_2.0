@@ -16,5 +16,6 @@
     <Folder Include="ViewModels\Warehouse\" />
     <Folder Include="ViewModels\Supplier\" />
     <Folder Include="ViewModels\Sale\" />
+    <Folder Include="ViewModels\User\" />
   </ItemGroup>
 </Project>

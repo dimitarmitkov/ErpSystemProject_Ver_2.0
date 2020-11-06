@@ -36,6 +36,8 @@ namespace ErpSysytem.ConsoleApp
 
             ISalesService salesService = new SalesService(db);
 
+            IUsersService usersService = new UsersService(db);
+
             //AddSupplierViewModel addSupplier1 = new AddSupplierViewModel
             //{
             //    SupplierName = "DotNet Gmbh",
@@ -238,12 +240,12 @@ namespace ErpSysytem.ConsoleApp
             //customerService.CreateCustomer(customer3);
 
 
-            var resultProductsName = productService.SearchByProductNameAndId(null, null);
+            //var resultProductsName = productService.SearchByProductNameAndId(null, null);
 
-            foreach (var resultProduct in resultProductsName)
-            {
-                Console.WriteLine($"Product: {resultProduct.ProductName}, Price: {resultProduct.ProductSalePrice}, Total Available Products: {resultProduct.ProductsAvailable}, Total Products Delivery Price = {resultProduct.ProductSalePrice}, LND: {resultProduct.ProductLandedPrice}");
-            }
+            //foreach (var resultProduct in resultProductsName)
+            //{
+            //    Console.WriteLine($"Product: {resultProduct.ProductName}, Price: {resultProduct.ProductSalePrice}, Total Available Products: {resultProduct.ProductsAvailable}, Total Products Delivery Price = {resultProduct.ProductSalePrice}, LND: {resultProduct.ProductLandedPrice}");
+            //}
 
             //var resultProductsPrice = productService.SearchByProductPrice(100, null);
 
@@ -341,6 +343,7 @@ namespace ErpSysytem.ConsoleApp
                 Console.WriteLine($"Customer: {sale.Customer}, Product: {sale.Product} => pieces: {sale.NumberOfSoldProducts}; singlr prod price {sale.SingleProudctSalePrice} total: {sale.TotalSalePrice}");
             }
 
+            //usersService.CreateUser("Dimitar", "Mitkov", "dimitar.mitkov@me.com", "123456");
         }
     }
 }
