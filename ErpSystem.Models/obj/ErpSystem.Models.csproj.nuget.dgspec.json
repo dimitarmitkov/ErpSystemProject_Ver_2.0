@@ -1,0 +1,67 @@
+{
+  "format": 1,
+  "restore": {
+    "/Users/dimitarmitkov/Projects/C#2020/web_project/ErpSystemProject/ErpSystem.Models/ErpSystem.Models.csproj": {}
+  },
+  "projects": {
+    "/Users/dimitarmitkov/Projects/C#2020/web_project/ErpSystemProject/ErpSystem.Models/ErpSystem.Models.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/dimitarmitkov/Projects/C#2020/web_project/ErpSystemProject/ErpSystem.Models/ErpSystem.Models.csproj",
+        "projectName": "ErpSystem.Models",
+        "projectPath": "/Users/dimitarmitkov/Projects/C#2020/web_project/ErpSystemProject/ErpSystem.Models/ErpSystem.Models.csproj",
+        "packagesPath": "/Users/dimitarmitkov/.nuget/packages/",
+        "outputPath": "/Users/dimitarmitkov/Projects/C#2020/web_project/ErpSystemProject/ErpSystem.Models/obj/",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "/Users/dimitarmitkov/.config/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "dependencies": {
+            "System.ComponentModel.Annotations": {
+              "target": "Package",
+              "version": "[4.7.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/3.1.403/RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

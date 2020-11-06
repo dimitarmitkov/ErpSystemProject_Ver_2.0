@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ErpSystem.Data\ErpSystem.Data.csproj" />
+    <ProjectReference Include="..\ErpSystem.Models\ErpSystem.Models.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ViewModels\" />
+    <Folder Include="ViewModels\Product\" />
+    <Folder Include="ViewModels\Customer\" />
+    <Folder Include="Services\" />
+    <Folder Include="ViewModels\Warehouse\" />
+    <Folder Include="ViewModels\Supplier\" />
+    <Folder Include="ViewModels\Sale\" />
+  </ItemGroup>
+</Project>
