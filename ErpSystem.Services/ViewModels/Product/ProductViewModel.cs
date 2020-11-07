@@ -1,8 +1,4 @@
-﻿using System;
-using System.Runtime.CompilerServices;
-using ErpSystem.Models;
-
-namespace ErpSystem.Services.Models
+﻿namespace ErpSystem.Services.ViewModels.Product
 {
     public class ProductViewModel
     {
@@ -28,5 +24,6 @@ namespace ErpSystem.Services.Models
         public int ProductsAvailable { get; set; }
 
         public decimal TotalProductsDeliveryPrice { get; set; }
+        public object ProductPrice { get; set; }
     }
 }

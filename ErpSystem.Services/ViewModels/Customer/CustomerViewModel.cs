@@ -1,5 +1,5 @@
 ﻿using System;
-namespace ErpSystem.Services.Models
+namespace ErpSystem.Services.ViewModels.Customer
 {
     public class CustomerViewModel
     {

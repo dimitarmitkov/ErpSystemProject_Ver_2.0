@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using ErpSystem.Data;
 using ErpSystem.Models;
-using ErpSystem.Services.Models;
 using ErpSystem.Services.ViewModels.Product;
 
-namespace ErpSystem.Services
+namespace ErpSystem.Services.Services
 {
     public class ProductsService : IProductsService
     {

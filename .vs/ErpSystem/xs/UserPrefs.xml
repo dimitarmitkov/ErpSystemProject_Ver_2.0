@@ -1,12 +1,25 @@
 ﻿<Properties StartupConfiguration="{388AC19D-A293-45FB-B25C-E98397B4C4DA}|Default">
   <MonoDevelop.Ide.Workbench ActiveDocument="ErpSysytem.ConsoleApp/ConsoleStartUp.cs">
     <Files>
-      <File FileName="ErpSysytem.ConsoleApp/ConsoleStartUp.cs" Line="346" Column="95" />
-      <File FileName="ErpSystem.Services/Services/OrdersService.cs" />
-      <File FileName="ErpSystem.Models/SaleAccumulator.cs" />
-      <File FileName="ErpSystem.Services/Services/IUsersService.cs" />
-      <File FileName="ErpSystem.Services/Services/UsersService.cs" />
+      <File FileName="ErpSysytem.ConsoleApp/ConsoleStartUp.cs" Line="1" Column="1" />
     </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="ErpSystem" expanded="True">
+            <Node name="ErpSystem.Services" expanded="True" />
+            <Node name="ErpSysytem.ConsoleApp" expanded="True">
+              <Node name="ConsoleStartUp.cs" selected="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="ClassPad">
+        <State name="__root__">
+          <Node name="ErpSystem" expanded="True" selected="True" />
+        </State>
+      </Pad>
+    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.ItemProperties.ErpSysytem.ConsoleApp PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

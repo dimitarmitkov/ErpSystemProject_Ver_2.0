@@ -126,7 +126,7 @@
         "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "/Users/dimitarmitkov/.config/NuGet/NuGet.Config"
+        "/Users/dimitarmitkov/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"

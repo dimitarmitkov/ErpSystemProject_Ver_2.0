@@ -1,9 +1,7 @@
 ﻿using System;
 using ErpSystem.Data;
-using ErpSystem.Models;
-using ErpSystem.Services;
-using ErpSystem.Services.Models;
 using ErpSystem.Services.Services;
+using ErpSystem.Services.ViewModels.Customer;
 using ErpSystem.Services.ViewModels.Product;
 using ErpSystem.Services.ViewModels.Supplier;
 using ErpSystem.Services.ViewModels.Warehouse;
@@ -240,18 +238,18 @@ namespace ErpSysytem.ConsoleApp
             //customerService.CreateCustomer(customer3);
 
 
-            //var resultProductsName = productService.SearchByProductNameAndId(null, null);
+            var resultProductsName = productService.SearchByProductNameAndId(null, null);
 
-            //foreach (var resultProduct in resultProductsName)
-            //{
-            //    Console.WriteLine($"Product: {resultProduct.ProductName}, Price: {resultProduct.ProductSalePrice}, Total Available Products: {resultProduct.ProductsAvailable}, Total Products Delivery Price = {resultProduct.ProductSalePrice}, LND: {resultProduct.ProductLandedPrice}");
-            //}
+            foreach (var resultProduct in resultProductsName)
+            {
+                Console.WriteLine($"Product: {resultProduct.ProductName}, Price: {resultProduct.ProductSalePrice}, Total Available Products: {resultProduct.ProductsAvailable}, Total Products Delivery Price = {resultProduct.ProductSalePrice}, LND: {resultProduct.ProductLandedPrice}");
+            }
 
             //var resultProductsPrice = productService.SearchByProductPrice(100, null);
 
             //foreach (var product in resultProductsPrice)
             //{
-            //    Console.WriteLine($"Product: {product.ProductName} {product.MeasurmentTag}, Price: {product.ProductPrice}, Transport: {product.ProductTransportPackage}, Supplier: {product.Supplier}");
+            //    Console.WriteLine($"Product: {product.ProductName} {product.MeasurmentTag}, Price: {product.ProductSalePrice}, Transport: {product.ProductTransportPackage}, Supplier: {product.Supplier}");
             //}
 
             //var resultProductsSupplierLocation = productService.SearchByProductSupplierCountryOrCity("Germany", null);
@@ -336,12 +334,12 @@ namespace ErpSysytem.ConsoleApp
 
             //salesService.CreateSale(8, "8047d37d-60b8-4884-aa5d-74b8ccfb8002", 100, true, false, 1);
 
-            var sales = salesService.ListOfSales();
+            //var sales = salesService.ListOfSales();
 
-            foreach (var sale in sales)
-            {
-                Console.WriteLine($"Customer: {sale.Customer}, Product: {sale.Product} => pieces: {sale.NumberOfSoldProducts}; singlr prod price {sale.SingleProudctSalePrice} total: {sale.TotalSalePrice}");
-            }
+            //foreach (var sale in sales)
+            //{
+            //    Console.WriteLine($"Customer: {sale.Customer}, Product: {sale.Product} => pieces: {sale.NumberOfSoldProducts}; singlr prod price {sale.SingleProudctSalePrice} total: {sale.TotalSalePrice}");
+            //}
 
             //usersService.CreateUser("Dimitar", "Mitkov", "dimitar.mitkov@me.com", "123456");
         }

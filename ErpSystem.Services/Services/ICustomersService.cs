@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using ErpSystem.Services.Models;
+using ErpSystem.Services.ViewModels.Customer;
 
-namespace ErpSystem.Services
+namespace ErpSystem.Services.Services
 {
     public interface ICustomersService
     {
