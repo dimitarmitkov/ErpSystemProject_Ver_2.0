@@ -14,20 +14,22 @@ namespace ErpSystem.Services.ViewModels.Product
         public decimal ProductPrice { get; set; }
 
         [Required(ErrorMessage = "Please insert product landed price")]
-        [Range(0, 9999999999999999.99, ErrorMessage = "Price must be positive value")]
+        [Range(typeof(decimal), "0", "79228162514264337593543950335", ErrorMessage = "Price must be positive value")]
         public decimal ProductLendedPrice { get; set; }
 
         [Required(ErrorMessage = "Please insert product gross margin needed")]
         [Range(0, 100, ErrorMessage = "Gross margin must be between 0 and 100")]
         public int ProductGrossMargin { get; set; }
 
-
+        [HasSupplier("Supplier")]
         public string Supplier { get; set; }
 
         [Required(ErrorMessage = "Please insert order days")]
+        [Range(0, 360, ErrorMessage = "Days must be between 0 and 360")]
         public int TimeToOrder { get; set; }
 
         [Required(ErrorMessage = "Please insert delivery days")]
+        [Range(0, 360, ErrorMessage = "Days must be between 0 and 360")]
         public int TimeToDelivery { get; set; }
 
         public string ProductionDate { get; set; }
@@ -40,7 +42,6 @@ namespace ErpSystem.Services.ViewModels.Product
         [Required(ErrorMessage = "Please insert measurement type")]
         public string MeasurmentTag { get; set; }
 
-        [Range(typeof(bool), "true", "true", ErrorMessage = "The field Is Pallet must be checked.")]
         public string IsPallet { get; set; }
 
         [Display(Name = "Package Width in cm")]

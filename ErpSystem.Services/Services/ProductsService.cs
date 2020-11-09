@@ -27,8 +27,6 @@ namespace ErpSystem.Services.Services
                 ProductGrossMargin = createProduct.ProductGrossMargin,
                 TimeToOrder = createProduct.TimeToOrder,
                 TimeToDelivery = createProduct.TimeToDelivery,
-                ProductionDate = DateTime.Parse(createProduct.ProductionDate),
-                ExpireDate = DateTime.Parse(createProduct.ExpireDate),
                 IsPallet = bool.Parse(createProduct.IsPallet),
                 ProductTransportPackageWidthSize = createProduct.ProductTransportPackageWidthSize,
                 ProductTransportPackageLengthSize = createProduct.ProductTransportPackageWidthSize,
@@ -46,43 +44,51 @@ namespace ErpSystem.Services.Services
             {
                 product.ProductionDate = null;
             }
+            else
+            {
+                product.ProductionDate = DateTime.Parse(createProduct.ProductionDate);
+            }
 
             //setting expire date to null, if not set
             if (string.IsNullOrWhiteSpace(product.ExpireDate.ToString()))
             {
                 product.ExpireDate = null;
             }
+            else
+            {
+                product.ExpireDate = DateTime.Parse(createProduct.ExpireDate);
+            }
 
             //setting of supplier
             var supplierEntity = this.dbContext.Suppliers.FirstOrDefault(s => s.SupplierName == createProduct.Supplier);
 
-            if (supplierEntity == null)
-            {
-                Console.Write("Country: ");
-                var country = Console.ReadLine();
+            //if (supplierEntity == null)
+            //{
+            //    //Console.Write("Country: ");
+            //    //var country = Console.ReadLine();
 
-                Console.Write("PostalCode: ");
-                var postalCode = Console.ReadLine();
+            //    //Console.Write("PostalCode: ");
+            //    //var postalCode = Console.ReadLine();
 
-                Console.Write("Address: ");
-                var address = Console.ReadLine();
+            //    //Console.Write("Address: ");
+            //    //var address = Console.ReadLine();
 
-                Console.Write("Customs Authorisation Needed: ");
-                var customs = Console.ReadLine();
+            //    //Console.Write("Customs Authorisation Needed: ");
+            //    //var customs = Console.ReadLine();
 
-                Console.Write("Aditional Information: ");
-                var additionalInfo = Console.ReadLine();
+            //    //Console.Write("Aditional Information: ");
+            //    //var additionalInfo = Console.ReadLine();
 
-                supplierEntity = new Supplier
-                {
-                    SupplierName = createProduct.Supplier,
-                    SupplierCountry = country,
-                    SupplierPostalCode = postalCode,
-                    SupplierAddress = address,
-                    CustomsAuthorisationNeeded = bool.Parse(customs),
-                    SupplierAdditionalInformation = additionalInfo
-                };
-            }
+            //    supplierEntity = new Supplier
+            //    {
+            //        SupplierName = createProduct.Supplier,
+            //        //SupplierCountry = country,
+            //        //SupplierPostalCode = postalCode,
+            //        //SupplierAddress = address,
+            //        //CustomsAuthorisationNeeded = bool.Parse(customs),
+            //        //SupplierAdditionalInformation = additionalInfo
+            //    };
+            //}
             product.Supplier = supplierEntity;
 
             //setting of productTransportPackage
@@ -111,9 +117,9 @@ namespace ErpSystem.Services.Services
 
             product.MeasurmentTag = measurmentTagEntity;
 
-            var res = (decimal)product.ProductGrossMargin / 100;
+            var resultativeGrossMargin = (decimal)product.ProductGrossMargin / 100;
 
-            product.ProductSalePrice = product.ProductLandedPrice / res;
+            product.ProductSalePrice = product.ProductLandedPrice / (1 - resultativeGrossMargin);
 
             this.dbContext.Products.Add(product);
             this.dbContext.SaveChanges();

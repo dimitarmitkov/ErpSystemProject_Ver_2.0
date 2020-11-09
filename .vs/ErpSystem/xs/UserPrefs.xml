@@ -1,10 +1,13 @@
 ﻿<Properties StartupConfiguration="{CF8BBC16-E3A1-4061-B496-59996DF9DBB2}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="ErpSystem.WebApp/Views/Products/CreateProduct.cshtml">
+  <MonoDevelop.Ide.Workbench ActiveDocument="ErpSystem.Services/ViewModels/Product/HasSupplierAttribute.cs">
     <Files>
-      <File FileName="ErpSystem.WebApp/Views/Products/AddProduct.cshtml" Line="19" Column="75" />
-      <File FileName="ErpSystem.Services/ViewModels/Product/CreateProductViewModel.cs" Line="73" Column="45" />
-      <File FileName="ErpSystem.Services/ViewModels/User/RegisterUserViewModel.cs" Line="9" Column="87" />
-      <File FileName="ErpSystem.Services/Services/ProductsService.cs" Line="40" Column="70" />
+      <File FileName="ErpSystem.WebApp/Views/Products/AddProduct.cshtml" Line="14" Column="57" />
+      <File FileName="ErpSystem.Services/Services/ProductsService.cs" Line="128" Column="34" />
+      <File FileName="ErpSystem.WebApp/Controllers/ProductsController.cs" Line="38" Column="1" />
+      <File FileName="ErpSystem.WebApp/Views/Shared/_Layout.cshtml" Line="59" Column="82" />
+      <File FileName="ErpSystem.Services/ViewModels/Product/CreateProductViewModel.cs" Line="77" Column="1" />
+      <File FileName="ErpSystem.Models/Product.cs" Line="1" Column="1" />
+      <File FileName="ErpSystem.Services/ViewModels/Product/HasSupplierAttribute.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -15,7 +18,9 @@
             <Node name="ErpSystem.Services" expanded="True">
               <Node name="Services" expanded="True" />
               <Node name="ViewModels" expanded="True">
-                <Node name="Product" expanded="True" />
+                <Node name="Product" expanded="True">
+                  <Node name="HasSupplierAttribute.cs" selected="True" />
+                </Node>
                 <Node name="User" expanded="True" />
               </Node>
             </Node>
@@ -24,9 +29,7 @@
               <Node name="Views" expanded="True">
                 <Node name="Charts" expanded="True" />
                 <Node name="Home" expanded="True" />
-                <Node name="Products" expanded="True">
-                  <Node name="CreateProduct.cshtml" selected="True" />
-                </Node>
+                <Node name="Products" expanded="True" />
                 <Node name="Shared" expanded="True" />
                 <Node name="Users" expanded="True" />
               </Node>

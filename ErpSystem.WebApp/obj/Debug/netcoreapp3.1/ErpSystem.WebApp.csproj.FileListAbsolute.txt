@@ -398,8 +398,6 @@
 /Users/dimitarmitkov/Projects/C#2020/web_project/ErpSystemProject/ErpSystem.WebApp/obj/Debug/netcoreapp3.1/Razor/Views/Home/Index.cshtml.g.cs
 /Users/dimitarmitkov/Projects/C#2020/web_project/ErpSystemProject/ErpSystem.WebApp/obj/Debug/netcoreapp3.1/Razor/Views/Shared/Error.cshtml.g.cs
 /Users/dimitarmitkov/Projects/C#2020/web_project/ErpSystemProject/ErpSystem.WebApp/obj/Debug/netcoreapp3.1/Razor/Views/Shared/_Layout.cshtml.g.cs
-/Users/dimitarmitkov/Projects/C#2020/web_project/ErpSystemProject/ErpSystem.WebApp/obj/Debug/netcoreapp3.1/Razor/Views/Shared/_LoginPartial.cshtml.g.cs
-/Users/dimitarmitkov/Projects/C#2020/web_project/ErpSystemProject/ErpSystem.WebApp/obj/Debug/netcoreapp3.1/Razor/Views/Shared/_ValidationScriptsPartial.cshtml.g.cs
 /Users/dimitarmitkov/Projects/C#2020/web_project/ErpSystemProject/ErpSystem.WebApp/obj/Debug/netcoreapp3.1/Razor/Views/Users/Login.cshtml.g.cs
 /Users/dimitarmitkov/Projects/C#2020/web_project/ErpSystemProject/ErpSystem.WebApp/obj/Debug/netcoreapp3.1/Razor/Views/Users/Register.cshtml.g.cs
 /Users/dimitarmitkov/Projects/C#2020/web_project/ErpSystemProject/ErpSystem.WebApp/obj/Debug/netcoreapp3.1/Razor/Views/_ViewImports.cshtml.g.cs
@@ -413,3 +411,5 @@
 /Users/dimitarmitkov/Projects/C#2020/web_project/ErpSystemProject/ErpSystem.WebApp/obj/Debug/netcoreapp3.1/ErpSystem.WebApp.dll
 /Users/dimitarmitkov/Projects/C#2020/web_project/ErpSystemProject/ErpSystem.WebApp/obj/Debug/netcoreapp3.1/ErpSystem.WebApp.pdb
 /Users/dimitarmitkov/Projects/C#2020/web_project/ErpSystemProject/ErpSystem.WebApp/obj/Debug/netcoreapp3.1/ErpSystem.WebApp.genruntimeconfig.cache
+/Users/dimitarmitkov/Projects/C#2020/web_project/ErpSystemProject/ErpSystem.WebApp/obj/Debug/netcoreapp3.1/Razor/Views/Products/CreateProduct.cshtml.g.cs
+/Users/dimitarmitkov/Projects/C#2020/web_project/ErpSystemProject/ErpSystem.WebApp/obj/Debug/netcoreapp3.1/Razor/Views/Products/Search.cshtml.g.cs

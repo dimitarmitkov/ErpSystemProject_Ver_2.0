@@ -1,5 +1,5 @@
-﻿@using ErpSystem.Services.ViewModels.User
-@model RegisterUserViewModel
+﻿@using ErpSystem.Services.ViewModels.Product
+@model CreateProductViewModel
 
 @{
     ViewData["Title"] = "Create Product";
@@ -8,59 +8,177 @@
 <div class="row justify-content-lg-center">
     <div class="col-lg-7">
         <div class="card shadow-lg border-0 rounded-lg mt-5">
-            <div class="card-header"><h3 class="text-center font-weight-light my-4">Create Account</h3></div>
+            <div class="card-header"><h3 class="text-center font-weight-light my-4">Create Product</h3></div>
             <div class="card-body">
 
-                <form method="post">
+                <form method="post" style="font-size:1vw">
+                    @*first part*@
+                    <div class="form-row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="small mb-1" asp-for="ProductName">Product Name</label>
+                                <input class="form-control py-4" id="productName" type="text" placeholder="Enter product name" asp-for="ProductName" />
+                                <span asp-validation-for="ProductName" class="text-danger" style="font-size:0.7vw"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="small mb-1" asp-for="ProductLendedPrice">Landed Price</label>
+                                <input class="form-control py-4" id="productLendedPrice" placeholder="Enter LND price" asp-for="ProductLendedPrice" />
+                                <span asp-validation-for="ProductLendedPrice" class="text-danger" style="font-size:0.7vw"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="small mb-1" asp-for="ProductGrossMargin">Gross margin</label>
+                                <input class="form-control py-4" id="productGrossMargin" type="number" placeholder="Enter GM" asp-for="ProductGrossMargin" />
+                                <span asp-validation-for="ProductGrossMargin" class="text-danger" style="font-size:0.7vw"></span>
+                            </div>
+                        </div>
+                    </div>
 
+                    @*second part*@
+                    <div class="form-row">
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label class="small mb-1" asp-for="Supplier">Supplier</label>
+                                <input class="form-control py-4" id="inputLastName" type="text" placeholder="Enter supplier name" asp-for="Supplier" />
+                                <span asp-validation-for="Supplier" class="text-danger" style="font-size:0.7vw"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="small mb-1" asp-for="ProductIndentificationNumber">Supplier's Product Id</label>
+                                <input class="form-control py-4" id="productIndentificationNumber" type="text" placeholder="Enter bar-code" asp-for="ProductIndentificationNumber" />
+                                <span asp-validation-for="ProductIndentificationNumber" class="text-danger" style="font-size:0.7vw"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    @*third part*@
+                    <div class="form-row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="small mb-1" asp-for="TimeToOrder">Order days</label>
+                                <input class="form-control py-4" id="timeToOrder" type="number" placeholder="Enter days" asp-for="TimeToOrder" />
+                                <span asp-validation-for="TimeToOrder" class="text-danger" style="font-size:0.7vw"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="small mb-1" asp-for="TimeToDelivery">Delivery days</label>
+                                <input class="form-control py-4" id="timeToDelivery" type="number" placeholder="Enter days" asp-for="TimeToDelivery" />
+                                <span asp-validation-for="TimeToDelivery" class="text-danger" style="font-size:0.7vw"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="small mb-1" asp-for="ProductionDate">Production date</label>
+                                <input class="form-control py-4" id="productionDate" type="date" placeholder="Enter date" asp-for="ProductionDate" />
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="small mb-1" asp-for="ExpireDate">Expire date</label>
+                                <input class="form-control py-4" id="expireDate" type="date" placeholder="Enter date" asp-for="ExpireDate" />
+                            </div>
+                        </div>
+                    </div>
+
+                    @*fourth part*@
+                    <div class="form-row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="small mb-1" asp-for="ProductTransportPackage">Transport package</label>
+                                <input class="form-control py-4" id="productTransportPackage" type="text" placeholder="Enter type" asp-for="ProductTransportPackage" />
+                                <span asp-validation-for="ProductTransportPackage" class="text-danger" style="font-size:0.7vw"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="small mb-1" asp-for="MeasurmentTag">Product measurment</label>
+                                <input class="form-control py-4" id="measurmentTag" type="text" placeholder="Enter type" asp-for="MeasurmentTag" />
+                                <span asp-validation-for="MeasurmentTag" class="text-danger" style="font-size:0.7vw"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="small mb-1" asp-for="IsPallet">Is pallet</label>
+                                <input class="form-control py-4" id="productionDate" type="checkbox" asp-for="IsPallet" />
+                                <span asp-validation-for="IsPallet" class="text-danger" style="font-size:0.7vw"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    @*fifth part*@
+                    <div class="form-row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="small mb-1" asp-for="ProductTransportPackageWidthSize"></label>
+                                <input class="form-control py-4" id="productTransportPackageWidthSize" type="number" placeholder="Enter width" asp-for="ProductTransportPackageWidthSize" />
+                                <span asp-validation-for="ProductTransportPackageWidthSize" class="text-danger" style="font-size:0.7vw"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="small mb-1" asp-for="ProductTransportPackageLengthSize"></label>
+                                <input class="form-control py-4" id="productTransportPackageLengthSize" type="number" placeholder="Enter length" asp-for="ProductTransportPackageLengthSize" />
+                                <span asp-validation-for="ProductTransportPackageLengthSize" class="text-danger" style="font-size:0.7vw"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="small mb-1" asp-for="ProductTransportPackageHeightSize"></label>
+                                <input class="form-control py-4" id="productTransportPackageHeightSize" type="number" placeholder="Enter height" asp-for="ProductTransportPackageHeightSize" />
+                                <span asp-validation-for="ProductTransportPackageHeightSize" class="text-danger" style="font-size:0.7vw"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    @*sixt part*@
+                    <div class="form-row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="small mb-1" asp-for="ProductTransportPackageWeight"></label>
+                                <input class="form-control py-4" id="productTransportPackageWeight" type="number" placeholder="Enter weight" asp-for="ProductTransportPackageWeight" />
+                                <span asp-validation-for="ProductTransportPackageWeight" class="text-danger" style="font-size:0.7vw"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="small mb-1" asp-for="ProductTransportPackageNumberOfPieces"></label>
+                                <input class="form-control py-4" id="productTransportPackageNumberOfPieces" type="number" placeholder="Enter pieces" asp-for="ProductTransportPackageNumberOfPieces" />
+                                <span asp-validation-for="ProductTransportPackageNumberOfPieces" class="text-danger" style="font-size:0.7vw"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="small mb-1" asp-for="BoxesPerPallet"></label>
+                                <input class="form-control py-4" id="boxesPerPallet" type="number" placeholder="Enter boxes number" asp-for="BoxesPerPallet" />
+                                <span asp-validation-for="BoxesPerPallet" class="text-danger" style="font-size:0.7vw"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    @*seventh part*@
                     <div class="form-row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="small mb-1" asp-for="InputFirstName">First Name</label>
-                                <input class="form-control py-4" id="inputFirstName" type="text" placeholder="Enter first name" asp-for="InputFirstName" />
-                                <span asp-validation-for="InputFirstName" class="text-danger" style="font-size:0.7vw"></span>
+                                <label class="small mb-1" asp-for="SingleProductSize"></label>
+                                <input class="form-control py-4" id="singleProductSize" type="text" placeholder="Enter size" asp-for="SingleProductSize" />
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                @*<label class="small mb-1" for="inputLastName" asp-for="InputLastName">Last Name</label>*@
-                                <label class="small mb-1" asp-for="InputLastName">Last Name</label>
-                                <input class="form-control py-4" id="inputLastName" type="text" placeholder="Enter last name" asp-for="InputLastName" />
-                                <span asp-validation-for="InputLastName" class="text-danger" style="font-size:0.7vw"></span>
+                                <label class="small mb-1" asp-for="ProductDescription"></label>
+                                <input class="form-control py-4" id="productDescription" type="text" placeholder="Enter product  description" asp-for="ProductDescription" />
                             </div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        @*<label class="small mb-1" for="inputEmailxAddress" asp-for="InputEmailAddress">Email</label>*@
-                        <label class="small mb-1" asp-for="InputEmailAddress">Email</label>
-                        <input class="form-control py-4" id="inputEmailAddress" type="email" aria-describedby="emailHelp" placeholder="Enter email address" asp-for="InputEmailAddress" />
-                        <span asp-validation-for="InputEmailAddress" class="text-danger" style="font-size:0.7vw"></span>
-                    </div>
-                    <div class="form-row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                @*<label class="small mb-1" for="inputPassword" asp-for="InputPassword">Password</label>*@
-                                <label class="small mb-1" asp-for="InputPassword">Password</label>
-                                <input class="form-control py-4" id="inputPassword" type="password" placeholder="Enter password" asp-for="InputPassword" />
-                                <span asp-validation-for="InputPassword" class="text-danger" style="font-size:0.7vw"></span>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                @*<label class="small mb-1" for="inputConfirmPassword" asp-for="InputConfirmPassword">Confirm Password</label>*@
-                                <label class="small mb-1" asp-for="InputConfirmPassword">Confirm Password</label>
-                                <input class="form-control py-4" id="inputConfirmPassword" type="password" placeholder="Confirm password" asp-for="InputConfirmPassword" />
-                                <span asp-validation-for="InputConfirmPassword" class="text-danger" style="font-size:0.7vw"></span>
-                            </div>
-                        </div>
-                    </div>
-                    @*<div class="form-group mt-4 mb-0"><a class="btn btn-primary btn-block" href="/Users/Login">Create Account</a></div>*@
-                    <div class="form-group mt-4 mb-0"><button type="submit" class="btn btn-primary btn-block">Create Account</button></div>
+
+                    <div class="form-group mt-4 mb-0"><button type="submit" class="btn btn-primary btn-block">Create Product</button></div>
                 </form>
 
-            </div>
-            <div class="card-footer text-center">
-                <div class="small"><a asp-area="" asp-controller="Users" asp-action="Login">Have an account? Go to login</a></div>
             </div>
         </div>
     </div>
