@@ -4,6 +4,7 @@ using System.Security.Cryptography;
 using System.Text;
 using ErpSystem.Data;
 using ErpSystem.Models;
+using ErpSystem.Services.ViewModels.User;
 
 namespace ErpSystem.Services.Services
 {
@@ -16,14 +17,14 @@ namespace ErpSystem.Services.Services
             this.dbContext = dbContext;
         }
 
-        public void CreateUser(string firstName, string lastName, string email, string password)
+        public void CreateUser(RegisterUserViewModel registerUser)
         {
             var user = new User
             {
-                FirstName = firstName,
-                LastName = lastName,
-                Email = email,
-                Password = ComputeHash(password)
+                FirstName = registerUser.InputFirstName,
+                LastName = registerUser.InputLastName,
+                Email = registerUser.InputEmailAddress,
+                Password = ComputeHash(registerUser.InputPassword)
             };
 
             this.dbContext.Users.Add(user);
@@ -43,6 +44,14 @@ namespace ErpSystem.Services.Services
             return !this.dbContext.Users.Any(u => u.Email == email);
         }
 
+        public string GetUserId(string userEmil, string userPassword)
+        {
+            var userHashPassword = ComputeHash(userPassword);
+            var user = this.dbContext.Users.FirstOrDefault(u => u.Email == userEmil && u.Password == userHashPassword);
+
+            return user?.Id;
+        }
+
         private static string ComputeHash(string input)
         {
             var bytes = Encoding.UTF8.GetBytes(input);
@@ -55,5 +64,6 @@ namespace ErpSystem.Services.Services
                 hashedInputStringBuilder.Append(b.ToString("X2"));
             return hashedInputStringBuilder.ToString();
         }
+
     }
 }

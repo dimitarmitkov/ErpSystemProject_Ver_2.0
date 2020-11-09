@@ -1,0 +1,48 @@
+﻿@using ErpSystem.Services.ViewModels.Sale
+@model IEnumerable<SaleViewModel>
+
+<div style="display: none;" id="jsArray">
+    @Html.Raw(Json.Serialize(Model))
+</div>
+<div class="container-fluid">
+    <h1 class="mt-4">Charts</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+        <li class="breadcrumb-item active">Charts</li>
+    </ol>
+    <div class="card mb-4">
+        @*<div class="card-body">
+                Chart.js is a third party plugin that is used to generate the charts in this template. The
+                charts below have been customized - for further customization options, please visit the official
+                <a target="_blank" href="https://www.chartjs.org/docs/latest/">Chart.js documentation</a>
+                .
+            </div>*@
+        <form>
+            <div class="form-row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="small mb-1" for="inputStartDate">Start Date</label>
+                        <input class="form-control py-4" id="inputStartDate" type="date" placeholder="Enter start date" />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="small mb-1" for="inputEndDate">End Date</label>
+                        <input class="form-control py-4" id="inputEndDate" type="date" placeholder="Enter end date" />
+                    </div>
+                </div>
+            </div>
+            <div class="form-group mt-4 mb-0"><a class="btn btn-primary btn-block" id="submit">Submit</a></div>
+        </form>
+    </div>
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-chart-bar mr-1"></i>
+            Bar Chart Example
+        </div>
+        <div class="card-body">
+            <canvas id="myBarChart" width="100%" height="30"></canvas>
+        </div>
+        <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+    </div>
+</div>

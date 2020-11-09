@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ErpSystem.Models", "ErpSyst
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ErpSystem.Services", "ErpSystem.Services\ErpSystem.Services.csproj", "{1BA271F4-11BF-404B-BDF2-DF85ACD54641}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ErpSystem.WebApp", "ErpSystem.WebApp\ErpSystem.WebApp.csproj", "{CF8BBC16-E3A1-4061-B496-59996DF9DBB2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,5 +33,9 @@ Global
 		{1BA271F4-11BF-404B-BDF2-DF85ACD54641}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1BA271F4-11BF-404B-BDF2-DF85ACD54641}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1BA271F4-11BF-404B-BDF2-DF85ACD54641}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF8BBC16-E3A1-4061-B496-59996DF9DBB2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF8BBC16-E3A1-4061-B496-59996DF9DBB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF8BBC16-E3A1-4061-B496-59996DF9DBB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF8BBC16-E3A1-4061-B496-59996DF9DBB2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

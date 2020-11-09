@@ -1,0 +1,67 @@
+﻿@using ErpSystem.Services.ViewModels.User
+@model RegisterUserViewModel
+
+@{
+    ViewData["Title"] = "Create Product";
+}
+
+<div class="row justify-content-lg-center">
+    <div class="col-lg-7">
+        <div class="card shadow-lg border-0 rounded-lg mt-5">
+            <div class="card-header"><h3 class="text-center font-weight-light my-4">Create Account</h3></div>
+            <div class="card-body">
+
+                <form method="post">
+
+                    <div class="form-row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="small mb-1" asp-for="InputFirstName">First Name</label>
+                                <input class="form-control py-4" id="inputFirstName" type="text" placeholder="Enter first name" asp-for="InputFirstName" />
+                                <span asp-validation-for="InputFirstName" class="text-danger" style="font-size:0.7vw"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                @*<label class="small mb-1" for="inputLastName" asp-for="InputLastName">Last Name</label>*@
+                                <label class="small mb-1" asp-for="InputLastName">Last Name</label>
+                                <input class="form-control py-4" id="inputLastName" type="text" placeholder="Enter last name" asp-for="InputLastName" />
+                                <span asp-validation-for="InputLastName" class="text-danger" style="font-size:0.7vw"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @*<label class="small mb-1" for="inputEmailxAddress" asp-for="InputEmailAddress">Email</label>*@
+                        <label class="small mb-1" asp-for="InputEmailAddress">Email</label>
+                        <input class="form-control py-4" id="inputEmailAddress" type="email" aria-describedby="emailHelp" placeholder="Enter email address" asp-for="InputEmailAddress" />
+                        <span asp-validation-for="InputEmailAddress" class="text-danger" style="font-size:0.7vw"></span>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                @*<label class="small mb-1" for="inputPassword" asp-for="InputPassword">Password</label>*@
+                                <label class="small mb-1" asp-for="InputPassword">Password</label>
+                                <input class="form-control py-4" id="inputPassword" type="password" placeholder="Enter password" asp-for="InputPassword" />
+                                <span asp-validation-for="InputPassword" class="text-danger" style="font-size:0.7vw"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                @*<label class="small mb-1" for="inputConfirmPassword" asp-for="InputConfirmPassword">Confirm Password</label>*@
+                                <label class="small mb-1" asp-for="InputConfirmPassword">Confirm Password</label>
+                                <input class="form-control py-4" id="inputConfirmPassword" type="password" placeholder="Confirm password" asp-for="InputConfirmPassword" />
+                                <span asp-validation-for="InputConfirmPassword" class="text-danger" style="font-size:0.7vw"></span>
+                            </div>
+                        </div>
+                    </div>
+                    @*<div class="form-group mt-4 mb-0"><a class="btn btn-primary btn-block" href="/Users/Login">Create Account</a></div>*@
+                    <div class="form-group mt-4 mb-0"><button type="submit" class="btn btn-primary btn-block">Create Account</button></div>
+                </form>
+
+            </div>
+            <div class="card-footer text-center">
+                <div class="small"><a asp-area="" asp-controller="Users" asp-action="Login">Have an account? Go to login</a></div>
+            </div>
+        </div>
+    </div>
+</div>

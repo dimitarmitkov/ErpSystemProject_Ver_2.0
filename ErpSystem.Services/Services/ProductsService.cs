@@ -21,23 +21,23 @@ namespace ErpSystem.Services.Services
         {
             var product = new Product
             {
-                ProductIndentificationNumber = createProduct.productIndentificationNumber,
-                ProductName = createProduct.productName,
-                ProductLandedPrice = createProduct.productLendedPrice,
-                ProductGrossMargin = createProduct.productGrossMargin,
-                TimeToOrder = createProduct.timeToOrder,
-                TimeToDelivery = createProduct.timeToDelivery,
-                ProductionDate = DateTime.Parse(createProduct.productionDate),
-                ExpireDate = DateTime.Parse(createProduct.expireDate),
-                IsPallet = bool.Parse(createProduct.isPallet),
-                ProductTransportPackageWidthSize = createProduct.productTransportPackageWidthSize,
-                ProductTransportPackageLengthSize = createProduct.productTransportPackageWidthSize,
-                ProductTransportPackageHeightSize = createProduct.productTransportPackageHeightSize,
-                ProductTransportPackageWeight = createProduct.productTransportPackageWeight,
-                ProductTransportPackageNumberOfPieces = createProduct.productTransportPackageNumberOfPieces,
-                BoxesPerPallet = createProduct.boxesPerPallet,
-                SingleProductSize = createProduct.singleProductSize,
-                ProductDescription = createProduct.productDescription
+                ProductIndentificationNumber = createProduct.ProductIndentificationNumber,
+                ProductName = createProduct.ProductName,
+                ProductLandedPrice = createProduct.ProductLendedPrice,
+                ProductGrossMargin = createProduct.ProductGrossMargin,
+                TimeToOrder = createProduct.TimeToOrder,
+                TimeToDelivery = createProduct.TimeToDelivery,
+                ProductionDate = DateTime.Parse(createProduct.ProductionDate),
+                ExpireDate = DateTime.Parse(createProduct.ExpireDate),
+                IsPallet = bool.Parse(createProduct.IsPallet),
+                ProductTransportPackageWidthSize = createProduct.ProductTransportPackageWidthSize,
+                ProductTransportPackageLengthSize = createProduct.ProductTransportPackageWidthSize,
+                ProductTransportPackageHeightSize = createProduct.ProductTransportPackageHeightSize,
+                ProductTransportPackageWeight = createProduct.ProductTransportPackageWeight,
+                ProductTransportPackageNumberOfPieces = createProduct.ProductTransportPackageNumberOfPieces,
+                BoxesPerPallet = createProduct.BoxesPerPallet,
+                SingleProductSize = createProduct.SingleProductSize,
+                ProductDescription = createProduct.ProductDescription
 
             };
 
@@ -54,7 +54,7 @@ namespace ErpSystem.Services.Services
             }
 
             //setting of supplier
-            var supplierEntity = this.dbContext.Suppliers.FirstOrDefault(s => s.SupplierName == createProduct.supplier);
+            var supplierEntity = this.dbContext.Suppliers.FirstOrDefault(s => s.SupplierName == createProduct.Supplier);
 
             if (supplierEntity == null)
             {
@@ -75,7 +75,7 @@ namespace ErpSystem.Services.Services
 
                 supplierEntity = new Supplier
                 {
-                    SupplierName = createProduct.supplier,
+                    SupplierName = createProduct.Supplier,
                     SupplierCountry = country,
                     SupplierPostalCode = postalCode,
                     SupplierAddress = address,
@@ -86,26 +86,26 @@ namespace ErpSystem.Services.Services
             product.Supplier = supplierEntity;
 
             //setting of productTransportPackage
-            var productTransportPackageEntity = this.dbContext.TransportPackageTags.FirstOrDefault(tp => tp.TypeOfPackage == createProduct.productTransportPackage);
+            var productTransportPackageEntity = this.dbContext.TransportPackageTags.FirstOrDefault(tp => tp.TypeOfPackage == createProduct.ProductTransportPackage);
 
             if (productTransportPackageEntity == null)
             {
                 productTransportPackageEntity = new TransportPackageTag
                 {
-                    TypeOfPackage = createProduct.productTransportPackage
+                    TypeOfPackage = createProduct.ProductTransportPackage
                 };
             }
 
             product.ProductTransportPackage = productTransportPackageEntity;
 
             //setting measurmentTag
-            var measurmentTagEntity = this.dbContext.ProductMeasurmentTags.FirstOrDefault(m => m.Maesurment == createProduct.measurmentTag);
+            var measurmentTagEntity = this.dbContext.ProductMeasurmentTags.FirstOrDefault(m => m.Maesurment == createProduct.MeasurmentTag);
 
             if (measurmentTagEntity == null)
             {
                 measurmentTagEntity = new ProductMeasurmentTag
                 {
-                    Maesurment = createProduct.measurmentTag
+                    Maesurment = createProduct.MeasurmentTag
                 };
             }
 
