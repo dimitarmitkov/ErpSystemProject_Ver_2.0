@@ -10,5 +10,9 @@ namespace ErpSystem.Services.ViewModels.Warehouse
         public int ProductId { get; set; }
 
         public int WarehouseId { get; set; }
+
+        public DateTime? ProductionDate { get; set; }
+
+        public DateTime? ExpireDate { get; set; }
     }
 }

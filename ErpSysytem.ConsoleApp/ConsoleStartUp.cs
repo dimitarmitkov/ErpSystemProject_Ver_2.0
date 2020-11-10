@@ -238,12 +238,12 @@ namespace ErpSysytem.ConsoleApp
             //customerService.CreateCustomer(customer3);
 
 
-            var resultProductsName = productService.SearchByProductNameAndId(null, null);
+            //var resultProductsName = productService.SearchByProductNameAndId(null, null);
 
-            foreach (var resultProduct in resultProductsName)
-            {
-                Console.WriteLine($"Product: {resultProduct.ProductName}, Price: {resultProduct.ProductSalePrice}, Total Available Products: {resultProduct.ProductsAvailable}, Total Products Delivery Price = {resultProduct.ProductSalePrice}, LND: {resultProduct.ProductLandedPrice}");
-            }
+            //foreach (var resultProduct in resultProductsName)
+            //{
+            //    Console.WriteLine($"Product: {resultProduct.ProductName}, Price: {resultProduct.ProductSalePrice}, Total Available Products: {resultProduct.ProductsAvailable}, Total Products Delivery Price = {resultProduct.ProductSalePrice}, LND: {resultProduct.ProductLandedPrice}");
+            //}
 
             //var resultProductsPrice = productService.SearchByProductPrice(100, null);
 
@@ -278,15 +278,17 @@ namespace ErpSysytem.ConsoleApp
 
             //warehousesService.AddProduct(product008);
 
-            //var product011 = new AddProductWaerhouseViewModel
+            //var product2001 = new AddProductWaerhouseViewModel
             //{
             //    WarehouseId = 1,
             //    ProductId = 4,
             //    AddQuantity = 5,
             //    SpaceTaken = 5,
+            //    ProductionDate = DateTime.UtcNow,
+            //    ExpireDate = DateTime.UtcNow.AddMonths(2),
             //};
 
-            //warehousesService.AddProduct(product011);
+            //warehousesService.AddProduct(product2001);
 
             //var product007 = new AddProductWaerhouseViewModel
             //{
@@ -332,7 +334,7 @@ namespace ErpSysytem.ConsoleApp
 
             //warehousesService.AddProduct(product010);
 
-            //salesService.CreateSale(8, "8047d37d-60b8-4884-aa5d-74b8ccfb8002", 100, true, false, 1);
+            //salesService.CreateSale(2, "2fd895b5-3eaf-4ef9-8456-4118bbc79f82", 900, true, true, 1);
 
             //var sales = salesService.ListOfSales();
 
@@ -342,6 +344,13 @@ namespace ErpSysytem.ConsoleApp
             //}
 
             //usersService.CreateUser("Dimitar", "Mitkov", "dimitar.mitkov@me.com", "123456");
+
+            var sales = salesService.TotalSalesPerDate();
+            foreach (var sale in sales)
+            {
+                Console.WriteLine($"{sale.Key} : {sale.Value}");
+            }
+
         }
     }
 }

@@ -75,12 +75,16 @@
                             <div class="form-group">
                                 <label class="small mb-1" asp-for="ProductionDate">Production date</label>
                                 <input class="form-control py-4" id="productionDate" type="date" placeholder="Enter date" asp-for="ProductionDate" />
+                                <span asp-validation-for="ProductionDate" class="text-danger" style="font-size:0.7vw"></span>
+
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label class="small mb-1" asp-for="ExpireDate">Expire date</label>
                                 <input class="form-control py-4" id="expireDate" type="date" placeholder="Enter date" asp-for="ExpireDate" />
+                                <span asp-validation-for="ExpireDate" class="text-danger" style="font-size:0.7vw"></span>
+
                             </div>
                         </div>
                     </div>

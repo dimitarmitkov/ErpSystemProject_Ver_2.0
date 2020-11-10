@@ -51,8 +51,8 @@ namespace ErpSystem.Data
             modelBuilder.Entity<ProductSupplier>()
                 .HasKey(x => new { x.SupplierId, x.ProductId });
 
-            modelBuilder.Entity<WarehouseProduct>()
-                .HasKey(x => new { x.WarehouseId, x.ProductId });
+            //modelBuilder.Entity<WarehouseProduct>()
+            //    .HasKey(x => new { x.WarehouseId, x.ProductId });
 
             modelBuilder.Entity<SaleAccumulator>()
                 .HasKey(x => x.ProductId);

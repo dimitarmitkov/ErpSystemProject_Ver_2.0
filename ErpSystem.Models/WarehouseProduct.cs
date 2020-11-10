@@ -3,13 +3,15 @@ namespace ErpSystem.Models
 {
     public class WarehouseProduct
     {
-        public WarehouseProduct()
-        {
-        }
+        public int Id { get; set; }
 
         public int ProductId { get; set; }
 
         public Product Product { get; set; }
+
+        public DateTime? ProductionDate { get; set; }
+
+        public DateTime? ExpireDate { get; set; }
 
         public int WarehouseId { get; set; }
 

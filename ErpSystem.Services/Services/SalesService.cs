@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using ErpSystem.Data;
 using ErpSystem.Models;
 using ErpSystem.Services.ViewModels.Sale;
@@ -16,7 +17,7 @@ namespace ErpSystem.Services.Services
             this.dbContext = dbContext;
         }
 
-        public void CreateSale(int productId, string customerId, int numberOfSoldProducts, bool hasproductDiscount, bool hasCustomerDiscount, int warehouesId)
+        public void CreateSale(int productId, string customerId, int numberOfSoldProducts, bool hasProductDiscount, bool hasCustomerDiscount, int warehouesId)
         {
             var sale = new Sale
             {
@@ -26,6 +27,8 @@ namespace ErpSystem.Services.Services
                 Product = this.dbContext.Products.FirstOrDefault(p => p.Id == productId),
                 SaleDate = DateTime.UtcNow,
                 NumberOfSoldProducts = numberOfSoldProducts,
+                HasCustomerDiscount = hasCustomerDiscount,
+                HasProductDiscount = hasProductDiscount,
             };
 
             var productDiscount = this.dbContext.Products.Where(p => p.Id == productId).Select(x => x.ProductDiscount).FirstOrDefault();
@@ -33,36 +36,29 @@ namespace ErpSystem.Services.Services
             var customerDiscount = this.dbContext.Customers.Where(c => c.Id == customerId).Select(x => x.CustomerDiscount).FirstOrDefault();
 
 
-            if (hasproductDiscount && !string.IsNullOrEmpty(productDiscount.ToString())) sale.SingleProudctSalePrice = (decimal)(price - price * productDiscount / 100);
+            if (hasProductDiscount && !string.IsNullOrEmpty(productDiscount.ToString())) sale.SingleProudctSalePrice = (decimal)(price - price * productDiscount / 100);
             else sale.SingleProudctSalePrice = (decimal)(price);
 
             if (hasCustomerDiscount && !string.IsNullOrEmpty(customerDiscount.ToString())) sale.SingleProudctSalePrice = (decimal)(sale.SingleProudctSalePrice - sale.SingleProudctSalePrice * customerDiscount / 100);
 
+            var productSold = this.dbContext.WarehouseProducts.FirstOrDefault(p => p.ProductId == productId && p.ProductsAvailable != 0);
 
-            this.dbContext.Sales.Add(sale);
-            int saved = this.dbContext.SaveChanges();
-
-            var productSold = this.dbContext.WarehouseProducts.FirstOrDefault(p => p.ProductId == productId);
-
-            //decrease number of available products based on number of sold products
-            if (!string.IsNullOrEmpty(saved.ToString()))
+            if (productSold.ProductsAvailable >= numberOfSoldProducts)
             {
-                if (productSold.ProductsAvailable < numberOfSoldProducts)
-                {
-                    Console.WriteLine("Not enough products " + $"{numberOfSoldProducts - productSold.ProductsAvailable}" + " missing");
 
-                    return;
-                }
+                //save sale in Sales database
+                this.dbContext.Sales.Add(sale);
+                int saved = this.dbContext.SaveChanges();
 
+
+                //decrease number of available products based on number of sold products
                 productSold.ProductsAvailable -= numberOfSoldProducts;
 
                 this.dbContext.WarehouseProducts.Update(productSold);
                 this.dbContext.SaveChanges();
-            }
 
-            //decrase number of boxes or pallets if number of sold products reaches box or pallet size
-            if (!string.IsNullOrEmpty(saved.ToString()))
-            {
+                //decrase number of boxes or pallets if number of sold products reaches box or pallet size
+
                 bool isProductInPallet = this.dbContext.Products.Where(p => p.Id == productSold.ProductId).Select(p => p.IsPallet == true).FirstOrDefault();
                 var productSoldProduct = this.dbContext.Products.FirstOrDefault(p => p.Id == productId);
                 var productSoldWarehouse = this.dbContext.Warehouses.FirstOrDefault(w => w.Id == warehouesId);
@@ -71,53 +67,55 @@ namespace ErpSystem.Services.Services
                 var boxesPerPallet = this.dbContext.Products.Where(p => p.Id == productId).Select(x => x.BoxesPerPallet).FirstOrDefault();
                 var numberOfProductPerPallet = numberOfProductsPerBox * boxesPerPallet;
 
-                var currentNumberOfBoxesOrPallets = isProductInPallet ? productSold.ProductsAvailable / numberOfProductPerPallet : productSold.ProductsAvailable / numberOfProductsPerBox;
+                //var currentNumberOfBoxesOrPallets = isProductInPallet ? productSold.ProductsAvailable / numberOfProductPerPallet : productSold.ProductsAvailable / numberOfProductsPerBox;
 
-                var preSaleNumberOfBoxesOrPallets = isProductInPallet ? (productSold.ProductsAvailable + numberOfSoldProducts) / numberOfProductPerPallet : (productSold.ProductsAvailable + numberOfSoldProducts) / numberOfProductsPerBox;
+                //var preSaleNumberOfBoxesOrPallets = isProductInPallet ? (productSold.ProductsAvailable + numberOfSoldProducts) / numberOfProductPerPallet : (productSold.ProductsAvailable + numberOfSoldProducts) / numberOfProductsPerBox;
+
+                var preSaleProductsAvailabe = productSold.ProductsAvailable + numberOfSoldProducts;
 
                 //TODO transaction for sale
 
-                if (isProductInPallet && currentNumberOfBoxesOrPallets <= preSaleNumberOfBoxesOrPallets)
+                if (isProductInPallet)
                 {
-                    if (productSold.ProductsAvailable == 0)
-                    {
-                        productSoldWarehouse.CurrentPalletsSpaceFree += 1;
-                    }
+                    //calculate pallets left
+                    var numberOfSoldPallets = numberOfSoldProducts / numberOfProductPerPallet;
+                    var partialPalletAdd = (productSold.ProductsAvailable % numberOfProductPerPallet) > 0 ? 1 : 0;
+                    var numberOfPalletsLeft = (productSold.ProductsAvailable / numberOfProductPerPallet) + partialPalletAdd;
 
-                    if (preSaleNumberOfBoxesOrPallets == 1 && currentNumberOfBoxesOrPallets == 0 && productSold.ProductsAvailable != 0) preSaleNumberOfBoxesOrPallets = 0;
+                    //calculate pallets before sale
+                    var preSalePratialPalletAdd = (preSaleProductsAvailabe % numberOfProductPerPallet) > 0 ? 1 : 0;
+                    var preSaleNumberOfPallets = (preSaleProductsAvailabe / numberOfProductPerPallet) + preSalePratialPalletAdd;
 
-                    productSoldWarehouse.CurrentPalletsSpaceFree += preSaleNumberOfBoxesOrPallets - currentNumberOfBoxesOrPallets;
+                    //increase space in warehouse if whole pallet was finished, if not - space remains unchanged
+                    productSoldWarehouse.CurrentPalletsSpaceFree += preSaleNumberOfPallets - numberOfPalletsLeft;
 
                     this.dbContext.Warehouses.Update(productSoldWarehouse);
                     this.dbContext.SaveChanges();
                 }
 
-                if (!isProductInPallet && currentNumberOfBoxesOrPallets <= preSaleNumberOfBoxesOrPallets)
+                if (!isProductInPallet)
                 {
+                    //get box size and shelf width size
                     var boxFront = this.dbContext.Products.Where(p => p.Id == productSold.ProductId).Select(x => x.ProductTransportPackageWidthSize).FirstOrDefault();
                     var boxLenght = this.dbContext.Products.Where(p => p.Id == productSold.ProductId).Select(x => x.ProductTransportPackageLengthSize).FirstOrDefault();
                     var shelfDepth = this.dbContext.WarehouseBoxes.Where(w => w.Id == productSold.WarehouseId).Select(x => x.ShelfDepth).FirstOrDefault();
 
-                    if (productSold.ProductsAvailable % numberOfProductsPerBox != 0)
-                    {
-                        productSoldWarehouse.CurrentBoxesFrontSpaceFree += 0;
-                    }
+                    //calculate boxes left
+                    var numberOfSoldBoxes = numberOfSoldProducts / numberOfProductsPerBox;
+                    var partialBoxAdd = (productSold.ProductsAvailable % numberOfProductsPerBox) > 0 ? 1 : 0;
+                    var numberOfBoxesLeft = (productSold.ProductsAvailable / numberOfProductsPerBox) + partialBoxAdd;
 
-                    else if (productSold.ProductsAvailable == 0)
-                    {
-                        productSoldWarehouse.CurrentBoxesFrontSpaceFree += boxLenght > shelfDepth ? boxLenght : boxFront;
-                    }
-                    else
-                    {
-                        productSoldWarehouse.CurrentBoxesFrontSpaceFree += boxLenght > shelfDepth ? (preSaleNumberOfBoxesOrPallets - currentNumberOfBoxesOrPallets) * boxLenght : (preSaleNumberOfBoxesOrPallets - currentNumberOfBoxesOrPallets) * boxFront;
-                    }
+                    //calculate number of boxes before sale
+                    var preSalePratialBoxAdd = (preSaleProductsAvailabe % numberOfProductsPerBox) > 0 ? 1 : 0;
+                    var preSaleNumberOfBoxes = (preSaleProductsAvailabe / numberOfProductsPerBox) + preSalePratialBoxAdd;
+                    var boxes = preSaleNumberOfBoxes - numberOfBoxesLeft;
+
+                    //increase space in warehouse if whole box was finished, if not - space remains unchanged
+                    productSoldWarehouse.CurrentBoxesFrontSpaceFree += boxLenght > shelfDepth ? (boxes) * boxLenght : (boxes) * boxFront;
 
                     this.dbContext.Warehouses.Update(productSoldWarehouse);
                     this.dbContext.SaveChanges();
                 }
-
-
-
             }
         }
 
@@ -133,6 +131,29 @@ namespace ErpSystem.Services.Services
                 TotalSalePrice = x.NumberOfSoldProducts * x.SingleProudctSalePrice,
                 ProductMesure = x.Product.MeasurmentTag.Maesurment,
             }).ToList();
+        }
+
+        public Dictionary<string, decimal> TotalSalesPerDate()
+        {
+            var listOfSales =
+           this.dbContext.Sales.Select(s => new SaleSumByDateViewModel
+           {
+               DateOfSale = s.SaleDate,
+               TotalSalesSum = s.SingleProudctSalePrice,
+           }).ToList();
+
+            var dictionary = new Dictionary<string, decimal>();
+
+            foreach (var sale in listOfSales)
+            {
+                if (!dictionary.ContainsKey(sale.DateOfSale.Date.ToString()))
+                {
+                    dictionary[sale.DateOfSale.Date.ToString()] = 0;
+                }
+                dictionary[sale.DateOfSale.Date.ToString()] += sale.TotalSalesSum;
+            }
+
+            return dictionary;
         }
     }
 }

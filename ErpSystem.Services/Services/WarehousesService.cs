@@ -18,6 +18,8 @@ namespace ErpSystem.Services.Services
         public const int warehouseInitialPalletSpace = 200;
         public const int warehouseInitialBoxesSpace = 750;
 
+
+        //add product in warehouse
         public void AddProduct(AddProductWaerhouseViewModel addProduct)
         {
 
@@ -37,31 +39,21 @@ namespace ErpSystem.Services.Services
 
             var boxesFrontSpace = this.dbContext.Products.Where(p => p.Id == addProduct.ProductId).Select(x => x.ProductTransportPackageWidthSize).FirstOrDefault();
 
-            var existingProduct = this.dbContext.WarehouseProducts.Any(p => p.ProductId == addProduct.ProductId);
+            //var existingProduct = this.dbContext.WarehouseProducts.Any(p => p.ProductId == addProduct.ProductId);
 
-            if (existingProduct)
+            var product = new WarehouseProduct
             {
-                var product = this.dbContext.WarehouseProducts.FirstOrDefault(x => x.ProductId == addProduct.ProductId && x.WarehouseId == addProduct.WarehouseId);
+                ProductId = addProduct.ProductId,
+                WarehouseId = addProduct.WarehouseId,
+                Product = this.dbContext.Products.FirstOrDefault(p => p.Id == addProduct.ProductId),
+                ProductionDate = addProduct.ProductionDate,
+                ExpireDate = addProduct.ExpireDate,
+            };
 
-                ProductAddQuantityPalletOrBoxSpace(addProduct, ref palletSpace, ref boxSpace, producTransportPackage, shelfDepth, boxesDepthSpace, boxesFrontSpace, product, productsPerBox, boxesPerPallet);
+            ProductAddQuantityPalletOrBoxSpace(addProduct, ref palletSpace, ref boxSpace, producTransportPackage, shelfDepth, boxesDepthSpace, boxesFrontSpace, product, productsPerBox, boxesPerPallet);
 
-                this.dbContext.WarehouseProducts.Update(product);
-                this.dbContext.SaveChanges();
-            }
-            else
-            {
-                var product = new WarehouseProduct
-                {
-                    ProductId = addProduct.ProductId,
-                    WarehouseId = addProduct.WarehouseId,
-                    Product = this.dbContext.Products.FirstOrDefault(p => p.Id == addProduct.ProductId),
-                };
-
-                ProductAddQuantityPalletOrBoxSpace(addProduct, ref palletSpace, ref boxSpace, producTransportPackage, shelfDepth, boxesDepthSpace, boxesFrontSpace, product, productsPerBox, boxesPerPallet);
-
-                this.dbContext.WarehouseProducts.Add(product);
-                this.dbContext.SaveChanges();
-            }
+            this.dbContext.WarehouseProducts.Add(product);
+            this.dbContext.SaveChanges();
 
         }
 
@@ -70,17 +62,13 @@ namespace ErpSystem.Services.Services
             product.ProductsAvailable += addProduct.AddQuantity;
             var productWarehouse = this.dbContext.Warehouses.FirstOrDefault(w => w.Id == addProduct.WarehouseId);
 
-
-
-            bool isWholePallet = (addProduct.AddQuantity % (productsPerBox * boxesPerPallet)) == 0 ? true : false;
-
             //TODO number of pallets depending on order
-            palletSpace = isWholePallet == true ? palletSpace - addProduct.SpaceTaken : palletSpace;
+            palletSpace = producTransportPackage == true ? palletSpace - addProduct.SpaceTaken : palletSpace;
             productWarehouse.CurrentPalletsSpaceFree = palletSpace;
 
             boxSpace =
             //below check if product is not in pallet transport package, which menais it is in box:
-            isWholePallet == false ?
+            producTransportPackage == false ?
             //below check if product box depth space > self depth:
             (boxesDepthSpace > shelfDepth) ?
             boxSpace - boxesDepthSpace * addProduct.SpaceTaken :
