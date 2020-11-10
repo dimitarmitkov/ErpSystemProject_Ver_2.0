@@ -10,6 +10,8 @@ namespace ErpSystem.Services.Services
 
         IEnumerable<SaleViewModel> ListOfSales();
 
-        Dictionary<string, decimal> TotalSalesPerDate();
+        //Dictionary<string, decimal> TotalSalesPerDate();
+
+        IDictionary<SaleSumByDateViewModel, SaleSumByDateViewModel> TotalSalesPerDate();
     }
 }

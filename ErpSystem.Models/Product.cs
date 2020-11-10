@@ -79,6 +79,10 @@ namespace ErpSystem.Models
 
         public string ProductDescription { get; set; }
 
-        public virtual ICollection<Sale> Sales { get; set; }
+        public virtual ICollection<Sale> Sales
+        {
+            get; set;
+
+            //TODO warehouse - product
+        }
     }
-}

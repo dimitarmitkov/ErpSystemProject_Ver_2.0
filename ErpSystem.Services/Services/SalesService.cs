@@ -133,7 +133,30 @@ namespace ErpSystem.Services.Services
             }).ToList();
         }
 
-        public Dictionary<string, decimal> TotalSalesPerDate()
+        //public Dictionary<string, decimal> TotalSalesPerDate()
+        //{
+        //    var listOfSales =
+        //   this.dbContext.Sales.Select(s => new SaleSumByDateViewModel
+        //   {
+        //       DateOfSale = s.SaleDate,
+        //       TotalSalesSum = s.SingleProudctSalePrice,
+        //   }).ToList();
+
+        //    var dictionary = new Dictionary<string, decimal>();
+
+        //    foreach (var sale in listOfSales)
+        //    {
+        //        if (!dictionary.ContainsKey(sale.DateOfSale.Date.ToString()))
+        //        {
+        //            dictionary[sale.DateOfSale.Date.ToString()] = 0;
+        //        }
+        //        dictionary[sale.DateOfSale.Date.ToString()] += sale.TotalSalesSum;
+        //    }
+
+        //    return dictionary;
+        //}
+
+        public IDictionary<SaleSumByDateViewModel, SaleSumByDateViewModel> TotalSalesPerDate()
         {
             var listOfSales =
            this.dbContext.Sales.Select(s => new SaleSumByDateViewModel

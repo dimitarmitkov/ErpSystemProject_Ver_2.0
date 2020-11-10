@@ -33,5 +33,6 @@
     <Folder Include="Views\Charts\" />
     <Folder Include="Views\Users\" />
     <Folder Include="Views\Products\" />
+    <Folder Include="Views\Sales\" />
   </ItemGroup>
 </Project>

@@ -1,0 +1,67 @@
+﻿@using ErpSystem.Services.ViewModels.Sale
+@model IEnumerable<SaleViewModel>
+
+@{
+    ViewData["Title"] = "Sales";
+}
+<div class="container-fluid">
+    <h1 class="mt-4">Tables</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="/Home/Index">Dashboard</a></li>
+        <li class="breadcrumb-item active">Tables</li>
+    </ol>
+    <div class="card mb-4">
+        <div class="card-body">
+            DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables, please visit the
+            <a target="_blank" href="https://datatables.net/">official DataTables documentation</a>
+            .
+        </div>
+    </div>
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-table mr-1"></i>
+            DataTable Example
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead style="font-size:1vw">
+                        <tr>
+                            <th>Customer name</th>
+                            <th>Product name</th>
+                            <th>Measure</th>
+                            <th>Sold products</th>
+                            <th>Sale date</th>
+                            <th>Sale price</th>
+                            <th>Has discount</th>
+                        </tr>
+                    </thead>
+                    @*<tfoot>
+                            <tr>
+                                <th>Name</th>
+                                <th>Position</th>
+                                <th>Office</th>
+                                <th>Age</th>
+                                <th>Start date</th>
+                                <th>Salary</th>
+                            </tr>
+                        </tfoot>*@
+                    <tbody style="font-size:1vw">
+                        @foreach (var sale in Model)
+                        {
+                            <tr>
+                                <td>@sale.Customer</td>
+                                <td>@sale.Product </td>
+                                <td>@sale.ProductMesure</td>
+                                <td>@sale.NumberOfSoldProducts</td>
+                                <td>@sale.SaleDate.Date.ToString("dd-MM-yyyy")</td>
+                                <td>@sale.SingleProudctSalePrice</td>
+                                <td>@sale.HasProductDiscount.ToString() </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

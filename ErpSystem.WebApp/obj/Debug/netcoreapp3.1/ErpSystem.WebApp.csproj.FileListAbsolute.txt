@@ -413,3 +413,4 @@
 /Users/dimitarmitkov/Projects/C#2020/web_project/ErpSystemProject/ErpSystem.WebApp/obj/Debug/netcoreapp3.1/ErpSystem.WebApp.dll
 /Users/dimitarmitkov/Projects/C#2020/web_project/ErpSystemProject/ErpSystem.WebApp/obj/Debug/netcoreapp3.1/ErpSystem.WebApp.pdb
 /Users/dimitarmitkov/Projects/C#2020/web_project/ErpSystemProject/ErpSystem.WebApp/obj/Debug/netcoreapp3.1/ErpSystem.WebApp.genruntimeconfig.cache
+/Users/dimitarmitkov/Projects/C#2020/web_project/ErpSystemProject/ErpSystem.WebApp/obj/Debug/netcoreapp3.1/Razor/Views/Sales/All.cshtml.g.cs

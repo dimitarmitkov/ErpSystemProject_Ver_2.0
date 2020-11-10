@@ -1,20 +1,30 @@
-﻿<Properties StartupConfiguration="{388AC19D-A293-45FB-B25C-E98397B4C4DA}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="ErpSystem.WebApp/Controllers/UsersController.cs">
+﻿<Properties StartupConfiguration="{CF8BBC16-E3A1-4061-B496-59996DF9DBB2}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="ErpSystem.Models/Warehouse.cs">
     <Files>
       <File FileName="ErpSystem.Services/Services/WarehousesService.cs" Line="56" Column="1" />
       <File FileName="ErpSystem.Services/ViewModels/Warehouse/AddProductWaerhouseViewModel.cs" Line="16" Column="50" />
       <File FileName="ErpSystem.Services/Services/UsersService.cs" Line="1" Column="1" />
       <File FileName="ErpSysytem.ConsoleApp/ConsoleStartUp.cs" Line="351" Column="61" />
       <File FileName="ErpSystem.WebApp/Controllers/UsersController.cs" Line="1" Column="1" />
-      <File FileName="ErpSystem.Services/Services/SalesService.cs" Line="155" Column="1" />
-      <File FileName="ErpSystem.Services/Services/ISalesService.cs" Line="13" Column="19" />
+      <File FileName="ErpSystem.Services/Services/SalesService.cs" Line="163" Column="13" />
+      <File FileName="ErpSystem.Services/Services/ISalesService.cs" Line="15" Column="20" />
+      <File FileName="ErpSystem.WebApp/Startup.cs" Line="50" Column="66" />
+      <File FileName="ErpSystem.WebApp/Views/Sales/All.cshtml" Line="57" Column="78" />
+      <File FileName="ErpSystem.WebApp/Views/Products/Search.cshtml" Line="1" Column="1" />
+      <File FileName="ErpSystem.WebApp/Controllers/SalesController.cs" Line="20" Column="39" />
+      <File FileName="ErpSystem.WebApp/Views/Shared/_Layout.cshtml" Line="60" Column="78" />
+      <File FileName="ErpSystem.WebApp/Views/Users/Register.cshtml" Line="23" Column="118" />
+      <File FileName="ErpSystem.Models/Product.cs" Line="1" Column="1" />
+      <File FileName="ErpSystem.Models/Warehouse.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="ErpSystem" expanded="True">
             <Node name="ErpSystem.Data" expanded="True" />
-            <Node name="ErpSystem.Models" expanded="True" />
+            <Node name="ErpSystem.Models" expanded="True">
+              <Node name="Warehouse.cs" selected="True" />
+            </Node>
             <Node name="ErpSystem.Services" expanded="True">
               <Node name="Services" expanded="True" />
               <Node name="ViewModels" expanded="True">
@@ -25,13 +35,12 @@
               </Node>
             </Node>
             <Node name="ErpSystem.WebApp" expanded="True">
-              <Node name="Controllers" expanded="True">
-                <Node name="UsersController.cs" selected="True" />
-              </Node>
+              <Node name="Controllers" expanded="True" />
               <Node name="Views" expanded="True">
                 <Node name="Charts" expanded="True" />
                 <Node name="Home" expanded="True" />
                 <Node name="Products" expanded="True" />
+                <Node name="Sales" expanded="True" />
                 <Node name="Shared" expanded="True" />
                 <Node name="Users" expanded="True" />
               </Node>
@@ -41,7 +50,6 @@
               </Node>
               <Node name="appsettings.json" expanded="True" />
             </Node>
-            <Node name="ErpSysytem.ConsoleApp" expanded="True" />
           </Node>
         </State>
       </Pad>
