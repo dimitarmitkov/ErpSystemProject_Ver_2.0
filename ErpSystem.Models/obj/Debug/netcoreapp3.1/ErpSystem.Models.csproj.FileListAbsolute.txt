@@ -1,8 +1,0 @@
-/Users/dimitarmitkov/Projects/C#2020/web_project/ErpSystemProject/ErpSystem.Models/bin/Debug/netcoreapp3.1/ErpSystem.Models.deps.json
-/Users/dimitarmitkov/Projects/C#2020/web_project/ErpSystemProject/ErpSystem.Models/bin/Debug/netcoreapp3.1/ErpSystem.Models.dll
-/Users/dimitarmitkov/Projects/C#2020/web_project/ErpSystemProject/ErpSystem.Models/bin/Debug/netcoreapp3.1/ErpSystem.Models.pdb
-/Users/dimitarmitkov/Projects/C#2020/web_project/ErpSystemProject/ErpSystem.Models/obj/Debug/netcoreapp3.1/ErpSystem.Models.AssemblyInfoInputs.cache
-/Users/dimitarmitkov/Projects/C#2020/web_project/ErpSystemProject/ErpSystem.Models/obj/Debug/netcoreapp3.1/ErpSystem.Models.AssemblyInfo.cs
-/Users/dimitarmitkov/Projects/C#2020/web_project/ErpSystemProject/ErpSystem.Models/obj/Debug/netcoreapp3.1/ErpSystem.Models.csproj.CoreCompileInputs.cache
-/Users/dimitarmitkov/Projects/C#2020/web_project/ErpSystemProject/ErpSystem.Models/obj/Debug/netcoreapp3.1/ErpSystem.Models.dll
-/Users/dimitarmitkov/Projects/C#2020/web_project/ErpSystemProject/ErpSystem.Models/obj/Debug/netcoreapp3.1/ErpSystem.Models.pdb
