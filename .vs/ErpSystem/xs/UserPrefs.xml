@@ -1,0 +1,73 @@
+﻿<Properties StartupConfiguration="{CF8BBC16-E3A1-4061-B496-59996DF9DBB2}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="ErpSystem.WebApp/wwwroot/js/table_data.js">
+    <Files>
+      <File FileName="ErpSystem.WebApp/Controllers/ProductsController.cs" Line="38" Column="1" />
+      <File FileName="ErpSystem.Services/Services/IProductsService.cs" />
+      <File FileName="ErpSystem.WebApp/Controllers/ChartsController.cs" Line="18" Column="66" />
+      <File FileName="ErpSystem.Services/Services/SalesService.cs" Line="123" Column="1" />
+      <File FileName="ErpSystem.Services/Services/ISalesService.cs" />
+      <File FileName="ErpSystem.WebApp/Views/Sales/All.cshtml" Line="44" Column="66" />
+      <File FileName="ErpSystem.WebApp/Views/Charts/Chart.cshtml" Line="51" Column="43" />
+      <File FileName="ErpSystem.WebApp/Controllers/SalesController.cs" Line="22" Column="1" />
+      <File FileName="ErpSystem.WebApp/Views/Users/Register.cshtml" Line="60" Column="140" />
+      <File FileName="ErpSystem.Services/Services/OrdersService.cs" />
+      <File FileName="ErpSystem.WebApp/wwwroot/js/table_data.js" Line="8" Column="15" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="ErpSystem" expanded="True">
+            <Node name="ErpSystem.Data" expanded="True" />
+            <Node name="ErpSystem.Models" expanded="True" />
+            <Node name="ErpSystem.Services" expanded="True">
+              <Node name="Dependencies" expanded="True" />
+              <Node name="Services" expanded="True" />
+              <Node name="ViewModels" expanded="True">
+                <Node name="Customer" expanded="True" />
+                <Node name="Product" expanded="True" />
+                <Node name="Sale" expanded="True" />
+                <Node name="User" expanded="True" />
+                <Node name="Warehouse" expanded="True" />
+              </Node>
+            </Node>
+            <Node name="ErpSystem.WebApp" expanded="True">
+              <Node name="Controllers" expanded="True" />
+              <Node name="Views" expanded="True">
+                <Node name="Charts" expanded="True" />
+                <Node name="Home" expanded="True" />
+                <Node name="Products" expanded="True" />
+                <Node name="Sales" expanded="True" />
+                <Node name="Shared" expanded="True" />
+                <Node name="Users" expanded="True" />
+              </Node>
+              <Node name="wwwroot" expanded="True">
+                <Node name="css" expanded="True" />
+                <Node name="js" expanded="True">
+                  <Node name="table_data.js" selected="True" />
+                </Node>
+              </Node>
+            </Node>
+            <Node name="ErpSysytem.ConsoleApp" expanded="True">
+              <Node name="Dependencies" expanded="True">
+                <Node name="PackageDependencies" expanded="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="ClassPad">
+        <State name="__root__">
+          <Node name="ErpSystem" expanded="True" selected="True" />
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.ErpSysytem.ConsoleApp PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.ErpSystem.WebApp PreferredExecutionTarget="/Applications/Firefox.app" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>

@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "4KQthDMNv2ceoccat0Y3Yg7bGOLoLFycoiCXpxpr2po+bjkNR37Y7gUYb3udrJ8jWPd+kv6s4U7gknPONAqevA==",
+  "success": true,
+  "projectFilePath": "/Users/dimitarmitkov/Projects/C#2020/web_project/ErpSystemProject/ErpSystem.Models/ErpSystem.Models.csproj",
+  "expectedPackageFiles": [
+    "/Users/dimitarmitkov/.nuget/packages/system.componentmodel.annotations/4.7.0/system.componentmodel.annotations.4.7.0.nupkg.sha512"
+  ],
+  "logs": []
+}

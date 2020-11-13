@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using ErpSystem.Services.ViewModels.Sale;
 
 namespace ErpSystem.Services.Services
@@ -8,10 +7,10 @@ namespace ErpSystem.Services.Services
     {
         void CreateSale(int productId, string customerId, int numberOfProducts, bool hasproductDiscount, bool hasCustomerDiscount, int warehouseId);
 
-        IEnumerable<SaleViewModel> ListOfSales();
+        IEnumerable<SalesPerCustomerOrProductViewModel> ListOfSales(string customerName, string productName);
 
-        //Dictionary<string, decimal> TotalSalesPerDate();
+        IEnumerable<SalesPerCustomerOrProductViewModel> ListOfAllSales();
 
-        IDictionary<SaleSumByDateViewModel, SaleSumByDateViewModel> TotalSalesPerDate();
+        public IEnumerable<KeyValuePair<string, decimal>> TotalSalesPerDate();
     }
 }

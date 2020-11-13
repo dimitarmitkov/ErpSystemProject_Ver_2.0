@@ -9,6 +9,7 @@ namespace ErpSystem.Models
         public Product()
         {
             this.Sales = new HashSet<Sale>();
+            this.Warehouses = new HashSet<Warehouse>();
         }
 
         [Key]
@@ -79,10 +80,8 @@ namespace ErpSystem.Models
 
         public string ProductDescription { get; set; }
 
-        public virtual ICollection<Sale> Sales
-        {
-            get; set;
+        public virtual ICollection<Sale> Sales { get; set; }
 
-            //TODO warehouse - product
-        }
+        public virtual ICollection<Warehouse> Warehouses { get; set; }
     }
+}

@@ -22,7 +22,11 @@ namespace ErpSystem.Services.ViewModels.Product
         {
             using (var dbContext = new ErpSystemDbContext())
             {
-                if (!dbContext.Suppliers.Any(s => s.SupplierName == value.ToString()))
+                if (value == null)
+                {
+                    return new ValidationResult("Please insert supplier name");
+                }
+                else if (!dbContext.Suppliers.Any(s => s.SupplierName == value.ToString()))
                 {
                     return new ValidationResult($"Supplier {value.ToString()} does not exist. Please add {value} to database.");
                 }

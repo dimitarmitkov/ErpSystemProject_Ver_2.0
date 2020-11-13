@@ -24,6 +24,7 @@
         public int ProductsAvailable { get; set; }
 
         public decimal TotalProductsDeliveryPrice { get; set; }
+
         public object ProductPrice { get; set; }
     }
 }

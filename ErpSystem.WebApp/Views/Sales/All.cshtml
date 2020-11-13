@@ -1,5 +1,5 @@
 ﻿@using ErpSystem.Services.ViewModels.Sale
-@model IEnumerable<SaleViewModel>
+@model IEnumerable<SalesPerCustomerOrProductViewModel>
 
 @{
     ViewData["Title"] = "Sales";
@@ -11,11 +11,28 @@
         <li class="breadcrumb-item active">Tables</li>
     </ol>
     <div class="card mb-4">
-        <div class="card-body">
-            DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables, please visit the
-            <a target="_blank" href="https://datatables.net/">official DataTables documentation</a>
-            .
-        </div>
+        @*<div class="card-body">
+                DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables, please visit the
+                <a target="_blank" href="https://datatables.net/">official DataTables documentation</a>
+                .
+            </div>*@
+        <form asp-controller="Sales" asp-action="All" method="post">
+            <div class="form-row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        Customer: <input class="form-control py-2" id="allCustomer" type="text" name="customer">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        Product: <input class="form-control py-2" id="allProduct" type="text" name="product">
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <button type="submit" class="btn btn-primary btn-block">Filter</button>
+                </div>
+            </div>
+        </form>
     </div>
     <div class="card mb-4">
         <div class="card-header">
@@ -36,16 +53,6 @@
                             <th>Has discount</th>
                         </tr>
                     </thead>
-                    @*<tfoot>
-                            <tr>
-                                <th>Name</th>
-                                <th>Position</th>
-                                <th>Office</th>
-                                <th>Age</th>
-                                <th>Start date</th>
-                                <th>Salary</th>
-                            </tr>
-                        </tfoot>*@
                     <tbody style="font-size:1vw">
                         @foreach (var sale in Model)
                         {
@@ -56,12 +63,25 @@
                                 <td>@sale.NumberOfSoldProducts</td>
                                 <td>@sale.SaleDate.Date.ToString("dd-MM-yyyy")</td>
                                 <td>@sale.SingleProudctSalePrice</td>
-                                <td>@sale.HasProductDiscount.ToString() </td>
+                                <td>@sale.HasCustomerDiscount.ToString() </td>
                             </tr>
                         }
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th>Total</th>
+                            <th id="totalSales"></th>
+                            <th></th>
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
         </div>
     </div>
 </div>
+
+<script src="~/js/table_data.js"></script>

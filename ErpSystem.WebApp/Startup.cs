@@ -38,12 +38,12 @@ namespace ErpSystem.WebApp
             services.AddMvc().AddRazorRuntimeCompilation();
             services.AddRazorPages();
 
-            //services.AddScoped<IDbQuerryRunner, DbQueryRunner>();
-
-
             services.AddSingleton(this.Configuration);
 
+            //Database
             services.AddDbContext<ErpSystemDbContext>();
+
+            //Application services
             services.AddTransient<IProductsService, ProductsService>();
             services.AddTransient<ISalesService, SalesService>();
             services.AddTransient<IUsersService, UsersService>();

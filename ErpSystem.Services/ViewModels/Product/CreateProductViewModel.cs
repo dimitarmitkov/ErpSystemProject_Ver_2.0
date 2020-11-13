@@ -1,4 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace ErpSystem.Services.ViewModels.Product
 {
@@ -21,6 +25,7 @@ namespace ErpSystem.Services.ViewModels.Product
         [Range(0, 100, ErrorMessage = "Gross margin must be between 0 and 100")]
         public int ProductGrossMargin { get; set; }
 
+        [Required(ErrorMessage = "Please insert Supplier")]
         [HasSupplier("Supplier")]
         public string Supplier { get; set; }
 
@@ -75,5 +80,9 @@ namespace ErpSystem.Services.ViewModels.Product
 
         [Display(Name = "Product description")]
         public string ProductDescription { get; set; }
+
+        public IEnumerable<SelectListItem> PackageItems { get; set; }
+
+        public IEnumerable<SelectListItem> MeasureItems { get; set; }
     }
 }

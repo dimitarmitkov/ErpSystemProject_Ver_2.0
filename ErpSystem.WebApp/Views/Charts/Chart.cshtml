@@ -1,5 +1,6 @@
 ﻿@using ErpSystem.Services.ViewModels.Sale
-@model IEnumerable<SaleViewModel>
+@*@model IEnumerable<SaleViewModel>*@
+@model IEnumerable<KeyValuePair<string, decimal>>
 
 <div style="display: none;" id="jsArray">
     @Html.Raw(Json.Serialize(Model))
@@ -46,3 +47,5 @@
         <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
     </div>
 </div>
+
+<script src="~/js/chart_data.js"></script>

@@ -1,0 +1,15 @@
+/Users/dimitarmitkov/Projects/C#2020/web_project/ErpSystemProject/ErpSystem.Data/bin/Debug/netcoreapp3.1/ErpSystem.Data.deps.json
+/Users/dimitarmitkov/Projects/C#2020/web_project/ErpSystemProject/ErpSystem.Data/bin/Debug/netcoreapp3.1/ErpSystem.Data.runtimeconfig.json
+/Users/dimitarmitkov/Projects/C#2020/web_project/ErpSystemProject/ErpSystem.Data/bin/Debug/netcoreapp3.1/ErpSystem.Data.runtimeconfig.dev.json
+/Users/dimitarmitkov/Projects/C#2020/web_project/ErpSystemProject/ErpSystem.Data/bin/Debug/netcoreapp3.1/ErpSystem.Data.dll
+/Users/dimitarmitkov/Projects/C#2020/web_project/ErpSystemProject/ErpSystem.Data/bin/Debug/netcoreapp3.1/ErpSystem.Data.pdb
+/Users/dimitarmitkov/Projects/C#2020/web_project/ErpSystemProject/ErpSystem.Data/bin/Debug/netcoreapp3.1/ErpSystem.Models.dll
+/Users/dimitarmitkov/Projects/C#2020/web_project/ErpSystemProject/ErpSystem.Data/bin/Debug/netcoreapp3.1/ErpSystem.Models.pdb
+/Users/dimitarmitkov/Projects/C#2020/web_project/ErpSystemProject/ErpSystem.Data/obj/Debug/netcoreapp3.1/ErpSystem.Data.csprojAssemblyReference.cache
+/Users/dimitarmitkov/Projects/C#2020/web_project/ErpSystemProject/ErpSystem.Data/obj/Debug/netcoreapp3.1/ErpSystem.Data.AssemblyInfoInputs.cache
+/Users/dimitarmitkov/Projects/C#2020/web_project/ErpSystemProject/ErpSystem.Data/obj/Debug/netcoreapp3.1/ErpSystem.Data.AssemblyInfo.cs
+/Users/dimitarmitkov/Projects/C#2020/web_project/ErpSystemProject/ErpSystem.Data/obj/Debug/netcoreapp3.1/ErpSystem.Data.csproj.CoreCompileInputs.cache
+/Users/dimitarmitkov/Projects/C#2020/web_project/ErpSystemProject/ErpSystem.Data/obj/Debug/netcoreapp3.1/ErpSystem.Data.csproj.CopyComplete
+/Users/dimitarmitkov/Projects/C#2020/web_project/ErpSystemProject/ErpSystem.Data/obj/Debug/netcoreapp3.1/ErpSystem.Data.dll
+/Users/dimitarmitkov/Projects/C#2020/web_project/ErpSystemProject/ErpSystem.Data/obj/Debug/netcoreapp3.1/ErpSystem.Data.pdb
+/Users/dimitarmitkov/Projects/C#2020/web_project/ErpSystemProject/ErpSystem.Data/obj/Debug/netcoreapp3.1/ErpSystem.Data.genruntimeconfig.cache

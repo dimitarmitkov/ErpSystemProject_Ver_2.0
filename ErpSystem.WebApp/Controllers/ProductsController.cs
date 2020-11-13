@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using ErpSystem.Services.Services;
 using ErpSystem.Services.ViewModels.Product;
 using Microsoft.AspNetCore.Mvc;
@@ -24,15 +25,24 @@ namespace ErpSystem.WebApp.Controllers
 
         public IActionResult CreateProduct()
         {
-            return this.View();
+            var viewModel = new CreateProductViewModel();
+            viewModel.PackageItems = this.productsService.ProductTransportsPackageTags();
+            viewModel.MeasureItems = this.productsService.ProductMeasurementTags();
+
+            return this.View(viewModel);
         }
+
 
         [HttpPost]
         public IActionResult CreateProduct(CreateProductViewModel createProduct)
         {
             if (!ModelState.IsValid)
             {
-                return this.View();
+                var viewModel = new CreateProductViewModel();
+                viewModel.PackageItems = this.productsService.ProductTransportsPackageTags();
+                viewModel.MeasureItems = this.productsService.ProductMeasurementTags();
+
+                return this.View(viewModel);
             }
 
             this.productsService.CreateProduct(createProduct);

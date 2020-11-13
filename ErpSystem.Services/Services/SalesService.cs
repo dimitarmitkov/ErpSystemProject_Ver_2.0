@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using ErpSystem.Data;
 using ErpSystem.Models;
 using ErpSystem.Services.ViewModels.Sale;
@@ -119,9 +118,9 @@ namespace ErpSystem.Services.Services
             }
         }
 
-        public IEnumerable<SaleViewModel> ListOfSales()
+        public IEnumerable<SalesPerCustomerOrProductViewModel> ListOfAllSales()
         {
-            return this.dbContext.Sales.Select(x => new SaleViewModel
+            return this.dbContext.Sales.Select(x => new SalesPerCustomerOrProductViewModel
             {
                 Product = x.Product.ProductName,
                 Customer = x.Customer.CompanyName,
@@ -133,30 +132,20 @@ namespace ErpSystem.Services.Services
             }).ToList();
         }
 
-        //public Dictionary<string, decimal> TotalSalesPerDate()
-        //{
-        //    var listOfSales =
-        //   this.dbContext.Sales.Select(s => new SaleSumByDateViewModel
-        //   {
-        //       DateOfSale = s.SaleDate,
-        //       TotalSalesSum = s.SingleProudctSalePrice,
-        //   }).ToList();
+        public IEnumerable<SalesPerCustomerOrProductViewModel> ListOfSales(string customerName, string productName)
+        {
+            IQueryable<Sale> saleView = null;
 
-        //    var dictionary = new Dictionary<string, decimal>();
+            if (!string.IsNullOrEmpty(customerName)) saleView = this.dbContext.Sales.Where(s => s.Customer.CompanyName == customerName);
+            else if (!string.IsNullOrEmpty(customerName) && !string.IsNullOrEmpty(productName)) saleView = this.dbContext.Sales.Where(s => s.Customer.CompanyName == customerName && s.Product.ProductName == productName);
+            else if (!string.IsNullOrEmpty(productName)) saleView = this.dbContext.Sales.Where(s => s.Product.ProductName == productName);
+            else saleView = this.dbContext.Sales.Where(s => !string.IsNullOrEmpty(s.Id.ToString()));
 
-        //    foreach (var sale in listOfSales)
-        //    {
-        //        if (!dictionary.ContainsKey(sale.DateOfSale.Date.ToString()))
-        //        {
-        //            dictionary[sale.DateOfSale.Date.ToString()] = 0;
-        //        }
-        //        dictionary[sale.DateOfSale.Date.ToString()] += sale.TotalSalesSum;
-        //    }
+            List<SalesPerCustomerOrProductViewModel> listOfSales = ListOfSalesAsSalesViewModel(saleView);
+            return listOfSales;
+        }
 
-        //    return dictionary;
-        //}
-
-        public IDictionary<SaleSumByDateViewModel, SaleSumByDateViewModel> TotalSalesPerDate()
+        public IEnumerable<KeyValuePair<string, decimal>> TotalSalesPerDate()
         {
             var listOfSales =
            this.dbContext.Sales.Select(s => new SaleSumByDateViewModel
@@ -169,14 +158,28 @@ namespace ErpSystem.Services.Services
 
             foreach (var sale in listOfSales)
             {
-                if (!dictionary.ContainsKey(sale.DateOfSale.Date.ToString()))
+                if (!dictionary.ContainsKey(sale.DateOfSale.Date.ToString("dd-MM-yyyy")))
                 {
-                    dictionary[sale.DateOfSale.Date.ToString()] = 0;
+                    dictionary[sale.DateOfSale.Date.ToString("dd-MM-yyyy")] = 0;
                 }
-                dictionary[sale.DateOfSale.Date.ToString()] += sale.TotalSalesSum;
+                dictionary[sale.DateOfSale.Date.ToString("dd-MM-yyyy")] += sale.TotalSalesSum;
             }
 
             return dictionary;
+        }
+
+        private List<SalesPerCustomerOrProductViewModel> ListOfSalesAsSalesViewModel(IQueryable<Sale> saleView)
+        {
+            return saleView.Select(x => new SalesPerCustomerOrProductViewModel
+            {
+                Product = x.Product.ProductName,
+                Customer = x.Customer.CompanyName,
+                SaleDate = x.SaleDate,
+                SingleProudctSalePrice = x.SingleProudctSalePrice,
+                NumberOfSoldProducts = x.NumberOfSoldProducts,
+                TotalSalePrice = x.NumberOfSoldProducts * x.SingleProudctSalePrice,
+                ProductMesure = x.Product.MeasurmentTag.Maesurment,
+            }).ToList();
         }
     }
 }

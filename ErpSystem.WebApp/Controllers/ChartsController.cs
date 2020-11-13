@@ -15,7 +15,7 @@ namespace ErpSystem.WebApp.Controllers
 
         public IActionResult Chart()
         {
-            var viewModel = this.salesService.ListOfSales();
+            var viewModel = this.salesService.TotalSalesPerDate();
 
             //return this.Json(viewModel);
 

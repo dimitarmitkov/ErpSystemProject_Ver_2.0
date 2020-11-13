@@ -1,6 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using ErpSystem.Services.ViewModels.Product;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace ErpSystem.Services.Services
 {
@@ -19,5 +19,9 @@ namespace ErpSystem.Services.Services
         //IEnumerable<ProductViewModel> GetAvailableProducts();
 
         void DeleteExistingProduct(int productId, string productName);
+
+        IEnumerable<SelectListItem> ProductTransportsPackageTags();
+
+        IEnumerable<SelectListItem> ProductMeasurementTags();
     }
 }

@@ -29,7 +29,7 @@ namespace ErpSystem.Services.Services
             bool isPallet = this.dbContext.Products.Where(p => p.Id == generateOrder.ProductId).Select(x => x.IsPallet).FirstOrDefault();
             var piecesPerBox = this.dbContext.Products.Where(p => p.Id == generateOrder.ProductId).Select(x => x.ProductTransportPackageNumberOfPieces).FirstOrDefault();
             var boxesPerPallet = this.dbContext.Products.Where(p => p.Id == generateOrder.ProductId).Select(x => x.BoxesPerPallet).FirstOrDefault();
-            var salesQuantity = this.SalesService.ListOfSales().Where(x => x.ProductId == generateOrder.ProductId).Sum(x => x.NumberOfSoldProducts);
+            var salesQuantity = this.SalesService.ListOfAllSales().Where(x => x.ProductId == generateOrder.ProductId).Sum(x => x.NumberOfSoldProducts);
             var productTransportPackage = isPallet ? piecesPerBox * boxesPerPallet : piecesPerBox;
 
             order.CalculatedOrderProductNumber = (int)Math.Ceiling((double)salesQuantity / productTransportPackage);

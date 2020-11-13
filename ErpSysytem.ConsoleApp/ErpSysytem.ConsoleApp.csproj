@@ -9,4 +9,15 @@
     <ProjectReference Include="..\ErpSystem.Data\ErpSystem.Data.csproj" />
     <ProjectReference Include="..\ErpSystem.Services\ErpSystem.Services.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="ConsoleStartUp.cs">
+      <IncludeInPackage>false</IncludeInPackage>
+    </Compile>
+  </ItemGroup>
 </Project>

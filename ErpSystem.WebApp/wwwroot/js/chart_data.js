@@ -1,14 +1,11 @@
 ﻿document.addEventListener("click", eventHandler);
 let startDateField = document.getElementById("inputStartDate");
 let endDateField = document.getElementById("inputEndDate");
-
 let arrFromHtml = document.getElementById("jsArray").innerText;
 
 let arrFromJson = JSON.parse(arrFromHtml);
+let resultObjectWithDateAndAmountKeys = Object.keys(arrFromJson).map(e => ({ date: e, amount: arrFromJson[e] }));
 
-let myJsArray = Object.En
-
-console.log(arrFromJson);
 
 
 function eventHandler(e) {
@@ -17,23 +14,68 @@ function eventHandler(e) {
 
         let startDate = new Date(startDateField.value);
         let endDate = new Date(endDateField.value);
-        let daysOfYear = [];
-        let dataList = [];
+        let dayAmount = {};
+        let resulObjectOfDaysWithoutAmount = {};
+        let daysWithoutAmountArray = [];
 
-
+        // create result array of objects 
         for (var d = startDate; d <= endDate; d.setDate(d.getDate() + 1)) {
-            daysOfYear.push(`${new Date(d).getDate()}/${new Date(d).getMonth() + 1}`);
+            new Date(d).getDate() < 10 ?
+                dayAmount[`0${new Date(d).getDate()}-${new Date(d).getMonth() + 1}-${new Date(d).getFullYear()}`] = 0 :
+                dayAmount[`${new Date(d).getDate()}-${new Date(d).getMonth() + 1}-${new Date(d).getFullYear()}`] = 0;
+            daysWithoutAmountArray.push(Object.keys((dayAmount)));
+            dayAmount = {};
+        }
+        // end of create result array
+
+
+        // add zero values to all array items 
+        for (var i = 0; i < daysWithoutAmountArray.length; i++) {
+            resulObjectOfDaysWithoutAmount[daysWithoutAmountArray[i]] = 0;
+        }
+
+        let resultObjectDaysWithAmount = Object.keys(resulObjectOfDaysWithoutAmount).map(e => ({ date: e, amount: resulObjectOfDaysWithoutAmount[e] }));
+        // end of add zero
+
+
+        // combine two arrays with adding dates with amount into arra with zero amount
+        function newArray(arr1, arr2) {
+            return arr2.reduce((result, obj2) => {
+                if (arr1.some(obj1 => obj1['date'] === obj2['date'])) {
+                    return result;
+                }
+                return [...result, { ['date']: obj2['date'], 'amount': obj2['amount'] }];
+            }, arr1)
+        }
+
+        const resultArray = newArray(resultObjectWithDateAndAmountKeys, resultObjectDaysWithAmount);
+        // end of array combination
+
+
+        // create sortable array and sort it ascending
+        let sortable = [];
+        Object.entries(resultArray).map(x => sortable.push(x[1]));
+
+        sortable = sortable.sort((a, b) => ((a.date) > (b.date)) ? 1 : (((b.date) < (a.date)) ? -1 : 0));
+        // end of sortable array
+
+
+        let labelsArray = [];
+        let dataArray = [];
+
+        for (let i = 0; i < sortable.length; i++) {
+            labelsArray.push(Object.values(sortable[i])[0]);
+            dataArray.push(Object.values(sortable[i])[1]);
         }
 
         var ctx = document.getElementById('myBarChart');
         var myChart = new Chart(ctx, {
             type: 'bar',
             data: {
-                //labels: [1, 2, 3, 4, 5, 6, 5, 3, 4, 2, 1, 2, 5, 7, 9, 2, 1, 3, 5]
-                labels: myJsArray,
+                labels: labelsArray,
                 datasets: [{
                     label: 'sales',
-                    data: dataList,
+                    data: dataArray,
 
                     backgroundColor:
                         'rgba(255, 99, 132, 0.2)',

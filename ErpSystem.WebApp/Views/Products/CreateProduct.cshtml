@@ -94,14 +94,15 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label class="small mb-1" asp-for="ProductTransportPackage">Transport package</label>
-                                <input class="form-control py-4" id="productTransportPackage" type="text" placeholder="Enter type" asp-for="ProductTransportPackage" />
+                                @*<input class="form-control py-4" id="productTransportPackage" type="text" placeholder="Enter type" asp-for="ProductTransportPackage" />*@
+                                <select class="form-control" id="productTransportPackage" type="text" asp-for="ProductTransportPackage" asp-items="Model.PackageItems"></select>
                                 <span asp-validation-for="ProductTransportPackage" class="text-danger" style="font-size:0.7vw"></span>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label class="small mb-1" asp-for="MeasurmentTag">Product measurment</label>
-                                <input class="form-control py-4" id="measurmentTag" type="text" placeholder="Enter type" asp-for="MeasurmentTag" />
+                                <select class="form-control" id="measurmentTag" type="text" asp-for="MeasurmentTag" asp-items="Model.MeasureItems"> </select>
                                 <span asp-validation-for="MeasurmentTag" class="text-danger" style="font-size:0.7vw"></span>
                             </div>
                         </div>
@@ -187,3 +188,4 @@
         </div>
     </div>
 </div>
+

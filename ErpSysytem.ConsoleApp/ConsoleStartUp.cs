@@ -1,21 +1,14 @@
-﻿using System;
-using ErpSystem.Data;
-using ErpSystem.Services.Services;
-using ErpSystem.Services.ViewModels.Customer;
-using ErpSystem.Services.ViewModels.Product;
-using ErpSystem.Services.ViewModels.Supplier;
-using ErpSystem.Services.ViewModels.Warehouse;
-using Microsoft.EntityFrameworkCore;
-
-
-namespace ErpSysytem.ConsoleApp
+﻿namespace ErpSysytem.ConsoleApp
 {
-    class ConsoleStartUp
+    using System;
+    using ErpSystem.Data;
+    using ErpSystem.Services.Services;
+    using Microsoft.EntityFrameworkCore;
+
+    public class ConsoleStartUp
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
-
-
             var db = new ErpSystemDbContext();
 
             //db.Database.EnsureDeleted();
@@ -36,8 +29,8 @@ namespace ErpSysytem.ConsoleApp
 
             IUsersService usersService = new UsersService(db);
 
-            //AddSupplierViewModel addSupplier1 = new AddSupplierViewModel
-            //{
+            // AddSupplierViewModel addSupplier1 = new AddSupplierViewModel
+            // {
             //    SupplierName = "DotNet Gmbh",
             //    SupplierAddress = "Berlin",
             //    SupplierCountry = "Germany",
@@ -345,12 +338,11 @@ namespace ErpSysytem.ConsoleApp
 
             //usersService.CreateUser("Dimitar", "Mitkov", "dimitar.mitkov@me.com", "123456");
 
-            var sales = salesService.TotalSalesPerDate();
-            foreach (var sale in sales)
-            {
-                Console.WriteLine($"{sale.Key} : {sale.Value}");
-            }
-
+            //var sales = salesService.TotalSalesPerDate();
+            //foreach (var sale in sales)
+            //{
+            //    Console.WriteLine($"{sale.Key} : {sale.Value}");
+            //}
         }
     }
 }

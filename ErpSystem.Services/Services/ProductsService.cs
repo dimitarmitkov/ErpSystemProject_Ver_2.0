@@ -4,6 +4,7 @@ using System.Linq;
 using ErpSystem.Data;
 using ErpSystem.Models;
 using ErpSystem.Services.ViewModels.Product;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace ErpSystem.Services.Services
 {
@@ -139,7 +140,7 @@ namespace ErpSystem.Services.Services
             throw new NotImplementedException();
         }
 
-        //serch by name or Id
+        // serch by name or Id
         public IEnumerable<ProductViewModel> SearchByProductNameAndId(int? productId, string productName)
         {
             IQueryable<Product> productView = null;
@@ -155,7 +156,7 @@ namespace ErpSystem.Services.Services
         }
 
 
-        //search by price
+        // search by price
         public IEnumerable<ProductViewModel> SearchByProductPrice(decimal? minPrice, decimal? maxPrice)
         {
             IQueryable<Product> productView = null;
@@ -185,6 +186,29 @@ namespace ErpSystem.Services.Services
             return result;
         }
 
+        public IEnumerable<SelectListItem> ProductTransportsPackageTags()
+        {
+            return this.dbContext.TransportPackageTags.Select(p => new SelectListItem
+            {
+                Text = p.TypeOfPackage,
+                Value = p.TypeOfPackage,
+
+            }).ToList();
+        }
+
+        public IEnumerable<SelectListItem> ProductMeasurementTags()
+        {
+            return this.dbContext.ProductMeasurmentTags.Select(p => new SelectListItem
+            {
+                Text = p.Maesurment,
+                Value = p.Maesurment,
+
+            }).ToList();
+        }
+
+
+
+
         private static List<ProductViewModel> SelectProductViewModel(IQueryable<Product> productView)
         {
             return productView.Select(x => new ProductViewModel
@@ -203,6 +227,5 @@ namespace ErpSystem.Services.Services
             }).OrderByDescending(x => x.ProductSalePrice)
                             .ToList();
         }
-
     }
 }
