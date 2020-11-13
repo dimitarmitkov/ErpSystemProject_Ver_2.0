@@ -27,24 +27,23 @@ namespace ErpSystem.WebApp.Controllers
         [HttpPost]
         public IActionResult All(string customer, string product)
         {
-            Console.WriteLine("all post");
-
             var viewModel = salesService.ListOfAllSales();
 
-            if (!string.IsNullOrEmpty(customer))
+            if (!string.IsNullOrEmpty(customer) && string.IsNullOrEmpty(product))
             {
-                viewModel = viewModel.Where(m => m.Customer.Contains(customer)).ToList();
+                viewModel = viewModel.Where(m => m.Customer.ToLower().Contains(customer.ToLower())).ToList();
             }
 
-            if (!string.IsNullOrEmpty(product))
+            if (!string.IsNullOrEmpty(product) && string.IsNullOrEmpty(customer))
             {
-                viewModel = viewModel.Where(m => m.Product.Contains(product)).ToList();
+                viewModel = viewModel.Where(m => m.Product.ToLower().Contains(product.ToLower())).ToList();
             }
 
             if (!string.IsNullOrEmpty(customer) && !string.IsNullOrEmpty(product))
             {
-                viewModel = viewModel.Where(m => m.Customer.Contains(customer) && m.Product.Contains(product)).ToList();
+                viewModel = viewModel.Where(m => m.Customer.ToLower().Contains(customer.ToLower()) && m.Product.ToLower().Contains(product.ToLower())).ToList();
             }
+
 
             return this.View(viewModel);
         }
