@@ -17,6 +17,9 @@
     <Folder Include="ViewModels\Supplier\" />
     <Folder Include="ViewModels\Sale\" />
     <Folder Include="ViewModels\User\" />
+    <Folder Include="ViewModels\CustomerWarehouse\" />
+    <Folder Include="ViewModels\CurrentSale\" />
+    <Folder Include="ViewModels\CustomerPorduct\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="AspNetCore.Mvc.SelectList" Version="1.1.14" />

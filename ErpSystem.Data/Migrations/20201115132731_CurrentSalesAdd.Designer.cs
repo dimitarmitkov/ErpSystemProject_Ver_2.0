@@ -4,14 +4,16 @@ using ErpSystem.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ErpSystem.Data.Migrations
 {
     [DbContext(typeof(ErpSystemDbContext))]
-    partial class ErpSystemDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201115132731_CurrentSalesAdd")]
+    partial class CurrentSalesAdd
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,30 +36,6 @@ namespace ErpSystem.Data.Migrations
                     b.ToTable("CompanyTypeTags");
                 });
 
-            modelBuilder.Entity("ErpSystem.Models.CurrentSale", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("CustomerEikNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CustomerId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CustomerName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("HasCustomerDiscount")
-                        .HasColumnType("bit");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("CurrentSales");
-                });
-
             modelBuilder.Entity("ErpSystem.Models.Customer", b =>
                 {
                     b.Property<string>("Id")
@@ -71,12 +49,12 @@ namespace ErpSystem.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("CompanyEik")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("CompanyName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CompanyTypeId")
+                        .HasColumnType("int");
 
                     b.Property<int?>("CompanyTypeOfRegistrationId")
                         .HasColumnType("int");
@@ -114,41 +92,6 @@ namespace ErpSystem.Data.Migrations
                     b.HasIndex("CompanyTypeOfRegistrationId");
 
                     b.ToTable("Customers");
-                });
-
-            modelBuilder.Entity("ErpSystem.Models.CustomerProduct", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("CurrentsaleId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("CustomerId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("HasProductDiscount")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProductsToSale")
-                        .HasColumnType("int");
-
-                    b.Property<int>("WarehouseId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("WarehouseProductIdByExpireDate")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CurrentsaleId");
-
-                    b.ToTable("CustomerProducts");
                 });
 
             modelBuilder.Entity("ErpSystem.Models.Delivery", b =>
@@ -591,15 +534,6 @@ namespace ErpSystem.Data.Migrations
                     b.HasOne("ErpSystem.Models.CompanyTypeTag", "CompanyTypeOfRegistration")
                         .WithMany("Customers")
                         .HasForeignKey("CompanyTypeOfRegistrationId");
-                });
-
-            modelBuilder.Entity("ErpSystem.Models.CustomerProduct", b =>
-                {
-                    b.HasOne("ErpSystem.Models.CurrentSale", "CurrentSale")
-                        .WithMany("CusomerProducts")
-                        .HasForeignKey("CurrentsaleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("ErpSystem.Models.Delivery", b =>

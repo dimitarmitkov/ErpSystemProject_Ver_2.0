@@ -1,0 +1,109 @@
+﻿@using ErpSystem.Services.ViewModels.CurrentSale
+@*@model CustomerWarehouseViewModel*@
+@model CurrentSaleViewModel
+
+@{
+    ViewData["Title"] = "Create Current Sale";
+}
+
+<div class="row justify-content-lg-center">
+    <div class="col-lg-7">
+        <div class="card shadow-lg border-0 rounded-lg mt-5">
+            <div class="card-header"><h3 class="text-center font-weight-light my-4">Create Product</h3></div>
+            <div class="card-body">
+
+                <form method="post" style="font-size:1vw">
+                    @*first part*@
+                    <div class="form-row">
+                        <div class="col-md-4">
+                            @*<div class="form-group">
+                                    <label class="small mb-1" asp-for="CustomerName">SelectCustomer</label>
+                                    <input class="form-control py-4" id="customerName" type="text" placeholder="Enter customer name" asp-for="CustomerName" />
+                                    <span asp-validation-for="CustomerName" class="text-danger" style="font-size:0.7vw"></span>
+                                </div>*@
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="small mb-1" asp-for="CustomerEikNumber">EIK Number</label>
+                                <input class="form-control py-4" id="customerEikNumber" type="text" placeholder="Enter LND price" asp-for="CustomerEikNumber" />
+                                <span asp-validation-for="CustomerEikNumber" class="text-danger" style="font-size:0.7vw"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="small mb-1" asp-for="HasCustomerDiscount">Gross margin</label>
+                                <input class="form-control py-4" id="hasCustomerDiscount" type="checkbox" placeholder="Enter GM" asp-for="HasCustomerDiscount" />
+                                <span asp-validation-for="HasCustomerDiscount" class="text-danger" style="font-size:0.7vw"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    @*fourth part*@
+                    <div class="form-row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="small mb-1" asp-for="CustomerName">Select customer</label>
+                                <select class="form-control" id="customerName" type="text" asp-for="CustomerName" asp-items="Model.CustomersList"></select>
+                                <span asp-validation-for="CustomerName" class="text-danger" style="font-size:0.7vw"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group mt-4 mb-0"><button type="submit" class="btn btn-primary btn-block">Select customer</button></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--<div class="row justify-content-lg-center">
+    <div class="col-lg-7">
+        <div class="card shadow-lg border-0 rounded-lg mt-5">
+            <div class="card-header"><h3 class="text-center font-weight-light my-4">Create Product</h3></div>
+            <div class="card-body">
+
+                <form method="post" style="font-size:1vw">-->
+@*first part*@
+<!--<div class="form-row">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label class="small mb-1" asp-for="CurrentSale.CustomerName">SelectCustomer</label>
+            <input class="form-control py-4" id="currentSale.CustomerName" type="text" placeholder="Enter customer name" asp-for="CurrentSale.CustomerName" />
+            <span asp-validation-for="CurrentSale.CustomerName" class="text-danger" style="font-size:0.7vw"></span>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label class="small mb-1" asp-for="CurrentSale.CustomerEikNumber">EIK Number</label>
+            <input class="form-control py-4" id="customerEikNumber" type="text" placeholder="Enter LND price" asp-for="CurrentSale.CustomerEikNumber" />
+            <span asp-validation-for="CurrentSale.CustomerEikNumber" class="text-danger" style="font-size:0.7vw"></span>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label class="small mb-1" asp-for="CurrentSale.HasCustomerDiscount">Gross margin</label>
+            <input class="form-control py-4" id="hasCustomerDiscount" type="checkbox" placeholder="Enter GM" asp-for="CurrentSale.HasCustomerDiscount" />
+            <span asp-validation-for="CurrentSale.HasCustomerDiscount" class="text-danger" style="font-size:0.7vw"></span>
+        </div>
+    </div>
+</div>-->
+@*fourth part*@
+<!--<div class="form-row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="small mb-1" asp-for="CustomerCombined">Select customer</label>
+                                <select class="form-control" id="customerCombined" type="text" asp-for="CustomerCombined" asp-items="Model.CurrentSale.CustomerName"></select>
+                                <span asp-validation-for="CustomerCombined" class="text-danger" style="font-size:0.7vw"></span>
+                                <select class="form-control" id="productTransportPackage" type="text" asp-for="ProductTransportPackage" asp-items="Model.PackageItems"></select>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group mt-4 mb-0"><button type="submit" class="btn btn-primary btn-block">Select customer</button></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>-->

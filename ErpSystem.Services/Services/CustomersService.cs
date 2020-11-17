@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using ErpSystem.Data;
 using ErpSystem.Models;
 using ErpSystem.Services.ViewModels.Customer;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace ErpSystem.Services.Services
 {
@@ -121,6 +123,16 @@ namespace ErpSystem.Services.Services
                 return SelectCustomerViewModel(customerView);
             }
         }
+
+        //public IEnumerable<SelectListItem> SeclectCustomerDropDown()
+        //{
+        //    return this.dbContext.Customers.Select(p => new SelectListItem
+        //    {
+        //        Text = p.CompanyName,
+        //        Value = p.CompanyName,
+
+        //    }).ToList();
+        //}
 
         private static IEnumerable<CustomerViewModel> SelectCustomerViewModel(IQueryable<Customer> customerView)
         {

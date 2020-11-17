@@ -1,5 +1,4 @@
 ﻿@using ErpSystem.Services.ViewModels.Sale
-@*@model IEnumerable<SaleViewModel>*@
 @model IEnumerable<KeyValuePair<string, decimal>>
 
 <div style="display: none;" id="jsArray">
@@ -48,4 +47,6 @@
     </div>
 </div>
 
-<script src="~/js/chart_data.js"></script>
+@section Scripts{
+    <script src="~/js/chart_data.js"></script>
+}

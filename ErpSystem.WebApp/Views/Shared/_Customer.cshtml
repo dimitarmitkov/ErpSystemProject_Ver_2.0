@@ -1,0 +1,6 @@
+﻿@using ErpSystem.Services.ViewModels.Customer
+@model GenerateSaleCustomerViewModel
+
+<label class="small mb-1" asp-for="CustomersNames">Customer</label>
+<select class="form-control" id="customersNames" type="text" asp-for="CustomersNames" asp-items="Model.CustomersNames"> </select>
+<span asp-validation-for="CustomersNames" class="text-danger" style="font-size:0.7vw"></span>

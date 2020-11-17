@@ -1,0 +1,30 @@
+﻿@using ErpSystem.Services.ViewModels.Customer
+@model GenerateSaleCustomerViewModel
+
+@{
+    ViewData["Title"] = "Customer Drop Down";
+}
+
+@*<div class="row justify-content-lg-center">
+    <div class="col-lg-7">
+        <div class="card shadow-lg border-0 rounded-lg mt-5">
+            <div class="card-header"><h3 class="text-center font-weight-light my-4">Create Product</h3></div>
+            <div class="card-body">*@
+<form method="post" style="font-size:1vw">
+    <div class="form-row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="small mb-1" asp-for="CustomersNames">Customer</label>
+                <select class="form-control" id="customersNames" type="text" asp-for="CustomersNames" asp-items="Model.CustomersNames"> </select>
+                <span asp-validation-for="CustomersNames" class="text-danger" style="font-size:0.7vw"></span>
+            </div>
+        </div>
+    </div>
+</form>
+@*</div>
+            </div>
+        </div>
+    </div>*@
+
+
+

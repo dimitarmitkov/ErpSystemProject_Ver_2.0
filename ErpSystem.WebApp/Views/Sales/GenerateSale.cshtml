@@ -1,0 +1,80 @@
+﻿@using ErpSystem.Services.ViewModels.Sale
+@model GenerateSaleViewModel
+
+@{
+    ViewData["Title"] = "Generate Sale";
+}
+
+<div class="row justify-content-lg-center">
+    <div class="col-lg-7">
+        <div class="card shadow-lg border-0 rounded-lg mt-5">
+            <div class="card-header"><h3 class="text-center font-weight-light my-4">Create Product</h3></div>
+            <div class="card-body">
+
+                <form method="post" style="font-size:1vw">
+                    @*first part*@
+                    <div class="form-row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="small mb-1" asp-for="Customer">Customer Name</label>
+                                <input class="form-control py-4" id="customerName" type="text" placeholder="Enter customer name" asp-for="Customer" />
+                                <span asp-validation-for="Customer" class="text-danger" style="font-size:0.7vw"></span>
+                            </div>
+                        </div>
+                    </div>
+                    @if (Model.Customer != null)
+                    {
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <p>@Model.CompanyType</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="small mb-1" asp-for="ProductDiscount">Product discount @Model.ProductDiscount</label>
+                                <input class="form-control py-4" id="hasCustomerDiscount" type="checkbox" asp-for="HasCustomerDiscount" />
+                            </div>
+                        </div>
+
+                        @*second part*@
+                        <div class="form-row">
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <label class="small mb-1" asp-for="ProductDiscount">Product Discount @Model.ProductDiscount</label>
+                                    <input class="form-control py-4" id="hasCustomerDiscount" type="checkbox" asp-for="HasProductDiscount" />
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <p>@Model.ProductsAvailable </p>
+                                    <p>@Model.ProductExpireDate </p>
+                                    <p>
+                                        @if (Model.HasProductDiscount == true)
+                                        {
+                                            @(Model.SingleProudctSalePrice - Model.SingleProudctSalePrice * Model.ProductDiscount / 100)
+                                        }
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        @*third part*@
+                        <div class="form-row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="small mb-1" asp-for="NumberOfSoldProducts">Number of products for sale</label>
+                                    <input class="form-control py-4" id="timeToOrder" type="number" placeholder="Enter days" asp-for="NumberOfSoldProducts" />
+                                    <span asp-validation-for="NumberOfSoldProducts" class="text-danger" style="font-size:0.7vw"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group mt-4 mb-0"><button type="submit" class="btn btn-primary btn-block">Sale</button></div>
+                    }
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+

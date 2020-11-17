@@ -1,0 +1,82 @@
+﻿@using ErpSystem.Services.ViewModels.CustomerWarehouse
+@model CustomerWarehouseViewModel
+
+@{
+    ViewData["Title"] = "Warehouse All";
+}
+
+<div class="container-fluid">
+    <h1 class="mt-4">Tables</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="/Home/Index">Dashboard</a></li>
+        <li class="breadcrumb-item active">Tables</li>
+    </ol>
+    <div class="card mb-4">
+
+        <form method="post">
+            <div class="form-row">
+                <div class="col-md-9">
+                    <div class="form-group">
+                        <label class="small mb-1" asp-for="CustomerCombined.CustomerName">Customer</label>
+                        <select class="form-control" id="customerName" type="text" asp-for="CustomerCombined.CustomerName" asp-items="Model.CustolersListForDD"> </select>
+                        <span asp-validation-for="CustomerCombined.CustomerName" class="text-danger" style="font-size:0.7vw"></span>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="small mb-1" asp-for="CustomerCombined.HasCustomerDiscount">Has discount</label>
+                        <input class="form-control py-4" id="hasCustomerDiscount" type="checkbox" asp-for="CustomerCombined.HasCustomerDiscount" />
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-md-6">
+                    <button id="submitBtn" type="submit" class="btn btn-primary btn-block">Filter</button>
+                </div>
+            </div>
+        </form>
+
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table mr-1"></i>
+                DataTable Example
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Product name</th>
+                                <th>Measument</th>
+                                <th>On stock</th>
+                                <th>Expire date</th>
+                                <th>Id</th>
+                                <th>CustomerId</th>
+                                <th>Sale</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @foreach (var product in Model.WarehouseProductCombined)
+                            {
+                                <tr>
+                                    <td>@product.Product</td>
+                                    <td>@product.ProductMeasurement</td>
+                                    <td>@product.ProductsAvailable</td>
+                                    <td>@product.ProductExpireDate</td>
+                                    <td>@product.Id</td>
+                                    <td>@product.CustomerId</td>
+
+                                    @*<td><a class="btn btn-primary btn-block" href="/Sales/GenerateSale?Id=@product.Id">Sale</a></td>*@
+                                    <td><button name="@product.Id" type="submit" class="btn btn-primary btn-block">Sale</button></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/js/sales_data.js"></script>

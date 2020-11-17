@@ -4,14 +4,16 @@ using ErpSystem.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ErpSystem.Data.Migrations
 {
     [DbContext(typeof(ErpSystemDbContext))]
-    partial class ErpSystemDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201115145745_AddPropInCustomerProductsForWarehouseProductsId")]
+    partial class AddPropInCustomerProductsForWarehouseProductsId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

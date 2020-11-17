@@ -19,7 +19,7 @@ namespace ErpSystem.Models
         [Required]
         public string CompanyName { get; set; }
 
-        public int CompanyTypeId { get; set; }
+        public string CompanyEik { get; set; }
 
         public virtual CompanyTypeTag CompanyTypeOfRegistration { get; set; }
 

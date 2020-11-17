@@ -1,0 +1,83 @@
+﻿@using ErpSystem.Services.ViewModels.CustomerWarehouse
+@model CustomerWarehouseViewModel
+
+@{
+    ViewData["Title"] = "Warehouse Generate Sale";
+}
+
+<div class="container-fluid">
+    <h1 class="mt-4">Tables</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="/Home/Index">Dashboard</a></li>
+        <li class="breadcrumb-item active">Tables</li>
+    </ol>
+    <div class="card mb-4">
+        <div class="form-row">
+            <div class="col-md-12">
+                <a id="submitBtn" class="btn btn-primary btn-block" href="/Sales/WarehouseAllSelectCustomer">Finalize sale for <span id="customerSpan">@Model.WarehouseProductCombined.Select(x => x.CustomerName).FirstOrDefault() </span> customer</a>
+            </div>
+        </div>
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table mr-1"></i>
+                DataTable Example
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <form method="post">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Product name</th>
+                                    <th>Measument</th>
+                                    <th>On stock</th>
+                                    <th>Expire date</th>
+                                    <th>Id</th>
+                                    <th>Customer</th>
+                                    <th>Has Discount</th>
+                                    <th>Prod discount</th>
+                                    <th>Sale volume</th>
+                                    <th style="display:none">CustomerId</th>
+                                    <th style="display:none">WarehouseId</th>
+                                    <th style="display:none">ProdustId</th>
+                                    <th>Sale</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var product in Model.WarehouseProductCombined)
+                                {
+                                    <tr id="@product.Id">
+                                        <td>@product.Product</td>
+                                        <td>@product.ProductMeasurement</td>
+                                        <td>@product.ProductsAvailable</td>
+                                        <td>@product.ProductExpireDate </td>
+                                        <td>@product.Id <input type="hidden" asp-for="WarehouseProductSingle.WarehouseProductId" value="@product.Id" /></td>
+
+                                        <td id="custName">@product.CustomerName <input type="hidden" asp-for="WarehouseProductSingle.CustomerName" value="@product.CustomerName" /></td>
+
+                                        <td>@product.HasCustomerDiscount <input type="hidden" asp-for="WarehouseProductSingle.HasCustomerDiscount" value="@product.HasCustomerDiscount" /></td>
+
+                                        <td><input class="form-control py-4" id="hasProductDiscount" type="checkbox" asp-for="WarehouseProductSingle.HasProductDiscount" /></td>
+
+                                        <td><input class="form-control py-4" id="productSold" type="number" asp-for="WarehouseProductSingle.ProductSold" /></td>
+
+                                        <td style="display:none"><input type="hidden" asp-for="WarehouseProductSingle.CustomerId" value="@product.CustomerId" /></td>
+
+                                        <td style="display:none"><input type="hidden" asp-for="WarehouseProductSingle.WarehouseId" value="@product.WarehouseId" /></td>
+
+                                        <td style="display:none"><input type="hidden" asp-for="WarehouseProductSingle.ProductId" value="@product.ProductId" /></td>
+
+                                        @*<td><button type="submit" class="btn btn-primary btn-block">Sale</button></td>*@
+                                        <td><a name="@product.Id" class="btn btn-success btn-block">Select</a></td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/js/sales_generate_data.js"></script>

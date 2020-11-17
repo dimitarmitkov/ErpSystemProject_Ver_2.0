@@ -4,14 +4,16 @@ using ErpSystem.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ErpSystem.Data.Migrations
 {
     [DbContext(typeof(ErpSystemDbContext))]
-    partial class ErpSystemDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201115141441_ChangeFieldOfCompanyTypeIdToEik")]
+    partial class ChangeFieldOfCompanyTypeIdToEik
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -44,8 +46,8 @@ namespace ErpSystem.Data.Migrations
                     b.Property<string>("CustomerEikNumber")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("CustomerId")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("int");
 
                     b.Property<string>("CustomerName")
                         .HasColumnType("nvarchar(max)");
@@ -126,8 +128,8 @@ namespace ErpSystem.Data.Migrations
                     b.Property<int>("CurrentsaleId")
                         .HasColumnType("int");
 
-                    b.Property<string>("CustomerId")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("int");
 
                     b.Property<bool>("HasProductDiscount")
                         .HasColumnType("bit");
@@ -139,9 +141,6 @@ namespace ErpSystem.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("WarehouseId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("WarehouseProductIdByExpireDate")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
