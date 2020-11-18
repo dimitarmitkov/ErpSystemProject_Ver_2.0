@@ -63,33 +63,6 @@ namespace ErpSystem.Services.Services
             //setting of supplier
             var supplierEntity = this.dbContext.Suppliers.FirstOrDefault(s => s.SupplierName == createProduct.Supplier);
 
-            //if (supplierEntity == null)
-            //{
-            //    //Console.Write("Country: ");
-            //    //var country = Console.ReadLine();
-
-            //    //Console.Write("PostalCode: ");
-            //    //var postalCode = Console.ReadLine();
-
-            //    //Console.Write("Address: ");
-            //    //var address = Console.ReadLine();
-
-            //    //Console.Write("Customs Authorisation Needed: ");
-            //    //var customs = Console.ReadLine();
-
-            //    //Console.Write("Aditional Information: ");
-            //    //var additionalInfo = Console.ReadLine();
-
-            //    supplierEntity = new Supplier
-            //    {
-            //        SupplierName = createProduct.Supplier,
-            //        //SupplierCountry = country,
-            //        //SupplierPostalCode = postalCode,
-            //        //SupplierAddress = address,
-            //        //CustomsAuthorisationNeeded = bool.Parse(customs),
-            //        //SupplierAdditionalInformation = additionalInfo
-            //    };
-            //}
             product.Supplier = supplierEntity;
 
             //setting of productTransportPackage
@@ -135,11 +108,6 @@ namespace ErpSystem.Services.Services
             this.dbContext.SaveChanges();
         }
 
-        public IEnumerable<ProductViewModel> OrderProductsByGrossMargin()
-        {
-            throw new NotImplementedException();
-        }
-
         // serch by name or Id
         public IEnumerable<ProductViewModel> SearchByProductNameAndId(int? productId, string productName)
         {
@@ -147,7 +115,8 @@ namespace ErpSystem.Services.Services
 
             if (productId != null) productView = this.dbContext.Products.Where(p => p.Id == productId);
             if (productName != null) productView = this.dbContext.Products.Where(p => p.ProductName == productName);
-            if (productName == null && productId == null) productView = this.dbContext.Products.Where(p => !string.IsNullOrEmpty(p.Id.ToString()));
+            if (productName == null && productId == null) productView = this.dbContext.Products.Where(p => p.Id > -1);
+
 
 
             List<ProductViewModel> result = SelectProductViewModel(productView);

@@ -26,5 +26,7 @@
         public decimal TotalProductsDeliveryPrice { get; set; }
 
         public object ProductPrice { get; set; }
+
+        public string ProductExpireDate { get; set; }
     }
 }

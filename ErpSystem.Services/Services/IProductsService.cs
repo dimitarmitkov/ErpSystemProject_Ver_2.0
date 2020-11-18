@@ -14,10 +14,6 @@ namespace ErpSystem.Services.Services
 
         IEnumerable<ProductViewModel> SearchByProductSupplierCountryOrCity(string country, string city);
 
-        IEnumerable<ProductViewModel> OrderProductsByGrossMargin();
-
-        //IEnumerable<ProductViewModel> GetAvailableProducts();
-
         void DeleteExistingProduct(int productId, string productName);
 
         IEnumerable<SelectListItem> ProductTransportsPackageTags();

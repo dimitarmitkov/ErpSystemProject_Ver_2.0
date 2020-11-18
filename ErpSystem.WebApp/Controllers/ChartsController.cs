@@ -21,5 +21,14 @@ namespace ErpSystem.WebApp.Controllers
 
             return this.View(viewModel);
         }
+
+        public IActionResult JsonChart()
+        {
+            var viewModel = this.salesService.TotalSalesPerDate();
+
+            return this.Json(viewModel);
+
+            //return this.View(viewModel);
+        }
     }
 }

@@ -52,7 +52,6 @@ namespace ErpSystem.WebApp.Controllers
                 viewModel = viewModel.Where(m => m.Customer.ToLower().Contains(customer.ToLower()) && m.Product.ToLower().Contains(product.ToLower())).ToList();
             }
 
-
             return this.View(viewModel);
         }
 

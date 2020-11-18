@@ -1,9 +1,6 @@
 ﻿@using ErpSystem.Services.ViewModels.Sale
 @model IEnumerable<KeyValuePair<string, decimal>>
 
-<div style="display: none;" id="jsArray">
-    @Html.Raw(Json.Serialize(Model))
-</div>
 <div class="container-fluid">
     <h1 class="mt-4">Charts</h1>
     <ol class="breadcrumb mb-4">
