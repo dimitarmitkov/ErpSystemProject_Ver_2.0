@@ -1,13 +1,12 @@
-﻿let table = document.getElementsByTagName("table")[0];
+﻿document.addEventListener("click", eventHandler);
+
+let table = document.getElementsByTagName("table")[0];
 let thead = document.getElementsByTagName("thead")[0];
 let customerSpan = document.getElementById("customerSpan");
 
 table.style.fontSize = "0.9vw";
 thead.style.textAlign = "center";
 customerSpan.style.fontWeight = "bold";
-
-
-document.addEventListener("click", eventHandler);
 
 function eventHandler(e) {
     console.log(e.target.name);
@@ -36,23 +35,17 @@ function eventHandler(e) {
             }
         }
     }
-    let inputNumber = document.getElementById("productSold")
-        .addEventListener("keyup", eventHandlerKeyup);
+    let inputNumber = document.getElementById("productSold").addEventListener("keyup", eventHandlerKeyup);
 
     let availableProducts = document.getElementById("productsAvailable").textContent;
 
-    console.log(availableProducts);
-
-
     function validateInput(numberOfProducts) {
         const reg = /^([0-9]+)$/;
-
         return reg.test(numberOfProducts);
     }
 
 
     function eventHandlerKeyup() {
-        //console.log(document.getElementsByTagName("tr")[1].lastElementChild.childNodes[0]);
 
         if (!(validateInput(this.value) && parseInt(this.value) <= parseInt(availableProducts))) {
             (document.getElementsByTagName("tr")[1].lastElementChild.childNodes[0]).style.display = "none";
@@ -61,7 +54,6 @@ function eventHandler(e) {
             (document.getElementsByTagName("tr")[1].lastElementChild.childNodes[0]).style.display = "block";
         }
     }
-
     eventHandlerKeyup(inputNumber)
 }
 
