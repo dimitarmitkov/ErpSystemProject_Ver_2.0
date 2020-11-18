@@ -44,7 +44,6 @@ function eventHandler(e) {
         return reg.test(numberOfProducts);
     }
 
-
     function eventHandlerKeyup() {
 
         if (!(validateInput(this.value) && parseInt(this.value) <= parseInt(availableProducts))) {
@@ -56,5 +55,3 @@ function eventHandler(e) {
     }
     eventHandlerKeyup(inputNumber)
 }
-
-
