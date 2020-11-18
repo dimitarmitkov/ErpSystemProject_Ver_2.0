@@ -86,7 +86,7 @@ namespace ErpSystem.WebApp.Controllers
             return this.Redirect("/Sales/WarehouseAllGenerateSale");
         }
 
-        [Authorize]
+
         public IActionResult WarehouseAllGenerateSale()
         {
             CustomerWarehouseViewModel viewModel = new CustomerWarehouseViewModel();

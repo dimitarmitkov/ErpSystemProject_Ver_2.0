@@ -9,7 +9,6 @@ customerSpan.style.fontWeight = "bold";
 
 document.addEventListener("click", eventHandler);
 
-
 function eventHandler(e) {
     console.log(e.target.name);
     let buttonTag = (e.target).tagName;
@@ -26,9 +25,6 @@ function eventHandler(e) {
         idList.push(trList[i].id);
     }
 
-    console.log(idList);
-
-
     if (buttonTag === "A") {
         for (let i = 0; i < idList.length; i++) {
             if (parseInt(idList[i]) !== parseInt(number)) {
@@ -36,10 +32,37 @@ function eventHandler(e) {
             }
             else {
 
-                let button = document.createElement()
-                document.getElementById(`${parseInt(idList[i])}`).lastElementChild.innerHTML = '<button type="submit" class="btn btn - primary btn - block">Sale</button>'
+                document.getElementById(`${parseInt(idList[i])}`).lastElementChild.innerHTML = '<td><button type="submit" class="btn btn - primary btn - block" style = "color: white;background-color: rgb(0,92,255);">Sale</button></td>'
             }
         }
     }
+    let inputNumber = document.getElementById("productSold")
+        .addEventListener("keyup", eventHandlerKeyup);
 
+    let availableProducts = document.getElementById("productsAvailable").textContent;
+
+    console.log(availableProducts);
+
+
+    function validateInput(numberOfProducts) {
+        const reg = /^([0-9]+)$/;
+
+        return reg.test(numberOfProducts);
+    }
+
+
+    function eventHandlerKeyup() {
+        //console.log(document.getElementsByTagName("tr")[1].lastElementChild.childNodes[0]);
+
+        if (!(validateInput(this.value) && parseInt(this.value) <= parseInt(availableProducts))) {
+            (document.getElementsByTagName("tr")[1].lastElementChild.childNodes[0]).style.display = "none";
+        }
+        else {
+            (document.getElementsByTagName("tr")[1].lastElementChild.childNodes[0]).style.display = "block";
+        }
+    }
+
+    eventHandlerKeyup(inputNumber)
 }
+
+
