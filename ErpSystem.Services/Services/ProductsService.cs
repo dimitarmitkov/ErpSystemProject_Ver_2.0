@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using ErpSystem.Data;
 using ErpSystem.Models;
@@ -193,7 +194,9 @@ namespace ErpSystem.Services.Services
                 MeasurmentTag = x.MeasurmentTag.Maesurment,
                 ProductsAvailable = x.WarehouseProduct.ProductsAvailable,
                 TotalProductsDeliveryPrice = x.WarehouseProduct.ProductsAvailable * x.ProductLandedPrice,
-            }).OrderByDescending(x => x.ProductSalePrice)
+                ProductExpireDate = !string.IsNullOrEmpty(x.WarehouseProduct.ExpireDate.ToString())
+                ? x.WarehouseProduct.ExpireDate.ToString() : "no expire date",
+            }).OrderByDescending(x => x.ProductName)
                             .ToList();
         }
     }

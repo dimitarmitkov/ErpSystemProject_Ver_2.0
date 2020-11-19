@@ -145,7 +145,7 @@ namespace ErpSystem.Services.Services
                 Product = x.Product.ProductName,
                 WarehouseId = x.WarehouseId,
                 ProductMeasurement = x.Product.MeasurmentTag.Maesurment,
-                ProductExpireDate = x.ExpireDate,
+                ProductExpireDate = x.ExpireDate.ToString(),
                 ProductsAvailable = x.ProductsAvailable,
             }).OrderBy(p => p.Product)
             .ThenByDescending(p => p.ProductExpireDate)
@@ -204,7 +204,7 @@ namespace ErpSystem.Services.Services
                 ProductId = x.ProductId,
                 WarehouseId = x.WarehouseId,
                 ProductMeasurement = x.Product.MeasurmentTag.Maesurment,
-                ProductExpireDate = x.ExpireDate,
+                ProductExpireDate = x.ExpireDate.ToString(),
                 ProductsAvailable = x.ProductsAvailable,
                 CustomerName = customerName,
                 HasCustomerDiscount = hasDiscount,

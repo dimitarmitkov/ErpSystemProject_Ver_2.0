@@ -15,7 +15,7 @@ namespace ErpSystem.Services.ViewModels.Warehouse
 
         public int ProductsAvailable { get; set; }
 
-        public DateTime? ProductExpireDate { get; set; }
+        public string ProductExpireDate { get; set; }
 
         public string CustomerId { get; set; }
 
