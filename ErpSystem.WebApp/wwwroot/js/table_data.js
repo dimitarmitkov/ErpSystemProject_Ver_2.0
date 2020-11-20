@@ -24,7 +24,7 @@
         console.log(thisTextNode.data);
 
         // try to convert text to numeric 
-        let thisNumber = parseFloat(thisTextNode.data.replace(',', ''));
+        let thisNumber = parseFloat(thisTextNode.data.replaceAll(',', ''));
         // if you didn't get back the value NaN (i.e. not a number), add into result
 
 

@@ -4,14 +4,16 @@ using ErpSystem.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ErpSystem.Data.Migrations
 {
     [DbContext(typeof(ErpSystemDbContext))]
-    partial class ErpSystemDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201119095326_DeliveryNeededProductsTableAdded")]
+    partial class DeliveryNeededProductsTableAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -193,9 +195,6 @@ namespace ErpSystem.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<bool>("ConfimBeenNoticed")
-                        .HasColumnType("bit");
 
                     b.Property<int>("DeliveryDays")
                         .HasColumnType("int");

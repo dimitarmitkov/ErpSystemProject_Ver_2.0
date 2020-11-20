@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using ErpSystem.Models;
 using ErpSystem.Services.ViewModels.CustomerWarehouse;
+using ErpSystem.Services.ViewModels.Order;
 using ErpSystem.Services.ViewModels.Sale;
 using ErpSystem.Services.ViewModels.Warehouse;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -20,8 +22,14 @@ namespace ErpSystem.Services.Services
 
         IEnumerable<SelectListItem> SeclectCustomerDropDown();
 
-        public void GenerateCurrentSale(string companyEik, bool hasDiscount);
+        void GenerateCurrentSale(string companyEik, bool hasDiscount);
 
-        public IEnumerable<WarehouseProductViewModel> ListOfProductsForSaleWithCustomer();
+        IEnumerable<WarehouseProductViewModel> ListOfProductsForSaleWithCustomer();
+
+        void IsProductForOrder(int currentId);
+
+        IEnumerable<CalculateNeedOfOrderViewModel> AreAnyProductsForOrder();
+
+        void ConfirmNeedOfOrder(DeliveryNeededProduct deliveryNeededProduct);
     }
 }

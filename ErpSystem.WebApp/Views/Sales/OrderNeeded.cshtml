@@ -1,0 +1,18 @@
+﻿@using ErpSystem.Services.ViewModels.Order
+@model IEnumerable<CalculateNeedOfOrderViewModel>
+
+
+
+<div id="supplier" class="alert alert-danger" role="alert">These products need to be ordered.</div>
+<div id="supplier" class="alert alert-danger" role="alert">Please order them when finish with your curren sale session.</div>
+
+@foreach (var product in Model)
+{
+    <div id="supplier" class="alert alert-danger" role="alert">Product: @product.ProductId @product.Product delivered by @product.Supplier</div>
+}
+
+<form method="post">
+    <button type="submit" class="btn btn btn-danger btn-block">Confirm</button>
+</form>
+
+<script src="~/js/product_need_alert.js"></script>

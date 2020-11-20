@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using ErpSystem.Data;
 using ErpSystem.Models;
 using ErpSystem.Services.ViewModels.CurrentSale;
 using ErpSystem.Services.ViewModels.Customer;
 using ErpSystem.Services.ViewModels.CustomerWarehouse;
+using ErpSystem.Services.ViewModels.Order;
 using ErpSystem.Services.ViewModels.Sale;
 using ErpSystem.Services.ViewModels.Warehouse;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -62,6 +65,9 @@ namespace ErpSystem.Services.Services
 
                 this.dbContext.WarehouseProducts.Update(productSold);
                 this.dbContext.SaveChanges();
+
+                // check if product needs order
+                IsProductForOrder(sale.ProductId);
 
                 //decrase number of boxes or pallets if number of sold products reaches box or pallet size
 
@@ -251,6 +257,55 @@ namespace ErpSystem.Services.Services
             return dictionary;
         }
 
+        // calculating does product need an order
+        public void IsProductForOrder(int currentId)
+        {
+            var productForOrder = this.dbContext.Products.Where(p => p.Id == currentId).Select(x => new DeliveryNeededProduct
+            {
+                Product = x.ProductName,
+                ProductId = currentId,
+                ProductsAvailable = this.dbContext.WarehouseProducts.Where(p => p.ProductId == currentId).Sum(x => x.ProductsAvailable),
+                SalesBasedOnDeliveryPeriod = this.dbContext.Sales.Where(p => p.ProductId == currentId && p.SaleDate >= DateTime.UtcNow.AddDays((x.TimeToDelivery + x.TimeToOrder) * (-1))).Sum(x => x.NumberOfSoldProducts),
+                Supplier = x.Supplier.SupplierName,
+                DeliveryDays = x.TimeToDelivery,
+                OrderDays = x.TimeToOrder,
+                TotalDeliveryTime = x.TimeToOrder + x.TimeToDelivery,
+                ConfimBeenNoticed = false,
+            }).FirstOrDefault();
+
+            var isProductAlreadySetForOrder = !this.dbContext.DeliveryNeededProducts.Any(p => p.ProductId == currentId);
+
+            if (productForOrder.SalesBasedOnDeliveryPeriod * 2 >= productForOrder.ProductsAvailable && isProductAlreadySetForOrder)
+            {
+                this.dbContext.DeliveryNeededProducts.AddAsync(productForOrder);
+                this.dbContext.SaveChanges();
+            }
+        }
+
+        public IEnumerable<CalculateNeedOfOrderViewModel> AreAnyProductsForOrder()
+        {
+            return this.dbContext.DeliveryNeededProducts.Where(p => p.ConfimBeenNoticed == false).Select(x => new CalculateNeedOfOrderViewModel
+            {
+                Product = x.Product,
+                ProductId = x.ProductId,
+                Supplier = x.Supplier,
+                DeliveryDays = x.OrderDays,
+                OrderDays = x.DeliveryDays,
+            }).ToList();
+        }
+
+        public void ConfirmNeedOfOrder(DeliveryNeededProduct deliveryNeededProduct)
+        {
+            var productId = deliveryNeededProduct.ProductId;
+            var confirmedProducts = this.dbContext.DeliveryNeededProducts.Where(p => p.ConfimBeenNoticed == false).ToList();
+
+            for (int i = 0; i < confirmedProducts.Count; i++)
+            {
+                confirmedProducts[i].ConfimBeenNoticed = true;
+                this.dbContext.Update(confirmedProducts[i]);
+                this.dbContext.SaveChangesAsync();
+            }
+        }
 
 
 

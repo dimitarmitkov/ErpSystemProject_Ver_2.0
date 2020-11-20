@@ -37,6 +37,7 @@
     <Folder Include="Views\Sales\" />
     <Folder Include="Views\Customers\" />
     <Folder Include="Views\CurrentSales\" />
+    <Folder Include="Views\Orders\" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="Views\CurrentSales\CurrentSale.cshtml" />

@@ -50,6 +50,7 @@ namespace ErpSystem.WebApp
             services.AddTransient<ISalesService, SalesService>();
             services.AddTransient<ICustomersService, CustomersService>();
             services.AddTransient<ICurrentSalesService, CurrentSalesService>();
+            services.AddTransient<IOrdersService, OrdersService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
