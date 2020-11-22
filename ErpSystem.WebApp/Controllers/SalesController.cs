@@ -27,8 +27,6 @@ namespace ErpSystem.WebApp.Controllers
 
         public IActionResult All()
         {
-            Console.WriteLine("all get");
-
             var viewModel = salesService.ListOfAllSales();
 
             return this.View(viewModel);

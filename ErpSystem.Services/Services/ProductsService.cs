@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using ErpSystem.Data;
 using ErpSystem.Models;
 using ErpSystem.Services.ViewModels.Product;
@@ -179,9 +180,10 @@ namespace ErpSystem.Services.Services
 
 
 
-        private static List<ProductViewModel> SelectProductViewModel(IQueryable<Product> productView)
+        private List<ProductViewModel> SelectProductViewModel(IQueryable<Product> productView)
         {
-            return productView.Select(x => new ProductViewModel
+
+            var listOfProductViewModel = productView.Select(x => new ProductViewModel
             {
                 ProductName = x.ProductName,
                 ProductLandedPrice = x.ProductLandedPrice,
@@ -198,6 +200,9 @@ namespace ErpSystem.Services.Services
                 ? x.WarehouseProduct.ExpireDate.ToString() : "no expire date",
             }).OrderByDescending(x => x.ProductName)
                             .ToList();
+
+
+            return listOfProductViewModel;
         }
     }
 }
