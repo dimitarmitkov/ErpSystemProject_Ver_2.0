@@ -8,10 +8,18 @@ namespace ErpSystem.Services.Services
 {
     public interface IOrdersService
     {
-        Task GenetareOrder();
+        void GenetareOrder(CalculateNeedOfOrderViewModel calculateNeedOfOrder);
 
         IEnumerable<SelectListItem> SuppliersDropDown();
 
         IEnumerable<CalculateNeedOfOrderViewModel> ProductsForOrderList();
+
+        void SelectSupplier(string supplierName);
+
+        string GetSupplierName();
+
+        void FinalizeOrder();
+
+        IEnumerable<int> OrdesAny();
     }
 }

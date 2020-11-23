@@ -36,6 +36,7 @@ namespace ErpSystem.Data
         public DbSet<CurrentSale> CurrentSales { get; set; }
         public DbSet<CustomerProduct> CustomerProducts { get; set; }
         public DbSet<DeliveryNeededProduct> DeliveryNeededProducts { get; set; }
+        public DbSet<SupplierForOrder> SupplierForOrders { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

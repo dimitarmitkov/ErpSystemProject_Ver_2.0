@@ -1,10 +1,15 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using ErpSystem.Data;
+using ErpSystem.Models;
 using ErpSystem.Services.ViewModels.Order;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ErpSystem.Services.Services
 {
@@ -18,33 +23,44 @@ namespace ErpSystem.Services.Services
         }
 
 
-        public async Task GenetareOrder()
+        public void GenetareOrder(CalculateNeedOfOrderViewModel calculateNeedOfOrder)
         {
+            var supplierId = this.dbContext.Suppliers.Where(x => x.SupplierName == calculateNeedOfOrder.Supplier).Select(x => x.Id).FirstOrDefault();
 
-            var supplier = this.dbContext.DeliveryNeededProducts.Select(x => x.Supplier).FirstOrDefault();
-            var prodictId = this.dbContext.Products.Where(p => p.Supplier.SupplierName == supplier).Select(x => x.Id).FirstOrDefault();
-            var isPallet = this.dbContext.Products.Where(p => p.Id == prodictId).Select(x => x.IsPallet).FirstOrDefault();
-            var piecesPerBox = this.dbContext.Products.Where(p => p.Id == prodictId).Select(x => x.ProductTransportPackageNumberOfPieces).FirstOrDefault();
-            var boxesPerPallet = this.dbContext.Products.Where(p => p.Id == prodictId).Select(x => x.BoxesPerPallet).FirstOrDefault();
-            var numberOfProductsInTransportUnit = isPallet ? piecesPerBox * boxesPerPallet : piecesPerBox;
-
-
-            var order = new CalculateNeedOfOrderViewModel
+            var order = new Order
             {
-                Product = this.dbContext.Products.Where(p => p.Supplier.SupplierName == supplier).Select(x => x.ProductName).FirstOrDefault(),
-                ProductId = prodictId,
-                ProductsAvailable = this.dbContext.WarehouseProducts.Where(x => x.ProductId == prodictId).Sum(x => x.ProductsAvailable),
-                SalesBasedOnDeliveryPeriod = this.dbContext.Sales.Where(p => p.ProductId == prodictId).Sum(x => x.NumberOfSoldProducts),
-                ProductExwPrice = this.dbContext.Products.Where(p => p.Supplier.SupplierName == supplier).Select(x => x.ProductLandedPrice).FirstOrDefault(),
-                ProductMeasurementType = this.dbContext.Products.Where(p => p.Id == prodictId).Select(x => x.MeasurmentTag.Maesurment).FirstOrDefault(),
-                NumberOfProductsInTrasportUnit = numberOfProductsInTransportUnit,
-                TotalWeightOfTransportUnit = this.dbContext.Products.Where(p => p.Id == prodictId).Select(x => x.ProductTransportPackageWeight).FirstOrDefault(),
+                SupplierId = supplierId,
+                Supplier = calculateNeedOfOrder.Supplier,
+                ProductId = calculateNeedOfOrder.ProductId,
+                ProductName = calculateNeedOfOrder.Product,
+                OrderDate = DateTime.UtcNow.Date,
+                NumberOfTransportPackageUnitsOrdered = calculateNeedOfOrder.OrderedTarnsportUnits,
+                TotalAmountOfOrder = calculateNeedOfOrder.ProductExwPrice * calculateNeedOfOrder.OrderedTarnsportUnits,
+                TotalOrderWeight = calculateNeedOfOrder.TotalWeightOfTransportUnit * calculateNeedOfOrder.OrderedTarnsportUnits,
             };
+
+            this.dbContext.Orders.Add(order);
+            this.dbContext.SaveChanges();
+
+
+
+            if (!ProductsForOrderList().Any())
+            {
+                var range = this.dbContext.DeliveryNeededProducts.ToList();
+
+                for (int i = 0; i < range.Count; i++)
+                {
+                    this.dbContext.DeliveryNeededProducts.Remove(range[i]);
+                    this.dbContext.SaveChanges();
+                }
+            }
 
         }
 
         public IEnumerable<CalculateNeedOfOrderViewModel> ProductsForOrderList()
         {
+
+            var productOrderedId = this.dbContext.Orders.Select(x => x.ProductId).ToList();
 
             var supplier = this.dbContext.DeliveryNeededProducts.Select(s => s.Supplier).ToList();
 
@@ -68,12 +84,48 @@ namespace ErpSystem.Services.Services
                     Package = x.IsPallet ? "Pallet" : "Box",
                 }).OrderBy(x => x.Supplier)
             .ThenBy(x => x.Product)
-            .Where(x => x.ProductsAvailable < x.SalesBasedOnDeliveryPeriod)
+            .Where(x => x.ProductsAvailable < x.SalesBasedOnDeliveryPeriod && !productOrderedId.Any(a => a == x.ProductId))
                 .ToList();
 
                 productsList.AddRange(products);
             }
+
             return productsList;
+        }
+
+        public IEnumerable<int> OrdesAny()
+        {
+            return this.dbContext.Orders.Select(x => x.ProductId).ToList();
+        }
+
+        public void SelectSupplier(string supplierName)
+        {
+            var supplierId = this.dbContext.Suppliers.Where(s => s.SupplierName == supplierName).Select(x => x.Id).FirstOrDefault();
+
+            var supplier = new SupplierForOrder
+            {
+                SupplierId = supplierId,
+                SupplierName = supplierName,
+            };
+
+            var excistingRecords = this.dbContext.SupplierForOrders.Where(x => x.Id > -1).ToList();
+
+            if (excistingRecords.Count > 0)
+            {
+                for (int i = 0; i < excistingRecords.Count; i++)
+                {
+                    this.dbContext.SupplierForOrders.Remove(excistingRecords[i]);
+                }
+            }
+
+            this.dbContext.SupplierForOrders.Add(supplier);
+            this.dbContext.SaveChanges();
+
+        }
+
+        public string GetSupplierName()
+        {
+            return this.dbContext.SupplierForOrders.Select(s => s.SupplierName).FirstOrDefault();
         }
 
         public IEnumerable<SelectListItem> SuppliersDropDown()
@@ -84,6 +136,23 @@ namespace ErpSystem.Services.Services
                 Value = p.Supplier,
 
             }).ToList();
+        }
+
+        public void FinalizeOrder()
+        {
+            var supplierName = this.dbContext.SupplierForOrders.Select(s => s.SupplierName).FirstOrDefault();
+
+            if (!string.IsNullOrEmpty(supplierName))
+            {
+                var supplier = this.dbContext.SupplierForOrders.FirstOrDefault(s => s.SupplierName == supplierName);
+                this.dbContext.SupplierForOrders.Remove(supplier);
+
+                var supplier2 = this.dbContext.DeliveryNeededProducts.FirstOrDefault(s => s.Supplier == supplierName);
+                this.dbContext.DeliveryNeededProducts.Remove(supplier2);
+
+                this.dbContext.SaveChanges();
+
+            }
         }
     }
 }

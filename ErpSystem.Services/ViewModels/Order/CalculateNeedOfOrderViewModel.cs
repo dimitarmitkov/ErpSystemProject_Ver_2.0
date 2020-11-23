@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using NetTopologySuite.Simplify;
 
@@ -36,7 +37,11 @@ namespace ErpSystem.Services.ViewModels.Order
 
         public bool ConfimBeenNoticed { get; set; }
 
+        [Range(0, 1000, ErrorMessage = "Please input number between 0 and 1000")]
         public int NumberOfTransportUnitsClaculatedForOrder { get; set; }
+
+        [Range(0, 1000, ErrorMessage = "Please input number between 0 and 1000")]
+        public int OrderedTarnsportUnits { get; set; }
 
         public string Package { get; set; }
 

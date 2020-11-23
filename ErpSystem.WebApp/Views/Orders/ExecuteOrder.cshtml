@@ -1,0 +1,91 @@
+﻿@using ErpSystem.Services.ViewModels.Order
+@model SupplierOrderViewModel
+
+<div class="container-fluid">
+    <h1 class="mt-4">Tables</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="/Home/Index">Dashboard</a></li>
+        <li class="breadcrumb-item active">Tables</li>
+    </ol>
+    <div class="card mb-4">
+
+    </div>
+    @foreach (var order in Model.CalculateOrderProductsList)
+    {
+        <form asp-controller="Orders" asp-action="ExecuteOrder" method="post" id="form_@order.ProductId">
+            <div class="row justify-content-lg-center">
+                <div class="col-lg-12">
+                    <div class="card shadow-lg border-0 rounded-lg mt-1">
+                        <div class="card-header"><h3 id="header" class="text-center font-weight-light my-2">Order for <span>@order.Product</span> from <span>@order.Supplier</span>. Please insert number of boxes or pallets to order. When ready press Finalize order button below. </h3></div>
+                        <div class="card-body">
+                            <div class="form-row">
+                                <div class="col-md-3">
+                                    <input class="form-control py-4" id="supplierName" type="hidden" placeholder="Supplier" asp-for="CalculateOrderProductSingle.Supplier" value="@order.Supplier" />
+                                    <p>Supplier: @order.Supplier</p>
+                                </div>
+                                <div class="col-md-3">
+                                    <input class="form-control py-4" id="productId" type="hidden" placeholder="ProductId" asp-for="CalculateOrderProductSingle.ProductId" value="@order.ProductId" />
+                                    <p>ProductId: @order.ProductId</p>
+                                </div>
+                                <div class="col-md-3">
+                                    <input class="form-control py-4" id="product" type="hidden" placeholder="Product" asp-for="CalculateOrderProductSingle.Product" value="@order.Product" />
+                                    <p>ProductName: @order.Product</p>
+                                </div>
+                                <div class="col-md-3">
+                                    <input class="form-control py-4" id="productExwPrice" type="hidden" placeholder="ProductExwPrice" asp-for="CalculateOrderProductSingle.ProductExwPrice" value="@order.ProductExwPrice" />
+                                    <p>Product EXW: @order.ProductExwPrice</p>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-3">
+                                    <input class="form-control py-4" id="totalDeliveryTime" type="hidden" placeholder="TotalDeliveryTime" asp-for="CalculateOrderProductSingle.TotalDeliveryTime" value="@order.TotalDeliveryTime" />
+                                    <p>Order days: @order.TotalDeliveryTime</p>
+                                </div>
+                                <div class="col-md-3">
+                                    <input class="form-control py-4" id="totalWeightOfTransportUnit" type="hidden" placeholder="TotalWeightOfTransportUnit" asp-for="CalculateOrderProductSingle.TotalWeightOfTransportUnit" value="@order.TotalWeightOfTransportUnit" />
+                                    <p>Weight: @order.TotalWeightOfTransportUnit</p>
+                                </div>
+                                <div class="col-md-3">
+                                    <input class="form-control py-4" id="productsAvailable" type="hidden" placeholder="ProductsAvailable" asp-for="CalculateOrderProductSingle.ProductsAvailable" value="@order.ProductsAvailable" />
+                                    <p>Available: @order.ProductsAvailable</p>
+                                </div>
+                                <div class="col-md-3">
+                                    <input class="form-control py-4" id="salesBasedOnDeliveryPeriod" type="hidden" placeholder="salesBasedOnDeliveryPeriod" asp-for="CalculateOrderProductSingle.SalesBasedOnDeliveryPeriod" value="@order.SalesBasedOnDeliveryPeriod" />
+                                    <p>Sales: @order.SalesBasedOnDeliveryPeriod</p>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-3">
+                                    <input class="form-control py-4" id="numberOfTransportUnitsClaculatedForOrder" type="hidden" placeholder="numberOfTransportUnitsClaculatedForOrder" asp-for="CalculateOrderProductSingle.NumberOfTransportUnitsClaculatedForOrder" value="@order.NumberOfTransportUnitsClaculatedForOrder" />
+                                    <p>Order suggested: @order.NumberOfTransportUnitsClaculatedForOrder</p>
+                                </div>
+                                <div class="col-md-3">
+                                    <input class="form-control py-4" id="package" type="hidden" placeholder="Package" asp-for="CalculateOrderProductSingle.Package" value="@order.Package" />
+                                    <p>@order.Package</p>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="small mb-1" asp-for="CalculateOrderProductSingle.OrderedTarnsportUnits">Please enter number of @order.Package you like to order</label>
+                                    <input class="form-control py-1" id="productUnitsForOrder @order.ProductId" type="number" placeholder="Enter number" asp-for="CalculateOrderProductSingle.OrderedTarnsportUnits" value="" />
+                                    <span asp-validation-for="CalculateOrderProductSingle.OrderedTarnsportUnits" class="text-danger" style="font-size:0.7vw"></span>
+                                </div>
+                                <div class="col-md-3">
+                                    <p><button id="@order.ProductId" type="submit" class="btn btn-primary btn-block">Confirm order</button></p>
+                                    @*<p><a id="@order.ProductId" class="btn btn-primary btn-block">Confirm order</a></p>*@
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    }
+    <br>
+    <form method="post">
+        <div class="form-row">
+            <div class="col-md-12">
+                <a class="btn btn-primary btn-block" href="/Orders/GenerateOrder">Finalize order</a>
+            </div>
+        </div>
+    </form>
+</div>
+<script src="~/js/execute_order_data.js"></script>

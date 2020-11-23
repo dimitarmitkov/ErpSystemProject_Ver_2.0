@@ -5,16 +5,20 @@ namespace ErpSystem.Models
     {
         public int Id { get; set; }
 
-        public virtual Supplier Supplier { get; set; }
+        public int SupplierId { get; set; }
 
-        public int CalculatedOrderProductNumber { get; set; }
-
-        public int ReserveNumberOfOrderedProduct { get; set; }
+        public string Supplier { get; set; }
 
         public DateTime OrderDate { get; set; }
 
-        public int NumberOfTransportPackageUnits { get; set; }//number of pallets, boxes or other transport package
+        public int ProductId { get; set; }
 
-        public decimal TotalAmountOfProductNumberOrWeight { get; set; }
+        public string ProductName { get; set; }
+
+        public int NumberOfTransportPackageUnitsOrdered { get; set; }
+
+        public decimal TotalAmountOfOrder { get; set; }
+
+        public double TotalOrderWeight { get; set; }
     }
 }
