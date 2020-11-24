@@ -240,7 +240,7 @@ namespace ErpSystem.Services.Services
             var listOfSales = this.dbContext.Sales.Select(s => new SaleSumByDateViewModel
             {
                 DateOfSale = s.SaleDate,
-                TotalSalesSum = s.SingleProudctSalePrice,
+                TotalSalesSum = s.SingleProudctSalePrice * s.NumberOfSoldProducts,
             }).ToList();
 
             var dictionary = new Dictionary<string, decimal>();
@@ -275,9 +275,9 @@ namespace ErpSystem.Services.Services
 
             var isProductAlreadySetForOrder = !this.dbContext.DeliveryNeededProducts.Any(p => p.ProductId == currentId);
 
-            if (productForOrder.SalesBasedOnDeliveryPeriod * 2 >= productForOrder.ProductsAvailable && isProductAlreadySetForOrder)
+            if (productForOrder.SalesBasedOnDeliveryPeriod >= productForOrder.ProductsAvailable && isProductAlreadySetForOrder)
             {
-                this.dbContext.DeliveryNeededProducts.AddAsync(productForOrder);
+                this.dbContext.DeliveryNeededProducts.Add(productForOrder);
                 this.dbContext.SaveChanges();
             }
         }
