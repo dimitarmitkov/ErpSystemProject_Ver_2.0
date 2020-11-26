@@ -25,6 +25,7 @@ namespace ErpSystem.WebApp.Controllers
             //this.warehouseProduct = warehouseProduct;
         }
 
+        [Authorize]
         public IActionResult All()
         {
             var viewModel = salesService.ListOfAllSales();

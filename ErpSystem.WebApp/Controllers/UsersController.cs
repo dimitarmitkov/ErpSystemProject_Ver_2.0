@@ -1,16 +1,22 @@
 ﻿using System;
+using System.Threading.Tasks;
 using ErpSystem.Services.Services;
 using ErpSystem.Services.ViewModels.User;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ErpSystem.WebApp.Controllers
 {
     public class UsersController : Controller
     {
+        private readonly UserManager<IdentityUser> userManager;
+        private readonly SignInManager<IdentityUser> signInManager;
         private readonly IUsersService usersService;
 
-        public UsersController(IUsersService usersService)
+        public UsersController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, IUsersService usersService)
         {
+            this.userManager = userManager;
+            this.signInManager = signInManager;
             this.usersService = usersService;
         }
 
@@ -20,17 +26,19 @@ namespace ErpSystem.WebApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult Login(LoginUserViewModel userViewModel)
+        public async Task<IActionResult> Login(LoginUserViewModel userViewModel)
         {
-            var userId = usersService.GetUserId(userViewModel.InputEmailAddress, userViewModel.InputEmailAddress);
 
-            //if (userId == null)
-            //{
-            //    return this.Content("Incorrect email or passwort");
-            //}
+            if (!ModelState.IsValid)
+            {
+                return this.View();
+            }
 
-            //this.SignIn();
-            return this.Redirect("/");
+            var user = usersService.LoginUser(userViewModel);
+
+            await this.signInManager.PasswordSignInAsync(user.Email, user.PasswordHash, true, true);
+
+            return this.Redirect("/Home/Index");
         }
 
         public IActionResult Register()
@@ -39,7 +47,7 @@ namespace ErpSystem.WebApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult Register(RegisterUserViewModel registerUser)
+        public async Task<IActionResult> Register(RegisterUserViewModel registerUser)
         {
 
             if (!ModelState.IsValid)
@@ -47,7 +55,16 @@ namespace ErpSystem.WebApp.Controllers
                 return this.View();
             }
 
-            this.usersService.CreateUser(registerUser);
+            var user = usersService.CreateUser(registerUser);
+
+            var result = await this.userManager.CreateAsync(user, user.PasswordHash);
+
+            return this.Redirect("/Users/Login");
+        }
+
+        public async Task<IActionResult> Logout()
+        {
+            await this.signInManager.SignOutAsync();
 
             return this.Redirect("/Users/Login");
         }

@@ -1,10 +1,16 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
+
 namespace ErpSystem.Services.ViewModels.User
 {
     public class LoginUserViewModel
     {
-        public string InputEmailAddress { get; set; }
+        [Required]
+        [EmailAddress(ErrorMessage = "Please enter valid email address")]
+        public string Email { get; set; }
 
-        public string InputPassword { get; set; }
+        [Required]
+        [MinLength(6, ErrorMessage = "Password length should be at least 6 characters.")]
+        public string Password { get; set; }
     }
 }
