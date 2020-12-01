@@ -87,6 +87,8 @@ namespace ErpSystem.Services.Services
             .Where(x => x.ProductsAvailable < x.SalesBasedOnDeliveryPeriod && !productOrderedId.Any(a => a == x.ProductId))
                 .ToList();
 
+
+
                 productsList.AddRange(products);
             }
 

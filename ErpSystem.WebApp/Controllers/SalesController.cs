@@ -147,5 +147,14 @@ namespace ErpSystem.WebApp.Controllers
             return this.Redirect("/Sales/WarehouseAllGenerateSale");
         }
 
+        public IActionResult Invoice()
+        {
+            var viewModel = new InvoiceCombinedViewModel();
+            viewModel.List = salesService.Invoice();
+            viewModel.Single = salesService.Invoice();
+
+            return this.View(viewModel);
+        }
+
     }
 }

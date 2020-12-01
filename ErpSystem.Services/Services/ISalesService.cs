@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using ErpSystem.Models;
-using ErpSystem.Services.ViewModels.CustomerWarehouse;
 using ErpSystem.Services.ViewModels.Order;
 using ErpSystem.Services.ViewModels.Sale;
 using ErpSystem.Services.ViewModels.Warehouse;
@@ -31,5 +30,7 @@ namespace ErpSystem.Services.Services
         IEnumerable<CalculateNeedOfOrderViewModel> AreAnyProductsForOrder();
 
         void ConfirmNeedOfOrder(DeliveryNeededProduct deliveryNeededProduct);
+
+        IEnumerable<InvoiceViewModel> Invoice();
     }
 }

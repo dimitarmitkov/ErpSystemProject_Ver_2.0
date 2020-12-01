@@ -14,6 +14,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ErpSystem.Data;
 using ErpSystem.Services.Services;
+using AutoMapper;
+using ErpSystem.Models;
+using ErpSystem.Services.ViewModels.Delivery;
 
 namespace ErpSystem.WebApp
 {
@@ -38,6 +41,15 @@ namespace ErpSystem.WebApp
             services.AddMvc().AddRazorRuntimeCompilation();
             services.AddRazorPages();
 
+            var mapperConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new MappingProfile());
+                mc.CreateMap<Order, DeliveryListViewModel>();
+            });
+
+            IMapper mapper = mapperConfig.CreateMapper();
+            services.AddSingleton(mapper);
+
             services.AddSingleton(this.Configuration);
 
             //Database
@@ -51,6 +63,7 @@ namespace ErpSystem.WebApp
             services.AddTransient<ICustomersService, CustomersService>();
             services.AddTransient<ICurrentSalesService, CurrentSalesService>();
             services.AddTransient<IOrdersService, OrdersService>();
+            services.AddTransient<IDeliveriesService, DeliveriesService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -20,6 +20,8 @@ function eventHandler(e) {
     let trList = document.getElementsByTagName("tr");
     let idList = [];
 
+    console.log(trList.length)
+
     for (let i = 1; i < trList.length; i++) {
         idList.push(trList[i].id);
     }
@@ -46,7 +48,7 @@ function eventHandler(e) {
 
     function eventHandlerKeyup() {
 
-        if (!(validateInput(this.value) && parseInt(this.value) <= parseInt(availableProducts))) {
+        if (!(validateInput(this.value) && parseInt(this.value) <= parseInt(availableProducts)) && trList.length <= 2) {
             (document.getElementsByTagName("tr")[1].lastElementChild.childNodes[0]).style.display = "none";
         }
         else {

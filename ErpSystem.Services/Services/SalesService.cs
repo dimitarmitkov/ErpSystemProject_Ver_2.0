@@ -1,19 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices;
-using System.Security.Cryptography.X509Certificates;
-using System.Threading.Tasks;
 using ErpSystem.Data;
 using ErpSystem.Models;
-using ErpSystem.Services.ViewModels.CurrentSale;
-using ErpSystem.Services.ViewModels.Customer;
-using ErpSystem.Services.ViewModels.CustomerWarehouse;
 using ErpSystem.Services.ViewModels.Order;
 using ErpSystem.Services.ViewModels.Sale;
 using ErpSystem.Services.ViewModels.Warehouse;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 
 namespace ErpSystem.Services.Services
 {
@@ -305,6 +298,31 @@ namespace ErpSystem.Services.Services
                 this.dbContext.Update(confirmedProducts[i]);
                 this.dbContext.SaveChangesAsync();
             }
+        }
+
+        public IEnumerable<InvoiceViewModel> Invoice()
+        {
+            var customerId = this.dbContext.CurrentSales.Select(x => x.CustomerId).FirstOrDefault();
+
+            var list = this.dbContext.Sales.Where(s => s.CustomerId == customerId && s.SaleDate.Date == DateTime.UtcNow.Date).Select(x => new InvoiceViewModel
+            {
+                Customer = x.Customer.CompanyName,
+                CustomerTypeOfRegistration = x.Customer.CompanyTypeOfRegistration.CompanyTypeOfRegistration,
+                SaleDate = DateTime.UtcNow.Date,
+                Eik = x.Customer.CompanyEik,
+                Address = x.Customer.Address + ", " + x.Customer.PostalCode + " " + x.Customer.City,
+                Email = x.Customer.Email,
+                Phone = x.Customer.PhoneNumber,
+                Product = x.Product.ProductName,
+                ProductMesure = x.Product.MeasurmentTag.Maesurment,
+                ProductDiscount = x.HasProductDiscount ? x.Product.ProductDiscount : 0,
+                CustomerDiscount = x.HasCustomerDiscount ? x.Customer.CustomerDiscount : 0,
+                SingleProudctSalePrice = x.SingleProudctSalePrice,
+                NumberOfSoldProducts = x.NumberOfSoldProducts,
+                TotalSalePrice = x.NumberOfSoldProducts * x.SingleProudctSalePrice,
+            }).ToList();
+
+            return list;
         }
 
 

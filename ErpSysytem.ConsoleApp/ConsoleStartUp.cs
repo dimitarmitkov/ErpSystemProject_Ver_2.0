@@ -1,8 +1,9 @@
 ﻿namespace ErpSysytem.ConsoleApp
 {
-    using System;
+    using AutoMapper;
     using ErpSystem.Data;
-    using ErpSystem.Services.Services;
+    using ErpSystem.Models;
+    using ErpSystem.Services.ViewModels.Delivery;
     using Microsoft.EntityFrameworkCore;
 
     public class ConsoleStartUp
@@ -11,23 +12,31 @@
         {
             var db = new ErpSystemDbContext();
 
-            //db.Database.EnsureDeleted();
-
-            //db.Database.EnsureCreated();
+            // db.Database.EnsureDeleted();
+            // db.Database.EnsureCreated();
 
             db.Database.Migrate();
 
-            IProductsService productService = new ProductsService(db);
+            var mapperConfig = new MapperConfiguration(mc =>
+            {
+                //mc.AddProfile(new MappingProfile());
+                mc.CreateMap<Order, DeliveryListViewModel>();
+            });
 
-            ICustomersService customerService = new CustomersService(db);
+            IMapper mapper = mapperConfig.CreateMapper();
 
-            IWarehousesService warehousesService = new WarehousesService(db);
 
-            ISuppliersService suppliersService = new SuppliersService(db);
+            //IProductsService productService = new ProductsService(db);
 
-            ISalesService salesService = new SalesService(db);
+            //ICustomersService customerService = new CustomersService(db);
 
-            IUsersService usersService = new UsersService(db);
+            //IWarehousesService warehousesService = new WarehousesService(db);
+
+            //ISuppliersService suppliersService = new SuppliersService(db);
+
+            //ISalesService salesService = new SalesService(db);
+
+            //IUsersService usersService = new UsersService(db);
 
             // AddSupplierViewModel addSupplier1 = new AddSupplierViewModel
             // {

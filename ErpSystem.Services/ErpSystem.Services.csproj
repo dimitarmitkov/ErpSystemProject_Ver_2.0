@@ -20,8 +20,11 @@
     <Folder Include="ViewModels\CustomerWarehouse\" />
     <Folder Include="ViewModels\CurrentSale\" />
     <Folder Include="ViewModels\CustomerPorduct\" />
+    <Folder Include="ViewModels\Delivery\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="AspNetCore.Mvc.SelectList" Version="1.1.14" />
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.0" />
   </ItemGroup>
 </Project>

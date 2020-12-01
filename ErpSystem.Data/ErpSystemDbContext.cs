@@ -37,6 +37,7 @@ namespace ErpSystem.Data
         public DbSet<CustomerProduct> CustomerProducts { get; set; }
         public DbSet<DeliveryNeededProduct> DeliveryNeededProducts { get; set; }
         public DbSet<SupplierForOrder> SupplierForOrders { get; set; }
+        public DbSet<FinalizedOrder> FinalizedOrders { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -54,9 +55,6 @@ namespace ErpSystem.Data
 
             modelBuilder.Entity<ProductSupplier>()
                 .HasKey(x => new { x.SupplierId, x.ProductId });
-
-            //modelBuilder.Entity<WarehouseProduct>()
-            //    .HasKey(x => new { x.WarehouseId, x.ProductId });
 
             modelBuilder.Entity<SaleAccumulator>()
                 .HasKey(x => x.ProductId);

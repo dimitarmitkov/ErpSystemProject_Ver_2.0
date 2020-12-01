@@ -1,0 +1,108 @@
+﻿@using ErpSystem.Services.ViewModels.Delivery
+@model DeliveryCombinedViewModel
+
+<div class="container-fluid">
+    <h1 class="mt-4">Tables</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="/Home/Index">Dashboard</a></li>
+        <li class="breadcrumb-item active">Tables</li>
+    </ol>
+    <div class="card mb-4">
+
+    </div>
+
+
+    @foreach (var delivery in Model.List)
+    {
+        <div class="row justify-content-lg-center">
+            <div class="col-lg-12">
+                <div class="card shadow-lg border-0 rounded-lg mt-1">
+                    <div class="card-header"><h3 id="header" class="text-center font-weight-light my-2">Order from <span>@delivery.Supplier</span>. Please insert number of boxes or pallets to order. When ready press Finalize order button below. </h3></div>
+
+
+                    <form asp-controller="Deliveries" asp-action="ConfirmDeliveries" method="post" id="form_@delivery.ProductId">
+                        <div class="card-body">
+
+                            @*first row*@
+                            <div class="form-row">
+                                <div class="col-md-3">
+                                    <input class="form-control py-4" id="supplierName" type="hidden" placeholder="Supplier" asp-for="Single.Supplier" value="@delivery.Supplier" />
+                                    <p>Supplier: @delivery.Supplier</p>
+                                </div>
+                                <div class="col-md-3">
+                                    <input class="form-control py-4" id="productId" type="hidden" placeholder="ProductId" asp-for="Single.ProductId" value="@delivery.ProductId" />
+                                    <p>ProductId: @delivery.ProductId</p>
+                                </div>
+                                <div class="col-md-3">
+                                    <input class="form-control py-4" id="product" type="hidden" placeholder="Product" asp-for="Single.Product" value="@delivery.Product" />
+                                    <p>ProductName: @delivery.Product</p>
+                                </div>
+                                <div class="col-md-3">
+                                    <input class="form-control py-4" id="numberOfTransportUnits" type="hidden" placeholder="NumberOfTransportUnits" asp-for="Single.NumberOfTransportUnits" value="@delivery.NumberOfTransportUnits" />
+                                    <p>Number Of Transport Units: @delivery.NumberOfTransportUnits</p>
+                                </div>
+                            </div>
+
+                            @*second row*@
+                            <div class="form-row">
+                                <div class="col-md-3">
+                                    <input class="form-control py-4" id="totalOrderWeight" type="hidden" placeholder="TotalOrderWeight" asp-for="Single.TotalOrderWeight" value="@delivery.TotalOrderWeight" />
+                                    <p>Total Product Transport Unit Weight: @delivery.TotalOrderWeight kg</p>
+                                </div>
+                                <div class="col-md-3">
+                                    <input class="form-control py-4" id="totalProductPrice" type="hidden" placeholder="TotalProductPrice" asp-for="Single.TotalProductPrice" value="@delivery.TotalProductPrice" />
+                                    <p>Total Product Delivery Price: @delivery.TotalProductPrice</p>
+                                </div>
+                                <div class="col-md-3">
+                                    <input class="form-control py-4" id="totalOrderPrice" type="hidden" placeholder="TotalOrderPrice" asp-for="Single.TotalOrderPrice" value="@delivery.TotalOrderPrice" />
+                                    <p>Total Order Delivery Price: @delivery.TotalOrderPrice</p>
+                                </div>
+                                <div class="col-md-3">
+                                    <input class="form-control py-4" id="package" type="hidden" placeholder="Package" asp-for="Single.Package" value="@delivery.Package" />
+                                    <p>@delivery.Package</p>
+                                </div>
+                            </div>
+
+                            @*third row*@
+                            <div class="form-row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="small mb-1" asp-for="@delivery.ProductionDate">Production date</label>
+                                        <input class="form-control py-4" id="productionDate" type="date" placeholder="Enter date" asp-for="Single.ProductionDate" />
+                                        <span asp-validation-for="Single.ProductionDate" class="text-danger" style="font-size:0.7vw"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="small mb-1" asp-for="@delivery.ExpireDate">Expire date</label>
+                                        <input class="form-control py-4" id="expireDate" type="date" placeholder="Enter date" asp-for="Single.ExpireDate" />
+                                        <span asp-validation-for="Single.ExpireDate" class="text-danger" style="font-size:0.7vw"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="small mb-1" asp-for="@delivery.ChangedNumberOfTransportUnits">Please enter real number of @delivery.Package delivered</label>
+                                    <input class="form-control py-1" id="numberOfTransportUnits" type="number" placeholder="Enter number" asp-for="Single.ChangedNumberOfTransportUnits" value="" />
+                                    <span asp-validation-for="Single.ChangedNumberOfTransportUnits" class="text-danger" style="font-size:0.7vw"></span>
+                                </div>
+                                <div class="col-md-3">
+                                    <p><button id="@delivery.ProductId" type="submit" class="btn btn-primary btn-block">Confirm order</button></p>
+                                    @*<p><a id="@order.ProductId" class="btn btn-primary btn-block">Confirm order</a></p>*@
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    }
+    <br>
+    <form method="post">
+        <div class="form-row">
+            <div class="col-md-12">
+                <a class="btn btn-primary btn-block" href="/Home/Index">Finalize delivery</a>
+            </div>
+        </div>
+    </form>
+</div>
+<script src="~/js/execute_order_data.js"></script>

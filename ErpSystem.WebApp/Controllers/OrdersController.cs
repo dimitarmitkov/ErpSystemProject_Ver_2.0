@@ -64,7 +64,7 @@ namespace ErpSystem.WebApp.Controllers
             if (!ModelState.IsValid)
             {
                 viewModel.CalculateOrderProductsList = ordersService.ProductsForOrderList();
-                viewModel.CalculateOrderProductsList = ordersService.ProductsForOrderList();
+                //viewModel.CalculateOrderProductsList = ordersService.ProductsForOrderList();
 
                 return this.View(viewModel);
             }
