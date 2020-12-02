@@ -20,11 +20,13 @@ namespace ErpSystem.WebApp.Controllers
 
         public IActionResult Index()
         {
+            _logger.LogError(121212, "Home view exception");
             return View();
         }
 
         public IActionResult Privacy()
         {
+            _logger.LogCritical(111111111, "Home view critical exception");
             return View();
         }
 

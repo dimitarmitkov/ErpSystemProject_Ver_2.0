@@ -1,28 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using ErpSystem.Data;
+﻿using System.Linq;
 using ErpSystem.Models;
 using ErpSystem.Services.Services;
 using ErpSystem.Services.ViewModels.CustomerWarehouse;
-using ErpSystem.Services.ViewModels.Order;
 using ErpSystem.Services.ViewModels.Sale;
-using ErpSystem.Services.ViewModels.Warehouse;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace ErpSystem.WebApp.Controllers
 {
     public class SalesController : Controller
     {
         private readonly ISalesService salesService;
-        //private readonly IWarehouseProductService warehouseProduct;
+        private readonly IMemoryCache memoryCache;
 
-        public SalesController(ISalesService salesService)
+        public SalesController(ISalesService salesService, IMemoryCache memoryCache)
         {
             this.salesService = salesService;
-            //this.warehouseProduct = warehouseProduct;
+            this.memoryCache = memoryCache;
         }
 
         [Authorize]
@@ -52,8 +47,6 @@ namespace ErpSystem.WebApp.Controllers
             {
                 viewModel = viewModel.Where(m => m.Customer.ToLower().Contains(customer.ToLower()) && m.Product.ToLower().Contains(product.ToLower())).ToList();
             }
-
-
 
             return this.View(viewModel);
         }

@@ -36,6 +36,12 @@ namespace ErpSystem.WebApp.Controllers
 
             var user = usersService.LoginUser(userViewModel);
 
+            var loggedinUser = await userManager.FindByEmailAsync(userViewModel.Email);
+            if (loggedinUser != null)
+            {
+                return this.Redirect("/Users/AlreadyLogged");
+            }
+
             await this.signInManager.PasswordSignInAsync(user.Email, user.PasswordHash, true, true);
 
             return this.Redirect("/Home/Index");
@@ -66,6 +72,17 @@ namespace ErpSystem.WebApp.Controllers
         {
             await this.signInManager.SignOutAsync();
 
+            return this.Redirect("/Users/Login");
+        }
+
+        public IActionResult AlreadyLogged()
+        {
+            return this.View();
+        }
+
+        [HttpPost]
+        public IActionResult AlreadyLogged(string id)
+        {
             return this.Redirect("/Users/Login");
         }
     }

@@ -1,5 +1,4 @@
-﻿using System;
-using ErpSystem.Models;
+﻿using ErpSystem.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace ErpSystem.Data

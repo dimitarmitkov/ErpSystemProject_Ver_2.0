@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using ErpSystem.Data;
 using ErpSystem.Models;
 using ErpSystem.Services.ViewModels.Order;
@@ -287,7 +288,7 @@ namespace ErpSystem.Services.Services
             }).ToList();
         }
 
-        public void ConfirmNeedOfOrder(DeliveryNeededProduct deliveryNeededProduct)
+        public async Task ConfirmNeedOfOrder(DeliveryNeededProduct deliveryNeededProduct)
         {
             var productId = deliveryNeededProduct.ProductId;
             var confirmedProducts = this.dbContext.DeliveryNeededProducts.Where(p => p.ConfimBeenNoticed == false).ToList();
@@ -296,7 +297,7 @@ namespace ErpSystem.Services.Services
             {
                 confirmedProducts[i].ConfimBeenNoticed = true;
                 this.dbContext.Update(confirmedProducts[i]);
-                this.dbContext.SaveChangesAsync();
+                await this.dbContext.SaveChangesAsync();
             }
         }
 

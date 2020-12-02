@@ -36,6 +36,9 @@
     <ProjectReference Include="..\ErpSystem.Services\ErpSystem.Services.csproj">
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>
+    <ProjectReference Include="..\ErpSysytem.ConsoleApp\ErpSysytem.ConsoleApp.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Charts\" />
@@ -46,6 +49,7 @@
     <Folder Include="Views\CurrentSales\" />
     <Folder Include="Views\Orders\" />
     <Folder Include="Views\Deliveries\" />
+    <Folder Include="Areas\Controllers\" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="Views\CurrentSales\CurrentSale.cshtml" />

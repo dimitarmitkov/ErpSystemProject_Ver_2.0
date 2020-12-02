@@ -1,0 +1,161 @@
+﻿@using ErpSystem.Services.ViewModels.CustomerWarehouse
+@model CustomerWarehouseViewModel
+
+@{
+    ViewData["Title"] = "Warehouse Generate Sale";
+}
+
+<div class="container-fluid">
+    <h1 class="mt-4">Tables</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="/Home/Index">Dashboard</a></li>
+        <li class="breadcrumb-item active">Tables</li>
+    </ol>
+    <div class="card mb-4">
+        <div class="form-row">
+            <div class="col-md-12">
+                <a id="submitBtn" class="btn btn-primary btn-block" href="/Sales/WarehouseAllSelectCustomer">Finalize sale for <span id="customerSpan">@Model.WarehouseProductCombined.Select(x => x.CustomerName).FirstOrDefault() </span> customer</a>
+            </div>
+        </div>
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table mr-1"></i>
+                Products for sale
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <div id="top" class="form-row">
+                        <div class="col-md-3">
+                            <div class="form-group" style="font-weight: bold;">
+                                Product name
+                            </div>
+                        </div>
+                        <div class="col-md-1">
+                            <div class="form-group" style="font-weight: bold;">
+                                Measument
+                            </div>
+                        </div>
+                        <div class="col-md-1">
+                            <div class="form-group" style="font-weight: bold;">
+                                On stock
+                            </div>
+                        </div>
+                        <div class="col-md-1">
+                            <div class="form-group" style="font-weight: bold;">
+                                Expire Date
+                            </div>
+                        </div>
+                        <div class="col-md-1">
+                            <div class="form-group" style="font-weight: bold;">
+                                Id
+                            </div>
+                        </div>
+                        <div class="col-md-1">
+                            <div class="form-group" style="font-weight: bold;">
+                                Customer
+                            </div>
+                        </div>
+                        <div class="col-md-1">
+                            <div class="form-group" style="font-weight: bold;">
+                                Discount
+                            </div>
+                        </div>
+                        <div class="col-md-1">
+                            <div class="form-group" style="text-align: center; font-weight: bold;">
+                                Product Discount
+                            </div>
+                        </div>
+                        <div class="col-md-1">
+                            <div class="form-group" style="font-weight: bold;">
+                                Sale Volume
+                            </div>
+                        </div>
+                        <div class="col-md-1">
+                            <div class="form-group" style="font-weight: bold;">
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    @for (int i = 0; i < Model.WarehouseProductCombined.Count(); i++)
+                    {
+
+
+                        <form method="post">
+                            <div class="form-row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        @Model.WarehouseProductCombined.ToList()[i].Product
+                                    </div>
+                                </div>
+                                <div class="col-md-1">
+                                    <div class="form-group">
+                                        @Model.WarehouseProductCombined.ToList()[i].ProductMeasurement
+                                    </div>
+                                </div>
+                                <div class="col-md-1">
+                                    <div class="form-group" id="productsAvailable_@Model.WarehouseProductCombined.ToList()[i].Id">
+                                        @Model.WarehouseProductCombined.ToList()[i].ProductsAvailable
+                                    </div>
+                                </div>
+                                <div class="col-md-1">
+                                    <div class="form-group">
+                                        @Model.WarehouseProductCombined.ToList()[i].ProductExpireDate
+                                    </div>
+                                </div>
+                                <div class="col-md-1">
+                                    <div class="form-group" id="@Model.WarehouseProductCombined.ToList()[i].Id" name="element">
+                                        @Model.WarehouseProductCombined.ToList()[i].Id
+                                        <input type="hidden" asp-for="WarehouseProductSingle.WarehouseProductId" value="@Model.WarehouseProductCombined.ToList()[i].Id" />
+                                    </div>
+                                </div>
+                                <div class="col-md-1">
+                                    <div class="form-group">
+                                        @Model.WarehouseProductCombined.ToList()[i].CustomerName
+                                        <input type="hidden" asp-for="WarehouseProductSingle.CustomerName" value="@Model.WarehouseProductCombined.ToList()[i].CustomerName" />
+                                    </div>
+                                </div>
+                                <div class="col-md-1">
+                                    <div class="form-group">
+                                        @Model.WarehouseProductCombined.ToList()[i].HasCustomerDiscount
+                                        <input type="hidden" asp-for="WarehouseProductSingle.HasCustomerDiscount" value="@Model.WarehouseProductCombined.ToList()[i].HasCustomerDiscount" />
+                                    </div>
+                                </div>
+                                <div class="col-md-1">
+                                    <div class="form-group" id="discountCheck">
+                                        <input style="text-align: center; vertical-align: middle;" class="form-control py-4" id="hasProductDiscount" type="checkbox" asp-for="WarehouseProductSingle.HasProductDiscount" />
+                                    </div>
+                                </div>
+                                <div class="col-md-1">
+                                    <div class="form-group">
+                                        <input class="form-control py-4" id="productSold_@Model.WarehouseProductCombined.ToList()[i].Id" type="number" asp-for="WarehouseProductSingle.ProductSold" />
+                                    </div>
+                                </div>
+                                <div class="col-md-1">
+                                    @*<td><button type="submit" class="btn btn-primary btn-block">Sale</button></td>*@
+                                    <button type="submit" class="btn btn-primary btn-block" id="buttonSale_@Model.WarehouseProductCombined.ToList()[i].Id" style="display:none;">Sale</button>
+                                </div>
+
+
+                                <input type="hidden" asp-for="WarehouseProductSingle.CustomerId" value="@Model.WarehouseProductCombined.ToList()[i].CustomerId" />
+
+
+
+                                <input type="hidden" asp-for="WarehouseProductSingle.WarehouseId" value="@Model.WarehouseProductCombined.ToList()[i].WarehouseId" />
+
+
+
+                                <input type="hidden" asp-for="WarehouseProductSingle.ProductId" value="@Model.WarehouseProductCombined.ToList()[i].ProductId" />
+
+
+                            </div>
+
+
+                        </form>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/js/sales_generate_data_list.js"></script>

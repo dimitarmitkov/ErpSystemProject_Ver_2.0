@@ -41,6 +41,15 @@ namespace ErpSystem.WebApp
             services.AddMvc().AddRazorRuntimeCompilation();
             services.AddRazorPages();
 
+            services.AddMemoryCache();
+
+            services.AddSession(options =>
+            {
+                options.Cookie.HttpOnly = true;
+                options.Cookie.SameSite = Microsoft.AspNetCore.Http.SameSiteMode.Strict;
+                options.Cookie.IsEssential = true; // for essentioal cookies needed to operate
+            });
+
             var mapperConfig = new MapperConfiguration(mc =>
             {
                 mc.AddProfile(new MappingProfile());
@@ -83,6 +92,7 @@ namespace ErpSystem.WebApp
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
+            app.UseSession(); // this is to use session setting form services.AddSession
             app.UseRouting();
 
             app.UseAuthentication();
