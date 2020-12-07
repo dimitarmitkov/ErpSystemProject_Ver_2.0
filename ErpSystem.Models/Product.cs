@@ -80,6 +80,8 @@ namespace ErpSystem.Models
 
         public string ProductDescription { get; set; }
 
+        public bool IsDeleted { get; set; }
+
         public virtual ICollection<Sale> Sales { get; set; }
 
         public virtual ICollection<Warehouse> Warehouses { get; set; }

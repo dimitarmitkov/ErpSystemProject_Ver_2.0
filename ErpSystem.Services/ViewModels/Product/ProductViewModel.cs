@@ -5,6 +5,8 @@
 
         public string ProductName { get; set; }
 
+        public int ProductId { get; set; }
+
         public decimal ProductLandedPrice { get; set; }
 
         public int ProductGrossMargin { get; set; }

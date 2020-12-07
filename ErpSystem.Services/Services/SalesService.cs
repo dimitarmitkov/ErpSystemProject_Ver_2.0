@@ -20,6 +20,7 @@ namespace ErpSystem.Services.Services
             this.dbContext = dbContext;
         }
 
+        // create sale start
         public void CreateSale(int productId, string customerId, int numberOfSoldProducts, bool hasProductDiscount, bool hasCustomerDiscount, int warehouseId, int productByExpireDateId)
         {
             var sale = new Sale
@@ -34,8 +35,8 @@ namespace ErpSystem.Services.Services
                 HasProductDiscount = hasProductDiscount,
             };
 
-            var productDiscount = this.dbContext.Products.Where(p => p.Id == productId).Select(x => x.ProductDiscount).FirstOrDefault();
-            var price = this.dbContext.Products.Where(p => p.Id == productId).Select(x => x.ProductSalePrice).FirstOrDefault();
+            var productDiscount = this.dbContext.Products.Where(p => p.Id == productId && p.IsDeleted == false).Select(x => x.ProductDiscount).FirstOrDefault();
+            var price = this.dbContext.Products.Where(p => p.Id == productId && p.IsDeleted == false).Select(x => x.ProductSalePrice).FirstOrDefault();
             var customerDiscount = this.dbContext.Customers.Where(c => c.Id == customerId).Select(x => x.CustomerDiscount).FirstOrDefault();
 
 
@@ -65,12 +66,12 @@ namespace ErpSystem.Services.Services
 
                 //decrase number of boxes or pallets if number of sold products reaches box or pallet size
 
-                bool isProductInPallet = this.dbContext.Products.Where(p => p.Id == productSold.ProductId).Select(p => p.IsPallet == true).FirstOrDefault();
-                var productSoldProduct = this.dbContext.Products.FirstOrDefault(p => p.Id == productId);
+                bool isProductInPallet = this.dbContext.Products.Where(p => p.Id == productSold.ProductId && p.IsDeleted == false).Select(p => p.IsPallet == true).FirstOrDefault();
+                var productSoldProduct = this.dbContext.Products.FirstOrDefault(p => p.Id == productId && p.IsDeleted == false);
                 var productSoldWarehouse = this.dbContext.Warehouses.FirstOrDefault(w => w.Id == warehouseId);
 
-                var numberOfProductsPerBox = this.dbContext.Products.Where(p => p.Id == productId).Select(x => x.ProductTransportPackageNumberOfPieces).FirstOrDefault();
-                var boxesPerPallet = this.dbContext.Products.Where(p => p.Id == productId).Select(x => x.BoxesPerPallet).FirstOrDefault();
+                var numberOfProductsPerBox = this.dbContext.Products.Where(p => p.Id == productId && p.IsDeleted == false).Select(x => x.ProductTransportPackageNumberOfPieces).FirstOrDefault();
+                var boxesPerPallet = this.dbContext.Products.Where(p => p.Id == productId && p.IsDeleted == false).Select(x => x.BoxesPerPallet).FirstOrDefault();
                 var numberOfProductPerPallet = numberOfProductsPerBox * boxesPerPallet;
 
                 var preSaleProductsAvailabe = productSold.ProductsAvailable + numberOfSoldProducts;
@@ -98,8 +99,8 @@ namespace ErpSystem.Services.Services
                 if (!isProductInPallet)
                 {
                     // get box size and shelf width size
-                    var boxFront = this.dbContext.Products.Where(p => p.Id == productSold.ProductId).Select(x => x.ProductTransportPackageWidthSize).FirstOrDefault();
-                    var boxLenght = this.dbContext.Products.Where(p => p.Id == productSold.ProductId).Select(x => x.ProductTransportPackageLengthSize).FirstOrDefault();
+                    var boxFront = this.dbContext.Products.Where(p => p.Id == productSold.ProductId && p.IsDeleted == false).Select(x => x.ProductTransportPackageWidthSize).FirstOrDefault();
+                    var boxLenght = this.dbContext.Products.Where(p => p.Id == productSold.ProductId && p.IsDeleted == false).Select(x => x.ProductTransportPackageLengthSize).FirstOrDefault();
                     var shelfDepth = this.dbContext.WarehouseBoxes.Where(w => w.Id == productSold.WarehouseId).Select(x => x.ShelfDepth).FirstOrDefault();
 
                     // calculate boxes left
@@ -120,7 +121,10 @@ namespace ErpSystem.Services.Services
                 }
             }
         }
+        // create sale end
 
+
+        // list of all sales, in use sales controller All()
         public IEnumerable<SalesPerCustomerOrProductViewModel> ListOfAllSales()
         {
             return this.dbContext.Sales.Select(x => new SalesPerCustomerOrProductViewModel
@@ -153,7 +157,7 @@ namespace ErpSystem.Services.Services
         }
 
         // generates crud record for customer
-        public void GenerateCurrentSale(string companyEik, bool hasDiscount)
+        public void GenerateCurrentSale(string companyEik, bool hasDiscount, string userId)
         {
             //TODO add userID for confirmation
 
@@ -241,11 +245,11 @@ namespace ErpSystem.Services.Services
 
             foreach (var sale in listOfSales)
             {
-                if (!dictionary.ContainsKey(sale.DateOfSale.Date.ToString("dd-MM-yyyy")))
+                if (!dictionary.ContainsKey(sale.DateOfSale.Date.ToString("yyyy-MM-dd")))
                 {
-                    dictionary[sale.DateOfSale.Date.ToString("dd-MM-yyyy")] = 0;
+                    dictionary[sale.DateOfSale.Date.ToString("yyyy-MM-dd")] = 0;
                 }
-                dictionary[sale.DateOfSale.Date.ToString("dd-MM-yyyy")] += sale.TotalSalesSum;
+                dictionary[sale.DateOfSale.Date.ToString("yyyy-MM-dd")] += sale.TotalSalesSum;
             }
 
             return dictionary;
@@ -254,7 +258,7 @@ namespace ErpSystem.Services.Services
         // calculating does product need an order
         public void IsProductForOrder(int currentId)
         {
-            var productForOrder = this.dbContext.Products.Where(p => p.Id == currentId).Select(x => new DeliveryNeededProduct
+            var productForOrder = this.dbContext.Products.Where(p => p.Id == currentId && p.IsDeleted == false).Select(x => new DeliveryNeededProduct
             {
                 Product = x.ProductName,
                 ProductId = currentId,

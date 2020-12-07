@@ -5,27 +5,25 @@
     ViewData["Title"] = "Sales";
 }
 <div class="container-fluid">
-    <h1 class="mt-4">Tables</h1>
+    <h1 class="mt-4">All Sales</h1>
     <ol class="breadcrumb mb-4">
         <li class="breadcrumb-item"><a href="/Home/Index">Dashboard</a></li>
-        <li class="breadcrumb-item active">Tables</li>
+        <li class="breadcrumb-item active">All Sales</li>
     </ol>
     <div class="card mb-4">
-        @*<div class="card-body">
-                DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables, please visit the
-                <a target="_blank" href="https://datatables.net/">official DataTables documentation</a>
-                .
-            </div>*@
+        <div class="card-body">
+            Please select Customer name or Product name, or both.
+        </div>
         <form asp-controller="Sales" asp-action="All" method="post">
             <div class="form-row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        Customer: <input class="form-control py-2" id="allCustomer" type="text" name="customer">
+                        <span style="font-weight: bold; padding-left: 20px">Customer:</span> <input class="form-control py-2" id="allCustomer" type="text" name="customer">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        Product: <input class="form-control py-2" id="allProduct" type="text" name="product">
+                        <span style="font-weight: bold; padding-left: 20px">Product: </span><input class="form-control py-2" id="allProduct" type="text" name="product">
                     </div>
                 </div>
                 <div class="col-md-12">
@@ -37,7 +35,7 @@
     <div class="card mb-4">
         <div class="card-header">
             <i class="fas fa-table mr-1"></i>
-            DataTable Example
+            DataTable All Sales List
         </div>
         <div class="card-body">
             <div class="table-responsive">

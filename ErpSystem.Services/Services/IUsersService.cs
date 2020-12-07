@@ -10,5 +10,11 @@ namespace ErpSystem.Services.Services
         IdentityUser CreateUser(RegisterUserViewModel registerUser);
 
         IdentityUser LoginUser(LoginUserViewModel userViewModel);
+
+        bool IsLogged(string userEmail);
+
+        Task UserLogInDeleteRecord(string userEmail);
+
+        Task UserLogInRecord(string userEmail, string userId);
     }
 }

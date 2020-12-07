@@ -1,0 +1,71 @@
+﻿@using ErpSystem.Services.ViewModels.Product
+@model CombinedProductViewModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+@{var date = string.Empty;}
+
+<div class="container-fluid">
+    <h1 class="mt-4">Delete Products</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="/Home/Index">Dashboard</a></li>
+        <li class="breadcrumb-item active">Delete Products</li>
+    </ol>
+    <div class="card mb-4">
+    </div>
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-table mr-1"></i>
+            DataTable Delete Products List
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Product name</th>
+                            <th>Measument</th>
+                            <th>Supplier</th>
+                            <th>Sale price</th>
+                            <th>On stock</th>
+                            <th>Expire Date</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var product in Model.ProductList)
+                        {
+                            @if (product.ProductExpireDate != null)
+                            {
+                                date = DateTime.Parse(product.ProductExpireDate).ToString("dd-MM-yyyy");
+                            }
+                            else
+                            {
+                                date = "no expire date";
+                            }
+
+                            <tr>
+                                <td>@product.ProductName</td>
+                                <td>@product.MeasurmentTag</td>
+                                <td>@product.Supplier</td>
+                                <td>@product.ProductSalePrice</td>
+                                <td>@product.ProductsAvailable</td>
+                                <td>@date</td>
+                                <td>
+                                    <form method="post">
+                                        <input class="form-control py-4" id="productName" type="hidden" asp-for="ProductSingle.ProductName" value="@product.ProductName" />
+                                        <input class="form-control py-4" id="productId" type="hidden" asp-for="ProductSingle.ProductId" value="@product.ProductId" />
+                                        <div class="form-group mt-1 mb-0"><button type="submit" class="btn btn-primary btn-block">Delete</button></div>
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

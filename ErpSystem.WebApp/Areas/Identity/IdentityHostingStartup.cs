@@ -30,7 +30,8 @@ namespace ErpSystem.WebApp.Areas.Identity
                     options.Password.RequireNonAlphanumeric = false;
                     options.User.RequireUniqueEmail = true;
                 })
-                    .AddEntityFrameworkStores<IdentityDataContext>();
+                .AddRoles<IdentityRole>()
+                .AddEntityFrameworkStores<IdentityDataContext>();
             });
         }
     }

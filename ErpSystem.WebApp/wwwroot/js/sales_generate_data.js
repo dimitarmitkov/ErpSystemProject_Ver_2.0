@@ -33,12 +33,7 @@ for (let i = 0; i < howManyRows; i++) {
 
         thisTdElem.innerHTML = updatedDate;
     }
-
-
-
 }
-
-
 
 function eventHandler(e) {
     let buttonTag = (e.target).tagName;
@@ -61,15 +56,19 @@ function eventHandler(e) {
                 document.getElementById(`${parseInt(idList[i])}`).lastElementChild.innerHTML = '<td><button type="submit" class="btn btn-primary btn-block" id="buttonSale">Sale</button></td>'
             }
         }
-        let head = document.getElementsByTagName("th");
+        //let head = document.getElementsByTagName("th");
 
-        for (let i = 0; i < head.length; i++) {
-            head[i].removeAttribute("class");
-        }
+        //for (let i = 0; i < head.length; i++) {
+        //    head[i].removeAttribute("class");
+        //}
         document.getElementById("dataTable_paginate").style.display = "none";
         document.getElementById("dataTable_info").style.display = "none";
         document.getElementById("dataTable_length").style.display = "none";
         document.getElementById("dataTable_filter").style.display = "none";
+        document.getElementById("hasProductDiscount").type = "checkbox"
+        document.getElementById("productSold").type = "number";
+        document.getElementById("tdSelectProduct").innerText = "Sale"
+
     }
 
 

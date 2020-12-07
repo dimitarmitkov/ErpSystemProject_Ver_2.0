@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using ErpSystem.Services.ViewModels.Product;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -6,7 +7,7 @@ namespace ErpSystem.Services.Services
 {
     public interface IProductsService
     {
-        void CreateProduct(CreateProductViewModel createProduct);
+        Task CreateProduct(CreateProductViewModel createProduct);
 
         IEnumerable<ProductViewModel> SearchByProductNameAndId(int? productId, string productName);
 
@@ -14,10 +15,12 @@ namespace ErpSystem.Services.Services
 
         IEnumerable<ProductViewModel> SearchByProductSupplierCountryOrCity(string country, string city);
 
-        void DeleteExistingProduct(int productId, string productName);
+        Task DeleteExistingProduct(int productId, string productName);
 
         IEnumerable<SelectListItem> ProductTransportsPackageTags();
 
         IEnumerable<SelectListItem> ProductMeasurementTags();
+
+        IEnumerable<ProductViewModel> FindAll();
     }
 }

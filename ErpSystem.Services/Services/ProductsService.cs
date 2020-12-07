@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using ErpSystem.Data;
 using ErpSystem.Models;
 using ErpSystem.Services.ViewModels.Product;
@@ -20,7 +21,7 @@ namespace ErpSystem.Services.Services
         }
 
         //create product service
-        public void CreateProduct(CreateProductViewModel createProduct)
+        public async Task CreateProduct(CreateProductViewModel createProduct)
         {
             var product = new Product
             {
@@ -38,8 +39,8 @@ namespace ErpSystem.Services.Services
                 ProductTransportPackageNumberOfPieces = createProduct.ProductTransportPackageNumberOfPieces,
                 BoxesPerPallet = createProduct.BoxesPerPallet,
                 SingleProductSize = createProduct.SingleProductSize,
-                ProductDescription = createProduct.ProductDescription
-
+                ProductDescription = createProduct.ProductDescription,
+                ProductDiscount = createProduct.ProductDiscount,
             };
 
             //setting production date to null, if not set
@@ -97,17 +98,42 @@ namespace ErpSystem.Services.Services
 
             product.ProductSalePrice = product.ProductLandedPrice / (1 - resultativeGrossMargin);
 
-            this.dbContext.Products.Add(product);
-            this.dbContext.SaveChanges();
+            await this.dbContext.Products.AddAsync(product);
+            await this.dbContext.SaveChangesAsync();
         }
 
         // delete product service
-        public void DeleteExistingProduct(int productId, string productName)
+        public async Task DeleteExistingProduct(int productId, string productName)
         {
             var productDelete = this.dbContext.Products.FirstOrDefault(p => p.Id == productId && p.ProductName == productName);
 
-            this.dbContext.Products.Remove(productDelete);
-            this.dbContext.SaveChanges();
+            productDelete.IsDeleted = true;
+            this.dbContext.Products.Update(productDelete);
+            await this.dbContext.SaveChangesAsync();
+        }
+
+
+        public IEnumerable<ProductViewModel> FindAll()
+        {
+            var result = this.dbContext.Products.Where(p => p.IsDeleted == false).Select(x => new ProductViewModel
+            {
+                ProductName = x.ProductName,
+                ProductId = x.Id,
+                ProductLandedPrice = x.ProductLandedPrice,
+                ProductSalePrice = x.ProductSalePrice,
+                ProductGrossMargin = x.ProductGrossMargin,
+                Supplier = x.Supplier.SupplierName,
+                TimeToOrder = x.TimeToOrder,
+                TimeToDelivery = x.TimeToDelivery,
+                ProductTransportPackage = x.ProductTransportPackage.TypeOfPackage,
+                MeasurmentTag = x.MeasurmentTag.Maesurment,
+                ProductsAvailable = x.WarehouseProduct.ProductsAvailable,
+                TotalProductsDeliveryPrice = x.WarehouseProduct.ProductsAvailable * x.ProductLandedPrice,
+                ProductExpireDate = x.WarehouseProduct.ExpireDate.ToString(),
+            }).OrderByDescending(x => x.ProductName)
+              .ToList();
+
+            return result;
         }
 
         // serch by name or Id
@@ -115,9 +141,9 @@ namespace ErpSystem.Services.Services
         {
             IQueryable<Product> productView = null;
 
-            if (productId != null) productView = this.dbContext.Products.Where(p => p.Id == productId);
-            if (productName != null) productView = this.dbContext.Products.Where(p => p.ProductName == productName);
-            if (productName == null && productId == null) productView = this.dbContext.Products.Where(p => p.Id > -1);
+            if (productId != null) productView = this.dbContext.Products.Where(p => p.Id == productId && p.IsDeleted == false);
+            if (productName != null) productView = this.dbContext.Products.Where(p => p.ProductName == productName && p.IsDeleted == false);
+            if (productName == null && productId == null) productView = this.dbContext.Products.Where(p => p.Id > -1 && p.IsDeleted == false);
 
 
 
@@ -132,9 +158,9 @@ namespace ErpSystem.Services.Services
         {
             IQueryable<Product> productView = null;
 
-            if (minPrice != null && maxPrice == null) productView = this.dbContext.Products.Where(p => p.ProductSalePrice >= minPrice);
-            else if (maxPrice != null && minPrice == null) productView = this.dbContext.Products.Where(p => p.ProductSalePrice <= maxPrice);
-            else if (maxPrice != null && minPrice != null) productView = this.dbContext.Products.Where(p => p.ProductSalePrice >= minPrice && p.ProductSalePrice <= maxPrice);
+            if (minPrice != null && maxPrice == null) productView = this.dbContext.Products.Where(p => p.ProductSalePrice >= minPrice && p.IsDeleted == false);
+            else if (maxPrice != null && minPrice == null) productView = this.dbContext.Products.Where(p => p.ProductSalePrice <= maxPrice && p.IsDeleted == false);
+            else if (maxPrice != null && minPrice != null) productView = this.dbContext.Products.Where(p => p.ProductSalePrice >= minPrice && p.ProductSalePrice <= maxPrice && p.IsDeleted == false);
 
             List<ProductViewModel> result = SelectProductViewModel(productView);
 
@@ -147,9 +173,9 @@ namespace ErpSystem.Services.Services
         {
             IQueryable<Product> productView = null;
 
-            if (country != null && city == null) productView = this.dbContext.Products.Where(p => p.Supplier.SupplierCountry == country);
-            else if (city != null && country == null) productView = this.dbContext.Products.Where(p => p.Supplier.SupplierAddress == city);
-            else if (city != null && country != null) productView = this.dbContext.Products.Where(p => p.Supplier.SupplierCountry == country && p.Supplier.SupplierAddress == city);
+            if (country != null && city == null) productView = this.dbContext.Products.Where(p => p.Supplier.SupplierCountry == country && p.IsDeleted == false);
+            else if (city != null && country == null) productView = this.dbContext.Products.Where(p => p.Supplier.SupplierAddress == city && p.IsDeleted == false);
+            else if (city != null && country != null) productView = this.dbContext.Products.Where(p => p.Supplier.SupplierCountry == country && p.Supplier.SupplierAddress == city && p.IsDeleted == false);
 
 
             List<ProductViewModel> result = SelectProductViewModel(productView);
@@ -186,6 +212,7 @@ namespace ErpSystem.Services.Services
             var listOfProductViewModel = productView.Select(x => new ProductViewModel
             {
                 ProductName = x.ProductName,
+                ProductId = x.Id,
                 ProductLandedPrice = x.ProductLandedPrice,
                 ProductSalePrice = x.ProductSalePrice,
                 ProductGrossMargin = x.ProductGrossMargin,
@@ -196,10 +223,9 @@ namespace ErpSystem.Services.Services
                 MeasurmentTag = x.MeasurmentTag.Maesurment,
                 ProductsAvailable = x.WarehouseProduct.ProductsAvailable,
                 TotalProductsDeliveryPrice = x.WarehouseProduct.ProductsAvailable * x.ProductLandedPrice,
-                ProductExpireDate = !string.IsNullOrEmpty(x.WarehouseProduct.ExpireDate.ToString())
-                ? x.WarehouseProduct.ExpireDate.ToString() : "no expire date",
+                ProductExpireDate = x.WarehouseProduct.ExpireDate.ToString(),
             }).OrderByDescending(x => x.ProductName)
-                            .ToList();
+              .ToList();
 
 
             return listOfProductViewModel;

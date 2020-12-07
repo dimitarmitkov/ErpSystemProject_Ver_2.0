@@ -24,6 +24,7 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.9" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.0" />
     <PackageReference Include="AutoMapper" Version="10.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Caching.SqlServer" Version="3.1.10" />
   </ItemGroup>
 
   <ItemGroup>
@@ -49,9 +50,14 @@
     <Folder Include="Views\CurrentSales\" />
     <Folder Include="Views\Orders\" />
     <Folder Include="Views\Deliveries\" />
-    <Folder Include="Areas\Controllers\" />
+    <Folder Include="Areas\Administration\" />
+    <Folder Include="Areas\Administration\Controllers\" />
+    <Folder Include="Areas\Administration\Views\" />
+    <Folder Include="Areas\Administration\Views\ProductsEdit\" />
+    <Folder Include="Views\Warehouses\" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="Views\CurrentSales\CurrentSale.cshtml" />
+    <Content Remove="Views\Warehouses\Warehouse.cshtml" />
   </ItemGroup>
 </Project>

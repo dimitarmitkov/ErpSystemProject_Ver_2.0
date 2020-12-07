@@ -7,8 +7,10 @@ namespace ErpSystem.Services.Services
 {
     public interface IDeliveriesService
     {
-        IEnumerable<DeliveryListViewModel> GetAllOrdersForDelivery();
+        IEnumerable<DeliveryListViewModel> GetAllOrdersForDelivery(int page, int itemsPerPage = 4);
 
         Task FinalizeDelivery(DeliveryListViewModel deliveryList);
+
+        int GetCount();
     }
 }

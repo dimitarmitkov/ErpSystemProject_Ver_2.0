@@ -1,10 +1,10 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using ErpSystem.Services.ViewModels.Warehouse;
 
 namespace ErpSystem.Services.Services
 {
     public interface IWarehousesService
     {
-        void AddProduct(AddProductWaerhouseViewModel addProduct);
+        IEnumerable<KeyValuePair<string, int>> CurrentSpace();
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using ErpSystem.Services.Services;
 using ErpSystem.Services.ViewModels.Product;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ErpSystem.WebApp.Controllers
@@ -19,7 +20,7 @@ namespace ErpSystem.WebApp.Controllers
 
         public IActionResult Search()
         {
-            IEnumerable<ProductViewModel> viewModel = this.productsService.SearchByProductNameAndId(null, null);
+            IEnumerable<ProductViewModel> viewModel = this.productsService.FindAll();
             return this.View(viewModel);
         }
 
@@ -48,6 +49,36 @@ namespace ErpSystem.WebApp.Controllers
             this.productsService.CreateProduct(createProduct);
             return this.Redirect("/Products/Search");
         }
+
+        [Authorize(Roles = "Admin")]
+        public IActionResult Delete()
+        {
+            var viewModel = new CombinedProductViewModel();
+            viewModel.ProductList = productsService.SearchByProductNameAndId(null, null);
+
+            return this.View(viewModel);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        public IActionResult Delete(CombinedProductViewModel combinedProductView)
+        {
+
+
+            if (!ModelState.IsValid)
+            {
+                var viewModel = new CombinedProductViewModel();
+                viewModel.ProductList = productsService.SearchByProductNameAndId(null, null);
+
+                return this.View(viewModel);
+            }
+
+            productsService.DeleteExistingProduct(combinedProductView.ProductSingle.ProductId, combinedProductView.ProductSingle.ProductName);
+
+            return this.Redirect("/Products/Delete");
+        }
+
+
 
     }
 }

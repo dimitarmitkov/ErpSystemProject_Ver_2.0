@@ -5,11 +5,13 @@
     ViewData["Title"] = "Warehouse Generate Sale";
 }
 
+@{var date = string.Empty;}
+
 <div class="container-fluid">
-    <h1 class="mt-4">Tables</h1>
+    <h1 class="mt-4">Generate Sale</h1>
     <ol class="breadcrumb mb-4">
         <li class="breadcrumb-item"><a href="/Home/Index">Dashboard</a></li>
-        <li class="breadcrumb-item active">Tables</li>
+        <li class="breadcrumb-item active">Generate Sale</li>
     </ol>
     <div class="card mb-4">
         <div class="form-row">
@@ -40,26 +42,37 @@
                                     <th style="display:none">CustomerId</th>
                                     <th style="display:none">WarehouseId</th>
                                     <th style="display:none">ProdustId</th>
-                                    <th>Sale</th>
+                                    <th id="tdSelectProduct">Select product for sale</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach (var product in Model.WarehouseProductCombined)
                                 {
+                                    @if (product.ProductExpireDate != null)
+                                    {
+                                        date = DateTime.Parse(product.ProductExpireDate).ToString("dd-MM-yyyy");
+                                    }
+                                    else
+                                    {
+                                        date = "no expire date";
+                                    }
+
                                     <tr id="@product.Id">
                                         <td>@product.Product</td>
                                         <td>@product.ProductMeasurement</td>
                                         <td id="productsAvailable">@product.ProductsAvailable</td>
-                                        <td>@product.ProductExpireDate</td>
+                                        <td>@date</td>
                                         <td>@product.Id <input type="hidden" asp-for="WarehouseProductSingle.WarehouseProductId" value="@product.Id" /></td>
 
                                         <td id="custName">@product.CustomerName <input type="hidden" asp-for="WarehouseProductSingle.CustomerName" value="@product.CustomerName" /></td>
 
                                         <td>@product.HasCustomerDiscount <input type="hidden" asp-for="WarehouseProductSingle.HasCustomerDiscount" value="@product.HasCustomerDiscount" /></td>
 
-                                        <td><input class="form-control py-4" id="hasProductDiscount" type="checkbox" asp-for="WarehouseProductSingle.HasProductDiscount" /></td>
+                                        @*<td><input class="form-control py-4" id="hasProductDiscount" type="checkbox" asp-for="WarehouseProductSingle.HasProductDiscount" /></td>*@
+                                        <td><input class="form-control py-4" id="hasProductDiscount" type="hidden" asp-for="WarehouseProductSingle.HasProductDiscount" /></td>
 
-                                        <td><input class="form-control py-4" id="productSold" type="number" asp-for="WarehouseProductSingle.ProductSold" /></td>
+                                        @*<td><input class="form-control py-4" id="productSold" type="number" asp-for="WarehouseProductSingle.ProductSold" /></td>*@
+                                        <td><input class="form-control py-4" id="productSold" type="hidden" asp-for="WarehouseProductSingle.ProductSold" /></td>
 
                                         <td style="display:none"><input type="hidden" asp-for="WarehouseProductSingle.CustomerId" value="@product.CustomerId" /></td>
 

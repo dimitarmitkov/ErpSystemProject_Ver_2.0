@@ -22,5 +22,7 @@ namespace ErpSystem.Models
         public bool HasCustomerDiscount { get; set; }
 
         public virtual ICollection<CustomerProduct> CusomerProducts { get; set; }
+
+        public string UserId { get; set; }
     }
 }

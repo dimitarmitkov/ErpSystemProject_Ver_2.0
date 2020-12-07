@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using AutoMapper;
 using ErpSystem.Data;
 using ErpSystem.Models;
 using ErpSystem.Services.ViewModels.Delivery;
@@ -11,16 +10,15 @@ namespace ErpSystem.Services.Services
 {
     public class DeliveriesService : IDeliveriesService
     {
+        private const int ProductsPerPage = 2;
         private readonly ErpSystemDbContext dbContext;
-        private readonly IMapper mapper;
 
-        public DeliveriesService(ErpSystemDbContext dbContext, IMapper mapper)
+        public DeliveriesService(ErpSystemDbContext dbContext)
         {
             this.dbContext = dbContext;
-            this.mapper = mapper;
         }
 
-        public IEnumerable<DeliveryListViewModel> GetAllOrdersForDelivery()
+        public IEnumerable<DeliveryListViewModel> GetAllOrdersForDelivery(int page, int itemsPerPage = ProductsPerPage)
         {
             var suppliersList = this.dbContext.Orders.Select(x => x.SupplierId).Distinct().ToList();
 
@@ -36,8 +34,8 @@ namespace ErpSystem.Services.Services
                     Product = x.ProductName,
                     NumberOfTransportUnits = x.NumberOfTransportPackageUnitsOrdered,
                     TotalProductPrice = x.TotalAmountOfOrder,
-                    TotalWeightOfTransportUnit = this.dbContext.Products.Where(p => p.Id == x.ProductId).Select(y => y.ProductTransportPackageWeight).FirstOrDefault(),
-                    ProductMeasurementType = this.dbContext.Products.Where(p => p.Id == x.ProductId).Select(y => y.MeasurmentTag.Maesurment).FirstOrDefault(),
+                    TotalWeightOfTransportUnit = this.dbContext.Products.Where(p => p.Id == x.ProductId && p.IsDeleted == false).Select(y => y.ProductTransportPackageWeight).FirstOrDefault(),
+                    ProductMeasurementType = this.dbContext.Products.Where(p => p.Id == x.ProductId && p.IsDeleted == false).Select(y => y.MeasurmentTag.Maesurment).FirstOrDefault(),
                     OrderDate = x.OrderDate,
                     Package = this.dbContext.Products.Where(p => p.Id == x.ProductId).Select(y => y.ProductTransportPackage.TypeOfPackage).FirstOrDefault(),
                     TotalOrderPrice = this.dbContext.Orders.Where(s => s.SupplierId == x.SupplierId).Sum(x => x.TotalAmountOfOrder),
@@ -47,7 +45,7 @@ namespace ErpSystem.Services.Services
 
                 listForDelivery.AddRange(list);
             }
-            return listForDelivery.OrderBy(x => x.Supplier).ThenBy(x => x.Product);
+            return listForDelivery.OrderBy(x => x.Supplier).ThenBy(x => x.Product).Skip((page - 1) * itemsPerPage).Take(itemsPerPage);
         }
 
         public async Task FinalizeDelivery(DeliveryListViewModel deliveryList)
@@ -59,7 +57,7 @@ namespace ErpSystem.Services.Services
 
             var addPorductInWarehouseProducts = new WarehouseProduct
             {
-                Product = this.dbContext.Products.Where(p => p.Id == deliveryList.ProductId).FirstOrDefault(),
+                Product = this.dbContext.Products.Where(p => p.Id == deliveryList.ProductId && p.IsDeleted == false).FirstOrDefault(),
                 ProductId = deliveryList.ProductId,
                 ProductionDate = deliveryList.ProductionDate,
                 ExpireDate = deliveryList.ExpireDate,
@@ -70,9 +68,9 @@ namespace ErpSystem.Services.Services
 
             //var addPorductInWarehouseProducts = this.mapper.Map<WarehouseProduct>(deliveryList);
 
-            bool isProductInPallet = this.dbContext.Products.Where(p => p.Id == deliveryList.ProductId).Select(p => p.IsPallet == true).FirstOrDefault();
-            var numberOfProductsPerBox = this.dbContext.Products.Where(p => p.Id == deliveryList.ProductId).Select(x => x.ProductTransportPackageNumberOfPieces).FirstOrDefault();
-            var boxesPerPallet = this.dbContext.Products.Where(p => p.Id == deliveryList.ProductId).Select(x => x.BoxesPerPallet).FirstOrDefault();
+            bool isProductInPallet = this.dbContext.Products.Where(p => p.Id == deliveryList.ProductId && p.IsDeleted == false).Select(p => p.IsPallet == true).FirstOrDefault();
+            var numberOfProductsPerBox = this.dbContext.Products.Where(p => p.Id == deliveryList.ProductId && p.IsDeleted == false).Select(x => x.ProductTransportPackageNumberOfPieces).FirstOrDefault();
+            var boxesPerPallet = this.dbContext.Products.Where(p => p.Id == deliveryList.ProductId && p.IsDeleted == false).Select(x => x.BoxesPerPallet).FirstOrDefault();
             var numberOfProductPerPallet = numberOfProductsPerBox * boxesPerPallet;
             var warehousePalletsSpace = addPorductInWarehouseProducts.Warehouse.CurrentPalletsSpaceFree;
             var warehouseBoxessSpace = addPorductInWarehouseProducts.Warehouse.CurrentBoxesFrontSpaceFree;
@@ -95,8 +93,8 @@ namespace ErpSystem.Services.Services
             if (!isProductInPallet)
             {
                 // get box size and shelf width size
-                var boxFront = this.dbContext.Products.Where(p => p.Id == deliveryList.ProductId).Select(x => x.ProductTransportPackageWidthSize).FirstOrDefault();
-                var boxLenght = this.dbContext.Products.Where(p => p.Id == deliveryList.ProductId).Select(x => x.ProductTransportPackageLengthSize).FirstOrDefault();
+                var boxFront = this.dbContext.Products.Where(p => p.Id == deliveryList.ProductId && p.IsDeleted == false).Select(x => x.ProductTransportPackageWidthSize).FirstOrDefault();
+                var boxLenght = this.dbContext.Products.Where(p => p.Id == deliveryList.ProductId && p.IsDeleted == false).Select(x => x.ProductTransportPackageLengthSize).FirstOrDefault();
                 var shelfDepth = this.dbContext.WarehouseBoxes.Where(w => w.Id == deliveryList.ProductId).Select(x => x.ShelfDepth).FirstOrDefault();
 
 
@@ -122,6 +120,11 @@ namespace ErpSystem.Services.Services
             this.dbContext.FinalizedOrders.Add(productFinalizedOrder);
             this.dbContext.SaveChanges();
 
+        }
+
+        public int GetCount()
+        {
+            return this.dbContext.Orders.Count();
         }
     }
 }

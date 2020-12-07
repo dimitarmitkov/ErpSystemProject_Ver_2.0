@@ -5,6 +5,8 @@ namespace ErpSystem.Data
 {
     public class ErpSystemDbContext : DbContext
     {
+        const string ConnectionString = "Server = localhost, 1433; Database = ERP; User = sa; Password = reallyStrongPwd123; ";
+
         public ErpSystemDbContext()
         {
 
@@ -32,6 +34,7 @@ namespace ErpSystem.Data
         public DbSet<WarehouseProduct> WarehouseProducts { get; set; }
         public DbSet<SaleAccumulator> SaleAccumulators { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<LoggedUser> LoggedUsers { get; set; }
         public DbSet<CurrentSale> CurrentSales { get; set; }
         public DbSet<CustomerProduct> CustomerProducts { get; set; }
         public DbSet<DeliveryNeededProduct> DeliveryNeededProducts { get; set; }
@@ -43,7 +46,7 @@ namespace ErpSystem.Data
 
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server = localhost, 1433; Database = ERP; User = sa; Password = reallyStrongPwd123; ");
+                optionsBuilder.UseSqlServer(ConnectionString);
             }
         }
 

@@ -17,6 +17,7 @@ using ErpSystem.Services.Services;
 using AutoMapper;
 using ErpSystem.Models;
 using ErpSystem.Services.ViewModels.Delivery;
+using ErpSystem.WebApp.Areas.Identity.Data;
 
 namespace ErpSystem.WebApp
 {
@@ -32,16 +33,23 @@ namespace ErpSystem.WebApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddDbContext<ApplicationDbContext>(options =>
-            //    options.UseSqlServer(
-            //        Configuration.GetConnectionString("DefaultConnection")));
-            //services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-            //    .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddDbContext<ErpSystemDbContext>(options =>
+                options.UseSqlServer(
+                    Configuration.GetConnectionString("DefaultConnection")));
+            services.AddMvc();
+            //services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
+            //    .AddEntityFrameworkStores<ErpSystemDbContext>();
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddMvc().AddRazorRuntimeCompilation();
             services.AddRazorPages();
 
             services.AddMemoryCache();
+            services.AddDistributedSqlServerCache(options =>
+            {
+                options.ConnectionString = Configuration.GetConnectionString("DefaultConnection");
+                options.SchemaName = "dbo";
+                options.TableName = "CacheRecords";
+            });
 
             services.AddSession(options =>
             {
@@ -73,6 +81,7 @@ namespace ErpSystem.WebApp
             services.AddTransient<ICurrentSalesService, CurrentSalesService>();
             services.AddTransient<IOrdersService, OrdersService>();
             services.AddTransient<IDeliveriesService, DeliveriesService>();
+            services.AddTransient<IWarehouseSpace, WarehouseSpace>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -100,6 +109,9 @@ namespace ErpSystem.WebApp
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllerRoute(
+                    "areaRoute",
+                    "{area:exists}/{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");

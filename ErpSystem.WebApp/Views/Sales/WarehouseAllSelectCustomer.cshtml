@@ -6,10 +6,10 @@
 }
 
 <div class="container-fluid">
-    <h1 class="mt-4">Tables</h1>
+    <h1 class="mt-4">Generate Sale</h1>
     <ol class="breadcrumb mb-4">
         <li class="breadcrumb-item"><a href="/Home/Index">Dashboard</a></li>
-        <li class="breadcrumb-item active">Tables</li>
+        <li class="breadcrumb-item active">Generate Sale</li>
     </ol>
     <div class="card mb-4">
 
@@ -23,7 +23,7 @@
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <div class="form-group">
+                    <div class="form-group" style="text-align:center">
                         <label class="small mb-1" asp-for="CustomerCombined.HasCustomerDiscount">Has discount</label>
                         <input class="form-control py-4" id="hasCustomerDiscount" type="checkbox" asp-for="CustomerCombined.HasCustomerDiscount" />
                     </div>
@@ -51,8 +51,8 @@
                                 <th>On stock</th>
                                 <th>Expire date</th>
                                 <th>Id</th>
-                                <th>CustomerId</th>
-                                <th>Sale</th>
+                                @*<th>CustomerId</th>*@
+                                @*<th>Sale</th>*@
                             </tr>
                         </thead>
                         <tbody>
@@ -65,10 +65,10 @@
                                     <td>@product.ProductsAvailable</td>
                                     <td>@product.ProductExpireDate</td>
                                     <td>@product.Id</td>
-                                    <td>@product.CustomerId</td>
+                                    @*<td>@product.CustomerId</td>*@
 
                                     @*<td><a class="btn btn-primary btn-block" href="/Sales/GenerateSale?Id=@product.Id">Sale</a></td>*@
-                                    <td><button name="@product.Id" type="submit" class="btn btn-primary btn-block">Sale</button></td>
+                                    @*<td><button name="@product.Id" type="submit" class="btn btn-primary btn-block">Sale</button></td>*@
                                 </tr>
                             }
                         </tbody>

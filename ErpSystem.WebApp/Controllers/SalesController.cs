@@ -3,7 +3,9 @@ using ErpSystem.Models;
 using ErpSystem.Services.Services;
 using ErpSystem.Services.ViewModels.CustomerWarehouse;
 using ErpSystem.Services.ViewModels.Sale;
+using ErpSystem.Services.ViewModels.Warehouse;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 
@@ -13,11 +15,15 @@ namespace ErpSystem.WebApp.Controllers
     {
         private readonly ISalesService salesService;
         private readonly IMemoryCache memoryCache;
+        private readonly UserManager<IdentityUser> userManager;
+        private readonly SignInManager<IdentityUser> signInManager;
 
-        public SalesController(ISalesService salesService, IMemoryCache memoryCache)
+        public SalesController(ISalesService salesService, IMemoryCache memoryCache, UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
         {
             this.salesService = salesService;
             this.memoryCache = memoryCache;
+            this.userManager = userManager;
+            this.signInManager = signInManager;
         }
 
         [Authorize]
@@ -76,9 +82,18 @@ namespace ErpSystem.WebApp.Controllers
             var customerEik = customerWarehouse.CustomerCombined.CustomerName;
             var hasDiscount = customerWarehouse.CustomerCombined.HasCustomerDiscount;
 
-            salesService.GenerateCurrentSale(customerEik, hasDiscount);
+            var isSignedIn = this.signInManager.IsSignedIn(User);
 
-            return this.Redirect("/Sales/WarehouseAllGenerateSale");
+
+            if (isSignedIn)
+            {
+                var userId = userManager.GetUserId(User);
+                salesService.GenerateCurrentSale(customerEik, hasDiscount, userId);
+                return this.Redirect("/Sales/WarehouseAllGenerateSale");
+            }
+
+            return this.View();
+
         }
 
 
@@ -108,13 +123,15 @@ namespace ErpSystem.WebApp.Controllers
                 return this.View(viewModel);
             }
 
-            var productId = customerWarehouse.WarehouseProductSingle.ProductId;
-            var customerId = customerWarehouse.WarehouseProductSingle.CustomerId;
-            var numberOfSoldProducts = customerWarehouse.WarehouseProductSingle.ProductSold;
-            var hasProductDiscount = customerWarehouse.WarehouseProductSingle.HasProductDiscount;
-            var hasCustomerDiscount = customerWarehouse.WarehouseProductSingle.HasCustomerDiscount;
-            var warehouseId = customerWarehouse.WarehouseProductSingle.WarehouseId;
-            var warehouseProductId = customerWarehouse.WarehouseProductSingle.WarehouseProductId;
+            var customerWarehouseProducts = customerWarehouse.WarehouseProductSingle;
+
+            var productId = customerWarehouseProducts.ProductId;
+            var customerId = customerWarehouseProducts.CustomerId;
+            var numberOfSoldProducts = customerWarehouseProducts.ProductSold;
+            var hasProductDiscount = customerWarehouseProducts.HasProductDiscount;
+            var hasCustomerDiscount = customerWarehouseProducts.HasCustomerDiscount;
+            var warehouseId = customerWarehouseProducts.WarehouseId;
+            var warehouseProductId = customerWarehouseProducts.WarehouseProductId;
 
             salesService.CreateSale(productId, customerId, numberOfSoldProducts, hasProductDiscount, hasCustomerDiscount, warehouseId, warehouseProductId);
 

@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using ErpSystem.Data;
 using ErpSystem.Models;
 using ErpSystem.Services.ViewModels.Order;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ErpSystem.Services.Services
 {
@@ -68,7 +64,7 @@ namespace ErpSystem.Services.Services
 
             for (int i = 0; i < supplier.Count; i++)
             {
-                var products = this.dbContext.Products.Where(s => s.Supplier.SupplierName == supplier[i]).Select(x => new CalculateNeedOfOrderViewModel
+                var products = this.dbContext.Products.Where(s => s.Supplier.SupplierName == supplier[i] && s.IsDeleted == false).Select(x => new CalculateNeedOfOrderViewModel
                 {
                     ProductId = x.Id,
                     Product = x.ProductName,

@@ -53,6 +53,9 @@ namespace ErpSystem.Data.Migrations
                     b.Property<bool>("HasCustomerDiscount")
                         .HasColumnType("bit");
 
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.ToTable("CurrentSales");
@@ -262,6 +265,27 @@ namespace ErpSystem.Data.Migrations
                     b.ToTable("FinalizedOrders");
                 });
 
+            modelBuilder.Entity("ErpSystem.Models.LoggedUser", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("IsLogged")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("LoggedUsers");
+                });
+
             modelBuilder.Entity("ErpSystem.Models.Order", b =>
                 {
                     b.Property<int>("Id")
@@ -312,6 +336,9 @@ namespace ErpSystem.Data.Migrations
 
                     b.Property<DateTime?>("ExpireDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<bool>("IsPallet")
                         .HasColumnType("bit");
@@ -561,16 +588,10 @@ namespace ErpSystem.Data.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsAdmin")
+                    b.Property<bool>("IsLogged")
                         .HasColumnType("bit");
 
-                    b.Property<string>("LastName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Password")
+                    b.Property<string>("UserId")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");

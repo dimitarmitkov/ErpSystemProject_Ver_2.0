@@ -21,9 +21,13 @@ namespace ErpSystem.Services.ViewModels.Product
         [Range(typeof(decimal), "0", "79228162514264337593543950335", ErrorMessage = "Price must be positive value")]
         public decimal ProductLendedPrice { get; set; }
 
-        [Required(ErrorMessage = "Please insert product gross margin needed")]
+        [Required(ErrorMessage = "Please insert product gross margin")]
         [Range(0, 100, ErrorMessage = "Gross margin must be between 0 and 100")]
         public int ProductGrossMargin { get; set; }
+
+        [Required(ErrorMessage = "Please insert product discount")]
+        [Range(0, 100, ErrorMessage = "Discount must be between 0 and 100")]
+        public int ProductDiscount { get; set; }
 
         [Required(ErrorMessage = "Please insert Supplier")]
         [HasSupplier("Supplier")]

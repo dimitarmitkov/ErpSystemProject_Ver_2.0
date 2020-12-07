@@ -28,11 +28,18 @@
                                 <span asp-validation-for="ProductLendedPrice" class="text-danger" style="font-size:0.7vw"></span>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-2">
                             <div class="form-group">
                                 <label class="small mb-1" asp-for="ProductGrossMargin">Gross margin</label>
                                 <input class="form-control py-4" id="productGrossMargin" type="number" placeholder="Enter GM" asp-for="ProductGrossMargin" />
                                 <span asp-validation-for="ProductGrossMargin" class="text-danger" style="font-size:0.7vw"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label class="small mb-1" asp-for="ProductDiscount">Discount</label>
+                                <input class="form-control py-4" id="productDiscount" type="number" placeholder="Enter Discount" asp-for="ProductDiscount" />
+                                <span asp-validation-for="ProductDiscount" class="text-danger" style="font-size:0.7vw"></span>
                             </div>
                         </div>
                     </div>

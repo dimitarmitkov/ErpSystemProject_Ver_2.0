@@ -1,121 +1,121 @@
 ﻿@using ErpSystem.Services.ViewModels.Sale
 @model InvoiceCombinedViewModel
+<link rel="stylesheet" href="~/css/invoice.css" type="text/css" />
+
+
+<div id="invoicePrint" class="offset-xl-2 col-xl-8 col-lg-12 col-md-12 col-sm-12 col-12 padding">
     <link rel="stylesheet" href="~/css/invoice.css" type="text/css" />
-
-
-    <div id="invoicePrint" class="offset-xl-2 col-xl-8 col-lg-12 col-md-12 col-sm-12 col-12 padding">
-        <link rel="stylesheet" href="~/css/invoice.css" type="text/css" />
-        <div class="card">
-            <div class="card-header p-4">
-                <a class="pt-2 d-inline-block" href="index.html" data-abc="true">BBBootstrap.com</a>
-                <div class="float-right">
-                    <h3 class="mb-0">Invoice #BBB10234</h3>
-                    @{ var customer = Model.Single.FirstOrDefault();}
-                    Date: @customer.SaleDate.Date.ToString("dd-MM-yyyy")
+    <div class="card">
+        <div class="card-header p-4">
+            <a class="pt-2 d-inline-block" href="index.html" data-abc="true">BBBootstrap.com</a>
+            <div class="float-right">
+                <h3 class="mb-0">Invoice #BBB10234</h3>
+                @{ var customer = Model.Single.FirstOrDefault();}
+                Date: @customer.SaleDate.Date.ToString("dd-MM-yyyy")
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row mb-4">
+                <div class="col-sm-6">
+                    <h5 class="mb-3">From:</h5>
+                    <h3 class="text-dark mb-1">City Service Group EOOD</h3>
+                    <div>36, Gen. Asen Nikolov Street</div>
+                    <div>Lulin 8, Sofia 1324</div>
+                    <div>Email: office@cityservicetires.com</div>
+                    <div>Phone: +359 88 8467947</div>
+                </div>
+                <div class="col-sm-6 ">
+                    <h5 class="mb-3">To:</h5>
+                    <h3 class="text-dark mb-1">@customer.Customer @customer.CustomerTypeOfRegistration </h3>
+                    <div>@customer.Eik</div>
+                    <div>@customer.Address </div>
+                    <div>Email: @customer.Email</div>
+                    <div>Phone: @customer.Phone</div>
                 </div>
             </div>
-            <div class="card-body">
-                <div class="row mb-4">
-                    <div class="col-sm-6">
-                        <h5 class="mb-3">From:</h5>
-                        <h3 class="text-dark mb-1">City Service Group EOOD</h3>
-                        <div>36, Gen. Asen Nikolov Street</div>
-                        <div>Lulin 8, Sofia 1324</div>
-                        <div>Email: office@cityservicetires.com</div>
-                        <div>Phone: +359 88 8467947</div>
-                    </div>
-                    <div class="col-sm-6 ">
-                        <h5 class="mb-3">To:</h5>
-                        <h3 class="text-dark mb-1">@customer.Customer @customer.CustomerTypeOfRegistration </h3>
-                        <div>@customer.Eik</div>
-                        <div>@customer.Address </div>
-                        <div>Email: @customer.Email</div>
-                        <div>Phone: @customer.Phone</div>
-                    </div>
-                </div>
 
-                <div class="table-responsive-sm">
-                    <table id="currentTable" class="table table-striped">
-                        <thead>
+            <div class="table-responsive-sm">
+                <table id="currentTable" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th class="center">#</th>
+                            <th>Item</th>
+                            <th>Description</th>
+                            <th class="right">Price BGN</th>
+                            <th class="center">Qty</th>
+                            <th class="right">Total BGN</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.List)
+                        {
                             <tr>
-                                <th class="center">#</th>
-                                <th>Item</th>
-                                <th>Description</th>
-                                <th class="right">Price BGN</th>
-                                <th class="center">Qty</th>
-                                <th class="right">Total BGN</th>
+                                <td class="center">1</td>
+                                <td class="left strong">@item.Product</td>
+                                <td class="left">Customer discount: @item.CustomerDiscount%, product discount: @item.ProductDiscount%</td>
+                                <td class="right">@item.SingleProudctSalePrice </td>
+                                <td class="center">@item.NumberOfSoldProducts</td>
+                                <td class="right">@item.TotalSalePrice.ToString("N2")</td>
                             </tr>
-                        </thead>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-sm-5">
+                </div>
+                <div class="col-lg-4 col-sm-5 ml-auto">
+                    <table class="table table-clear">
                         <tbody>
-                            @foreach (var item in Model.List)
-                            {
-                                <tr>
-                                    <td class="center">1</td>
-                                    <td class="left strong">@item.Product</td>
-                                    <td class="left">Customer discount: @item.CustomerDiscount%, product discount: @item.ProductDiscount%</td>
-                                    <td class="right">@item.SingleProudctSalePrice </td>
-                                    <td class="center">@item.NumberOfSoldProducts</td>
-                                    <td class="right">@item.TotalSalePrice.ToString("N2")</td>
-                                </tr>
-                            }
+                            <tr>
+                                <td class="left">
+                                    <strong class="text-dark">Subtotal BGN</strong>
+                                </td>
+                                <td id="totalSales" class="right"></td>
+                            </tr>
+                            @*<tr>
+                                    <td class="left">
+                                        <strong class="text-dark">Discount (20%)</strong>
+                                    </td>
+                                    <td class="right">$5,761,00</td>
+                                </tr>*@
+                            <tr>
+                                <td class="left">
+                                    <strong class="text-dark">VAT (20%)</strong>
+                                </td>
+                                <td id="vat" class="right"></td>
+                            </tr>
+                            <tr>
+                                <td class="left">
+                                    <strong class="text-dark">Total BGN</strong>
+                                </td>
+                                <td class="right">
+                                    <strong id="total" class="text-dark"></strong>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
-                <div class="row">
-                    <div class="col-lg-4 col-sm-5">
-                    </div>
-                    <div class="col-lg-4 col-sm-5 ml-auto">
-                        <table class="table table-clear">
-                            <tbody>
-                                <tr>
-                                    <td class="left">
-                                        <strong class="text-dark">Subtotal BGN</strong>
-                                    </td>
-                                    <td id="totalSales" class="right"></td>
-                                </tr>
-                                @*<tr>
-                                        <td class="left">
-                                            <strong class="text-dark">Discount (20%)</strong>
-                                        </td>
-                                        <td class="right">$5,761,00</td>
-                                    </tr>*@
-                                <tr>
-                                    <td class="left">
-                                        <strong class="text-dark">VAT (10%)</strong>
-                                    </td>
-                                    <td id="vat" class="right"></td>
-                                </tr>
-                                <tr>
-                                    <td class="left">
-                                        <strong class="text-dark">Total BGN</strong>
-                                    </td>
-                                    <td class="right">
-                                        <strong id="total" class="text-dark"></strong>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card-footer bg-white">
-                <p class="mb-0">BBBootstrap.com, Sounth Block, New delhi, 110034</p>
             </div>
         </div>
-    </div>
-    <br>
-    <div class="form-row">
-        <div class="col-md-2">
-            <p><button type="submit" class="btn btn-primary btn-block">Email invoice</button></p>
-        </div>
-        <div class="col-md-2">
-            <p><button type="submit" class="btn btn-primary btn-block">Save invoice</button></p>
-        </div>
-        <div class="col-md-2">
-            @*<p><button onclick="window.print()" class="btn btn-primary btn-block">Print invoice</button></p>*@
-            <p><a id="printBtn" class="btn btn-primary btn-block">Print invoice</a></p>
-        </div>
-    </div>
 
-    <script src="~/js/invoice_data.js"></script>
+        <div class="card-footer bg-white">
+            <p class="mb-0">BBBootstrap.com, Sounth Block, New delhi, 110034</p>
+        </div>
+    </div>
+</div>
+<br>
+<div class="form-row">
+    <div class="col-md-2">
+        <p><button type="submit" class="btn btn-primary btn-block">Email invoice</button></p>
+    </div>
+    <div class="col-md-2">
+        <p><button type="submit" class="btn btn-primary btn-block">Save invoice</button></p>
+    </div>
+    <div class="col-md-2">
+        @*<p><button onclick="window.print()" class="btn btn-primary btn-block">Print invoice</button></p>*@
+        <p><a id="printBtn" class="btn btn-primary btn-block">Print invoice</a></p>
+    </div>
+</div>
+
+<script src="~/js/invoice_data.js"></script>

@@ -22,7 +22,7 @@ namespace ErpSystem.Services.Services
 
         IEnumerable<SelectListItem> SeclectCustomerDropDown();
 
-        void GenerateCurrentSale(string companyEik, bool hasDiscount);
+        void GenerateCurrentSale(string companyEik, bool hasDiscount, string userId);
 
         IEnumerable<WarehouseProductViewModel> ListOfProductsForSaleWithCustomer();
 

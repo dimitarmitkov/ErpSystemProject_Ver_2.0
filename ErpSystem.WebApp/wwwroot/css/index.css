@@ -1,0 +1,15 @@
+﻿body {
+}
+
+
+h5 {
+    background-color: lightgray;
+    border-radius: 5px;
+    /*    text-align: center;*/
+    padding-left: 20px;
+}
+
+.card {
+    margin-left: 10px;
+    margin-right: 20px;
+}
