@@ -1,0 +1,90 @@
+﻿@using ErpSystem.Services.ViewModels.Supplier
+@model AddSupplierViewModel
+
+
+@{
+    ViewData["Title"] = "Add Supplier";
+}
+<div class="row justify-content-lg-center">
+    <div class="col-lg-6">
+        <div class="card shadow-lg border-0 rounded-lg mt-5">
+            <div class="card-header"><h3 class="text-center font-weight-light my-4">Add Supplier</h3></div>
+            <div class="card-body">
+
+                <form method="post">
+                    <div class="form-row">
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="small mb-1" asp-for="SupplierName">Supplier Name</label>
+                                <input class="form-control py-4" id="supplierName" type="text" placeholder="Enter supplier name" asp-for="SupplierName" />
+                                <span asp-validation-for="SupplierName" class="text-danger" style="font-size:0.7vw"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="small mb-1" asp-for="SupplierCountry">Supplier Country</label>
+                                <input class="form-control py-4" id="supplierCountry" type="text" placeholder="Enter Country" asp-for="SupplierCountry" />
+                                <span asp-validation-for="SupplierCountry" class="text-danger" style="font-size:0.7vw"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="small mb-1" asp-for="SupplierPostalCode">Supplier Postal Code</label>
+                                <input class="form-control py-4" id="supplierPostalCode" type="text" placeholder="Enter Postal code" asp-for="SupplierPostalCode" />
+                                <span asp-validation-for="SupplierPostalCode" class="text-danger" style="font-size:0.7vw"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="small mb-1" asp-for="PhoneNumber">Supplier Phone</label>
+                                <input class="form-control py-4" id="phoneNumber" type="tel" placeholder="Enter Phone number" asp-for="PhoneNumber" />
+                                <span asp-validation-for="PhoneNumber" class="text-danger" style="font-size:0.7vw"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="small mb-1" asp-for="Email">Supplier Email</label>
+                                <input class="form-control py-4" id="email" type="email" placeholder="Enter email" asp-for="Email" />
+                                <span asp-validation-for="Email" class="text-danger" style="font-size:0.7vw"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-1">
+                            <div class="form-group">
+                                <label class="small mb-1" asp-for="CustomsAuthorisationNeeded">Customs needed</label>
+                                <input class="form-control py-4" id="customsNeeded" type="checkbox" asp-for="CustomsAuthorisationNeeded" />
+                                <span asp-validation-for="CustomsAuthorisationNeeded" class="text-danger" style="font-size:0.7vw"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label class="small mb-1" asp-for="SupplierAdditionalInformation">Supplier Additional Info</label>
+                                <input class="form-control py-4" id="supplierAdditionalInformation" type="text" placeholder="Enter Additional Info" asp-for="SupplierAdditionalInformation" />
+                                <span asp-validation-for="SupplierAdditionalInformation" class="text-danger" style="font-size:0.7vw"></span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="small mb-1" asp-for="SupplierAddress">Supplier Address</label>
+                                <input class="form-control py-4" id="supplierAddress" type="tel" placeholder="Enter Address" asp-for="SupplierAddress" />
+                                <span asp-validation-for="SupplierAddress" class="text-danger" style="font-size:0.7vw"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group mt-4 mb-0"><button type="submit" class="btn btn-primary btn-block">Create Supplier</button></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

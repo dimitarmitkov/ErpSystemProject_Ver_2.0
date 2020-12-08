@@ -2,6 +2,7 @@
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
 
+<link href="~/css/index.css" rel="stylesheet" type="text/css" />
 
 @{
     ViewData["Title"] = "Home Page";
@@ -15,7 +16,7 @@
     <h1>Welcome @User.Identity.Name</h1>
 }
 
-<link href="~/css/index.css" rel="stylesheet" type="text/css" />
+<hr />
 
 <div class="row">
     <div class="card" style="width: 30rem; height: 7rem;">
@@ -26,18 +27,25 @@
             <a id="aElem" href="/Products/Search" class="btn btn-secondary">Search products</a>
         </div>
     </div>
-    <div class="card" style="width: 30rem; height: 7rem;">
+    <div class="card" style="width: 25rem; height: 7rem;">
         <div class="card-body">
             <h5 class="card-title">Sale</h5>
             <a id="aElem" href="/Sales/All" class="btn btn-secondary">Sales list</a>
             <a id="aElem" href="/Sales/WarehouseAllSelectCustomer" class="btn btn-secondary">Generate sale</a>
+            <a id="aElem" href="/Charts/Chart" class="btn btn-secondary">Sales charts</a>
         </div>
     </div>
-    <div class="card" style="width: 30rem; height: 7rem;">
+    <div class="card" style="width: 20rem; height: 7rem;">
         <div class="card-body">
             <h5 class="card-title">Warehouse</h5>
             <a id="aElem" href="/Orders/GenerateOrder" class="btn btn-secondary">Order</a>
             <a id="aElem" href="/Deliveries/ConfirmDeliveries" class="btn btn-secondary">Delivery</a>
+        </div>
+    </div>
+    <div class="card" style="width: 20rem; height: 7rem;">
+        <div class="card-body">
+            <h5 class="card-title">Supplier</h5>
+            <a id="aElem" href="/Suppliers/Supplier" class="btn btn-secondary">Add Supplier</a>
         </div>
     </div>
 </div>

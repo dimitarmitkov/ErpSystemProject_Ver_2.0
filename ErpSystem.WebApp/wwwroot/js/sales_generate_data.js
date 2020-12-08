@@ -47,28 +47,26 @@ function eventHandler(e) {
     }
 
     if (buttonTag === "A" && buttonText === "Select") {
+
         for (let i = 0; i < idList.length; i++) {
             if (parseInt(idList[i]) !== parseInt(number)) {
                 document.getElementById(`${parseInt(idList[i])}`).remove();
             }
             else {
 
-                document.getElementById(`${parseInt(idList[i])}`).lastElementChild.innerHTML = '<td><button type="submit" class="btn btn-primary btn-block" id="buttonSale">Sale</button></td>'
+                document.getElementById(`${parseInt(idList[i])}`).lastElementChild.innerHTML = '<td> <button type="submit" class="btn btn-primary btn-block" id="buttonSale">Sale</button> </td>'
             }
         }
-        //let head = document.getElementsByTagName("th");
 
-        //for (let i = 0; i < head.length; i++) {
-        //    head[i].removeAttribute("class");
-        //}
+        let thElement = document.getElementsByTagName("th");
+        for (let i = 0; i < thElement.length; i++) {
+            thElement[i].classList.remove("sorting");
+            thElement[i].classList.remove("sorting_asc");
+        }
         document.getElementById("dataTable_paginate").style.display = "none";
         document.getElementById("dataTable_info").style.display = "none";
         document.getElementById("dataTable_length").style.display = "none";
         document.getElementById("dataTable_filter").style.display = "none";
-        document.getElementById("hasProductDiscount").type = "checkbox"
-        document.getElementById("productSold").type = "number";
-        document.getElementById("tdSelectProduct").innerText = "Sale"
-
     }
 
 
@@ -83,10 +81,10 @@ function eventHandler(e) {
     function eventHandlerKeyup() {
 
         if (!(validateInput(this.value) && parseInt(this.value) <= parseInt(availableProducts)) && trList.length <= 2) {
-            (document.getElementsByTagName("tr")[1].lastElementChild.childNodes[0]).style.display = "none";
+            document.getElementById("buttonSale").style.display = "none";
         }
         else {
-            (document.getElementsByTagName("tr")[1].lastElementChild.childNodes[0]).style.display = "block";
+            document.getElementById("buttonSale").style.display = "block";
         }
     }
     eventHandlerKeyup(inputNumber)

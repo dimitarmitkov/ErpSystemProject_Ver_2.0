@@ -15,8 +15,8 @@ namespace ErpSystem.Services.Services
 
         public IEnumerable<KeyValuePair<string, int>> GetSpaceBoxes()
         {
-            var currentBoxesSpaceTaken = this.dbContext.Warehouses.Select(b => b.CurrentBoxesFrontSpaceFree).FirstOrDefault();
-            var currentBoxesSpaceFree = this.dbContext.WarehouseBoxes.Select(b => b.BoxSpace).FirstOrDefault() - currentBoxesSpaceTaken;
+            var currentBoxesSpaceFree = this.dbContext.Warehouses.Select(b => b.CurrentBoxesFrontSpaceFree).FirstOrDefault();
+            var currentBoxesSpaceTaken = this.dbContext.WarehouseBoxes.Select(b => b.BoxSpace).FirstOrDefault() - currentBoxesSpaceFree;
 
             var dictionary = new Dictionary<string, int>();
 
@@ -28,8 +28,8 @@ namespace ErpSystem.Services.Services
 
         public IEnumerable<KeyValuePair<string, int>> GetSpacePallets()
         {
-            var currentPalletsSpaceTaken = this.dbContext.Warehouses.Select(p => p.CurrentPalletsSpaceFree).FirstOrDefault();
-            var currenPalletsSpaceFree = this.dbContext.WarehousePallets.Select(p => p.PalletSpace).FirstOrDefault() - currentPalletsSpaceTaken;
+            var currenPalletsSpaceFree = this.dbContext.Warehouses.Select(p => p.CurrentPalletsSpaceFree).FirstOrDefault();
+            var currentPalletsSpaceTaken = this.dbContext.WarehousePallets.Select(p => p.PalletSpace).FirstOrDefault() - currenPalletsSpaceFree;
 
             var dictionary = new Dictionary<string, int>();
 

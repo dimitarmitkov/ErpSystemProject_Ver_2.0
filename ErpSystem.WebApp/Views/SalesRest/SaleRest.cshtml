@@ -1,0 +1,84 @@
+﻿@using ErpSystem.Services.ViewModels.Sale
+@model SaleRestCombinedViewModel
+
+@{
+    ViewData["Title"] = "Sales";
+}
+<div class="container-fluid">
+    <h1 class="mt-4">Tables</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="/Home/Index">Dashboard</a></li>
+        <li class="breadcrumb-item active">Tables</li>
+    </ol>
+    <form method="post" id="antyForgeryForm"></form>
+    <div class="card mb-4">
+
+        <div class="form-row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    Customer: <input class="form-control py-2" id="allCustomer" type="text" name="customer" asp-for="Single.Customer">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    Product: <input class="form-control py-2" id="allProduct" type="text" name="product" asp-for="Single.Product">
+                </div>
+            </div>
+            <div class="col-md-12">
+                <button type="submit" id="submitButton" class="btn btn-primary btn-block">Filter</button>
+            </div>
+        </div>
+        @*</form>*@
+    </div>
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-table mr-1"></i>
+            DataTable Example
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead style="font-size:1vw">
+                        <tr>
+                            <th>Customer name</th>
+                            <th>Product name</th>
+                            <th>Measure</th>
+                            <th>Sold products</th>
+                            <th>Sale date</th>
+                            <th>Sale price</th>
+                            <th>Has discount</th>
+                        </tr>
+                    </thead>
+                    <tbody style="font-size:1vw">
+                        @foreach (var sale in Model.List)
+                        {
+                            <tr>
+                                <td>@sale.Customer</td>
+                                <td>@sale.Product </td>
+                                <td>@sale.ProductMesure</td>
+                                <td>@sale.ProductId</td>
+                                <td>@sale.SaleDate.Date.ToString("dd-MM-yyyy")</td>
+                                <td>@sale.SingleProudctSalePrice.ToString("N2")</td>
+                                <td>@sale.TotalSalePrice.ToString("N2") </td>
+                            </tr>
+                        }
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th>Total</th>
+                            <th id="totalSales"></th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/js/table_data_rest.js"></script>
+@*<script src="~/js/table_get_data_rest.js"></script>*@

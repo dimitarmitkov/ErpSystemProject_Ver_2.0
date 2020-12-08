@@ -1,6 +1,6 @@
 ﻿@using ErpSystem.Services.ViewModels.Sale
 @model InvoiceCombinedViewModel
-<link rel="stylesheet" href="~/css/invoice.css" type="text/css" />
+@*<link rel="stylesheet" href="~/css/invoice.css" type="text/css" />*@
 
 
 <div id="invoicePrint" class="offset-xl-2 col-xl-8 col-lg-12 col-md-12 col-sm-12 col-12 padding">
@@ -107,13 +107,6 @@
 <br>
 <div class="form-row">
     <div class="col-md-2">
-        <p><button type="submit" class="btn btn-primary btn-block">Email invoice</button></p>
-    </div>
-    <div class="col-md-2">
-        <p><button type="submit" class="btn btn-primary btn-block">Save invoice</button></p>
-    </div>
-    <div class="col-md-2">
-        @*<p><button onclick="window.print()" class="btn btn-primary btn-block">Print invoice</button></p>*@
         <p><a id="printBtn" class="btn btn-primary btn-block">Print invoice</a></p>
     </div>
 </div>

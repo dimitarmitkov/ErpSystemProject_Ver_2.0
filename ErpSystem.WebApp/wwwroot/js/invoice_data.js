@@ -44,19 +44,7 @@ document.getElementById("total").innerHTML = totalResult;
 
 let btn = document.getElementById("printBtn");
 btn.onclick = function printInvoice() {
-
-
-
-    let prtContent = document.getElementById("invoicePrint");
-
-    let WinPrint = window.open('', '', 'left=0,top=0,width=800,height=900,toolbar=0,scrollbars=0,status=0');
-    WinPrint.document.write(prtContent.innerHTML);
-    WinPrint.document.close();
-
-    WinPrint.focus();
-    WinPrint.print();
-    WinPrint.close();
-
-
-
+    btn.style.display = "none";
+    window.print();
+    window.location.href = "/Home/Index";
 }

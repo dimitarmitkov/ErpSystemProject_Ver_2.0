@@ -16,7 +16,7 @@
     <div class="card mb-4">
         <div class="form-row">
             <div class="col-md-12">
-                <a id="submitBtn" class="btn btn-primary btn-block" href="/Sales/WarehouseAllSelectCustomer">Finalize sale for <span id="customerSpan">@Model.WarehouseProductCombined.Select(x => x.CustomerName).FirstOrDefault() </span> customer</a>
+                <a id="submitBtn" class="btn btn-primary btn-block" href="/Sales/Invoice">Finalize sale for <span id="customerSpan">@Model.WarehouseProductCombined.Select(x => x.CustomerName).FirstOrDefault() </span> customer</a>
             </div>
         </div>
         <div class="card mb-4">
@@ -69,10 +69,10 @@
                                         <td>@product.HasCustomerDiscount <input type="hidden" asp-for="WarehouseProductSingle.HasCustomerDiscount" value="@product.HasCustomerDiscount" /></td>
 
                                         @*<td><input class="form-control py-4" id="hasProductDiscount" type="checkbox" asp-for="WarehouseProductSingle.HasProductDiscount" /></td>*@
-                                        <td><input class="form-control py-4" id="hasProductDiscount" type="hidden" asp-for="WarehouseProductSingle.HasProductDiscount" /></td>
+                                        <td><input class="form-control py-4" id="hasProductDiscount" type="checkbox" asp-for="WarehouseProductSingle.HasProductDiscount" /></td>
 
                                         @*<td><input class="form-control py-4" id="productSold" type="number" asp-for="WarehouseProductSingle.ProductSold" /></td>*@
-                                        <td><input class="form-control py-4" id="productSold" type="hidden" asp-for="WarehouseProductSingle.ProductSold" /></td>
+                                        <td><input class="form-control py-4" id="productSold" type="number" asp-for="WarehouseProductSingle.ProductSold" /></td>
 
                                         <td style="display:none"><input type="hidden" asp-for="WarehouseProductSingle.CustomerId" value="@product.CustomerId" /></td>
 

@@ -18,6 +18,7 @@ using AutoMapper;
 using ErpSystem.Models;
 using ErpSystem.Services.ViewModels.Delivery;
 using ErpSystem.WebApp.Areas.Identity.Data;
+using ErpSystem.Services.ViewModels.Supplier;
 
 namespace ErpSystem.WebApp
 {
@@ -42,6 +43,10 @@ namespace ErpSystem.WebApp
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddMvc().AddRazorRuntimeCompilation();
             services.AddRazorPages();
+            services.AddAntiforgery(options =>
+            {
+                options.HeaderName = "X-CSRF-TOKEN";
+            });
 
             services.AddMemoryCache();
             services.AddDistributedSqlServerCache(options =>
@@ -62,10 +67,12 @@ namespace ErpSystem.WebApp
             {
                 mc.AddProfile(new MappingProfile());
                 mc.CreateMap<Order, DeliveryListViewModel>();
+                mc.CreateMap<AddSupplierViewModel, Supplier>();
+                mc.CreateMap<Supplier, AddSupplierViewModel>();
             });
 
-            IMapper mapper = mapperConfig.CreateMapper();
-            services.AddSingleton(mapper);
+            IMapper _mapper = mapperConfig.CreateMapper();
+            services.AddSingleton(_mapper);
 
             services.AddSingleton(this.Configuration);
 
@@ -82,6 +89,7 @@ namespace ErpSystem.WebApp
             services.AddTransient<IOrdersService, OrdersService>();
             services.AddTransient<IDeliveriesService, DeliveriesService>();
             services.AddTransient<IWarehouseSpace, WarehouseSpace>();
+            services.AddTransient<ISuppliersService, SuppliersService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

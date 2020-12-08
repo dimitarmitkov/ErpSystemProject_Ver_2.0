@@ -55,9 +55,12 @@
     <Folder Include="Areas\Administration\Views\" />
     <Folder Include="Areas\Administration\Views\ProductsEdit\" />
     <Folder Include="Views\Warehouses\" />
+    <Folder Include="Views\SalesRest\" />
+    <Folder Include="Views\Suppliers\" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="Views\CurrentSales\CurrentSale.cshtml" />
     <Content Remove="Views\Warehouses\Warehouse.cshtml" />
+    <Content Remove="Views\SalesRest\SaleRest.cshtml" />
   </ItemGroup>
 </Project>

@@ -23,6 +23,7 @@ namespace ErpSystem.Services.Services
         // create sale start
         public void CreateSale(int productId, string customerId, int numberOfSoldProducts, bool hasProductDiscount, bool hasCustomerDiscount, int warehouseId, int productByExpireDateId)
         {
+
             var sale = new Sale
             {
                 ProductId = productId,
@@ -194,7 +195,7 @@ namespace ErpSystem.Services.Services
             }).ToList();
         }
 
-        // ge
+
         public IEnumerable<WarehouseProductViewModel> ListOfProductsForSaleWithCustomer()
         {
             var customerName = this.dbContext.CurrentSales.Select(x => x.CustomerName).FirstOrDefault();
@@ -307,6 +308,8 @@ namespace ErpSystem.Services.Services
 
         public IEnumerable<InvoiceViewModel> Invoice()
         {
+
+
             var customerId = this.dbContext.CurrentSales.Select(x => x.CustomerId).FirstOrDefault();
 
             var list = this.dbContext.Sales.Where(s => s.CustomerId == customerId && s.SaleDate.Date == DateTime.UtcNow.Date).Select(x => new InvoiceViewModel
