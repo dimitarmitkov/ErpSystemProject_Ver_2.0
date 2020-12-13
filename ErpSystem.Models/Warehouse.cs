@@ -1,19 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
 
 namespace ErpSystem.Models
 {
     public class Warehouse
     {
-        public int Id { get; set; }
-
-        public string WarehouseName { get; set; }
-
         public Warehouse()
         {
             this.WarehouseProducts = new HashSet<WarehouseProduct>();
         }
+
+        public int Id { get; set; }
+
+        public string WarehouseName { get; set; }
 
         public int CurrentPalletsSpaceFree { get; set; }
 

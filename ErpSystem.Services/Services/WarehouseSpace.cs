@@ -13,6 +13,7 @@ namespace ErpSystem.Services.Services
             this.dbContext = dbContext;
         }
 
+        // test completed
         public IEnumerable<KeyValuePair<string, int>> GetSpaceBoxes()
         {
             var currentBoxesSpaceFree = this.dbContext.Warehouses.Select(b => b.CurrentBoxesFrontSpaceFree).FirstOrDefault();
@@ -26,6 +27,7 @@ namespace ErpSystem.Services.Services
             return dictionary;
         }
 
+        // test completed
         public IEnumerable<KeyValuePair<string, int>> GetSpacePallets()
         {
             var currenPalletsSpaceFree = this.dbContext.Warehouses.Select(p => p.CurrentPalletsSpaceFree).FirstOrDefault();

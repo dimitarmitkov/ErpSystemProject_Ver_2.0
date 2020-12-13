@@ -9,7 +9,6 @@ namespace ErpSystem.WebApp.Controllers
     {
         private const int ProductsPerPage = 2;
         private const int FirstPage = 1;
-
         private readonly IDeliveriesService deliveriesService;
 
         public DeliveriesController(IDeliveriesService deliveriesService, IMapper mapper)
@@ -26,7 +25,6 @@ namespace ErpSystem.WebApp.Controllers
                 ItemsPerPage = ProductsPerPage,
                 List = this.deliveriesService.GetAllOrdersForDelivery(id, ProductsPerPage),
             };
-            //viewModel.List = deliveriesService.GetAllOrdersForDelivery();
             return this.View(viewModel);
         }
 
@@ -40,12 +38,10 @@ namespace ErpSystem.WebApp.Controllers
                 ItemsPerPage = ProductsPerPage,
                 List = this.deliveriesService.GetAllOrdersForDelivery(id, ProductsPerPage),
             };
-            //var viewModel = new DeliveryCombinedViewModel();
-            //viewModel.List = deliveriesService.GetAllOrdersForDelivery(id, 12);
+
             if (!ModelState.IsValid)
             {
-                //viewModel.List = this.deliveriesService.GetAllOrdersForDelivery(id, 12);
-                return this.View();
+                return this.View(viewModel);
             }
 
 

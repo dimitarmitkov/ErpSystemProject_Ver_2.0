@@ -1,8 +1,8 @@
-﻿using AutoMapper;
+﻿using System.Threading.Tasks;
+using AutoMapper;
 using ErpSystem.Data;
 using ErpSystem.Models;
 using ErpSystem.Services.ViewModels.Supplier;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace ErpSystem.Services.Services
 {
@@ -17,26 +17,13 @@ namespace ErpSystem.Services.Services
             this.mapper = mapper;
         }
 
-        public void ConfigureServices(IServiceCollection services)
+        // create supplier, test done
+        public async Task AddSupplier(AddSupplierViewModel addSupplier)
         {
-            // Auto Mapper Configurations
-            var mappingConfig = new MapperConfiguration(mc =>
-            {
-                mc.CreateMap<AddSupplierViewModel, Supplier>();
-                mc.CreateMap<Supplier, AddSupplierViewModel>();
-            });
-
-            IMapper mapper = mappingConfig.CreateMapper();
-            services.AddSingleton(mapper);
-        }
-
-        public void AddSupplier(AddSupplierViewModel addSupplier)
-        {
-
             var supplier = mapper.Map<Supplier>(addSupplier);
 
-            this.dbContext.Suppliers.Add(supplier);
-            this.dbContext.SaveChanges();
+            await this.dbContext.Suppliers.AddAsync(supplier);
+            await this.dbContext.SaveChangesAsync();
         }
     }
 }

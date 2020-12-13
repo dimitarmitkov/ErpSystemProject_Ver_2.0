@@ -21,7 +21,18 @@ namespace ErpSystem.WebApp.Controllers
             {
                 List = this.salesService.ListOfSales(null, null),
             };
+
             return this.View(viewModel);
+        }
+
+        public IActionResult SaleRestReturn()
+        {
+            var viewModel = new SaleRestCombinedViewModel
+            {
+                List = this.salesService.ListOfSales(null, null),
+            };
+
+            return this.Json(viewModel);
         }
     }
 }

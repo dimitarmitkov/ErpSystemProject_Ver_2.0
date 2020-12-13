@@ -30,7 +30,7 @@ namespace ErpSystem.Services.Services
 
         IEnumerable<CalculateNeedOfOrderViewModel> AreAnyProductsForOrder();
 
-        Task ConfirmNeedOfOrder(DeliveryNeededProduct deliveryNeededProduct);
+        void ConfirmNeedOfOrder(DeliveryNeededProduct deliveryNeededProduct);
 
         IEnumerable<InvoiceViewModel> Invoice();
     }

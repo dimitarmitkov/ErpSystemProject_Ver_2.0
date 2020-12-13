@@ -19,6 +19,7 @@ using ErpSystem.Models;
 using ErpSystem.Services.ViewModels.Delivery;
 using ErpSystem.WebApp.Areas.Identity.Data;
 using ErpSystem.Services.ViewModels.Supplier;
+using ErpSystem.Services;
 
 namespace ErpSystem.WebApp
 {
@@ -63,16 +64,18 @@ namespace ErpSystem.WebApp
                 options.Cookie.IsEssential = true; // for essentioal cookies needed to operate
             });
 
-            var mapperConfig = new MapperConfiguration(mc =>
-            {
-                mc.AddProfile(new MappingProfile());
-                mc.CreateMap<Order, DeliveryListViewModel>();
-                mc.CreateMap<AddSupplierViewModel, Supplier>();
-                mc.CreateMap<Supplier, AddSupplierViewModel>();
-            });
+            //var mapperConfig = new MapperConfiguration(mc =>
+            //{
+            //    mc.AddProfile(new MappingProfile());
+            //    mc.CreateMap<Order, DeliveryListViewModel>();
+            //    mc.CreateMap<AddSupplierViewModel, Supplier>();
+            //    mc.CreateMap<Supplier, AddSupplierViewModel>();
+            //});
 
-            IMapper _mapper = mapperConfig.CreateMapper();
-            services.AddSingleton(_mapper);
+            //IMapper _mapper = mapperConfig.CreateMapper();
+            //services.AddSingleton(_mapper);
+
+            services.AddAutoMapper(m => m.AddProfile<AutoMapping>(), typeof(Startup));
 
             services.AddSingleton(this.Configuration);
 

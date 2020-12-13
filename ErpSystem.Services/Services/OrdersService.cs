@@ -18,7 +18,7 @@ namespace ErpSystem.Services.Services
             this.dbContext = dbContext;
         }
 
-
+        // test completed
         public void GenetareOrder(CalculateNeedOfOrderViewModel calculateNeedOfOrder)
         {
             var supplierId = this.dbContext.Suppliers.Where(x => x.SupplierName == calculateNeedOfOrder.Supplier).Select(x => x.Id).FirstOrDefault();
@@ -38,8 +38,6 @@ namespace ErpSystem.Services.Services
             this.dbContext.Orders.Add(order);
             this.dbContext.SaveChanges();
 
-
-
             if (!ProductsForOrderList().Any())
             {
                 var range = this.dbContext.DeliveryNeededProducts.ToList();
@@ -50,16 +48,13 @@ namespace ErpSystem.Services.Services
                     this.dbContext.SaveChanges();
                 }
             }
-
         }
 
+        // test completed
         public IEnumerable<CalculateNeedOfOrderViewModel> ProductsForOrderList()
         {
-
             var productOrderedId = this.dbContext.Orders.Select(x => x.ProductId).ToList();
-
-            var supplier = this.dbContext.DeliveryNeededProducts.Select(s => s.Supplier).ToList();
-
+            var supplier = this.dbContext.DeliveryNeededProducts.Select(s => s.Supplier).Distinct().ToList();
             var productsList = new List<CalculateNeedOfOrderViewModel>();
 
             for (int i = 0; i < supplier.Count; i++)
@@ -76,26 +71,24 @@ namespace ErpSystem.Services.Services
                     ProductMeasurementType = x.MeasurmentTag.Maesurment,
                     NumberOfProductsInTrasportUnit = x.IsPallet ? x.ProductTransportPackageNumberOfPieces * x.BoxesPerPallet : x.ProductTransportPackageNumberOfPieces,
                     TotalWeightOfTransportUnit = x.ProductTransportPackageWeight * (x.IsPallet ? x.ProductTransportPackageNumberOfPieces * x.BoxesPerPallet : x.ProductTransportPackageNumberOfPieces),
-                    NumberOfTransportUnitsClaculatedForOrder = (this.dbContext.Sales.Where(p => p.ProductId == x.Id && p.SaleDate >= DateTime.UtcNow.AddDays((x.TimeToDelivery + x.TimeToOrder) * (-1))).Sum(s => s.NumberOfSoldProducts)) * 2 / (x.IsPallet ? x.ProductTransportPackageNumberOfPieces * x.BoxesPerPallet : x.ProductTransportPackageNumberOfPieces),
+                    NumberOfTransportUnitsClaculatedForOrder = (int)Math.Ceiling(((double)this.dbContext.Sales.Where(p => p.ProductId == x.Id && p.SaleDate >= DateTime.UtcNow.AddDays((x.TimeToDelivery + x.TimeToOrder) * (-1))).Sum(s => s.NumberOfSoldProducts)) / (x.IsPallet ? x.ProductTransportPackageNumberOfPieces * x.BoxesPerPallet : x.ProductTransportPackageNumberOfPieces)),
                     Package = x.IsPallet ? "Pallet" : "Box",
                 }).OrderBy(x => x.Supplier)
             .ThenBy(x => x.Product)
             .Where(x => x.ProductsAvailable < x.SalesBasedOnDeliveryPeriod && !productOrderedId.Any(a => a == x.ProductId))
                 .ToList();
-
-
-
                 productsList.AddRange(products);
             }
-
             return productsList;
         }
 
+        // test completed
         public IEnumerable<int> OrdesAny()
         {
             return this.dbContext.Orders.Select(x => x.ProductId).ToList();
         }
 
+        // test completed
         public void SelectSupplier(string supplierName)
         {
             var supplierId = this.dbContext.Suppliers.Where(s => s.SupplierName == supplierName).Select(x => x.Id).FirstOrDefault();
@@ -115,12 +108,11 @@ namespace ErpSystem.Services.Services
                     this.dbContext.SupplierForOrders.Remove(excistingRecords[i]);
                 }
             }
-
             this.dbContext.SupplierForOrders.Add(supplier);
             this.dbContext.SaveChanges();
-
         }
 
+        // test completed
         public string GetSupplierName()
         {
             return this.dbContext.SupplierForOrders.Select(s => s.SupplierName).FirstOrDefault();
@@ -132,25 +124,23 @@ namespace ErpSystem.Services.Services
             {
                 Text = p.Supplier,
                 Value = p.Supplier,
-
             }).ToList();
         }
 
-        public void FinalizeOrder()
+        // test completed
+        public async Task FinalizeOrder()
         {
             var supplierName = this.dbContext.SupplierForOrders.Select(s => s.SupplierName).FirstOrDefault();
 
             if (!string.IsNullOrEmpty(supplierName))
             {
-                var supplier = this.dbContext.SupplierForOrders.FirstOrDefault(s => s.SupplierName == supplierName);
-                this.dbContext.SupplierForOrders.Remove(supplier);
+                var supplierNeedForOrder = this.dbContext.SupplierForOrders.FirstOrDefault(s => s.SupplierName == supplierName);
+                this.dbContext.SupplierForOrders.Remove(supplierNeedForOrder);
 
-                var supplier2 = this.dbContext.DeliveryNeededProducts.FirstOrDefault(s => s.Supplier == supplierName);
-                this.dbContext.DeliveryNeededProducts.Remove(supplier2);
-
-                this.dbContext.SaveChanges();
-
+                var supplierDeliveryNeedProducts = this.dbContext.DeliveryNeededProducts.FirstOrDefault(s => s.Supplier == supplierName);
+                this.dbContext.DeliveryNeededProducts.Remove(supplierDeliveryNeedProducts);
             }
+            await this.dbContext.SaveChangesAsync();
         }
     }
 }

@@ -18,7 +18,7 @@ namespace ErpSystem.Services.Services
 
         string GetSupplierName();
 
-        void FinalizeOrder();
+        Task FinalizeOrder();
 
         IEnumerable<int> OrdesAny();
     }

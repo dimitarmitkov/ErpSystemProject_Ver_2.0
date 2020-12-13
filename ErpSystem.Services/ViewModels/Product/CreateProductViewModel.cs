@@ -85,6 +85,8 @@ namespace ErpSystem.Services.ViewModels.Product
         [Display(Name = "Product description")]
         public string ProductDescription { get; set; }
 
+        public bool IsDeleted { get; set; }
+
         public IEnumerable<SelectListItem> PackageItems { get; set; }
 
         public IEnumerable<SelectListItem> MeasureItems { get; set; }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using ErpSystem.Services.ViewModels.Order;
 
 namespace ErpSystem.Services.ViewModels.Delivery
@@ -9,6 +10,7 @@ namespace ErpSystem.Services.ViewModels.Delivery
 
         public double TotalOrderWeight { get; set; }
 
+        [Required(ErrorMessage = "Please enter number of ordered units to confirm delivery.")]
         public int ChangedNumberOfTransportUnits { get; set; }
 
         public DateTime OrderDate { get; set; }

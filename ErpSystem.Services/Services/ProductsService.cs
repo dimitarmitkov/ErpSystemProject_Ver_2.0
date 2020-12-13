@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using ErpSystem.Data;
 using ErpSystem.Models;
@@ -20,7 +18,7 @@ namespace ErpSystem.Services.Services
             this.dbContext = dbContext;
         }
 
-        //create product service
+        // create product service, test done
         public async Task CreateProduct(CreateProductViewModel createProduct)
         {
             var product = new Product
@@ -43,7 +41,7 @@ namespace ErpSystem.Services.Services
                 ProductDiscount = createProduct.ProductDiscount,
             };
 
-            //setting production date to null, if not set
+            // setting production date to null, if not set
             if (string.IsNullOrWhiteSpace(product.ProductionDate.ToString()))
             {
                 product.ProductionDate = null;
@@ -53,7 +51,7 @@ namespace ErpSystem.Services.Services
                 product.ProductionDate = DateTime.Parse(createProduct.ProductionDate);
             }
 
-            //setting expire date to null, if not set
+            // setting expire date to null, if not set
             if (string.IsNullOrWhiteSpace(product.ExpireDate.ToString()))
             {
                 product.ExpireDate = null;
@@ -63,12 +61,12 @@ namespace ErpSystem.Services.Services
                 product.ExpireDate = DateTime.Parse(createProduct.ExpireDate);
             }
 
-            //setting of supplier
+            // setting of supplier
             var supplierEntity = this.dbContext.Suppliers.FirstOrDefault(s => s.SupplierName == createProduct.Supplier);
 
             product.Supplier = supplierEntity;
 
-            //setting of productTransportPackage
+            // setting of productTransportPackage
             var productTransportPackageEntity = this.dbContext.TransportPackageTags.FirstOrDefault(tp => tp.TypeOfPackage == createProduct.ProductTransportPackage);
 
             if (productTransportPackageEntity == null)
@@ -81,7 +79,7 @@ namespace ErpSystem.Services.Services
 
             product.ProductTransportPackage = productTransportPackageEntity;
 
-            //setting measurmentTag
+            // setting measurmentTag
             var measurmentTagEntity = this.dbContext.ProductMeasurmentTags.FirstOrDefault(m => m.Maesurment == createProduct.MeasurmentTag);
 
             if (measurmentTagEntity == null)
@@ -105,14 +103,14 @@ namespace ErpSystem.Services.Services
         // delete product service
         public async Task DeleteExistingProduct(int productId, string productName)
         {
-            var productDelete = this.dbContext.Products.FirstOrDefault(p => p.Id == productId && p.ProductName == productName);
+            var productDelete = this.dbContext.Products.FirstOrDefault(p => p.Id == productId && p.ProductName == productName && p.IsDeleted == false);
 
             productDelete.IsDeleted = true;
             this.dbContext.Products.Update(productDelete);
             await this.dbContext.SaveChangesAsync();
         }
 
-
+        // find all products, test done
         public IEnumerable<ProductViewModel> FindAll()
         {
             var result = this.dbContext.Products.Where(p => p.IsDeleted == false).Select(x => new ProductViewModel
@@ -136,7 +134,7 @@ namespace ErpSystem.Services.Services
             return result;
         }
 
-        // serch by name or Id
+        // serch by name or Id, test done
         public IEnumerable<ProductViewModel> SearchByProductNameAndId(int? productId, string productName)
         {
             IQueryable<Product> productView = null;
@@ -145,15 +143,13 @@ namespace ErpSystem.Services.Services
             if (productName != null) productView = this.dbContext.Products.Where(p => p.ProductName == productName && p.IsDeleted == false);
             if (productName == null && productId == null) productView = this.dbContext.Products.Where(p => p.Id > -1 && p.IsDeleted == false);
 
-
-
             List<ProductViewModel> result = SelectProductViewModel(productView);
 
             return result;
         }
 
 
-        // search by price
+        // search by price, test done
         public IEnumerable<ProductViewModel> SearchByProductPrice(decimal? minPrice, decimal? maxPrice)
         {
             IQueryable<Product> productView = null;
@@ -168,7 +164,7 @@ namespace ErpSystem.Services.Services
         }
 
 
-        // search product by country of origin
+        // search product by country of origin, test done
         public IEnumerable<ProductViewModel> SearchByProductSupplierCountryOrCity(string country, string city)
         {
             IQueryable<Product> productView = null;
@@ -176,6 +172,7 @@ namespace ErpSystem.Services.Services
             if (country != null && city == null) productView = this.dbContext.Products.Where(p => p.Supplier.SupplierCountry == country && p.IsDeleted == false);
             else if (city != null && country == null) productView = this.dbContext.Products.Where(p => p.Supplier.SupplierAddress == city && p.IsDeleted == false);
             else if (city != null && country != null) productView = this.dbContext.Products.Where(p => p.Supplier.SupplierCountry == country && p.Supplier.SupplierAddress == city && p.IsDeleted == false);
+            else if (country == null && city == null) productView = this.dbContext.Products.Where(p => p.IsDeleted == false);
 
 
             List<ProductViewModel> result = SelectProductViewModel(productView);
@@ -183,6 +180,7 @@ namespace ErpSystem.Services.Services
             return result;
         }
 
+        // product transport package tags
         public IEnumerable<SelectListItem> ProductTransportsPackageTags()
         {
             return this.dbContext.TransportPackageTags.Select(p => new SelectListItem
@@ -193,6 +191,7 @@ namespace ErpSystem.Services.Services
             }).ToList();
         }
 
+        // product measurements tag
         public IEnumerable<SelectListItem> ProductMeasurementTags()
         {
             return this.dbContext.ProductMeasurmentTags.Select(p => new SelectListItem
@@ -203,9 +202,7 @@ namespace ErpSystem.Services.Services
             }).ToList();
         }
 
-
-
-
+        // pivate method, included in tests
         private List<ProductViewModel> SelectProductViewModel(IQueryable<Product> productView)
         {
 
@@ -226,7 +223,6 @@ namespace ErpSystem.Services.Services
                 ProductExpireDate = x.WarehouseProduct.ExpireDate.ToString(),
             }).OrderByDescending(x => x.ProductName)
               .ToList();
-
 
             return listOfProductViewModel;
         }

@@ -29,7 +29,7 @@ namespace ErpSystem.Services.Services
                 WarehouseProductIdByExpireDate = productByExpireDateId,
             };
 
-            this.dbContext.AddAsync(products);
+            this.dbContext.CustomerProducts.AddAsync(products);
             this.dbContext.SaveChangesAsync();
         }
     }

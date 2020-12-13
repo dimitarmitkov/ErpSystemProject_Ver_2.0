@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using ErpSystem.Services.Services;
 using ErpSystem.Services.ViewModels.Sale;
 using Microsoft.AspNetCore.Authorization;
@@ -26,6 +27,14 @@ namespace ErpSystem.WebApp.Controllers
 
             var viewModel = this.salesService.ListOfSales(customerName, productName);
             return this.Json(viewModel);
+        }
+
+        public IActionResult ReturnData()
+        {
+            var result = "name";
+            var name = "first";
+
+            return this.Json(result + " " + name);
         }
     }
 }

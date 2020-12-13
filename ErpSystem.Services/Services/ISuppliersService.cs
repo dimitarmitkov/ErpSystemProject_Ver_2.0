@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Threading.Tasks;
 using ErpSystem.Services.ViewModels.Supplier;
 
 namespace ErpSystem.Services.Services
 {
     public interface ISuppliersService
     {
-        void AddSupplier(AddSupplierViewModel addSupplier);
+        Task AddSupplier(AddSupplierViewModel addSupplier);
     }
 }

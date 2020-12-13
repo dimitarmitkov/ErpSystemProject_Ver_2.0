@@ -49,8 +49,6 @@ namespace ErpSystem.Services.Services
 
         public async Task UserLogInRecord(string userEmail, string userId)
         {
-
-
             var exists = this.dbContext.LoggedUsers.Any(u => u.UserName == userEmail);
 
             if (exists)

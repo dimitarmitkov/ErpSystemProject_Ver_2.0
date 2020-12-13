@@ -1,4 +1,7 @@
 ﻿using AutoMapper;
+using ErpSystem.Models;
+using ErpSystem.Services.ViewModels.Customer;
+using ErpSystem.Services.ViewModels.Supplier;
 
 namespace ErpSystem.Services
 {
@@ -6,8 +9,10 @@ namespace ErpSystem.Services
     {
         public AutoMapping()
         {
+            CreateMap<AddSupplierViewModel, Supplier>();
+            CreateMap<Supplier, AddSupplierViewModel>();
+            CreateMap<Order, FinalizedOrder>();
+            CreateMap<CustomerViewModel, Customer>();
         }
-
-
     }
 }

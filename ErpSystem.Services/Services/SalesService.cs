@@ -20,7 +20,7 @@ namespace ErpSystem.Services.Services
             this.dbContext = dbContext;
         }
 
-        // create sale start
+        // create sale start, test completed
         public void CreateSale(int productId, string customerId, int numberOfSoldProducts, bool hasProductDiscount, bool hasCustomerDiscount, int warehouseId, int productByExpireDateId)
         {
 
@@ -125,7 +125,7 @@ namespace ErpSystem.Services.Services
         // create sale end
 
 
-        // list of all sales, in use sales controller All()
+        // list of all sales, in use sales controller All(), test completed
         public IEnumerable<SalesPerCustomerOrProductViewModel> ListOfAllSales()
         {
             return this.dbContext.Sales.Select(x => new SalesPerCustomerOrProductViewModel
@@ -293,7 +293,7 @@ namespace ErpSystem.Services.Services
             }).ToList();
         }
 
-        public async Task ConfirmNeedOfOrder(DeliveryNeededProduct deliveryNeededProduct)
+        public void ConfirmNeedOfOrder(DeliveryNeededProduct deliveryNeededProduct)
         {
             var productId = deliveryNeededProduct.ProductId;
             var confirmedProducts = this.dbContext.DeliveryNeededProducts.Where(p => p.ConfimBeenNoticed == false).ToList();
@@ -302,14 +302,12 @@ namespace ErpSystem.Services.Services
             {
                 confirmedProducts[i].ConfimBeenNoticed = true;
                 this.dbContext.Update(confirmedProducts[i]);
-                await this.dbContext.SaveChangesAsync();
+                this.dbContext.SaveChanges();
             }
         }
 
         public IEnumerable<InvoiceViewModel> Invoice()
         {
-
-
             var customerId = this.dbContext.CurrentSales.Select(x => x.CustomerId).FirstOrDefault();
 
             var list = this.dbContext.Sales.Where(s => s.CustomerId == customerId && s.SaleDate.Date == DateTime.UtcNow.Date).Select(x => new InvoiceViewModel

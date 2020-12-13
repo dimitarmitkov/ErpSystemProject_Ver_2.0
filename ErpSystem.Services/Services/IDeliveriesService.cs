@@ -9,7 +9,7 @@ namespace ErpSystem.Services.Services
     {
         IEnumerable<DeliveryListViewModel> GetAllOrdersForDelivery(int page, int itemsPerPage = 4);
 
-        Task FinalizeDelivery(DeliveryListViewModel deliveryList);
+        void FinalizeDelivery(DeliveryListViewModel deliveryList);
 
         int GetCount();
     }

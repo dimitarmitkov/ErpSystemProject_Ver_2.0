@@ -1,0 +1,123 @@
+﻿@using ErpSystem.Services.ViewModels.Customer
+@model CustomerViewModel
+
+
+@{
+    ViewData["Title"] = "Add Customer";
+}
+<div class="row justify-content-lg-center">
+    <div class="col-lg-6">
+        <div class="card shadow-lg border-0 rounded-lg mt-5">
+            <div class="card-header"><h3 class="text-center font-weight-light my-4">Add Customer</h3></div>
+            <div class="card-body">
+
+                <form method="post">
+
+                    @*first row*@
+                    <div class="form-row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="small mb-1" asp-for="CompanyName">Company Name</label>
+                                <input class="form-control py-4" id="companyName" type="text" placeholder="Enter company name" asp-for="CompanyName" />
+                                <span asp-validation-for="CompanyName" class="text-danger" style="font-size:0.7vw"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="small mb-1" asp-for="CompanyType">Company Type</label>
+                                <input class="form-control py-4" id="companyType" type="text" placeholder="Enter Company Type" asp-for="CompanyType" />
+                                <span asp-validation-for="CompanyType" class="text-danger" style="font-size:0.7vw"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="small mb-1" asp-for="CompanyEik">CompanyEik</label>
+                                <input class="form-control py-4" id="companyEik" type="text" placeholder="Enter Company Eik" asp-for="CompanyEik" />
+                                <span asp-validation-for="CompanyEik" class="text-danger" style="font-size:0.7vw"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    @*second row*@
+                    <div class="form-row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="small mb-1" asp-for="PhoneNumber">Company Phone</label>
+                                <input class="form-control py-4" id="phoneNumber" type="tel" placeholder="Enter Phone number" asp-for="PhoneNumber" />
+                                <span asp-validation-for="PhoneNumber" class="text-danger" style="font-size:0.7vw"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="small mb-1" asp-for="Email">Company Email</label>
+                                <input class="form-control py-4" id="email" type="email" placeholder="Enter email" asp-for="Email" />
+                                <span asp-validation-for="Email" class="text-danger" style="font-size:0.7vw"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="small mb-1" asp-for="City">City</label>
+                                <input class="form-control py-4" id="city" type="text" placeholder="Enter City" asp-for="City" />
+                                <span asp-validation-for="City" class="text-danger" style="font-size:0.7vw"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="small mb-1" asp-for="PostalCode">Postal Code</label>
+                                <input class="form-control py-4" id="postalCode" type="text" placeholder="Enter Postal Code" asp-for="PostalCode" />
+                                <span asp-validation-for="PostalCode" class="text-danger" style="font-size:0.7vw"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    @*third row*@
+                    <div class="form-row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="small mb-1" asp-for="Address">Company Address</label>
+                                <input class="form-control py-4" id="address" type="text" placeholder="Enter Address" asp-for="Address" />
+                                <span asp-validation-for="Address" class="text-danger" style="font-size:0.7vw"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group" style="text-align:center;">
+                                <label class="small mb-1" asp-for="HasDelivery">Has Delivery</label>
+                                <input class="form-control py-4" id="hasDelivery" type="checkbox" asp-for="HasDelivery" />
+                                <span asp-validation-for="HasDelivery" class="text-danger" style="font-size:0.7vw"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group" style="text-align:center;">
+                                <label class="small mb-1" asp-for="IsActive">Is Active</label>
+                                <input class="form-control py-4" id="isActive" type="checkbox" asp-for="IsActive" />
+                                <span asp-validation-for="IsActive" class="text-danger" style="font-size:0.7vw"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    @*fourth row*@
+                    <div class="form-row">
+                        <div class="col-md-9">
+                            <div class="form-group">
+                                <label class="small mb-1" asp-for="CustomerAdditionalInfo">Additional Info</label>
+                                <input class="form-control py-4" id="additionalInfo" type="text" placeholder="Enter Additional Info" asp-for="CustomerAdditionalInfo" />
+                                <span asp-validation-for="CustomerAdditionalInfo" class="text-danger" style="font-size:0.7vw"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="small mb-1" asp-for="CustomerDiscount">Customer Discount</label>
+                                <input class="form-control py-4" id="customerDiscount" type="tel" placeholder="Enter Discount" asp-for="CustomerDiscount" />
+                                <span asp-validation-for="CustomerDiscount" class="text-danger" style="font-size:0.7vw"></span>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group mt-4 mb-0"><button type="submit" class="btn btn-primary btn-block">Create Customer</button></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ErpSystem.Data;
@@ -18,6 +17,7 @@ namespace ErpSystem.Services.Services
             this.dbContext = dbContext;
         }
 
+        // test completed
         public IEnumerable<DeliveryListViewModel> GetAllOrdersForDelivery(int page, int itemsPerPage = ProductsPerPage)
         {
             var suppliersList = this.dbContext.Orders.Select(x => x.SupplierId).Distinct().ToList();
@@ -28,7 +28,6 @@ namespace ErpSystem.Services.Services
             {
                 var list = this.dbContext.Orders.Where(s => s.SupplierId == suppliersList[i]).Select(x => new DeliveryListViewModel
                 {
-
                     Supplier = x.Supplier,
                     ProductId = x.ProductId,
                     Product = x.ProductName,
@@ -48,7 +47,8 @@ namespace ErpSystem.Services.Services
             return listForDelivery.OrderBy(x => x.Supplier).ThenBy(x => x.Product).Skip((page - 1) * itemsPerPage).Take(itemsPerPage);
         }
 
-        public async Task FinalizeDelivery(DeliveryListViewModel deliveryList)
+        // test completed
+        public void FinalizeDelivery(DeliveryListViewModel deliveryList)
         {
             var productOrdered = this.dbContext.Orders.Where(x => x.ProductId == deliveryList.ProductId).FirstOrDefault();
 
@@ -64,9 +64,6 @@ namespace ErpSystem.Services.Services
                 Warehouse = this.dbContext.WarehouseProducts.Where(p => p.ProductId == deliveryList.ProductId).Select(x => x.Warehouse).FirstOrDefault(),
                 WarehouseId = this.dbContext.WarehouseProducts.Where(p => p.ProductId == deliveryList.ProductId).Select(x => x.WarehouseId).FirstOrDefault(),
             };
-
-
-            //var addPorductInWarehouseProducts = this.mapper.Map<WarehouseProduct>(deliveryList);
 
             bool isProductInPallet = this.dbContext.Products.Where(p => p.Id == deliveryList.ProductId && p.IsDeleted == false).Select(p => p.IsPallet == true).FirstOrDefault();
             var numberOfProductsPerBox = this.dbContext.Products.Where(p => p.Id == deliveryList.ProductId && p.IsDeleted == false).Select(x => x.ProductTransportPackageNumberOfPieces).FirstOrDefault();
@@ -84,7 +81,6 @@ namespace ErpSystem.Services.Services
 
             if (isProductInPallet)
             {
-
                 addPorductInWarehouseProducts.Warehouse.CurrentPalletsSpaceFree -= deliveryList.NumberOfTransportUnits;
                 this.dbContext.Warehouses.Update(addPorductInWarehouseProducts.Warehouse);
                 this.dbContext.SaveChanges();
@@ -104,7 +100,6 @@ namespace ErpSystem.Services.Services
                 this.dbContext.SaveChanges();
             }
 
-
             var productFinalizedOrder = new FinalizedOrder
             {
                 ProductId = productOrdered.ProductId,
@@ -119,9 +114,9 @@ namespace ErpSystem.Services.Services
 
             this.dbContext.FinalizedOrders.Add(productFinalizedOrder);
             this.dbContext.SaveChanges();
-
         }
 
+        // get cout, test completed 
         public int GetCount()
         {
             return this.dbContext.Orders.Count();

@@ -22,16 +22,15 @@ button.addEventListener("click", (e) => {
         body: JSON.stringify(transfer)
     })
         .then(response => response.json())
+        .then(() => { this.getData() })
         .catch(error => console.error('Unable to add item.', error));
 });
 
 function getData() {
-    fetch("https://localhost:35811/SalesApi/SaleRest")
+    fetch("https://localhost:35811/SalesRest/SaleRestReturn")
         .then(response => response.json())
         .then(jsonDataInput => {
             console.log(jsonDataInput)
         })
         .catch(err => console.log(err))
 }
-
-getData();
