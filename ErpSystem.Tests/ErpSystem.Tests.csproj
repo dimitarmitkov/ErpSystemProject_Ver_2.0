@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
+    <PackageReference Include="xunit" Version="2.4.0" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.0" />
+    <PackageReference Include="coverlet.collector" Version="1.2.0" />
+    <PackageReference Include="Moq" Version="4.15.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="3.1.10" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ErpSystem.Data\ErpSystem.Data.csproj" />
+    <ProjectReference Include="..\ErpSystem.Models\ErpSystem.Models.csproj" />
+    <ProjectReference Include="..\ErpSystem.Services\ErpSystem.Services.csproj" />
+    <ProjectReference Include="..\ErpSystem.WebApp\ErpSystem.WebApp.csproj" />
+    <ProjectReference Include="..\ErpSysytem.ConsoleApp\ErpSysytem.ConsoleApp.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Products\" />
+    <Folder Include="Customers\" />
+    <Folder Include="Suppliers\" />
+    <Folder Include="Orders\" />
+    <Folder Include="Warehouses\" />
+    <Folder Include="Users\" />
+    <Folder Include="Deliveries\" />
+    <Folder Include="Sales\" />
+  </ItemGroup>
+</Project>

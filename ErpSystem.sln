@@ -16,6 +16,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ErpSystem.Tests", "ErpSystem.Tests\ErpSystem.Tests.csproj", "{0B15A143-F1B2-48F3-9B4E-314E35635846}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,5 +44,9 @@ Global
 		{CF8BBC16-E3A1-4061-B496-59996DF9DBB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CF8BBC16-E3A1-4061-B496-59996DF9DBB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CF8BBC16-E3A1-4061-B496-59996DF9DBB2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B15A143-F1B2-48F3-9B4E-314E35635846}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B15A143-F1B2-48F3-9B4E-314E35635846}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B15A143-F1B2-48F3-9B4E-314E35635846}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B15A143-F1B2-48F3-9B4E-314E35635846}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
