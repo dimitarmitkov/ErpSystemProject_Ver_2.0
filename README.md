@@ -56,7 +56,7 @@ Main functionalities:
     
     5.6. When Sale is finalized Invoice appears on screen. Invoice contains all needed requisites for Customer and Company, and also list of sold products, discounts information, sales prices after discount, VAT, total amount. By pressing Print invoice button Sales process is finalized and invoice is printed.
     
-    6. Order
+6. Order
     
     6.1. During Sale process application is checking every Sale by measuring Available Products of every species of Products, time needed form Order start to Delivery end, number of Products sold for that time. In case of possible lack of products in Order/Delivery time horizon during Sale process a meaasge will appear informing the operator that Product need to be ordared and asking for confirmation by operator before continue with Sale process.
     
