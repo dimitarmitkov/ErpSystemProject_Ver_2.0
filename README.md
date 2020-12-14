@@ -15,7 +15,7 @@ Main functionalities:
     - Delete Product (visible only for Users with Admin Role);
     - Sales List;
     - Generate Sale;
-    - Sales Charts;
+    - Sales Charts - graphic data for sales;
     - Order;
     - Delivery;
     - Add Supplier;
@@ -56,11 +56,43 @@ Main functionalities:
     
     5.6. When Sale is finalized Invoice appears on screen. Invoice contains all needed requisites for Customer and Company, and also list of sold products, discounts information, sales prices after discount, VAT, total amount. By pressing Print invoice button Sales process is finalized and invoice is printed.
     
+    5.7. When Sale is over number of Available products is decreased. I case of whole box or pallet is sold Warehouse space is increasing respectivly with number of pallets sold or with width/lenght in centimeters multyplied by number of boxes sold. Boxes take place on shelf accordingly on their width if its lenght is less than shelft depth. If box lenght is bigger that shelf depth the box will be placed with longer side along the shelf, so respectively it will take place equal its lenght.
+    
 6. Order
     
-    6.1. During Sale process application is checking every Sale by measuring Available Products of every species of Products, time needed form Order start to Delivery end, number of Products sold for that time. In case of possible lack of products in Order/Delivery time horizon during Sale process a meaasge will appear informing the operator that Product need to be ordared and asking for confirmation by operator before continue with Sale process.
+    6.1. During Sale process application is checking every Sale by measuring Available Products of every species of Products, time needed form Order start to Delivery end and number of Products sold for that time. In case of possible lack of products in Order/Delivery time horizon during Sale process a meaasge will appear informing the User that Product need to be ordared and asking for confirmation by User before continue with Sale process.
     
-    
+     6.2. When any Product for order is located, it will be stored in pending for Order Products storage.
+     
+     6.3. User could check all Order needed Products by click on Order button in Dashboard menu.
+     
+     6.4. Onclick list of Product needed Order will appear. These product ought to be separated by Supplier, from Supplier drop-down menu. Once Supplier is selected all prpducts delivered by this Supplier are open for order. In Order suggestion form User will find information about: Supplier, Product Id, Product name, EXW price, total delivery days neede, Order total weight, Currently available products, Sales based on delivery time, suggested order volume based on transport package (boxes, pallets, ect.), transport package type. User have to type number of transport units for order and then to end Order for that product by pressing Confirm order button.
+     
+     6.5. When all Products delivered by selecter Supplier are set for Order, User needs to finalize Order for that product group by pressing Finalize order button. 
+     
+     7. Delivery
+     
+     7.1. When Delivery appears in Warehouse, it will be checked by User. Then Delivery ought to be put in stock. First of all User have to choose Deliveru button in Dashboard.
+     
+     7.2. After selection all Products received for delivery will appear on screen. The information containing request for Delivery contauns: Supplier, Product Id, Product name, Number of transport units as per Order (it could be different, so it must be confirmerd by User), tatal weight of delivery, Product delivery price, total Delivery price, type of transport unit. User must type Production date, Expire date (taken form invoice, or CMR) and real number of delivered transport units.
+     
+     7.3. Delivery is finalized by click on Confirm delivery button. After all Deliveries are confirmad, User have to finaliza whole Delivery by pressing Finaliz Delivery.
+     
+     7.4. Finalized Delivery takes spaces from pallet or/and boxes areas in Warehouse.
+     
+     8. Supplier
+     
+     8.1. Add Supplier - add new Supllier
+     
+     9. Customer
+     
+     9.1. Add Customer - add new Customer
+     
+     10. Sales Charts - graphic Sales data. It appears after select Sales period.
+     
+     
+   
+   
     
     
     
