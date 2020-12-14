@@ -42,7 +42,7 @@ namespace ErpSystem.Services.Services
             };
 
             // setting production date to null, if not set
-            if (string.IsNullOrWhiteSpace(product.ProductionDate.ToString()))
+            if (string.IsNullOrWhiteSpace(createProduct.ProductionDate.ToString()))
             {
                 product.ProductionDate = null;
             }
@@ -52,7 +52,7 @@ namespace ErpSystem.Services.Services
             }
 
             // setting expire date to null, if not set
-            if (string.IsNullOrWhiteSpace(product.ExpireDate.ToString()))
+            if (string.IsNullOrWhiteSpace(createProduct.ExpireDate.ToString()))
             {
                 product.ExpireDate = null;
             }

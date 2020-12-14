@@ -33,7 +33,7 @@
                                 </div>
                                 <div class="col-md-3">
                                     <input class="form-control py-4" id="productExwPrice" type="hidden" placeholder="ProductExwPrice" asp-for="CalculateOrderProductSingle.ProductExwPrice" value="@order.ProductExwPrice" />
-                                    <p>Product EXW: @order.ProductExwPrice</p>
+                                    <p>Product EXW: @order.ProductExwPrice BGN</p>
                                 </div>
                             </div>
                             <div class="form-row">
@@ -57,7 +57,7 @@
                             <div class="form-row">
                                 <div class="col-md-3">
                                     <input class="form-control py-4" id="numberOfTransportUnitsClaculatedForOrder" type="hidden" placeholder="numberOfTransportUnitsClaculatedForOrder" asp-for="CalculateOrderProductSingle.NumberOfTransportUnitsClaculatedForOrder" value="@order.NumberOfTransportUnitsClaculatedForOrder" />
-                                    <p>Order suggested: @order.NumberOfTransportUnitsClaculatedForOrder</p>
+                                    <p id="pOrderSuggested">Order suggested: @order.NumberOfTransportUnitsClaculatedForOrder</p>
                                 </div>
                                 <div class="col-md-3">
                                     <input class="form-control py-4" id="package" type="hidden" placeholder="Package" asp-for="CalculateOrderProductSingle.Package" value="@order.Package" />

@@ -23,8 +23,9 @@ namespace ErpSystem.WebApp.Controllers
                 PageNumber = id,
                 ProductsCount = this.deliveriesService.GetCount(),
                 ItemsPerPage = ProductsPerPage,
-                List = this.deliveriesService.GetAllOrdersForDelivery(id, ProductsPerPage),
+                //List = this.deliveriesService.GetAllOrdersForDelivery(id, ProductsPerPage),
             };
+            viewModel.List = this.deliveriesService.GetAllOrdersForDelivery(id, ProductsPerPage);
             return this.View(viewModel);
         }
 

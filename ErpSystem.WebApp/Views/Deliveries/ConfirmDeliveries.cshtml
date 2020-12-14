@@ -39,7 +39,7 @@
                                 </div>
                                 <div class="col-md-3">
                                     <input class="form-control py-4" id="numberOfTransportUnits" type="hidden" placeholder="NumberOfTransportUnits" asp-for="Single.NumberOfTransportUnits" value="@delivery.NumberOfTransportUnits" />
-                                    <p>Number Of Transport Units: @delivery.NumberOfTransportUnits</p>
+                                    <p id="pTransportUnits">Number Of Transport Units: @delivery.NumberOfTransportUnits</p>
                                 </div>
                             </div>
 
@@ -47,15 +47,15 @@
                             <div class="form-row">
                                 <div class="col-md-3">
                                     <input class="form-control py-4" id="totalOrderWeight" type="hidden" placeholder="TotalOrderWeight" asp-for="Single.TotalOrderWeight" value="@delivery.TotalOrderWeight" />
-                                    <p>Total Product Transport Unit Weight: @delivery.TotalOrderWeight kg</p>
+                                    <p>Product Transport Unit Weight: @delivery.TotalOrderWeight kg</p>
                                 </div>
                                 <div class="col-md-3">
                                     <input class="form-control py-4" id="totalProductPrice" type="hidden" placeholder="TotalProductPrice" asp-for="Single.TotalProductPrice" value="@delivery.TotalProductPrice" />
-                                    <p>Total Product Delivery Price: @delivery.TotalProductPrice</p>
+                                    <p>Product Delivery Price: @delivery.TotalProductPrice BGN</p>
                                 </div>
                                 <div class="col-md-3">
                                     <input class="form-control py-4" id="totalOrderPrice" type="hidden" placeholder="TotalOrderPrice" asp-for="Single.TotalOrderPrice" value="@delivery.TotalOrderPrice" />
-                                    <p>Total Order Delivery Price: @delivery.TotalOrderPrice</p>
+                                    <p>Total Delivery Price: @delivery.TotalOrderPrice.ToString("N2") BGN</p>
                                 </div>
                                 <div class="col-md-3">
                                     <input class="form-control py-4" id="package" type="hidden" placeholder="Package" asp-for="Single.Package" value="@delivery.Package" />
@@ -68,24 +68,24 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label class="small mb-1" asp-for="@delivery.ProductionDate">Production date</label>
-                                        <input class="form-control py-4" id="productionDate" type="date" placeholder="Enter date" asp-for="Single.ProductionDate" />
+                                        <input class="form-control py-4" id="productionDate" type="date" placeholder="Enter date" asp-for="Single.ProductionDate" value="" />
                                         <span asp-validation-for="Single.ProductionDate" class="text-danger" style="font-size:0.7vw"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label class="small mb-1" asp-for="@delivery.ExpireDate">Expire date</label>
-                                        <input class="form-control py-4" id="expireDate" type="date" placeholder="Enter date" asp-for="Single.ExpireDate" />
+                                        <input class="form-control py-4" id="expireDate" type="date" placeholder="Enter date" asp-for="Single.ExpireDate" value="" />
                                         <span asp-validation-for="Single.ExpireDate" class="text-danger" style="font-size:0.7vw"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <label class="small mb-1" asp-for="@delivery.ChangedNumberOfTransportUnits">Please enter real number of @delivery.Package delivered</label>
-                                    <input class="form-control py-1" id="numberOfTransportUnits" type="number" placeholder="Enter number" asp-for="Single.ChangedNumberOfTransportUnits" />
+                                    <input class="form-control py-1" id="changedNumberOfTransportUnits" type="number" placeholder="Enter number" asp-for="Single.ChangedNumberOfTransportUnits" value="" />
                                     <span asp-validation-for="Single.ChangedNumberOfTransportUnits" class="text-danger" style="font-size:0.7vw"></span>
                                 </div>
                                 <div class="col-md-3">
-                                    <p><button id="@delivery.ProductId" type="submit" class="btn btn-primary btn-block">Confirm order</button></p>
+                                    <p><button id="@delivery.ProductId" type="submit" class="btn btn-primary btn-block">Confirm delivery</button></p>
                                     @*<p><a id="@order.ProductId" class="btn btn-primary btn-block">Confirm order</a></p>*@
                                 </div>
                             </div>

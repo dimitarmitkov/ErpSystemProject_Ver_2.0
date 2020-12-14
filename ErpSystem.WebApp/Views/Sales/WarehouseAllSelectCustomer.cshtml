@@ -5,6 +5,8 @@
     ViewData["Title"] = "Select Customer";
 }
 
+@{var date = string.Empty;}
+
 <div class="container-fluid">
     <h1 class="mt-4">Generate Sale</h1>
     <ol class="breadcrumb mb-4">
@@ -39,7 +41,7 @@
         <div class="card mb-4">
             <div class="card-header">
                 <i class="fas fa-table mr-1"></i>
-                DataTable Example
+                DataTable Generate Sale
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -59,11 +61,20 @@
 
                             @foreach (var product in Model.WarehouseProductCombined)
                             {
+                                @if (product.ProductExpireDate != null)
+                                {
+                                    date = DateTime.Parse(product.ProductExpireDate).ToString("dd-MM-yyyy");
+                                }
+                                else
+                                {
+                                    date = "no expire date";
+                                }
+
                                 <tr>
                                     <td>@product.Product</td>
                                     <td>@product.ProductMeasurement</td>
                                     <td>@product.ProductsAvailable</td>
-                                    <td>@product.ProductExpireDate</td>
+                                    <td>@date</td>
                                     <td>@product.Id</td>
                                     @*<td>@product.CustomerId</td>*@
 

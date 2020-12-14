@@ -31,13 +31,13 @@ namespace ErpSystem.Services.Services
                     Supplier = x.Supplier,
                     ProductId = x.ProductId,
                     Product = x.ProductName,
-                    NumberOfTransportUnits = x.NumberOfTransportPackageUnitsOrdered,
+                    NumberOfTransportUnits = this.dbContext.Products.Where(p => p.Id == x.ProductId).Select(y => y.ProductTransportPackageNumberOfPieces).FirstOrDefault(),
                     TotalProductPrice = x.TotalAmountOfOrder,
                     TotalWeightOfTransportUnit = this.dbContext.Products.Where(p => p.Id == x.ProductId && p.IsDeleted == false).Select(y => y.ProductTransportPackageWeight).FirstOrDefault(),
                     ProductMeasurementType = this.dbContext.Products.Where(p => p.Id == x.ProductId && p.IsDeleted == false).Select(y => y.MeasurmentTag.Maesurment).FirstOrDefault(),
                     OrderDate = x.OrderDate,
                     Package = this.dbContext.Products.Where(p => p.Id == x.ProductId).Select(y => y.ProductTransportPackage.TypeOfPackage).FirstOrDefault(),
-                    TotalOrderPrice = this.dbContext.Orders.Where(s => s.SupplierId == x.SupplierId).Sum(x => x.TotalAmountOfOrder),
+                    TotalOrderPrice = x.TotalAmountOfOrder * this.dbContext.Products.Where(p => p.Id == x.ProductId).Select(y => y.ProductTransportPackageNumberOfPieces).FirstOrDefault(),
                     TotalOrderWeight = this.dbContext.Orders.Where(s => s.SupplierId == x.SupplierId).Sum(x => x.TotalOrderWeight),
 
                 }).ToList();

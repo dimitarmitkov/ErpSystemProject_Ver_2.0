@@ -1,4 +1,5 @@
-﻿document.addEventListener("click", clickHandler)
+﻿
+document.addEventListener("click", clickHandler)
 let h3Element = document.getElementsByTagName("h3");
 let spanElement = document.getElementsByTagName("span");
 

@@ -124,7 +124,7 @@ namespace ErpSystem.Services.Services
             {
                 Text = p.Supplier,
                 Value = p.Supplier,
-            }).ToList();
+            }).Distinct().ToList();
         }
 
         // test completed
