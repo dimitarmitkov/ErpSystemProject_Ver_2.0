@@ -31,19 +31,36 @@ Main functionalities:
 3. User
     
     3.1. Regisrer User - registers new user with email and password.
+    
     3.2. Login User - login User in application. Every User could Login form one entry poin only.
+    
     3.3. Logout - logout User from application.
 
 4. User Roles
     
     4.1. There are 2 types User Roles: User and Admin.
+    
     4.2. Admin is allowed to Delete products. Delete Produc button on Dashboard is visible only when User with Admin Role is logged in.
   
 5. Sale
     
-    5.1. Sale culd be initiated be pressing Generate Sale button on Dashboard
-    5.2. First step of Sale is to select Customer form drop-down selector. When Customer is selected, after pressing Filter button strs Sale process for selecter Customer.
-    5.3. All avavilable products appear for selected Customer and process of sale will continue ater selection of product bt pressig Select button on right end of every product row.
+    5.1. Sale culd be initiated be pressing Generate Sale button on Dashboard.
+    
+    5.2. First step of Sale is to select Customer form drop-down selector. Then choose whether Customer will receive Discount per curren Sale by checkin Has Discount checkbox. When Customer and Discount are selected, by pressing Filter button, Sale process is started for selecter Customer.
+    
+    5.3. All avavilable products appear for selected Customer and process of sale will continue ater selection of product by pressig green colored Select button on right end of every product row.
+    
+    5.4. Selected Product appears on sigle row and it needed to be selected if there will be given Product Discount (additional to Customer Discount) by tick in checkbox named Prod Discount. Number of products for sale ought to be typed in Sale Volume box. Only numbers less than or equal to Products Availabe are allowed to be entered. In case of incorrect entered amout or in case of not numeric symbols are typed in box button Sale will not appear. Also Sale button will disapire if number typed exceeds Available Products. Sale for selected product is finalized by pressing Sale button.
+    
+    5.5. When all products requested by Customer are sold, Sales process ouht to be finalized by pressing Finalize sale for ... customer.
+    
+    5.6. When Sale is finalized Invoice appears on screen. Invoice contains all needed requisites for Customer and Company, and also list of sold products, discounts information, sales prices after discount, VAT, total amount. By pressing Print invoice button Sales process is finalized and invoice is printed.
+    
+    6. Order
+    
+    6.1. During Sale process application is checking every Sale by measuring Available Products of every species of Products, time needed form Order start to Delivery end, number of Products sold for that time. In case of possible lack of products in Order/Delivery time horizon during Sale process a meaasge will appear informing the operator that Product need to be ordared and asking for confirmation by operator before continue with Sale process.
+    
+    
     
     
     
