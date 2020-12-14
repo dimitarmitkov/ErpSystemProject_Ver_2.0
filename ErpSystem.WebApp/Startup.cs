@@ -88,7 +88,7 @@ namespace ErpSystem.WebApp
             services.AddTransient<IUsersService, UsersService>();
             services.AddTransient<ISalesService, SalesService>();
             services.AddTransient<ICustomersService, CustomersService>();
-            services.AddTransient<ICurrentSalesService, CurrentSalesService>();
+            //services.AddTransient<ICurrentSalesService, CurrentSalesService>();
             services.AddTransient<IOrdersService, OrdersService>();
             services.AddTransient<IDeliveriesService, DeliveriesService>();
             services.AddTransient<IWarehouseSpace, WarehouseSpace>();

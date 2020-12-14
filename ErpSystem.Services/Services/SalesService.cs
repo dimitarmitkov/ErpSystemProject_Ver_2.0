@@ -140,10 +140,9 @@ namespace ErpSystem.Services.Services
             }).ToList();
         }
 
-        // in use - sales controller WarehouseAll(GET,POST)
+        // in use - sales controller WarehouseAll(GET,POST), test completed
         public IEnumerable<WarehouseProductViewModel> ListOfProductsForSale()
         {
-
             return this.dbContext.WarehouseProducts.Where(wp => wp.ProductsAvailable > 0).Select(x => new WarehouseProductViewModel
             {
                 Id = x.Id,
@@ -157,7 +156,7 @@ namespace ErpSystem.Services.Services
                 .ToList();
         }
 
-        // generates crud record for customer
+        // generates crud record for customer, test completed
         public void GenerateCurrentSale(string companyEik, bool hasDiscount, string userId)
         {
             //TODO add userID for confirmation
@@ -195,7 +194,7 @@ namespace ErpSystem.Services.Services
             }).ToList();
         }
 
-
+        // test cmpleted
         public IEnumerable<WarehouseProductViewModel> ListOfProductsForSaleWithCustomer()
         {
             var customerName = this.dbContext.CurrentSales.Select(x => x.CustomerName).FirstOrDefault();
@@ -220,6 +219,7 @@ namespace ErpSystem.Services.Services
                 .ToList();
         }
 
+        // test completed
         public IEnumerable<SalesPerCustomerOrProductViewModel> ListOfSales(string customerName, string productName)
         {
             IQueryable<Sale> saleView = null;
@@ -233,7 +233,7 @@ namespace ErpSystem.Services.Services
             return listOfSales;
         }
 
-        // collection of sales calculating total sales per day, retursn dictionary of date and amount
+        // collection of sales calculating total sales per day, retursn dictionary of date and amount, test completed
         public IEnumerable<KeyValuePair<string, decimal>> TotalSalesPerDate()
         {
             var listOfSales = this.dbContext.Sales.Select(s => new SaleSumByDateViewModel
@@ -256,7 +256,7 @@ namespace ErpSystem.Services.Services
             return dictionary;
         }
 
-        // calculating does product need an order
+        // calculating does product need an order, test completed
         public void IsProductForOrder(int currentId)
         {
             var productForOrder = this.dbContext.Products.Where(p => p.Id == currentId && p.IsDeleted == false).Select(x => new DeliveryNeededProduct
@@ -281,6 +281,7 @@ namespace ErpSystem.Services.Services
             }
         }
 
+        // test completed
         public IEnumerable<CalculateNeedOfOrderViewModel> AreAnyProductsForOrder()
         {
             return this.dbContext.DeliveryNeededProducts.Where(p => p.ConfimBeenNoticed == false).Select(x => new CalculateNeedOfOrderViewModel
@@ -292,6 +293,7 @@ namespace ErpSystem.Services.Services
                 OrderDays = x.DeliveryDays,
             }).ToList();
         }
+
 
         public void ConfirmNeedOfOrder(DeliveryNeededProduct deliveryNeededProduct)
         {
