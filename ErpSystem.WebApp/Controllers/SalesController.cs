@@ -3,7 +3,6 @@ using ErpSystem.Models;
 using ErpSystem.Services.Services;
 using ErpSystem.Services.ViewModels.CustomerWarehouse;
 using ErpSystem.Services.ViewModels.Sale;
-using ErpSystem.Services.ViewModels.Warehouse;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -14,14 +13,12 @@ namespace ErpSystem.WebApp.Controllers
     public class SalesController : Controller
     {
         private readonly ISalesService salesService;
-        private readonly IMemoryCache memoryCache;
         private readonly UserManager<IdentityUser> userManager;
         private readonly SignInManager<IdentityUser> signInManager;
 
-        public SalesController(ISalesService salesService, IMemoryCache memoryCache, UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
+        public SalesController(ISalesService salesService, UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
         {
             this.salesService = salesService;
-            this.memoryCache = memoryCache;
             this.userManager = userManager;
             this.signInManager = signInManager;
         }
@@ -81,9 +78,7 @@ namespace ErpSystem.WebApp.Controllers
 
             var customerEik = customerWarehouse.CustomerCombined.CustomerName;
             var hasDiscount = customerWarehouse.CustomerCombined.HasCustomerDiscount;
-
             var isSignedIn = this.signInManager.IsSignedIn(User);
-
 
             if (isSignedIn)
             {
@@ -93,9 +88,7 @@ namespace ErpSystem.WebApp.Controllers
             }
 
             return this.View();
-
         }
-
 
         public IActionResult WarehouseAllGenerateSale()
         {
@@ -106,7 +99,6 @@ namespace ErpSystem.WebApp.Controllers
             }
 
             CustomerWarehouseViewModel viewModel = new CustomerWarehouseViewModel();
-
             viewModel.WarehouseProductCombined = salesService.ListOfProductsForSaleWithCustomer();
 
             return this.View(viewModel);
@@ -163,8 +155,12 @@ namespace ErpSystem.WebApp.Controllers
             viewModel.List = salesService.Invoice();
             viewModel.Single = salesService.Invoice();
 
-            return this.View(viewModel);
-        }
+            if (viewModel.List.ToList().Count != 0 && viewModel.Single.ToList().Count != 0)
+            {
+                return this.View(viewModel);
+            }
 
+            return this.Redirect("/Errors/Error500");
+        }
     }
 }

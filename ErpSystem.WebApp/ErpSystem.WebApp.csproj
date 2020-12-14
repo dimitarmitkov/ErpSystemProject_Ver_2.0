@@ -57,11 +57,15 @@
     <Folder Include="Views\Warehouses\" />
     <Folder Include="Views\SalesRest\" />
     <Folder Include="Views\Suppliers\" />
+    <Folder Include="Views\Errors\" />
+    <Folder Include="wwwroot\assets\" />
+    <Folder Include="wwwroot\assets\img\" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="Views\CurrentSales\CurrentSale.cshtml" />
     <Content Remove="Views\Warehouses\Warehouse.cshtml" />
     <Content Remove="Views\SalesRest\SaleRest.cshtml" />
     <Content Remove="Views\Customers\CreateCustomer.cshtml" />
+    <Content Remove="Views\Errors\401.cshtml" />
   </ItemGroup>
 </Project>

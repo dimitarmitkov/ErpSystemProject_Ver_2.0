@@ -1,24 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
-using ErpSystem.WebApp.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ErpSystem.Data;
 using ErpSystem.Services.Services;
 using AutoMapper;
-using ErpSystem.Models;
-using ErpSystem.Services.ViewModels.Delivery;
-using ErpSystem.WebApp.Areas.Identity.Data;
-using ErpSystem.Services.ViewModels.Supplier;
 using ErpSystem.Services;
 
 namespace ErpSystem.WebApp
@@ -39,7 +27,7 @@ namespace ErpSystem.WebApp
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddMvc();
-            //services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
+            // services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
             //    .AddEntityFrameworkStores<ErpSystemDbContext>();
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddMvc().AddRazorRuntimeCompilation();
@@ -64,19 +52,7 @@ namespace ErpSystem.WebApp
                 options.Cookie.IsEssential = true; // for essentioal cookies needed to operate
             });
 
-            //var mapperConfig = new MapperConfiguration(mc =>
-            //{
-            //    mc.AddProfile(new MappingProfile());
-            //    mc.CreateMap<Order, DeliveryListViewModel>();
-            //    mc.CreateMap<AddSupplierViewModel, Supplier>();
-            //    mc.CreateMap<Supplier, AddSupplierViewModel>();
-            //});
-
-            //IMapper _mapper = mapperConfig.CreateMapper();
-            //services.AddSingleton(_mapper);
-
             services.AddAutoMapper(m => m.AddProfile<AutoMapping>(), typeof(Startup));
-
             services.AddSingleton(this.Configuration);
 
             //Database
@@ -88,7 +64,6 @@ namespace ErpSystem.WebApp
             services.AddTransient<IUsersService, UsersService>();
             services.AddTransient<ISalesService, SalesService>();
             services.AddTransient<ICustomersService, CustomersService>();
-            //services.AddTransient<ICurrentSalesService, CurrentSalesService>();
             services.AddTransient<IOrdersService, OrdersService>();
             services.AddTransient<IDeliveriesService, DeliveriesService>();
             services.AddTransient<IWarehouseSpace, WarehouseSpace>();
@@ -102,13 +77,15 @@ namespace ErpSystem.WebApp
             {
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
+                app.UseExceptionHandler("/Errors/Error404");
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/Errors/Error404");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
