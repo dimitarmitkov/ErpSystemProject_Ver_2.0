@@ -70,7 +70,7 @@ Main functionalities:
      
      6.5. When all Products delivered by selecter Supplier are set for Order, User needs to finalize Order for that product group by pressing Finalize order button. 
      
-     7. Delivery
+7. Delivery
      
      7.1. When Delivery appears in Warehouse, it will be checked by User. Then Delivery ought to be put in stock. First of all User have to choose Deliveru button in Dashboard.
      
@@ -80,15 +80,15 @@ Main functionalities:
      
      7.4. Finalized Delivery takes spaces from pallet or/and boxes areas in Warehouse.
      
-     8. Supplier
+8. Supplier
      
      8.1. Add Supplier - add new Supllier
      
-     9. Customer
+9. Customer
      
      9.1. Add Customer - add new Customer
      
-     10. Sales Charts - graphic Sales data. It appears after select Sales period.
+10. Sales Charts - graphic Sales data. It appears after select Sales period.
      
      
    
