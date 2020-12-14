@@ -29,15 +29,18 @@ Main functionalities:
   - References calls: Create Product; Generate Sale; Current Sale (it is visible just for demonstrative purpose); Generate Invoice (it is visible just for demonstrative purpose); Generate Order; Generate Delivery; API Sale (it is visible just for demonstrative purpose);
 
 3. User
+    
     3.1. Regisrer User - registers new user with email and password.
     3.2. Login User - login User in application. Every User could Login form one entry poin only.
     3.3. Logout - logout User from application.
 
 4. User Roles
+    
     4.1. There are 2 types User Roles: User and Admin.
     4.2. Admin is allowed to Delete products. Delete Produc button on Dashboard is visible only when User with Admin Role is logged in.
   
 5. Sale
+    
     5.1. Sale culd be initiated be pressing Generate Sale button on Dashboard
     5.2. First step of Sale is to select Customer form drop-down selector. When Customer is selected, after pressing Filter button strs Sale process for selecter Customer.
     5.3. All avavilable products appear for selected Customer and process of sale will continue ater selection of product bt pressig Select button on right end of every product row.
