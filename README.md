@@ -20,6 +20,7 @@ Main functionalities:
     - Delivery;
     - Add Supplier;
     - Add Customer;
+    
   1.3. On Dashboard is presented information about current available and taken space of Warehouse. It is presented in 2 pie-cahrts: one per pallet space (count of pallet spaces) and one per boxes space (presenting shelf lenght in cm);
 
 2. Side bar inherits same functionalities form Dashboard, exended with additional actions. All finctionalities of Side bar are wrapped in 5 main articles:
