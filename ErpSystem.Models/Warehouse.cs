@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-
-namespace ErpSystem.Models
+﻿namespace ErpSystem.Models
 {
+    using System.Collections.Generic;
+
     public class Warehouse
     {
         public Warehouse()

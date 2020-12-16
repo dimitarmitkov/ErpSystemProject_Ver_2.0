@@ -1,8 +1,7 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-
-namespace ErpSystem.Services.ViewModels.Supplier
+﻿namespace ErpSystem.Services.ViewModels.Supplier
 {
+    using System.ComponentModel.DataAnnotations;
+
     public class AddSupplierViewModel
     {
         [Required(ErrorMessage = "Please insert supplier name")]

@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace ErpSystem.Models
+﻿namespace ErpSystem.Models
 {
+    using System.Collections.Generic;
+
     public class CompanyTypeTag
     {
         public CompanyTypeTag()

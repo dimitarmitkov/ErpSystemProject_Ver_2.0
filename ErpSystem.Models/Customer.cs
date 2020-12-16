@@ -1,10 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace ErpSystem.Models
+﻿namespace ErpSystem.Models
 {
+    using System;
+
+    using System.Collections.Generic;
+
+    using System.ComponentModel.DataAnnotations;
+
     public class Customer
     {
         public Customer()

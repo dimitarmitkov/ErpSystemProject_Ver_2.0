@@ -1,15 +1,14 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using ErpSystem.Data;
-using Microsoft.EntityFrameworkCore.Internal;
-
-namespace ErpSystem.Services.ViewModels.Product
+﻿namespace ErpSystem.Services.ViewModels.Product
 {
+    using System.ComponentModel.DataAnnotations;
+    using System.Linq;
+
+    using ErpSystem.Data;
+
+    using Microsoft.EntityFrameworkCore.Internal;
+
     public class HasSupplierAttribute : ValidationAttribute
     {
-        private readonly ErpSystemDbContext dbContext;
-
-
         public HasSupplierAttribute(string supplier)
         {
             this.supplierName = supplier;
@@ -31,6 +30,7 @@ namespace ErpSystem.Services.ViewModels.Product
                     return new ValidationResult($"Supplier {value.ToString()} does not exist. Please add {value} to database.");
                 }
             }
+
             return ValidationResult.Success;
         }
     }

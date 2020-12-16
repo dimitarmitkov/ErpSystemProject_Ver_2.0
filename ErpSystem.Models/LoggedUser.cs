@@ -1,5 +1,4 @@
-﻿using System;
-namespace ErpSystem.Models
+﻿namespace ErpSystem.Models
 {
     public class LoggedUser
     {

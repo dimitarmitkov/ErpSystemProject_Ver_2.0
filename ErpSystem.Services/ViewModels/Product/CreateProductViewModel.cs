@@ -1,14 +1,12 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.AspNetCore.Razor.TagHelpers;
-
-namespace ErpSystem.Services.ViewModels.Product
+﻿namespace ErpSystem.Services.ViewModels.Product
 {
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+
+    using Microsoft.AspNetCore.Mvc.Rendering;
+
     public class CreateProductViewModel
     {
-
         public string ProductIndentificationNumber { get; set; }
 
         [Required(ErrorMessage = "Please insert product name")]

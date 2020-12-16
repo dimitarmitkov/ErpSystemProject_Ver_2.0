@@ -1,10 +1,9 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using NetTopologySuite.Simplify;
-
-namespace ErpSystem.Services.ViewModels.Order
+﻿namespace ErpSystem.Services.ViewModels.Order
 {
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+
+    using Microsoft.AspNetCore.Mvc.Rendering;
     public class CalculateNeedOfOrderViewModel
     {
         public int ProductId { get; set; }

@@ -1,6 +1,7 @@
-﻿using System;
-namespace ErpSystem.Services.ViewModels.Sale
+﻿namespace ErpSystem.Services.ViewModels.Sale
 {
+    using System;
+
     public class SalesPerCustomerOrProductViewModel
     {
         public int ProductId { get; set; }

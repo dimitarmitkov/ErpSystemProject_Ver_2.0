@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using ErpSystem.Services.ViewModels.Product;
-using Microsoft.AspNetCore.Mvc.Rendering;
-
-namespace ErpSystem.Services.Services
+﻿namespace ErpSystem.Services.Services
 {
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+    using ErpSystem.Services.ViewModels.Product;
+
+    using Microsoft.AspNetCore.Mvc.Rendering;
+
     public interface IProductsService
     {
         Task CreateProduct(CreateProductViewModel createProduct);

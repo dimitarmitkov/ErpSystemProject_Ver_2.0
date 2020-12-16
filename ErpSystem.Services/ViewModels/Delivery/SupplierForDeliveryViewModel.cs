@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-
-namespace ErpSystem.Services.ViewModels.Delivery
+﻿namespace ErpSystem.Services.ViewModels.Delivery
 {
+    using System.Collections.Generic;
+
     public class SupplierForDeliveryViewModel
     {
         public int SupplierId { get; set; }

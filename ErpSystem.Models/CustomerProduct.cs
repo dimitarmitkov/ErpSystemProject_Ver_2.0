@@ -1,6 +1,4 @@
-﻿using System.Reflection.Metadata.Ecma335;
-
-namespace ErpSystem.Models
+﻿namespace ErpSystem.Models
 {
     public class CustomerProduct
     {

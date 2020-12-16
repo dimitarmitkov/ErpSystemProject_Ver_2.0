@@ -1,16 +1,25 @@
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using ErpSystem.Data;
-using ErpSystem.Services.Services;
-using AutoMapper;
-using ErpSystem.Services;
-
 namespace ErpSystem.WebApp
 {
+    using Microsoft.AspNetCore.Builder;
+
+    using Microsoft.AspNetCore.Hosting;
+
+    using Microsoft.EntityFrameworkCore;
+
+    using Microsoft.Extensions.Configuration;
+
+    using Microsoft.Extensions.DependencyInjection;
+
+    using Microsoft.Extensions.Hosting;
+
+    using ErpSystem.Data;
+
+    using ErpSystem.Services.Services;
+
+    using AutoMapper;
+
+    using ErpSystem.Services;
+
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -28,7 +37,7 @@ namespace ErpSystem.WebApp
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddMvc();
             // services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
-            //    .AddEntityFrameworkStores<ErpSystemDbContext>();
+            //   .AddEntityFrameworkStores<ErpSystemDbContext>();
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddMvc().AddRazorRuntimeCompilation();
             services.AddRazorPages();

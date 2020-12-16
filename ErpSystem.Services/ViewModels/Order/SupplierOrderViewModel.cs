@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc.Rendering;
-
-namespace ErpSystem.Services.ViewModels.Order
+﻿namespace ErpSystem.Services.ViewModels.Order
 {
+    using System.Collections.Generic;
+
+    using Microsoft.AspNetCore.Mvc.Rendering;
+
     public class SupplierOrderViewModel
     {
         public IEnumerable<CalculateNeedOfOrderViewModel> CalculateOrderProductsList { get; set; }
@@ -13,6 +13,5 @@ namespace ErpSystem.Services.ViewModels.Order
         public IEnumerable<SelectListItem> SuppliersListDropDown { get; set; }
 
         public CalculateNeedOfOrderViewModel Suppliers { get; set; }
-
     }
 }

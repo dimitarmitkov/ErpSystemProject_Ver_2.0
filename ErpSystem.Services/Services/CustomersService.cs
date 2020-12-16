@@ -1,13 +1,15 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
-using ErpSystem.Data;
-using ErpSystem.Models;
-using ErpSystem.Services.ViewModels.Customer;
-
-namespace ErpSystem.Services.Services
+﻿namespace ErpSystem.Services.Services
 {
+    using AutoMapper;
+
+    using ErpSystem.Data;
+    using ErpSystem.Models;
+    using ErpSystem.Services.ViewModels.Customer;
+
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+
     public class CustomersService : ICustomersService
     {
         private readonly ErpSystemDbContext dbContext;
@@ -40,7 +42,6 @@ namespace ErpSystem.Services.Services
             await this.dbContext.SaveChangesAsync();
         }
 
-        // TODO add is deleted in Customer table in DB, then change remove to update and add is deleted = true
         public async Task DeleteCustomer(string id, string companyName)
         {
             IEnumerable<Customer> customerToDeleteList = null;
@@ -50,7 +51,9 @@ namespace ErpSystem.Services.Services
 
             foreach (var customerToDelete in customerToDeleteList)
             {
-                this.dbContext.Customers.Remove(customerToDelete);
+                customerToDelete.IsActive = false;
+
+                this.dbContext.Customers.Update(customerToDelete);
             }
             await this.dbContext.SaveChangesAsync();
         }

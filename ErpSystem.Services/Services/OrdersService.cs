@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using ErpSystem.Data;
-using ErpSystem.Models;
-using ErpSystem.Services.ViewModels.Order;
-using Microsoft.AspNetCore.Mvc.Rendering;
-
-namespace ErpSystem.Services.Services
+﻿namespace ErpSystem.Services.Services
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using ErpSystem.Data;
+    using ErpSystem.Models;
+    using ErpSystem.Services.ViewModels.Order;
+    using Microsoft.AspNetCore.Mvc.Rendering;
     public class OrdersService : IOrdersService
     {
         private readonly ErpSystemDbContext dbContext;
@@ -79,6 +79,7 @@ namespace ErpSystem.Services.Services
                 .ToList();
                 productsList.AddRange(products);
             }
+
             return productsList;
         }
 
@@ -108,6 +109,7 @@ namespace ErpSystem.Services.Services
                     this.dbContext.SupplierForOrders.Remove(excistingRecords[i]);
                 }
             }
+
             this.dbContext.SupplierForOrders.Add(supplier);
             this.dbContext.SaveChanges();
         }
@@ -140,6 +142,7 @@ namespace ErpSystem.Services.Services
                 var supplierDeliveryNeedProducts = this.dbContext.DeliveryNeededProducts.FirstOrDefault(s => s.Supplier == supplierName);
                 this.dbContext.DeliveryNeededProducts.Remove(supplierDeliveryNeedProducts);
             }
+
             await this.dbContext.SaveChangesAsync();
         }
     }

@@ -1,15 +1,13 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace ErpSystem.Models
+﻿namespace ErpSystem.Models
 {
+    using System;
+
+    using System.ComponentModel.DataAnnotations;
+
+    using System.ComponentModel.DataAnnotations.Schema;
 
     public class Delivery
     {
-
-        private DateTime? deliveryDate = null;
-
         public int Id { get; set; }
 
         public virtual Supplier Supplier { get; set; }
@@ -17,20 +15,6 @@ namespace ErpSystem.Models
         [Required]
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime DeliveryDate { get; set; }
-
-        //this is to set DeliveryDate to DateTime now automatically
-        //public DateTime DeliveryDate
-        //{
-        //    get
-        //    {
-        //        return this.deliveryDate.HasValue
-        //           ? this.deliveryDate.Value
-        //           : DateTime.Now;
-        //    }
-
-        //    set { this.deliveryDate = value; }
-        //}
-
 
         [Required]
         public decimal TransportCost { get; set; }
@@ -40,7 +24,7 @@ namespace ErpSystem.Models
         public decimal? OtherExpenses { get; set; }
 
         [Required]
-        public int NumberOfTransportPackageUnits { get; set; }//number of pallets, boxes or other transport package
+        public int NumberOfTransportPackageUnits { get; set; }
 
         public decimal TotalAmountOfProductNumberOrWeight { get; set; }
     }

@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-
-namespace ErpSystem.Models
+﻿namespace ErpSystem.Models
 {
+    using System.Collections.Generic;
+
     public class CurrentSale
     {
         public CurrentSale()

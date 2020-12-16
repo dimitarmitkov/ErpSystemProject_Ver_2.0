@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace ErpSystem.Models
+﻿namespace ErpSystem.Models
 {
+    using System.Collections.Generic;
+
     public class ProductMeasurmentTag
     {
         public ProductMeasurmentTag()
@@ -12,7 +11,7 @@ namespace ErpSystem.Models
 
         public int Id { get; set; }
 
-        public string Maesurment { get; set; }//pieces, kg, liter...
+        public string Maesurment { get; set; }
 
         public virtual ICollection<Product> Products { get; set; }
     }

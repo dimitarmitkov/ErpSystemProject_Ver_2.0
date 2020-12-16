@@ -1,6 +1,7 @@
-﻿using System;
-namespace ErpSystem.Services.ViewModels.Order
+﻿namespace ErpSystem.Services.ViewModels.Order
 {
+    using System;
+
     public class GenerateOrderViewModel
     {
         public int ProductId { get; set; }

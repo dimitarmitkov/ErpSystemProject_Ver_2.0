@@ -1,8 +1,6 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-
-namespace ErpSystem.Services.ViewModels.Product
+﻿namespace ErpSystem.Services.ViewModels.Product
 {
+    using System.ComponentModel.DataAnnotations;
 
     public class CompareDatesAttribute : ValidationAttribute
     {
@@ -13,6 +11,7 @@ namespace ErpSystem.Services.ViewModels.Product
         }
 
         public string ProductionDate { get; }
+
         public string ExpireDate { get; }
 
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
@@ -24,6 +23,7 @@ namespace ErpSystem.Services.ViewModels.Product
             {
                 return new ValidationResult("You need to add both Production and Expire dates.");
             }
+
             return ValidationResult.Success;
         }
     }

@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using ErpSystem.Services.ViewModels.Order;
-using Microsoft.AspNetCore.Mvc.Rendering;
-
-namespace ErpSystem.Services.Services
+﻿namespace ErpSystem.Services.Services
 {
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+
+    using ErpSystem.Services.ViewModels.Order;
+    using Microsoft.AspNetCore.Mvc.Rendering;
+
     public interface IOrdersService
     {
         void GenetareOrder(CalculateNeedOfOrderViewModel calculateNeedOfOrder);

@@ -1,8 +1,7 @@
-﻿using System.Collections.Generic;
-using ErpSystem.Services.ViewModels.Warehouse;
-
-namespace ErpSystem.Services.Services
+﻿namespace ErpSystem.Services.Services
 {
+    using System.Collections.Generic;
+
     public interface IWarehousesService
     {
         IEnumerable<KeyValuePair<string, int>> CurrentSpace();

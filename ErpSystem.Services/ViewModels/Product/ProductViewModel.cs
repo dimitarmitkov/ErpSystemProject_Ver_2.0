@@ -2,7 +2,6 @@
 {
     public class ProductViewModel
     {
-
         public string ProductName { get; set; }
 
         public int ProductId { get; set; }
@@ -19,7 +18,7 @@
 
         public int TimeToDelivery { get; set; }
 
-        public string ProductTransportPackage { get; set; }//Pallet, box, container, ect.
+        public string ProductTransportPackage { get; set; } // Pallet, box, container, ect.
 
         public string MeasurmentTag { get; set; }
 

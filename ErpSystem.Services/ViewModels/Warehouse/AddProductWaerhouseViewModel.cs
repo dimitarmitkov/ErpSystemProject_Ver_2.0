@@ -1,6 +1,7 @@
-﻿using System;
-namespace ErpSystem.Services.ViewModels.Warehouse
+﻿namespace ErpSystem.Services.ViewModels.Warehouse
 {
+    using System;
+
     public class AddProductWaerhouseViewModel
     {
         public int AddQuantity { get; set; }

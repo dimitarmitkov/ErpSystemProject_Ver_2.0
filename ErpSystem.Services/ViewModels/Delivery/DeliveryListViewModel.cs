@@ -1,9 +1,10 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using ErpSystem.Services.ViewModels.Order;
-
-namespace ErpSystem.Services.ViewModels.Delivery
+﻿namespace ErpSystem.Services.ViewModels.Delivery
 {
+    using System;
+    using System.ComponentModel.DataAnnotations;
+
+    using ErpSystem.Services.ViewModels.Order;
+
     public class DeliveryListViewModel : CalculateNeedOfOrderViewModel
     {
         public decimal TotalOrderPrice { get; set; }

@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using ErpSystem.Data;
-using ErpSystem.Models;
-using ErpSystem.Services.ViewModels.Warehouse;
-
-namespace ErpSystem.Services.Services
+﻿namespace ErpSystem.Services.Services
 {
+    using System.Collections.Generic;
+    using System.Linq;
+
+    using ErpSystem.Data;
+    using ErpSystem.Models;
+
     public class WarehouseProducService : IWarehouseProductService
     {
         private readonly ErpSystemDbContext dbContext;
@@ -16,9 +15,9 @@ namespace ErpSystem.Services.Services
             this.dbContext = dbContext;
         }
 
-        public WarehouseProduct GetById(int Id)
+        public WarehouseProduct GetById(int id)
         {
-            return this.dbContext.WarehouseProducts.Where(w => w.Id == Id).FirstOrDefault();
+            return this.dbContext.WarehouseProducts.Where(w => w.Id == id).FirstOrDefault();
         }
 
         public IEnumerable<KeyValuePair<string, int>> CurrentSpace()

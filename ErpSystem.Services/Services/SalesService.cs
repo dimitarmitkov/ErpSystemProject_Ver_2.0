@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using ErpSystem.Data;
-using ErpSystem.Models;
-using ErpSystem.Services.ViewModels.Order;
-using ErpSystem.Services.ViewModels.Sale;
-using ErpSystem.Services.ViewModels.Warehouse;
-using Microsoft.AspNetCore.Mvc.Rendering;
-
-namespace ErpSystem.Services.Services
+﻿namespace ErpSystem.Services.Services
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
+    using ErpSystem.Data;
+    using ErpSystem.Models;
+    using ErpSystem.Services.ViewModels.Order;
+    using ErpSystem.Services.ViewModels.Sale;
+    using ErpSystem.Services.ViewModels.Warehouse;
+    using Microsoft.AspNetCore.Mvc.Rendering;
     public class SalesService : ISalesService
     {
         private readonly ErpSystemDbContext dbContext;
@@ -40,7 +39,6 @@ namespace ErpSystem.Services.Services
             var price = this.dbContext.Products.Where(p => p.Id == productId && p.IsDeleted == false).Select(x => x.ProductSalePrice).FirstOrDefault();
             var customerDiscount = this.dbContext.Customers.Where(c => c.Id == customerId).Select(x => x.CustomerDiscount).FirstOrDefault();
 
-
             if (hasProductDiscount && !string.IsNullOrEmpty(productDiscount.ToString())) sale.SingleProudctSalePrice = (decimal)(price - price * productDiscount / 100);
             else sale.SingleProudctSalePrice = (decimal)(price);
 
@@ -55,7 +53,6 @@ namespace ErpSystem.Services.Services
                 this.dbContext.Sales.Add(sale);
                 int saved = this.dbContext.SaveChanges();
 
-
                 //decrease number of available products based on number of sold products
                 productSold.ProductsAvailable -= numberOfSoldProducts;
 
@@ -65,8 +62,7 @@ namespace ErpSystem.Services.Services
                 // check if product needs order
                 IsProductForOrder(sale.ProductId);
 
-                //decrase number of boxes or pallets if number of sold products reaches box or pallet size
-
+                // decrase number of boxes or pallets if number of sold products reaches box or pallet size
                 bool isProductInPallet = this.dbContext.Products.Where(p => p.Id == productSold.ProductId && p.IsDeleted == false).Select(p => p.IsPallet == true).FirstOrDefault();
                 var productSoldProduct = this.dbContext.Products.FirstOrDefault(p => p.Id == productId && p.IsDeleted == false);
                 var productSoldWarehouse = this.dbContext.Warehouses.FirstOrDefault(w => w.Id == warehouseId);
@@ -81,7 +77,7 @@ namespace ErpSystem.Services.Services
 
                 if (isProductInPallet)
                 {
-                    //calculate pallets left
+                    // calculate pallets left
                     var numberOfSoldPallets = numberOfSoldProducts / numberOfProductPerPallet;
                     var partialPalletAdd = (productSold.ProductsAvailable % numberOfProductPerPallet) > 0 ? 1 : 0;
                     var numberOfPalletsLeft = (productSold.ProductsAvailable / numberOfProductPerPallet) + partialPalletAdd;
@@ -90,7 +86,7 @@ namespace ErpSystem.Services.Services
                     var preSalePratialPalletAdd = (preSaleProductsAvailabe % numberOfProductPerPallet) > 0 ? 1 : 0;
                     var preSaleNumberOfPallets = (preSaleProductsAvailabe / numberOfProductPerPallet) + preSalePratialPalletAdd;
 
-                    //increase space in warehouse if whole pallet was finished, if not - space remains unchanged
+                    // increase space in warehouse if whole pallet was finished, if not - space remains unchanged
                     productSoldWarehouse.CurrentPalletsSpaceFree += preSaleNumberOfPallets - numberOfPalletsLeft;
 
                     this.dbContext.Warehouses.Update(productSoldWarehouse);
@@ -121,9 +117,7 @@ namespace ErpSystem.Services.Services
                     this.dbContext.SaveChanges();
                 }
             }
-        }
-        // create sale end
-
+        } // create sale end
 
         // list of all sales, in use sales controller All(), test completed
         public IEnumerable<SalesPerCustomerOrProductViewModel> ListOfAllSales()
@@ -294,7 +288,6 @@ namespace ErpSystem.Services.Services
             }).ToList();
         }
 
-
         public void ConfirmNeedOfOrder(DeliveryNeededProduct deliveryNeededProduct)
         {
             var productId = deliveryNeededProduct.ProductId;
@@ -332,8 +325,6 @@ namespace ErpSystem.Services.Services
 
             return list;
         }
-
-
 
         // private 
         private List<SalesPerCustomerOrProductViewModel> ListOfSalesAsSalesViewModel(IQueryable<Sale> saleView)

@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc.Rendering;
-
-namespace ErpSystem.Services.ViewModels.Customer
+﻿namespace ErpSystem.Services.ViewModels.Customer
 {
+    using System.Collections.Generic;
+
+    using Microsoft.AspNetCore.Mvc.Rendering;
+
     public class GenerateSaleCustomerViewModel
     {
         public string CustomerId { get; set; }

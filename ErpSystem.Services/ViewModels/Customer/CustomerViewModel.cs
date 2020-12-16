@@ -1,8 +1,9 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-
-namespace ErpSystem.Services.ViewModels.Customer
+﻿namespace ErpSystem.Services.ViewModels.Customer
 {
+    using System;
+
+    using System.ComponentModel.DataAnnotations;
+
     public class CustomerViewModel
     {
         [Required(ErrorMessage = "Please insert customer name")]

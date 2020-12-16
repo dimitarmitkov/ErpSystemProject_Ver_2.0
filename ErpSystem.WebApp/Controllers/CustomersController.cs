@@ -1,9 +1,11 @@
-﻿using ErpSystem.Services.Services;
-using ErpSystem.Services.ViewModels.Customer;
-using Microsoft.AspNetCore.Mvc;
-
-namespace ErpSystem.WebApp.Controllers
+﻿namespace ErpSystem.WebApp.Controllers
 {
+    using ErpSystem.Services.Services;
+
+    using ErpSystem.Services.ViewModels.Customer;
+
+    using Microsoft.AspNetCore.Mvc;
+
     public class CustomersController : Controller
     {
         private readonly ICustomersService customersService;
@@ -29,7 +31,5 @@ namespace ErpSystem.WebApp.Controllers
             customersService.CreateCustomer(customerView);
             return this.Redirect("/Home/Index");
         }
-
-
     }
 }

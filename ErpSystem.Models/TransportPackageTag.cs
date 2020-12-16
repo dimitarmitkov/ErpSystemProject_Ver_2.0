@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace ErpSystem.Models
+﻿namespace ErpSystem.Models
 {
+    using System.Collections.Generic;
+
     public class TransportPackageTag
     {
         public TransportPackageTag()
@@ -12,7 +11,7 @@ namespace ErpSystem.Models
 
         public int Id { get; set; }
 
-        public string TypeOfPackage { get; set; } //box, pallet, container...
+        public string TypeOfPackage { get; set; } // box, pallet, container...
 
         public ICollection<Product> Products { get; set; }
     }

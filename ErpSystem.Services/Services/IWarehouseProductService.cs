@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
-using ErpSystem.Models;
-
-namespace ErpSystem.Services.Services
+﻿namespace ErpSystem.Services.Services
 {
+    using System.Collections.Generic;
+
+    using ErpSystem.Models;
+
     public interface IWarehouseProductService
     {
-        WarehouseProduct GetById(int Id);
+        WarehouseProduct GetById(int id);
 
         IEnumerable<KeyValuePair<string, int>> CurrentSpace();
     }

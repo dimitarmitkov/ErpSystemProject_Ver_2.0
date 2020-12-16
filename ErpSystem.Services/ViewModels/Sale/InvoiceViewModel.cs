@@ -1,5 +1,4 @@
-﻿using System;
-namespace ErpSystem.Services.ViewModels.Sale
+﻿namespace ErpSystem.Services.ViewModels.Sale
 {
     public class InvoiceViewModel : SalesPerCustomerOrProductViewModel
     {

@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-
-namespace ErpSystem.Models
+﻿namespace ErpSystem.Models
 {
+    using System;
+
     public class Sale
     {
 
