@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc.Rendering;
-
-namespace ErpSystem.Services.ViewModels.CurrentSale
+﻿namespace ErpSystem.Services.ViewModels.CurrentSale
 {
+    using System.Collections.Generic;
+
+    using Microsoft.AspNetCore.Mvc.Rendering;
+
     public class CurrentSaleViewModel
     {
         public string CustomerId { get; set; }

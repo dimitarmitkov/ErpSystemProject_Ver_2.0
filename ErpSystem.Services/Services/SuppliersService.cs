@@ -1,11 +1,11 @@
-﻿using System.Threading.Tasks;
-using AutoMapper;
-using ErpSystem.Data;
-using ErpSystem.Models;
-using ErpSystem.Services.ViewModels.Supplier;
-
-namespace ErpSystem.Services.Services
+﻿namespace ErpSystem.Services.Services
 {
+    using System.Threading.Tasks;
+    using AutoMapper;
+    using ErpSystem.Data;
+    using ErpSystem.Models;
+    using ErpSystem.Services.ViewModels.Supplier;
+
     public class SuppliersService : ISuppliersService
     {
         private readonly ErpSystemDbContext dbContext;
@@ -20,7 +20,7 @@ namespace ErpSystem.Services.Services
         // create supplier, test done
         public async Task AddSupplier(AddSupplierViewModel addSupplier)
         {
-            var supplier = mapper.Map<Supplier>(addSupplier);
+            var supplier = this.mapper.Map<Supplier>(addSupplier);
 
             await this.dbContext.Suppliers.AddAsync(supplier);
             await this.dbContext.SaveChangesAsync();

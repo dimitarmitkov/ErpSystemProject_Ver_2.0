@@ -1,16 +1,12 @@
-﻿using System;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
-using ErpSystem.Data;
-using ErpSystem.Data.Migrations;
-using ErpSystem.Models;
-using ErpSystem.Services.ViewModels.User;
-using Microsoft.AspNetCore.Identity;
-
-namespace ErpSystem.Services.Services
+﻿namespace ErpSystem.Services.Services
 {
+    using System.Linq;
+    using System.Threading.Tasks;
+    using ErpSystem.Data;
+    using ErpSystem.Models;
+    using ErpSystem.Services.ViewModels.User;
+    using Microsoft.AspNetCore.Identity;
+
     public class UsersService : IUsersService
     {
         private readonly UserManager<IdentityUser> userManager;
@@ -63,11 +59,12 @@ namespace ErpSystem.Services.Services
                 {
                     UserName = userEmail,
                     UserId = userId,
-                    IsLogged = true
+                    IsLogged = true,
                 };
 
                 await this.dbContext.LoggedUsers.AddAsync(loggedUser);
             }
+
             await this.dbContext.SaveChangesAsync();
         }
 

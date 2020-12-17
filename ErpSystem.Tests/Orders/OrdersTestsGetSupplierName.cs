@@ -1,12 +1,11 @@
-﻿using System;
-using ErpSystem.Data;
-using ErpSystem.Models;
-using ErpSystem.Services.Services;
-using Microsoft.EntityFrameworkCore;
-using Xunit;
-
-namespace ErpSystem.Tests.Orders
+﻿namespace ErpSystem.Tests.Orders
 {
+    using ErpSystem.Data;
+    using ErpSystem.Models;
+    using ErpSystem.Services.Services;
+    using Microsoft.EntityFrameworkCore;
+    using Xunit;
+
     public class OrdersTestsGetSupplierName
     {
         [Fact]

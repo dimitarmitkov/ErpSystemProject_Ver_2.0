@@ -1,7 +1,6 @@
 ﻿namespace ErpSystem.Services.ViewModels.Customer
 {
     using System.Collections.Generic;
-
     using Microsoft.AspNetCore.Mvc.Rendering;
 
     public class GenerateSaleCustomerViewModel

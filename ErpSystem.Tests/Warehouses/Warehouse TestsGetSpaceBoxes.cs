@@ -1,14 +1,12 @@
-﻿using System;
-using ErpSystem.Data;
-using ErpSystem.Services.Services;
-using ErpSystem.Models;
-using Microsoft.EntityFrameworkCore;
-using Xunit;
-using System.Linq;
-using System.Collections.Generic;
-
-namespace ErpSystem.Tests.Warehouses
+﻿namespace ErpSystem.Tests.Warehouses
 {
+    using System.Collections.Generic;
+    using ErpSystem.Data;
+    using ErpSystem.Models;
+    using ErpSystem.Services.Services;
+    using Microsoft.EntityFrameworkCore;
+    using Xunit;
+
     public class Warehouse_TestsGetSpaceBoxes
     {
         [Fact]
@@ -35,6 +33,7 @@ namespace ErpSystem.Tests.Warehouses
             {
                 boxSpace = box.Value;
             }
+
             Assert.Equal(30m, boxSpace, 0);
 
             var pallets = warehouse.GetSpacePallets();
@@ -44,6 +43,7 @@ namespace ErpSystem.Tests.Warehouses
             {
                 palletSpace = pallet.Value;
             }
+
             Assert.Equal(70m, palletSpace, 0);
 
             var boxesTaken = new WarehouseBoxSpace

@@ -1,37 +1,21 @@
-﻿using System;
-using System.Linq;
-using ErpSystem.Data;
-using ErpSystem.Models;
-using ErpSystem.Services.Services;
-using ErpSystem.Services.ViewModels.Order;
-using Microsoft.EntityFrameworkCore;
-using Xunit;
-
-namespace ErpSystem.Tests.Orders
+﻿namespace ErpSystem.Tests.Orders
 {
+    using System.Linq;
+    using ErpSystem.Data;
+    using ErpSystem.Models;
+    using ErpSystem.Services.Services;
+    using ErpSystem.Services.ViewModels.Order;
+    using Microsoft.EntityFrameworkCore;
+    using Xunit;
+
     public class OrdersTestsGenerateOrder
     {
-
         [Fact]
         public void CheckCorrectGenerateOrderUsingCalculateNeedOfOrderViewModel()
         {
             var optionsBuilder = new DbContextOptionsBuilder<ErpSystemDbContext>().UseInMemoryDatabase("testGenerateOrder");
             var dbContext = new ErpSystemDbContext(optionsBuilder.Options);
             var order = new OrdersService(dbContext);
-
-            //var createOrder = new Order
-            //{
-            //    SupplierId = 100,
-            //    Supplier = "First Supplier",
-            //    ProductId = 1001,
-            //    ProductName = "Product 1001",
-            //    OrderDate = DateTime.UtcNow.Date,
-            //    NumberOfTransportPackageUnitsOrdered = 10,
-            //    TotalAmountOfOrder = 1001.99m,
-            //    TotalOrderWeight = 230.23,
-            //};
-            //dbContext.Orders.Add(createOrder);
-            //dbContext.SaveChanges();
 
             var orderVM = new CalculateNeedOfOrderViewModel
             {

@@ -4,11 +4,11 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-
     using ErpSystem.Data;
     using ErpSystem.Models;
     using ErpSystem.Services.ViewModels.Order;
     using Microsoft.AspNetCore.Mvc.Rendering;
+
     public class OrdersService : IOrdersService
     {
         private readonly ErpSystemDbContext dbContext;
@@ -38,7 +38,7 @@
             this.dbContext.Orders.Add(order);
             this.dbContext.SaveChanges();
 
-            if (!ProductsForOrderList().Any())
+            if (!this.ProductsForOrderList().Any())
             {
                 var range = this.dbContext.DeliveryNeededProducts.ToList();
 

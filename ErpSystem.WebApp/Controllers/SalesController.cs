@@ -1,15 +1,13 @@
-﻿using System.Linq;
-using ErpSystem.Models;
-using ErpSystem.Services.Services;
-using ErpSystem.Services.ViewModels.CustomerWarehouse;
-using ErpSystem.Services.ViewModels.Sale;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Caching.Memory;
-
-namespace ErpSystem.WebApp.Controllers
+﻿namespace ErpSystem.WebApp.Controllers
 {
+    using System.Linq;
+    using ErpSystem.Models;
+    using ErpSystem.Services.Services;
+    using ErpSystem.Services.ViewModels.CustomerWarehouse;
+    using ErpSystem.Services.ViewModels.Sale;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
     public class SalesController : Controller
     {
         private readonly ISalesService salesService;

@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace ErpSystem.Services.Services
+﻿namespace ErpSystem.Services.Services
 {
+    using System.Collections.Generic;
+
     public interface IWarehouseSpace
     {
         IEnumerable<KeyValuePair<string, int>> GetSpaceBoxes();

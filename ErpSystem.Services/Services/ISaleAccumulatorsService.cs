@@ -1,6 +1,7 @@
-﻿using System;
-namespace ErpSystem.Services.Services
+﻿namespace ErpSystem.Services.Services
 {
+    using System;
+
     public interface ISaleAccumulatorsService
     {
         void CountBoxes();

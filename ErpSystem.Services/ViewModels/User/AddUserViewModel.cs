@@ -1,5 +1,4 @@
-﻿using System;
-namespace ErpSystem.Services.ViewModels.User
+﻿namespace ErpSystem.Services.ViewModels.User
 {
     public class AddUserViewModel
     {

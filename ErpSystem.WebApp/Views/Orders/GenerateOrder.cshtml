@@ -8,11 +8,6 @@
         <li class="breadcrumb-item active">Tables</li>
     </ol>
     <div class="card mb-4">
-        @*<div class="card-body">
-                DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables, please visit the
-                <a target="_blank" href="https://datatables.net/">official DataTables documentation</a>
-                .
-            </div>*@
         <form asp-controller="Orders" asp-action="GenerateOrder" method="post">
             <div class="form-row">
                 <div class="col-md-6">
@@ -73,9 +68,6 @@
                                     <p>@order.Package</p>
                                 </div>
                                 <div class="col-md-3">
-                                    @*<label class="small mb-1" asp-for="@order.NumberOfTransportUnitsClaculatedForOrder">Please enter number of @order.Package you like to order</label>
-                                        <input class="form-control py-1" id="productUnitsForOrder" type="number" placeholder="Enter number" asp-for="@order.OrderedTarnsportUnits" />
-                                        <span asp-validation-for="@order.OrderedTarnsportUnits" class="text-danger" style="font-size:0.7vw"></span>*@
                                 </div>
                                 <div class="col-md-3">
                                     @*<p><button type="submit" class="btn btn-primary btn-block">Confirm order</button></p>*@

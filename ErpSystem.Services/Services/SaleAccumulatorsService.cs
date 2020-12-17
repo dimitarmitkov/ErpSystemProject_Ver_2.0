@@ -1,10 +1,8 @@
-﻿using System;
-using System.Linq;
-using ErpSystem.Data;
-using ErpSystem.Models;
-
-namespace ErpSystem.Services.Services
+﻿namespace ErpSystem.Services.Services
 {
+    using System;
+    using ErpSystem.Data;
+
     public class SaleAccumulatorsService : ISaleAccumulatorsService
     {
         private readonly ErpSystemDbContext dbContext;
@@ -16,7 +14,7 @@ namespace ErpSystem.Services.Services
 
         public void CountBoxes()
         {
-
+            throw new NotImplementedException();
         }
 
         public void CountPallets()

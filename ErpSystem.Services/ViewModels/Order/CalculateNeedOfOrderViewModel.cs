@@ -2,8 +2,8 @@
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-
     using Microsoft.AspNetCore.Mvc.Rendering;
+
     public class CalculateNeedOfOrderViewModel
     {
         public int ProductId { get; set; }

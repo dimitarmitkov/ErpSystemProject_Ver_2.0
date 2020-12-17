@@ -1,11 +1,12 @@
-﻿using System.Threading.Tasks;
-using ErpSystem.Services.Services;
-using ErpSystem.Services.ViewModels.User;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-
-namespace ErpSystem.WebApp.Controllers
+﻿namespace ErpSystem.WebApp.Controllers
 {
+    using System.Threading.Tasks;
+
+    using ErpSystem.Services.Services;
+    using ErpSystem.Services.ViewModels.User;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
+
     public class UsersController : Controller
     {
         private readonly UserManager<IdentityUser> userManager;
@@ -27,7 +28,6 @@ namespace ErpSystem.WebApp.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginUserViewModel userViewModel)
         {
-
             if (!ModelState.IsValid)
             {
                 return this.View();
@@ -58,7 +58,6 @@ namespace ErpSystem.WebApp.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterUserViewModel registerUser)
         {
-
             if (!ModelState.IsValid)
             {
                 return this.View();

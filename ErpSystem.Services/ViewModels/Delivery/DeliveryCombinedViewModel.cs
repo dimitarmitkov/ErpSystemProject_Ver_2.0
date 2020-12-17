@@ -1,7 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-namespace ErpSystem.Services.ViewModels.Delivery
+﻿namespace ErpSystem.Services.ViewModels.Delivery
 {
+    using System;
+    using System.Collections.Generic;
+
     public class DeliveryCombinedViewModel
     {
         public IEnumerable<DeliveryListViewModel> List { get; set; }

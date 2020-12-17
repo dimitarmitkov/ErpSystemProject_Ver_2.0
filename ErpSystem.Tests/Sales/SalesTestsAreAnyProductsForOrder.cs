@@ -1,15 +1,15 @@
-﻿using System;
-using System.Linq;
-using AutoMapper;
-using ErpSystem.Data;
-using ErpSystem.Models;
-using ErpSystem.Services;
-using ErpSystem.Services.Services;
-using Microsoft.EntityFrameworkCore;
-using Xunit;
-
-namespace ErpSystem.Tests.Sales
+﻿namespace ErpSystem.Tests.Sales
 {
+    using System;
+    using System.Linq;
+    using AutoMapper;
+    using ErpSystem.Data;
+    using ErpSystem.Models;
+    using ErpSystem.Services;
+    using ErpSystem.Services.Services;
+    using Microsoft.EntityFrameworkCore;
+    using Xunit;
+
     public class SalesTestsAreAnyProductsForOrder
     {
         [Fact]
@@ -27,7 +27,7 @@ namespace ErpSystem.Tests.Sales
 
             var companyTypeTag = new CompanyTypeTag
             {
-                CompanyTypeOfRegistration = "OOD"
+                CompanyTypeOfRegistration = "OOD",
             };
 
             dbContext.CompanyTypeTags.Add(companyTypeTag);
@@ -218,7 +218,6 @@ namespace ErpSystem.Tests.Sales
 
             sale.CreateSale(firstProduct.Id, currentCusomer.Id, 2, true, true, 1, warehouseProductsFromDb.Where(x => x.ProductId == firstProduct.Id).Select(y => y.ProductId).FirstOrDefault());
 
-
             var result = sale.AreAnyProductsForOrder().ToList();
 
             Assert.True(result.Count() == 0);
@@ -246,7 +245,6 @@ namespace ErpSystem.Tests.Sales
             Assert.True(result.Count() == 2);
             Assert.True(result[1].Product == "Product 1002");
 
-
             sale.CreateSale(thirdProduct.Id, currentCusomer.Id, 150, false, false, 1, warehouseProductsFromDb.Where(x => x.ProductId == thirdProduct.Id).Select(y => y.ProductId).FirstOrDefault());
 
             result = sale.AreAnyProductsForOrder().ToList();
@@ -261,6 +259,5 @@ namespace ErpSystem.Tests.Sales
             Assert.True(result.Count() == 3);
             Assert.True(result[2].Product == "Product 1003");
         }
-
     }
 }

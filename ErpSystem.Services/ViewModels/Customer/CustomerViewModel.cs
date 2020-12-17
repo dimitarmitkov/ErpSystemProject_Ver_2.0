@@ -1,7 +1,6 @@
 ﻿namespace ErpSystem.Services.ViewModels.Customer
 {
     using System;
-
     using System.ComponentModel.DataAnnotations;
 
     public class CustomerViewModel
@@ -20,18 +19,18 @@
 
         [Required(ErrorMessage = "Please insert postal code")]
         [RegularExpression(@"[\d]+[ |-][\d]+|[\d]+", ErrorMessage = "Please enter correct postal code")]
-        public int PostalCode { get; set; } //TODO int must contain 4 numbers
+        public int PostalCode { get; set; }
 
         [Required(ErrorMessage = "Please insert address")]
         public string Address { get; set; }
 
         [Required(ErrorMessage = "Please insert phone number")]
         [Phone]
-        public string PhoneNumber { get; set; } //TODO must contain +359(or other prefix code) ...;
+        public string PhoneNumber { get; set; }
 
         [Required(ErrorMessage = "Please insert email")]
         [EmailAddress]
-        public string Email { get; set; } //TODO email check
+        public string Email { get; set; }
 
         [Range(0, 100)]
         public int? CustomerDiscount { get; set; }

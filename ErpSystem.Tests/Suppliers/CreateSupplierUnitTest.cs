@@ -1,15 +1,15 @@
-﻿using AutoMapper;
-using ErpSystem.Data;
-using ErpSystem.Services;
-using ErpSystem.Services.Services;
-using ErpSystem.Services.ViewModels.Supplier;
-using Microsoft.EntityFrameworkCore;
-using Xunit;
-namespace ErpSystem.Tests
+﻿namespace ErpSystem.Tests
 {
+    using AutoMapper;
+    using ErpSystem.Data;
+    using ErpSystem.Services;
+    using ErpSystem.Services.Services;
+    using ErpSystem.Services.ViewModels.Supplier;
+    using Microsoft.EntityFrameworkCore;
+    using Xunit;
+
     public class CreateSupplierUnitTest
     {
-
         [Fact]
         public void CheckCorrectCreateSupplierServiceMethodAddSupplier()
         {

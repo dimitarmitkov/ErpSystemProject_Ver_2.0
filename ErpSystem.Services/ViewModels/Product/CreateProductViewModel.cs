@@ -2,7 +2,6 @@
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-
     using Microsoft.AspNetCore.Mvc.Rendering;
 
     public class CreateProductViewModel
@@ -39,10 +38,8 @@
         [Range(0, 360, ErrorMessage = "Days must be between 0 and 360")]
         public int TimeToDelivery { get; set; }
 
-        //[CompareDates("ProductionDate", "ExpireDate")]
         public string ProductionDate { get; set; }
 
-        //[CompareDates("ProductionDate", "ExpireDate")]
         public string ExpireDate { get; set; }
 
         [Required(ErrorMessage = "Please insert transport package type")]

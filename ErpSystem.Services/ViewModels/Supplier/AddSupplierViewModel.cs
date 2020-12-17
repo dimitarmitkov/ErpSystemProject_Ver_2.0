@@ -20,11 +20,11 @@
 
         [Required(ErrorMessage = "Please insert supplier phone")]
         [Phone]
-        public string PhoneNumber { get; set; } //TODO must contain +359(or other prefix code) ...;
+        public string PhoneNumber { get; set; }
 
         [Required(ErrorMessage = "Please insert supplier email")]
         [EmailAddress]
-        public string Email { get; set; } //TODO email check
+        public string Email { get; set; }
 
         public bool CustomsAuthorisationNeeded { get; set; }
 

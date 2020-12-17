@@ -1,7 +1,6 @@
 ﻿namespace ErpSystem.Services.Services
 {
     using System.Threading.Tasks;
-
     using ErpSystem.Services.ViewModels.Customer;
 
     public interface ICustomersService

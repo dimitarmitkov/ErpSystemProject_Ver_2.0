@@ -2,22 +2,19 @@
 {
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
-
     using ErpSystem.Data;
-
     using Microsoft.EntityFrameworkCore.Internal;
 
     public class HasSupplierAttribute : ValidationAttribute
     {
         public HasSupplierAttribute(string supplier)
         {
-            this.supplierName = supplier;
+            this.SupplierName = supplier;
         }
 
-        public string supplierName { get; }
+        public string SupplierName { get; }
 
-        protected override ValidationResult IsValid(object value,
-            ValidationContext validationContext)
+        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
             using (var dbContext = new ErpSystemDbContext())
             {

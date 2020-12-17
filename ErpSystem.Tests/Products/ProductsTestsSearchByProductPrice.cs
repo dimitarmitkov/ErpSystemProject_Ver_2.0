@@ -1,13 +1,13 @@
-﻿using System;
-using System.Linq;
-using ErpSystem.Data;
-using ErpSystem.Models;
-using ErpSystem.Services.Services;
-using Microsoft.EntityFrameworkCore;
-using Xunit;
-
-namespace ErpSystem.Tests.Products
+﻿namespace ErpSystem.Tests.Products
 {
+    using System;
+    using System.Linq;
+    using ErpSystem.Data;
+    using ErpSystem.Models;
+    using ErpSystem.Services.Services;
+    using Microsoft.EntityFrameworkCore;
+    using Xunit;
+
     public class ProductsTestsSearchByProductPrice
     {
         [Fact]
@@ -26,7 +26,7 @@ namespace ErpSystem.Tests.Products
                 CustomsAuthorisationNeeded = false,
                 Email = "firstSupplier@email.com",
                 PhoneNumber = "359 887 111 111",
-                SupplierAdditionalInformation = "empty"
+                SupplierAdditionalInformation = "empty",
             };
 
             dbContext.Suppliers.Add(supplier1);
@@ -40,7 +40,7 @@ namespace ErpSystem.Tests.Products
                 CustomsAuthorisationNeeded = true,
                 Email = "secondSupplier@email.com",
                 PhoneNumber = "359 887 222 222",
-                SupplierAdditionalInformation = "empty"
+                SupplierAdditionalInformation = "empty",
             };
             dbContext.Suppliers.Add(supplier2);
             dbContext.SaveChanges();

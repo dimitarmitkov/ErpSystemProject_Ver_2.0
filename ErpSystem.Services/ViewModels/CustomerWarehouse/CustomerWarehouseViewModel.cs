@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using ErpSystem.Services.ViewModels.CurrentSale;
-using ErpSystem.Services.ViewModels.Warehouse;
-using Microsoft.AspNetCore.Mvc.Rendering;
-
-namespace ErpSystem.Services.ViewModels.CustomerWarehouse
+﻿namespace ErpSystem.Services.ViewModels.CustomerWarehouse
 {
+    using System.Collections.Generic;
+    using ErpSystem.Services.ViewModels.CurrentSale;
+    using ErpSystem.Services.ViewModels.Warehouse;
+    using Microsoft.AspNetCore.Mvc.Rendering;
+
     public class CustomerWarehouseViewModel
     {
         public IEnumerable<WarehouseProductViewModel> WarehouseProductCombined { get; set; }

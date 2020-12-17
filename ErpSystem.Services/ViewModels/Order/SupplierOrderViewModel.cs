@@ -1,7 +1,6 @@
 ﻿namespace ErpSystem.Services.ViewModels.Order
 {
     using System.Collections.Generic;
-
     using Microsoft.AspNetCore.Mvc.Rendering;
 
     public class SupplierOrderViewModel

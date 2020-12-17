@@ -1,14 +1,14 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Xunit;
-using ErpSystem.Data;
-using ErpSystem.Models;
-using System;
-using ErpSystem.Services.ViewModels.Product;
-using ErpSystem.Services.Services;
-using System.Linq;
-
-namespace ErpSystem.Tests
+﻿namespace ErpSystem.Tests
 {
+    using System;
+    using System.Linq;
+    using ErpSystem.Data;
+    using ErpSystem.Models;
+    using ErpSystem.Services.Services;
+    using ErpSystem.Services.ViewModels.Product;
+    using Microsoft.EntityFrameworkCore;
+    using Xunit;
+
     public class ProductsTestsFindAllProducts
     {
         [Fact]
@@ -52,7 +52,7 @@ namespace ErpSystem.Tests
                 CustomsAuthorisationNeeded = false,
                 Email = "email@email.com",
                 PhoneNumber = "359 887 123 456",
-                SupplierAdditionalInformation = "empty"
+                SupplierAdditionalInformation = "empty",
             };
 
             dbContext.Suppliers.Add(supplier);

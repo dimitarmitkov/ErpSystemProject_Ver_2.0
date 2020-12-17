@@ -3,13 +3,13 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-
     using ErpSystem.Data;
     using ErpSystem.Models;
     using ErpSystem.Services.ViewModels.Order;
     using ErpSystem.Services.ViewModels.Sale;
     using ErpSystem.Services.ViewModels.Warehouse;
     using Microsoft.AspNetCore.Mvc.Rendering;
+
     public class SalesService : ISalesService
     {
         private readonly ErpSystemDbContext dbContext;
@@ -22,7 +22,6 @@
         // create sale start, test completed
         public void CreateSale(int productId, string customerId, int numberOfSoldProducts, bool hasProductDiscount, bool hasCustomerDiscount, int warehouseId, int productByExpireDateId)
         {
-
             var sale = new Sale
             {
                 ProductId = productId,
@@ -39,28 +38,36 @@
             var price = this.dbContext.Products.Where(p => p.Id == productId && p.IsDeleted == false).Select(x => x.ProductSalePrice).FirstOrDefault();
             var customerDiscount = this.dbContext.Customers.Where(c => c.Id == customerId).Select(x => x.CustomerDiscount).FirstOrDefault();
 
-            if (hasProductDiscount && !string.IsNullOrEmpty(productDiscount.ToString())) sale.SingleProudctSalePrice = (decimal)(price - price * productDiscount / 100);
-            else sale.SingleProudctSalePrice = (decimal)(price);
+            if (hasProductDiscount && !string.IsNullOrEmpty(productDiscount.ToString()))
+            {
+                sale.SingleProudctSalePrice = (decimal)(price - (price * productDiscount / 100));
+            }
+            else
+            {
+                sale.SingleProudctSalePrice = (decimal)price;
+            }
 
-            if (hasCustomerDiscount && !string.IsNullOrEmpty(customerDiscount.ToString())) sale.SingleProudctSalePrice = (decimal)(sale.SingleProudctSalePrice - sale.SingleProudctSalePrice * customerDiscount / 100);
+            if (hasCustomerDiscount && !string.IsNullOrEmpty(customerDiscount.ToString()))
+            {
+                sale.SingleProudctSalePrice = (decimal)(sale.SingleProudctSalePrice - (sale.SingleProudctSalePrice * customerDiscount / 100));
+            }
 
             var productSold = this.dbContext.WarehouseProducts.FirstOrDefault(p => p.ProductId == productId && p.ProductsAvailable != 0 && p.Id == productByExpireDateId);
 
             if (productSold.ProductsAvailable >= numberOfSoldProducts)
             {
-
-                //save sale in Sales database
+                // save sale in Sales database
                 this.dbContext.Sales.Add(sale);
                 int saved = this.dbContext.SaveChanges();
 
-                //decrease number of available products based on number of sold products
+                // decrease number of available products based on number of sold products
                 productSold.ProductsAvailable -= numberOfSoldProducts;
 
                 this.dbContext.WarehouseProducts.Update(productSold);
                 this.dbContext.SaveChanges();
 
                 // check if product needs order
-                IsProductForOrder(sale.ProductId);
+                this.IsProductForOrder(sale.ProductId);
 
                 // decrase number of boxes or pallets if number of sold products reaches box or pallet size
                 bool isProductInPallet = this.dbContext.Products.Where(p => p.Id == productSold.ProductId && p.IsDeleted == false).Select(p => p.IsPallet == true).FirstOrDefault();
@@ -73,8 +80,7 @@
 
                 var preSaleProductsAvailabe = productSold.ProductsAvailable + numberOfSoldProducts;
 
-                //TODO transaction for sale
-
+                // TODO transaction for sale
                 if (isProductInPallet)
                 {
                     // calculate pallets left
@@ -111,7 +117,7 @@
                     var boxes = preSaleNumberOfBoxes - numberOfBoxesLeft;
 
                     // increase space in warehouse if whole box was finished, if not - space remains unchanged
-                    productSoldWarehouse.CurrentBoxesFrontSpaceFree += boxLenght > shelfDepth ? (boxes) * boxLenght : (boxes) * boxFront;
+                    productSoldWarehouse.CurrentBoxesFrontSpaceFree += boxLenght > shelfDepth ? boxes * boxLenght : boxes * boxFront;
 
                     this.dbContext.Warehouses.Update(productSoldWarehouse);
                     this.dbContext.SaveChanges();
@@ -153,17 +159,14 @@
         // generates crud record for customer, test completed
         public void GenerateCurrentSale(string companyEik, bool hasDiscount, string userId)
         {
-            //TODO add userID for confirmation
-
+            // TODO add userID for confirmation
             var deletableCustomer = this.dbContext.CurrentSales.FirstOrDefault(c => c.Id > -1);
-
 
             this.dbContext.CurrentSales.Remove(deletableCustomer);
             this.dbContext.SaveChanges();
 
             var customerId = this.dbContext.Customers.Where(c => c.CompanyEik == companyEik).Select(x => x.Id).FirstOrDefault();
             var customerName = this.dbContext.Customers.Where(c => c.CompanyEik == companyEik).Select(x => x.CompanyName).FirstOrDefault();
-
 
             var current = new CurrentSale
             {
@@ -184,7 +187,6 @@
             {
                 Text = p.CompanyName + " " + p.CompanyTypeOfRegistration.CompanyTypeOfRegistration + " " + p.CompanyEik,
                 Value = p.CompanyEik,
-
             }).ToList();
         }
 
@@ -218,12 +220,24 @@
         {
             IQueryable<Sale> saleView = null;
 
-            if (!string.IsNullOrEmpty(customerName)) saleView = this.dbContext.Sales.Where(s => s.Customer.CompanyName == customerName);
-            else if (!string.IsNullOrEmpty(customerName) && !string.IsNullOrEmpty(productName)) saleView = this.dbContext.Sales.Where(s => s.Customer.CompanyName == customerName && s.Product.ProductName == productName);
-            else if (!string.IsNullOrEmpty(productName)) saleView = this.dbContext.Sales.Where(s => s.Product.ProductName == productName);
-            else saleView = this.dbContext.Sales.Where(s => !string.IsNullOrEmpty(s.Id.ToString()));
+            if (!string.IsNullOrEmpty(customerName))
+            {
+                saleView = this.dbContext.Sales.Where(s => s.Customer.CompanyName == customerName);
+            }
+            else if (!string.IsNullOrEmpty(customerName) && !string.IsNullOrEmpty(productName))
+            {
+                saleView = this.dbContext.Sales.Where(s => s.Customer.CompanyName == customerName && s.Product.ProductName == productName);
+            }
+            else if (!string.IsNullOrEmpty(productName))
+            {
+                saleView = this.dbContext.Sales.Where(s => s.Product.ProductName == productName);
+            }
+            else
+            {
+                saleView = this.dbContext.Sales.Where(s => !string.IsNullOrEmpty(s.Id.ToString()));
+            }
 
-            List<SalesPerCustomerOrProductViewModel> listOfSales = ListOfSalesAsSalesViewModel(saleView);
+            List<SalesPerCustomerOrProductViewModel> listOfSales = this.ListOfSalesAsSalesViewModel(saleView);
             return listOfSales;
         }
 
@@ -244,6 +258,7 @@
                 {
                     dictionary[sale.DateOfSale.Date.ToString("yyyy-MM-dd")] = 0;
                 }
+
                 dictionary[sale.DateOfSale.Date.ToString("yyyy-MM-dd")] += sale.TotalSalesSum;
             }
 
@@ -326,7 +341,7 @@
             return list;
         }
 
-        // private 
+        // private
         private List<SalesPerCustomerOrProductViewModel> ListOfSalesAsSalesViewModel(IQueryable<Sale> saleView)
         {
             return saleView.Select(x => new SalesPerCustomerOrProductViewModel

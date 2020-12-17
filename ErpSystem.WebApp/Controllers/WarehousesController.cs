@@ -1,9 +1,8 @@
-﻿using System;
-using ErpSystem.Services.Services;
-using Microsoft.AspNetCore.Mvc;
-
-namespace ErpSystem.WebApp.Controllers
+﻿namespace ErpSystem.WebApp.Controllers
 {
+    using ErpSystem.Services.Services;
+    using Microsoft.AspNetCore.Mvc;
+
     public class WarehousesController : Controller
     {
         private readonly IWarehouseSpace warehouseSpace;
@@ -24,6 +23,5 @@ namespace ErpSystem.WebApp.Controllers
             var viewModel = warehouseSpace.GetSpacePallets();
             return this.Json(viewModel);
         }
-
     }
 }

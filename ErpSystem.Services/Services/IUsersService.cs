@@ -1,12 +1,11 @@
-﻿using System.Threading.Tasks;
-using ErpSystem.Services.ViewModels.User;
-using Microsoft.AspNetCore.Identity;
-
-namespace ErpSystem.Services.Services
+﻿namespace ErpSystem.Services.Services
 {
+    using System.Threading.Tasks;
+    using ErpSystem.Services.ViewModels.User;
+    using Microsoft.AspNetCore.Identity;
+
     public interface IUsersService
     {
-
         IdentityUser CreateUser(RegisterUserViewModel registerUser);
 
         IdentityUser LoginUser(LoginUserViewModel userViewModel);

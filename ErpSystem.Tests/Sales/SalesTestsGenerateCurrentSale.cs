@@ -1,14 +1,14 @@
-﻿using System.Linq;
-using AutoMapper;
-using ErpSystem.Data;
-using ErpSystem.Models;
-using ErpSystem.Services;
-using ErpSystem.Services.Services;
-using Microsoft.EntityFrameworkCore;
-using Xunit;
-
-namespace ErpSystem.Tests.Sales
+﻿namespace ErpSystem.Tests.Sales
 {
+    using System.Linq;
+    using AutoMapper;
+    using ErpSystem.Data;
+    using ErpSystem.Models;
+    using ErpSystem.Services;
+    using ErpSystem.Services.Services;
+    using Microsoft.EntityFrameworkCore;
+    using Xunit;
+
     public class SalesTestsGenerateCurrentSale
     {
         [Fact]
@@ -26,7 +26,7 @@ namespace ErpSystem.Tests.Sales
 
             var companyTypeTag = new CompanyTypeTag
             {
-                CompanyTypeOfRegistration = "OOD"
+                CompanyTypeOfRegistration = "OOD",
             };
 
             dbContext.CompanyTypeTags.Add(companyTypeTag);
@@ -44,7 +44,7 @@ namespace ErpSystem.Tests.Sales
                 HasDelivery = true,
                 Email = "customer1@mail.com",
                 CompanyTypeOfRegistration = dbContext.CompanyTypeTags.FirstOrDefault(),
-                CompanyEik = "BG111111111"
+                CompanyEik = "BG111111111",
             };
 
             dbContext.Customers.Add(createCustomer1);
@@ -61,7 +61,7 @@ namespace ErpSystem.Tests.Sales
                 HasDelivery = true,
                 Email = "customer1@mail.com",
                 CompanyTypeOfRegistration = dbContext.CompanyTypeTags.FirstOrDefault(),
-                CompanyEik = "BG222222222"
+                CompanyEik = "BG222222222",
             };
 
             dbContext.Customers.Add(createCustomer2);

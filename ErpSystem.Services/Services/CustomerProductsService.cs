@@ -1,10 +1,9 @@
-﻿using System;
-using System.Linq;
-using ErpSystem.Data;
-using ErpSystem.Models;
-
-namespace ErpSystem.Services.Services
+﻿namespace ErpSystem.Services.Services
 {
+    using System.Linq;
+    using ErpSystem.Data;
+    using ErpSystem.Models;
+
     public class CustomerProductsService : ICustomerProductsService
     {
         private readonly ErpSystemDbContext dbContext;

@@ -1,12 +1,12 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using ErpSystem.Data;
-using ErpSystem.Models;
-using ErpSystem.Services.ViewModels.Delivery;
-
-namespace ErpSystem.Services.Services
+﻿namespace ErpSystem.Services.Services
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using ErpSystem.Data;
+    using ErpSystem.Models;
+    using ErpSystem.Services.ViewModels.Delivery;
+
     public class DeliveriesService : IDeliveriesService
     {
         private const int ProductsPerPage = 2;
@@ -39,11 +39,11 @@ namespace ErpSystem.Services.Services
                     Package = this.dbContext.Products.Where(p => p.Id == x.ProductId).Select(y => y.ProductTransportPackage.TypeOfPackage).FirstOrDefault(),
                     TotalOrderPrice = x.TotalAmountOfOrder * this.dbContext.Products.Where(p => p.Id == x.ProductId).Select(y => y.ProductTransportPackageNumberOfPieces).FirstOrDefault(),
                     TotalOrderWeight = this.dbContext.Orders.Where(s => s.SupplierId == x.SupplierId).Sum(x => x.TotalOrderWeight),
-
                 }).ToList();
 
                 listForDelivery.AddRange(list);
             }
+
             return listForDelivery.OrderBy(x => x.Supplier).ThenBy(x => x.Product).Skip((page - 1) * itemsPerPage).Take(itemsPerPage);
         }
 
@@ -93,8 +93,7 @@ namespace ErpSystem.Services.Services
                 var boxLenght = this.dbContext.Products.Where(p => p.Id == deliveryList.ProductId && p.IsDeleted == false).Select(x => x.ProductTransportPackageLengthSize).FirstOrDefault();
                 var shelfDepth = this.dbContext.WarehouseBoxes.Where(w => w.Id == deliveryList.ProductId).Select(x => x.ShelfDepth).FirstOrDefault();
 
-
-                addPorductInWarehouseProducts.Warehouse.CurrentBoxesFrontSpaceFree -= boxLenght > shelfDepth ? (deliveryList.NumberOfTransportUnits) * boxLenght : (deliveryList.NumberOfTransportUnits) * boxFront;
+                addPorductInWarehouseProducts.Warehouse.CurrentBoxesFrontSpaceFree -= boxLenght > shelfDepth ? deliveryList.NumberOfTransportUnits * boxLenght : deliveryList.NumberOfTransportUnits * boxFront;
 
                 this.dbContext.Warehouses.Update(addPorductInWarehouseProducts.Warehouse);
                 this.dbContext.SaveChanges();
@@ -116,7 +115,7 @@ namespace ErpSystem.Services.Services
             this.dbContext.SaveChanges();
         }
 
-        // get cout, test completed 
+        // get cout, test completed
         public int GetCount()
         {
             return this.dbContext.Orders.Count();

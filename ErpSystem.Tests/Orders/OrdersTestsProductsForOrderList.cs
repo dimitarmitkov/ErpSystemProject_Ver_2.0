@@ -1,13 +1,13 @@
-﻿using System;
-using System.Linq;
-using ErpSystem.Data;
-using ErpSystem.Models;
-using ErpSystem.Services.Services;
-using Microsoft.EntityFrameworkCore;
-using Xunit;
-
-namespace ErpSystem.Tests.Orders
+﻿namespace ErpSystem.Tests.Orders
 {
+    using System;
+    using System.Linq;
+    using ErpSystem.Data;
+    using ErpSystem.Models;
+    using ErpSystem.Services.Services;
+    using Microsoft.EntityFrameworkCore;
+    using Xunit;
+
     public class OrdersTestsProductsForOrderList
     {
         [Fact]
@@ -26,7 +26,7 @@ namespace ErpSystem.Tests.Orders
                 CustomsAuthorisationNeeded = false,
                 Email = "email@email.com",
                 PhoneNumber = "359 887 123 456",
-                SupplierAdditionalInformation = "empty"
+                SupplierAdditionalInformation = "empty",
             };
 
             dbContext.Suppliers.Add(supplier);

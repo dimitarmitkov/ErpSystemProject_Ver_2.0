@@ -2,7 +2,6 @@
 {
     using System;
     using System.ComponentModel.DataAnnotations;
-
     using ErpSystem.Services.ViewModels.Order;
 
     public class DeliveryListViewModel : CalculateNeedOfOrderViewModel

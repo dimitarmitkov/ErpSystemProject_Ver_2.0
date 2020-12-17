@@ -6,8 +6,8 @@
     {
         public CompareDatesAttribute(string productionDate, string expireDate)
         {
-            ProductionDate = productionDate;
-            ExpireDate = expireDate;
+            this.ProductionDate = productionDate;
+            this.ExpireDate = expireDate;
         }
 
         public string ProductionDate { get; }
@@ -16,8 +16,6 @@
 
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
-            // get your StartDate and EndDate from model and value
-
             // perform comparison
             if (value == null)
             {

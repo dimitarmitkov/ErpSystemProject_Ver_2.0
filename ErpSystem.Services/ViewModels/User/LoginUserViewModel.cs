@@ -1,8 +1,7 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-
-namespace ErpSystem.Services.ViewModels.User
+﻿namespace ErpSystem.Services.ViewModels.User
 {
+    using System.ComponentModel.DataAnnotations;
+
     public class LoginUserViewModel
     {
         [Required]

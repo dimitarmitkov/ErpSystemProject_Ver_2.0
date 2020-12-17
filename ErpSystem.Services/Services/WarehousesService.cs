@@ -1,11 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using ErpSystem.Data;
-using ErpSystem.Models;
-using ErpSystem.Services.ViewModels.Warehouse;
-
-namespace ErpSystem.Services.Services
+﻿namespace ErpSystem.Services.Services
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using ErpSystem.Data;
 
     public class WarehousesService : IWarehousesService
     {

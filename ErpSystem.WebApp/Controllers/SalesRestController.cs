@@ -1,10 +1,8 @@
-﻿using ErpSystem.Services.Services;
-using ErpSystem.Services.ViewModels.Sale;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-
-namespace ErpSystem.WebApp.Controllers
+﻿namespace ErpSystem.WebApp.Controllers
 {
+    using ErpSystem.Services.Services;
+    using ErpSystem.Services.ViewModels.Sale;
+    using Microsoft.AspNetCore.Mvc;
 
     public class SalesRestController : Controller
     {

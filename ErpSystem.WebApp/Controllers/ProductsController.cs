@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using ErpSystem.Services.Services;
-using ErpSystem.Services.ViewModels.Product;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-
-namespace ErpSystem.WebApp.Controllers
+﻿namespace ErpSystem.WebApp.Controllers
 {
+    using System.Collections.Generic;
+
+    using ErpSystem.Services.Services;
+    using ErpSystem.Services.ViewModels.Product;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
+
     public class ProductsController : Controller
     {
         private readonly IProductsService productsService;
@@ -16,7 +15,6 @@ namespace ErpSystem.WebApp.Controllers
         {
             this.productsService = productsService;
         }
-
 
         public IActionResult Search()
         {
@@ -63,8 +61,6 @@ namespace ErpSystem.WebApp.Controllers
         [Authorize(Roles = "Admin")]
         public IActionResult Delete(CombinedProductViewModel combinedProductView)
         {
-
-
             if (!ModelState.IsValid)
             {
                 var viewModel = new CombinedProductViewModel();
@@ -77,8 +73,5 @@ namespace ErpSystem.WebApp.Controllers
 
             return this.Redirect("/Products/Delete");
         }
-
-
-
     }
 }

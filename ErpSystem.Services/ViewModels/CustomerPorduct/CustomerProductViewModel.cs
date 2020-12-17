@@ -1,5 +1,4 @@
-﻿using System;
-namespace ErpSystem.Services.ViewModels.CustomerPorduct
+﻿namespace ErpSystem.Services.ViewModels.CustomerPorduct
 {
     public class CustomerProductViewModel
     {

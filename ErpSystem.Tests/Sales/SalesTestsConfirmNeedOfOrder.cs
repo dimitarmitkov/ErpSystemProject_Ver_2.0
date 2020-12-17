@@ -1,15 +1,15 @@
-﻿using System;
-using System.Linq;
-using AutoMapper;
-using ErpSystem.Data;
-using ErpSystem.Models;
-using ErpSystem.Services;
-using ErpSystem.Services.Services;
-using Microsoft.EntityFrameworkCore;
-using Xunit;
-
-namespace ErpSystem.Tests.Sales
+﻿namespace ErpSystem.Tests.Sales
 {
+    using System;
+    using System.Linq;
+    using AutoMapper;
+    using ErpSystem.Data;
+    using ErpSystem.Models;
+    using ErpSystem.Services;
+    using ErpSystem.Services.Services;
+    using Microsoft.EntityFrameworkCore;
+    using Xunit;
+
     public class SalesTestsConfirmNeedOfOrder
     {
         [Fact]
@@ -27,7 +27,7 @@ namespace ErpSystem.Tests.Sales
 
             var companyTypeTag = new CompanyTypeTag
             {
-                CompanyTypeOfRegistration = "OOD"
+                CompanyTypeOfRegistration = "OOD",
             };
 
             dbContext.CompanyTypeTags.Add(companyTypeTag);
@@ -220,16 +220,11 @@ namespace ErpSystem.Tests.Sales
 
             sale.CreateSale(firstProduct.Id, currentCusomer.Id, 4, true, true, 1, warehouseProductsFromDb.Where(x => x.ProductId == firstProduct.Id).Select(y => y.ProductId).FirstOrDefault());
 
-
             sale.CreateSale(secondProduct.Id, currentCusomer.Id, 202, true, true, 1, warehouseProductsFromDb.Where(x => x.ProductId == secondProduct.Id).Select(y => y.ProductId).FirstOrDefault());
 
-
             sale.CreateSale(secondProduct.Id, currentCusomer.Id, 202, true, true, 1, warehouseProductsFromDb.Where(x => x.ProductId == secondProduct.Id).Select(y => y.ProductId).FirstOrDefault());
-
 
             sale.CreateSale(thirdProduct.Id, currentCusomer.Id, 150, false, false, 1, warehouseProductsFromDb.Where(x => x.ProductId == thirdProduct.Id).Select(y => y.ProductId).FirstOrDefault());
-
-
 
             sale.CreateSale(thirdProduct.Id, currentCusomer.Id, 80, true, true, 1, warehouseProductsFromDb.Where(x => x.ProductId == thirdProduct.Id).Select(y => y.ProductId).FirstOrDefault());
 

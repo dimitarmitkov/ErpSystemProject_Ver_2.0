@@ -1,13 +1,11 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using ErpSystem.Services.Services;
-using ErpSystem.Services.ViewModels.Order;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-
-namespace ErpSystem.WebApp.Controllers
+﻿namespace ErpSystem.WebApp.Controllers
 {
+    using System.Linq;
+
+    using ErpSystem.Services.Services;
+    using ErpSystem.Services.ViewModels.Order;
+    using Microsoft.AspNetCore.Mvc;
+
     public class OrdersController : Controller
     {
         private readonly IOrdersService ordersService;
@@ -17,11 +15,8 @@ namespace ErpSystem.WebApp.Controllers
             this.ordersService = ordersService;
         }
 
-
-
         public IActionResult GenerateOrder()
         {
-
             SupplierOrderViewModel viewModel = new SupplierOrderViewModel();
             viewModel.CalculateOrderProductsList = ordersService.ProductsForOrderList();
             viewModel.SuppliersListDropDown = ordersService.SuppliersDropDown();
@@ -64,7 +59,6 @@ namespace ErpSystem.WebApp.Controllers
             if (!ModelState.IsValid)
             {
                 viewModel.CalculateOrderProductsList = ordersService.ProductsForOrderList();
-                //viewModel.CalculateOrderProductsList = ordersService.ProductsForOrderList();
 
                 return this.View(viewModel);
             }

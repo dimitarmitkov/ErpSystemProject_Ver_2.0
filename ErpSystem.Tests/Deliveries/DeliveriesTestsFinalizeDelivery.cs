@@ -1,14 +1,14 @@
-﻿using System;
-using System.Linq;
-using ErpSystem.Data;
-using ErpSystem.Models;
-using ErpSystem.Services.Services;
-using ErpSystem.Services.ViewModels.Delivery;
-using Microsoft.EntityFrameworkCore;
-using Xunit;
-
-namespace ErpSystem.Tests.Deliveries
+﻿namespace ErpSystem.Tests.Deliveries
 {
+    using System;
+    using System.Linq;
+    using ErpSystem.Data;
+    using ErpSystem.Models;
+    using ErpSystem.Services.Services;
+    using ErpSystem.Services.ViewModels.Delivery;
+    using Microsoft.EntityFrameworkCore;
+    using Xunit;
+
     public class DeliveriesTestsFinalizeDelivery
     {
         [Fact]

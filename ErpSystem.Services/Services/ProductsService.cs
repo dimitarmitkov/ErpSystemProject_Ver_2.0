@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using ErpSystem.Data;
-using ErpSystem.Models;
-using ErpSystem.Services.ViewModels.Product;
-using Microsoft.AspNetCore.Mvc.Rendering;
-
-namespace ErpSystem.Services.Services
+﻿namespace ErpSystem.Services.Services
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using ErpSystem.Data;
+    using ErpSystem.Models;
+    using ErpSystem.Services.ViewModels.Product;
+    using Microsoft.AspNetCore.Mvc.Rendering;
+
     public class ProductsService : IProductsService
     {
         private ErpSystemDbContext dbContext;
@@ -73,7 +73,7 @@ namespace ErpSystem.Services.Services
             {
                 productTransportPackageEntity = new TransportPackageTag
                 {
-                    TypeOfPackage = createProduct.ProductTransportPackage
+                    TypeOfPackage = createProduct.ProductTransportPackage,
                 };
             }
 
@@ -86,7 +86,7 @@ namespace ErpSystem.Services.Services
             {
                 measurmentTagEntity = new ProductMeasurmentTag
                 {
-                    Maesurment = createProduct.MeasurmentTag
+                    Maesurment = createProduct.MeasurmentTag,
                 };
             }
 
@@ -139,43 +139,72 @@ namespace ErpSystem.Services.Services
         {
             IQueryable<Product> productView = null;
 
-            if (productId != null) productView = this.dbContext.Products.Where(p => p.Id == productId && p.IsDeleted == false);
-            if (productName != null) productView = this.dbContext.Products.Where(p => p.ProductName == productName && p.IsDeleted == false);
-            if (productName == null && productId == null) productView = this.dbContext.Products.Where(p => p.Id > -1 && p.IsDeleted == false);
+            if (productId != null)
+            {
+                productView = this.dbContext.Products.Where(p => p.Id == productId && p.IsDeleted == false);
+            }
 
-            List<ProductViewModel> result = SelectProductViewModel(productView);
+            if (productName != null)
+            {
+                productView = this.dbContext.Products.Where(p => p.ProductName == productName && p.IsDeleted == false);
+            }
+
+            if (productName == null && productId == null)
+            {
+                productView = this.dbContext.Products.Where(p => p.Id > -1 && p.IsDeleted == false);
+            }
+
+            List<ProductViewModel> result = this.SelectProductViewModel(productView);
 
             return result;
         }
-
 
         // search by price, test done
         public IEnumerable<ProductViewModel> SearchByProductPrice(decimal? minPrice, decimal? maxPrice)
         {
             IQueryable<Product> productView = null;
 
-            if (minPrice != null && maxPrice == null) productView = this.dbContext.Products.Where(p => p.ProductSalePrice >= minPrice && p.IsDeleted == false);
-            else if (maxPrice != null && minPrice == null) productView = this.dbContext.Products.Where(p => p.ProductSalePrice <= maxPrice && p.IsDeleted == false);
-            else if (maxPrice != null && minPrice != null) productView = this.dbContext.Products.Where(p => p.ProductSalePrice >= minPrice && p.ProductSalePrice <= maxPrice && p.IsDeleted == false);
+            if (minPrice != null && maxPrice == null)
+            {
+                productView = this.dbContext.Products.Where(p => p.ProductSalePrice >= minPrice && p.IsDeleted == false);
+            }
+            else if (maxPrice != null && minPrice == null)
+            {
+                productView = this.dbContext.Products.Where(p => p.ProductSalePrice <= maxPrice && p.IsDeleted == false);
+            }
+            else if (maxPrice != null && minPrice != null)
+            {
+                productView = this.dbContext.Products.Where(p => p.ProductSalePrice >= minPrice && p.ProductSalePrice <= maxPrice && p.IsDeleted == false);
+            }
 
-            List<ProductViewModel> result = SelectProductViewModel(productView);
+            List<ProductViewModel> result = this.SelectProductViewModel(productView);
 
             return result;
         }
-
 
         // search product by country of origin, test done
         public IEnumerable<ProductViewModel> SearchByProductSupplierCountryOrCity(string country, string city)
         {
             IQueryable<Product> productView = null;
 
-            if (country != null && city == null) productView = this.dbContext.Products.Where(p => p.Supplier.SupplierCountry == country && p.IsDeleted == false);
-            else if (city != null && country == null) productView = this.dbContext.Products.Where(p => p.Supplier.SupplierAddress == city && p.IsDeleted == false);
-            else if (city != null && country != null) productView = this.dbContext.Products.Where(p => p.Supplier.SupplierCountry == country && p.Supplier.SupplierAddress == city && p.IsDeleted == false);
-            else if (country == null && city == null) productView = this.dbContext.Products.Where(p => p.IsDeleted == false);
+            if (country != null && city == null)
+            {
+                productView = this.dbContext.Products.Where(p => p.Supplier.SupplierCountry == country && p.IsDeleted == false);
+            }
+            else if (city != null && country == null)
+            {
+                productView = this.dbContext.Products.Where(p => p.Supplier.SupplierAddress == city && p.IsDeleted == false);
+            }
+            else if (city != null && country != null)
+            {
+                productView = this.dbContext.Products.Where(p => p.Supplier.SupplierCountry == country && p.Supplier.SupplierAddress == city && p.IsDeleted == false);
+            }
+            else if (country == null && city == null)
+            {
+                productView = this.dbContext.Products.Where(p => p.IsDeleted == false);
+            }
 
-
-            List<ProductViewModel> result = SelectProductViewModel(productView);
+            List<ProductViewModel> result = this.SelectProductViewModel(productView);
 
             return result;
         }
@@ -187,7 +216,6 @@ namespace ErpSystem.Services.Services
             {
                 Text = p.TypeOfPackage,
                 Value = p.TypeOfPackage,
-
             }).ToList();
         }
 
@@ -198,14 +226,12 @@ namespace ErpSystem.Services.Services
             {
                 Text = p.Maesurment,
                 Value = p.Maesurment,
-
             }).ToList();
         }
 
         // pivate method, included in tests
         private List<ProductViewModel> SelectProductViewModel(IQueryable<Product> productView)
         {
-
             var listOfProductViewModel = productView.Select(x => new ProductViewModel
             {
                 ProductName = x.ProductName,

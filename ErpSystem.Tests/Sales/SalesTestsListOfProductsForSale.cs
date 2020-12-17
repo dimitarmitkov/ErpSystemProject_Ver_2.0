@@ -1,15 +1,15 @@
-﻿using System;
-using System.Linq;
-using AutoMapper;
-using ErpSystem.Data;
-using ErpSystem.Models;
-using ErpSystem.Services;
-using ErpSystem.Services.Services;
-using Microsoft.EntityFrameworkCore;
-using Xunit;
-
-namespace ErpSystem.Tests.Sales
+﻿namespace ErpSystem.Tests.Sales
 {
+    using System;
+    using System.Linq;
+    using AutoMapper;
+    using ErpSystem.Data;
+    using ErpSystem.Models;
+    using ErpSystem.Services;
+    using ErpSystem.Services.Services;
+    using Microsoft.EntityFrameworkCore;
+    using Xunit;
+
     public class SalesTestsListOfProductsForSale
     {
         [Fact]
@@ -27,7 +27,7 @@ namespace ErpSystem.Tests.Sales
 
             var companyTypeTag = new CompanyTypeTag
             {
-                CompanyTypeOfRegistration = "OOD"
+                CompanyTypeOfRegistration = "OOD",
             };
 
             dbContext.CompanyTypeTags.Add(companyTypeTag);

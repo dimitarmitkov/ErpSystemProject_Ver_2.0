@@ -6,6 +6,7 @@ namespace ErpSystem.Data
     public class ErpSystemDbContext : DbContext
     {
         const string ConnectionString = "Server = localhost, 1433; Database = ERP; User = sa; Password = reallyStrongPwd123; ";
+        //const string ConnectionString = "Data Source=tcp:erpsystemserver.database.windows.net,1433;Initial Catalog=ErpSystemDb;User Id=erpsystemserver@erpsystemserver.database.windows.net;Password=F6xrnA1rvfW21NFP;";
 
         public ErpSystemDbContext()
         {

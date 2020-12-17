@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using ErpSystem.Services.Services;
-using ErpSystem.Services.ViewModels.Sale;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-
-namespace ErpSystem.WebApp.Controllers
+﻿namespace ErpSystem.WebApp.Controllers
 {
+    using ErpSystem.Services.Services;
+    using ErpSystem.Services.ViewModels.Sale;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
+
     [ApiController]
     [Route("api/[controller]")]
     public class SalesApiController : Controller

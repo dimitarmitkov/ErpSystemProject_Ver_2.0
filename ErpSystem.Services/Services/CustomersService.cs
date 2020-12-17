@@ -1,14 +1,12 @@
 ﻿namespace ErpSystem.Services.Services
 {
-    using AutoMapper;
-
-    using ErpSystem.Data;
-    using ErpSystem.Models;
-    using ErpSystem.Services.ViewModels.Customer;
-
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+    using AutoMapper;
+    using ErpSystem.Data;
+    using ErpSystem.Models;
+    using ErpSystem.Services.ViewModels.Customer;
 
     public class CustomersService : ICustomersService
     {
@@ -24,7 +22,7 @@
         // create customer service, test done
         public async Task CreateCustomer(CustomerViewModel customerView)
         {
-            var customer = mapper.Map<Customer>(customerView);
+            var customer = this.mapper.Map<Customer>(customerView);
 
             var customerTypeEntity = this.dbContext.CompanyTypeTags.FirstOrDefault(c => c.CompanyTypeOfRegistration == customerView.CompanyType);
 
@@ -46,8 +44,14 @@
         {
             IEnumerable<Customer> customerToDeleteList = null;
 
-            if (!string.IsNullOrEmpty(id)) customerToDeleteList = this.dbContext.Customers.Where(c => c.Id == id);
-            else if (!string.IsNullOrEmpty(companyName)) customerToDeleteList = this.dbContext.Customers.Where(c => c.CompanyName == companyName);
+            if (!string.IsNullOrEmpty(id))
+            {
+                customerToDeleteList = this.dbContext.Customers.Where(c => c.Id == id);
+            }
+            else if (!string.IsNullOrEmpty(companyName))
+            {
+                customerToDeleteList = this.dbContext.Customers.Where(c => c.CompanyName == companyName);
+            }
 
             foreach (var customerToDelete in customerToDeleteList)
             {
@@ -55,6 +59,7 @@
 
                 this.dbContext.Customers.Update(customerToDelete);
             }
+
             await this.dbContext.SaveChangesAsync();
         }
     }

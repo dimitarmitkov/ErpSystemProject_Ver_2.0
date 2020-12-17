@@ -1,15 +1,12 @@
-﻿using ErpSystem.Data;
-using ErpSystem.Services.Services;
-using ErpSystem.WebApp.Areas.Identity.Data;
-using Microsoft.EntityFrameworkCore;
-using Xunit;
-
-namespace ErpSystem.Tests.Users
+﻿namespace ErpSystem.Tests.Users
 {
+    using ErpSystem.Data;
+    using ErpSystem.WebApp.Areas.Identity.Data;
+    using Microsoft.EntityFrameworkCore;
+    using Xunit;
+
     public class UsersTestsCreateUser
     {
-
-
         [Fact]
         public void CheckCorrectGetSupplierName()
         {

@@ -1,9 +1,8 @@
-﻿using ErpSystem.Services.Services;
-using ErpSystem.Services.ViewModels.Supplier;
-using Microsoft.AspNetCore.Mvc;
-
-namespace ErpSystem.WebApp.Controllers
+﻿namespace ErpSystem.WebApp.Controllers
 {
+    using ErpSystem.Services.Services;
+    using ErpSystem.Services.ViewModels.Supplier;
+    using Microsoft.AspNetCore.Mvc;
     public class SuppliersController : Controller
     {
         private readonly ISuppliersService suppliersService;
