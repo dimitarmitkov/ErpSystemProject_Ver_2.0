@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-
-namespace ErpSystem.Models
+﻿namespace ErpSystem.Models
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+
     public class Product
     {
         public Product()
@@ -48,7 +48,7 @@ namespace ErpSystem.Models
 
         public int ProductTransportPackageId { get; set; }
 
-        public virtual TransportPackageTag ProductTransportPackage { get; set; }//Pallet, box, container, ect.
+        public virtual TransportPackageTag ProductTransportPackage { get; set; }
 
         public int MeasurementId { get; set; }
 

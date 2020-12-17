@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Globalization;
-
-namespace ErpSystem.Models
+﻿namespace ErpSystem.Models
 {
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.Globalization;
+
     public class Supplier
     {
         public Supplier()
@@ -29,10 +29,10 @@ namespace ErpSystem.Models
 
         [Required]
         [RegularExpression(@"\+[\d]{2,3}[ ][\d]+[ ][\d]{1,13}|\+[\d]{2,3}[ ][\d]+")]
-        public string PhoneNumber { get; set; } //TODO must contain +359(or other prefix code) ...;
+        public string PhoneNumber { get; set; }
 
         [EmailAddress]
-        public string Email { get; set; } //TODO email check
+        public string Email { get; set; }
 
         public bool CustomsAuthorisationNeeded { get; set; }
 

@@ -1,8 +1,7 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace ErpSystem.Models
+﻿namespace ErpSystem.Models
 {
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public class SaleAccumulator
     {
         [ForeignKey("Sales")]

@@ -1,9 +1,7 @@
 ﻿namespace ErpSystem.Models
 {
     using System;
-
     using System.Collections.Generic;
-
     using System.ComponentModel.DataAnnotations;
 
     public class Customer
@@ -29,17 +27,17 @@
 
         [Required]
         [RegularExpression(@"[\d]+[ |-][\d]+|[\d]+")]
-        public int PostalCode { get; set; } //TODO int must contain 4 numbers
+        public int PostalCode { get; set; }
 
         [Required]
         public string Address { get; set; }
 
         [Required]
         [RegularExpression(@"\+[\d]{2,3}[ ][\d]+[ ][\d]{1,13}|\+[\d]{2,3}[ ][\d]+")]
-        public string PhoneNumber { get; set; } //TODO must contain +359(or other prefix code) ...;
+        public string PhoneNumber { get; set; }
 
         [EmailAddress]
-        public string Email { get; set; } //TODO email check
+        public string Email { get; set; }
 
         public int? CustomerType { get; set; }
 
@@ -54,6 +52,5 @@
         public string CustomerAdditionalInfo { get; set; }
 
         public virtual ICollection<Sale> Purchase { get; set; }
-
     }
 }

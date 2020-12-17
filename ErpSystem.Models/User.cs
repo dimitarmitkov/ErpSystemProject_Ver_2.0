@@ -1,6 +1,7 @@
-﻿using System;
-namespace ErpSystem.Models
+﻿namespace ErpSystem.Models
 {
+    using System;
+
     public class User
     {
         public User()

@@ -19,6 +19,5 @@
         public int CurrentsaleId { get; set; }
 
         public virtual CurrentSale CurrentSale { get; set; }
-
     }
 }
