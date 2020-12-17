@@ -1,6 +1,6 @@
 function chart() {
 
-    fetch("https://localhost:35811/Warehouses/JsonChartBoxes")
+    fetch("/Warehouses/JsonChartBoxes")
         .then(response => response.json())
         .then(jsonDataInput => {
 
@@ -21,7 +21,7 @@ function chart() {
         })
         .catch(err => console.log(err))
 
-    fetch("https://localhost:35811/Warehouses/JsonChartPallets")
+    fetch("/Warehouses/JsonChartPallets")
         .then(response => response.json())
         .then(jsonDataInput => {
 

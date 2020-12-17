@@ -6,7 +6,7 @@ function eventHandler(e) {
 
     if (e.target.id === "submit") {
 
-        fetch("https://localhost:35811/Charts/JsonChart")
+        fetch("/Charts/JsonChart")
             .then(response => response.json())
             .then(jsonDataInput => {
 
