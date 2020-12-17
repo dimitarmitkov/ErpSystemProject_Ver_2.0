@@ -1,7 +1,6 @@
 ﻿namespace ErpSystem.WebApp.Controllers
 {
     using System.Threading.Tasks;
-
     using ErpSystem.Services.Services;
     using ErpSystem.Services.ViewModels.User;
     using Microsoft.AspNetCore.Identity;
@@ -28,22 +27,22 @@
         [HttpPost]
         public async Task<IActionResult> Login(LoginUserViewModel userViewModel)
         {
-            if (!ModelState.IsValid)
+            if (!this.ModelState.IsValid)
             {
                 return this.View();
             }
 
             var user = this.usersService.LoginUser(userViewModel);
-            var userEmail = User.Identity.Name;
+            var userEmail = this.User.Identity.Name;
 
-            if (usersService.IsLogged(userViewModel.Email))
+            if (this.usersService.IsLogged(userViewModel.Email))
             {
                 return this.Redirect("/Users/AlreadyLogged");
             }
 
             await this.signInManager.PasswordSignInAsync(user.Email, user.PasswordHash, true, true);
 
-            var userId = userManager.GetUserId(User);
+            var userId = this.userManager.GetUserId(this.User);
 
             await this.usersService.UserLogInRecord(user.Email, userId);
 
@@ -58,7 +57,7 @@
         [HttpPost]
         public async Task<IActionResult> Register(RegisterUserViewModel registerUser)
         {
-            if (!ModelState.IsValid)
+            if (!this.ModelState.IsValid)
             {
                 return this.View();
             }
@@ -77,9 +76,9 @@
 
         public async Task<IActionResult> Logout()
         {
-            var userId = userManager.GetUserId(User);
+            var userId = this.userManager.GetUserId(this.User);
 
-            var userEmail = User.Identity.Name;
+            var userEmail = this.User.Identity.Name;
 
             await this.usersService.UserLogInDeleteRecord(userEmail);
 

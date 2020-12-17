@@ -3,6 +3,7 @@
     using ErpSystem.Services.Services;
     using ErpSystem.Services.ViewModels.Supplier;
     using Microsoft.AspNetCore.Mvc;
+
     public class SuppliersController : Controller
     {
         private readonly ISuppliersService suppliersService;
@@ -20,12 +21,12 @@
         [HttpPost]
         public IActionResult Supplier(AddSupplierViewModel addSupplier)
         {
-            if (!ModelState.IsValid)
+            if (!this.ModelState.IsValid)
             {
                 return this.View();
             }
 
-            suppliersService.AddSupplier(addSupplier);
+            this.suppliersService.AddSupplier(addSupplier);
             return this.Redirect("/Home/Index");
         }
     }

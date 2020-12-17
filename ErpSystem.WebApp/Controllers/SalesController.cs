@@ -8,6 +8,7 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+
     public class SalesController : Controller
     {
         private readonly ISalesService salesService;
@@ -24,7 +25,7 @@
         [Authorize]
         public IActionResult All()
         {
-            var viewModel = salesService.ListOfAllSales();
+            var viewModel = this.salesService.ListOfAllSales();
 
             return this.View(viewModel);
         }
@@ -32,7 +33,7 @@
         [HttpPost]
         public IActionResult All(string customer, string product)
         {
-            var viewModel = salesService.ListOfAllSales();
+            var viewModel = this.salesService.ListOfAllSales();
 
             if (!string.IsNullOrEmpty(customer) && string.IsNullOrEmpty(product))
             {
@@ -56,8 +57,8 @@
         {
             CustomerWarehouseViewModel viewModel = new CustomerWarehouseViewModel();
 
-            viewModel.WarehouseProductCombined = salesService.ListOfProductsForSale();
-            viewModel.CustolersListForDD = salesService.SeclectCustomerDropDown();
+            viewModel.WarehouseProductCombined = this.salesService.ListOfProductsForSale();
+            viewModel.CustolersListForDD = this.salesService.SeclectCustomerDropDown();
 
             return this.View(viewModel);
         }
@@ -65,23 +66,22 @@
         [HttpPost]
         public IActionResult WarehouseAllSelectCustomer(CustomerWarehouseViewModel customerWarehouse)
         {
-
             CustomerWarehouseViewModel viewModel = new CustomerWarehouseViewModel();
-            if (!ModelState.IsValid)
+            if (!this.ModelState.IsValid)
             {
-                viewModel.WarehouseProductCombined = salesService.ListOfProductsForSale();
-                viewModel.CustolersListForDD = salesService.SeclectCustomerDropDown();
+                viewModel.WarehouseProductCombined = this.salesService.ListOfProductsForSale();
+                viewModel.CustolersListForDD = this.salesService.SeclectCustomerDropDown();
                 return this.View(viewModel);
             }
 
             var customerEik = customerWarehouse.CustomerCombined.CustomerName;
             var hasDiscount = customerWarehouse.CustomerCombined.HasCustomerDiscount;
-            var isSignedIn = this.signInManager.IsSignedIn(User);
+            var isSignedIn = this.signInManager.IsSignedIn(this.User);
 
             if (isSignedIn)
             {
-                var userId = userManager.GetUserId(User);
-                salesService.GenerateCurrentSale(customerEik, hasDiscount, userId);
+                var userId = this.userManager.GetUserId(this.User);
+                this.salesService.GenerateCurrentSale(customerEik, hasDiscount, userId);
                 return this.Redirect("/Sales/WarehouseAllGenerateSale");
             }
 
@@ -90,14 +90,14 @@
 
         public IActionResult WarehouseAllGenerateSale()
         {
-            var deliveryNeedCheck = salesService.AreAnyProductsForOrder().ToList();
+            var deliveryNeedCheck = this.salesService.AreAnyProductsForOrder().ToList();
             if (deliveryNeedCheck.Any())
             {
                 return this.RedirectToAction("OrderNeeded");
             }
 
             CustomerWarehouseViewModel viewModel = new CustomerWarehouseViewModel();
-            viewModel.WarehouseProductCombined = salesService.ListOfProductsForSaleWithCustomer();
+            viewModel.WarehouseProductCombined = this.salesService.ListOfProductsForSaleWithCustomer();
 
             return this.View(viewModel);
         }
@@ -105,11 +105,10 @@
         [HttpPost]
         public IActionResult WarehouseAllGenerateSale(CustomerWarehouseViewModel customerWarehouse)
         {
-
-            if (!ModelState.IsValid)
+            if (!this.ModelState.IsValid)
             {
                 CustomerWarehouseViewModel viewModel = new CustomerWarehouseViewModel();
-                viewModel.WarehouseProductCombined = salesService.ListOfProductsForSaleWithCustomer();
+                viewModel.WarehouseProductCombined = this.salesService.ListOfProductsForSaleWithCustomer();
                 return this.View(viewModel);
             }
 
@@ -123,14 +122,14 @@
             var warehouseId = customerWarehouseProducts.WarehouseId;
             var warehouseProductId = customerWarehouseProducts.WarehouseProductId;
 
-            salesService.CreateSale(productId, customerId, numberOfSoldProducts, hasProductDiscount, hasCustomerDiscount, warehouseId, warehouseProductId);
+            this.salesService.CreateSale(productId, customerId, numberOfSoldProducts, hasProductDiscount, hasCustomerDiscount, warehouseId, warehouseProductId);
 
             return this.Redirect("/Sales/WarehouseAllGenerateSale");
         }
 
         public IActionResult OrderNeeded()
         {
-            var viewModel = salesService.AreAnyProductsForOrder();
+            var viewModel = this.salesService.AreAnyProductsForOrder();
 
             return this.View(viewModel);
         }
@@ -138,20 +137,20 @@
         [HttpPost]
         public IActionResult OrderNeeded(DeliveryNeededProduct deliveryNeededProduct)
         {
-            if (!ModelState.IsValid)
+            if (!this.ModelState.IsValid)
             {
                 return this.View();
             }
 
-            salesService.ConfirmNeedOfOrder(deliveryNeededProduct);
+            this.salesService.ConfirmNeedOfOrder(deliveryNeededProduct);
             return this.Redirect("/Sales/WarehouseAllGenerateSale");
         }
 
         public IActionResult Invoice()
         {
             var viewModel = new InvoiceCombinedViewModel();
-            viewModel.List = salesService.Invoice();
-            viewModel.Single = salesService.Invoice();
+            viewModel.List = this.salesService.Invoice();
+            viewModel.Single = this.salesService.Invoice();
 
             if (viewModel.List.ToList().Count != 0 && viewModel.Single.ToList().Count != 0)
             {

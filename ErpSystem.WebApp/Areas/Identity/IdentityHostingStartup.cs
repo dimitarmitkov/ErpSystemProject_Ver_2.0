@@ -1,13 +1,12 @@
-using System;
 using ErpSystem.WebApp.Areas.Identity.Data;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 [assembly: HostingStartup(typeof(ErpSystem.WebApp.Areas.Identity.IdentityHostingStartup))]
+
 namespace ErpSystem.WebApp.Areas.Identity
 {
     public class IdentityHostingStartup : IHostingStartup

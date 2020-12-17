@@ -14,13 +14,13 @@
 
         public IActionResult JsonChartBoxes()
         {
-            var viewModel = warehouseSpace.GetSpaceBoxes();
+            var viewModel = this.warehouseSpace.GetSpaceBoxes();
             return this.Json(viewModel);
         }
 
         public IActionResult JsonChartPallets()
         {
-            var viewModel = warehouseSpace.GetSpacePallets();
+            var viewModel = this.warehouseSpace.GetSpacePallets();
             return this.Json(viewModel);
         }
     }

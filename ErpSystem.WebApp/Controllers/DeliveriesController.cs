@@ -38,11 +38,10 @@
                 List = this.deliveriesService.GetAllOrdersForDelivery(id, ProductsPerPage),
             };
 
-            if (!ModelState.IsValid)
+            if (!this.ModelState.IsValid)
             {
                 return this.View(viewModel);
             }
-
 
             this.deliveriesService.FinalizeDelivery(deliveryCombined.Single);
             viewModel.List = this.deliveriesService.GetAllOrdersForDelivery(id, ProductsPerPage);

@@ -1,7 +1,6 @@
 ﻿namespace ErpSystem.WebApp.Controllers
 {
     using System.Linq;
-
     using ErpSystem.Services.Services;
     using ErpSystem.Services.ViewModels.Order;
     using Microsoft.AspNetCore.Mvc;
@@ -18,8 +17,8 @@
         public IActionResult GenerateOrder()
         {
             SupplierOrderViewModel viewModel = new SupplierOrderViewModel();
-            viewModel.CalculateOrderProductsList = ordersService.ProductsForOrderList();
-            viewModel.SuppliersListDropDown = ordersService.SuppliersDropDown();
+            viewModel.CalculateOrderProductsList = this.ordersService.ProductsForOrderList();
+            viewModel.SuppliersListDropDown = this.ordersService.SuppliersDropDown();
 
             return this.View(viewModel);
         }
@@ -28,19 +27,19 @@
         public IActionResult GenerateOrder(SupplierOrderViewModel supplierOrder)
         {
             var viewModel = new SupplierOrderViewModel();
-            if (!ModelState.IsValid)
+            if (!this.ModelState.IsValid)
             {
-                viewModel.CalculateOrderProductsList = ordersService.ProductsForOrderList();
-                viewModel.SuppliersListDropDown = ordersService.SuppliersDropDown();
+                viewModel.CalculateOrderProductsList = this.ordersService.ProductsForOrderList();
+                viewModel.SuppliersListDropDown = this.ordersService.SuppliersDropDown();
 
                 return this.View(viewModel);
             }
 
             var supplierName = supplierOrder.Suppliers.Supplier;
 
-            ordersService.SelectSupplier(supplierName);
+            this.ordersService.SelectSupplier(supplierName);
 
-            viewModel.CalculateOrderProductsList = ordersService.ProductsForOrderList();
+            viewModel.CalculateOrderProductsList = this.ordersService.ProductsForOrderList();
 
             if (!string.IsNullOrEmpty(supplierName))
             {
@@ -53,41 +52,41 @@
 
         public IActionResult ExecuteOrder()
         {
-            var supplierName = ordersService.GetSupplierName();
+            var supplierName = this.ordersService.GetSupplierName();
 
             var viewModel = new SupplierOrderViewModel();
-            if (!ModelState.IsValid)
+            if (!this.ModelState.IsValid)
             {
-                viewModel.CalculateOrderProductsList = ordersService.ProductsForOrderList();
+                viewModel.CalculateOrderProductsList = this.ordersService.ProductsForOrderList();
 
                 return this.View(viewModel);
             }
 
-            viewModel.CalculateOrderProductsList = ordersService.ProductsForOrderList();
+            viewModel.CalculateOrderProductsList = this.ordersService.ProductsForOrderList();
 
             if (!string.IsNullOrEmpty(supplierName))
             {
                 viewModel.CalculateOrderProductsList = viewModel.CalculateOrderProductsList.Where(x => x.Supplier == supplierName);
                 return this.View(viewModel);
             }
+
             return this.View(viewModel);
         }
 
         [HttpPost]
         public IActionResult ExecuteOrder(SupplierOrderViewModel supplierOrder)
         {
-            var supplierName = ordersService.GetSupplierName();
+            var supplierName = this.ordersService.GetSupplierName();
             var viewModel = new SupplierOrderViewModel();
-            viewModel.CalculateOrderProductsList = ordersService.ProductsForOrderList().Where(x => x.Supplier == supplierName && !ordersService.OrdesAny().Any(o => o == x.ProductId));
-            if (!ModelState.IsValid)
+            viewModel.CalculateOrderProductsList = this.ordersService.ProductsForOrderList().Where(x => x.Supplier == supplierName && !this.ordersService.OrdesAny().Any(o => o == x.ProductId));
+            if (!this.ModelState.IsValid)
             {
-
-                viewModel.CalculateOrderProductsList = ordersService.ProductsForOrderList().Where(x => x.Supplier == supplierName);
+                viewModel.CalculateOrderProductsList = this.ordersService.ProductsForOrderList().Where(x => x.Supplier == supplierName);
 
                 return this.View(viewModel);
             }
 
-            ordersService.GenetareOrder(supplierOrder.CalculateOrderProductSingle);
+            this.ordersService.GenetareOrder(supplierOrder.CalculateOrderProductSingle);
 
             return this.View(viewModel);
         }

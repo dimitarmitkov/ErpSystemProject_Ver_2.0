@@ -1,11 +1,10 @@
-﻿using System;
-using ErpSystem.Services.Services;
-using ErpSystem.Services.ViewModels.Product;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-
-namespace ErpSystem.WebApp.Areas.Administration.Controllers
+﻿namespace ErpSystem.WebApp.Areas.Administration.Controllers
 {
+    using ErpSystem.Services.Services;
+    using ErpSystem.Services.ViewModels.Product;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
+
     [Area("Administration")]
     [Authorize(Roles = "Admin")]
     public class ProductsEditController : Controller
@@ -20,7 +19,7 @@ namespace ErpSystem.WebApp.Areas.Administration.Controllers
         public IActionResult Delete()
         {
             var viewModel = new CombinedProductViewModel();
-            viewModel.ProductList = productsService.SearchByProductNameAndId(null, null);
+            viewModel.ProductList = this.productsService.SearchByProductNameAndId(null, null);
 
             return this.View(viewModel);
         }
@@ -28,19 +27,17 @@ namespace ErpSystem.WebApp.Areas.Administration.Controllers
         [HttpPost]
         public IActionResult Delete(CombinedProductViewModel combinedProductView)
         {
-
-            if (!ModelState.IsValid)
+            if (!this.ModelState.IsValid)
             {
                 var viewModel = new CombinedProductViewModel();
-                viewModel.ProductList = productsService.SearchByProductNameAndId(null, null);
+                viewModel.ProductList = this.productsService.SearchByProductNameAndId(null, null);
 
                 return this.View(viewModel);
             }
 
-            productsService.DeleteExistingProduct(combinedProductView.ProductSingle.ProductId, combinedProductView.ProductSingle.ProductName);
+            this.productsService.DeleteExistingProduct(combinedProductView.ProductSingle.ProductId, combinedProductView.ProductSingle.ProductName);
 
             return this.Redirect("Administration/ProductsEdit/Delete");
         }
-
     }
 }

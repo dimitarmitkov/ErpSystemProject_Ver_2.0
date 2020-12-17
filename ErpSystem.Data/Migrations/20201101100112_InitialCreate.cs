@@ -1,8 +1,8 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
-
-namespace ErpSystem.Data.Migrations
+﻿namespace ErpSystem.Data.Migrations
 {
+    using System;
+    using Microsoft.EntityFrameworkCore.Migrations;
+
     public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -13,7 +13,7 @@ namespace ErpSystem.Data.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CompanyTypeOfRegistration = table.Column<string>(nullable: true)
+                    CompanyTypeOfRegistration = table.Column<string>(nullable: true),
                 },
                 constraints: table =>
                 {
@@ -26,7 +26,7 @@ namespace ErpSystem.Data.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Maesurment = table.Column<string>(nullable: true)
+                    Maesurment = table.Column<string>(nullable: true),
                 },
                 constraints: table =>
                 {
@@ -46,7 +46,7 @@ namespace ErpSystem.Data.Migrations
                     PhoneNumber = table.Column<string>(nullable: false),
                     Email = table.Column<string>(nullable: true),
                     CustomsAuthorisationNeeded = table.Column<bool>(nullable: false),
-                    SupplierAdditionalInformation = table.Column<string>(nullable: true)
+                    SupplierAdditionalInformation = table.Column<string>(nullable: true),
                 },
                 constraints: table =>
                 {
@@ -59,7 +59,7 @@ namespace ErpSystem.Data.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    TypeOfPackage = table.Column<string>(nullable: true)
+                    TypeOfPackage = table.Column<string>(nullable: true),
                 },
                 constraints: table =>
                 {
@@ -79,7 +79,7 @@ namespace ErpSystem.Data.Migrations
                     BoxesFrontSpace = table.Column<int>(nullable: true),
                     BoxesDepthSpace = table.Column<int>(nullable: true),
                     CurrentBoxesFrontSpaceFree = table.Column<int>(nullable: false),
-                    ProductId = table.Column<int>(nullable: false)
+                    ProductId = table.Column<int>(nullable: false),
                 },
                 constraints: table =>
                 {
@@ -104,7 +104,7 @@ namespace ErpSystem.Data.Migrations
                     CustomerDiscount = table.Column<int>(nullable: true),
                     HasDelivery = table.Column<bool>(nullable: false),
                     IsActive = table.Column<bool>(nullable: false),
-                    CustomerAdditionalInfo = table.Column<string>(nullable: true)
+                    CustomerAdditionalInfo = table.Column<string>(nullable: true),
                 },
                 constraints: table =>
                 {
@@ -129,7 +129,7 @@ namespace ErpSystem.Data.Migrations
                     CompanyExpenses = table.Column<decimal>(nullable: true),
                     OtherExpenses = table.Column<decimal>(nullable: true),
                     NumberOfTransportPackageUnits = table.Column<int>(nullable: false),
-                    TotalAmountOfProductNumberOrWeight = table.Column<decimal>(nullable: false)
+                    TotalAmountOfProductNumberOrWeight = table.Column<decimal>(nullable: false),
                 },
                 constraints: table =>
                 {
@@ -153,7 +153,7 @@ namespace ErpSystem.Data.Migrations
                     ReserveNumberOfOrderedProduct = table.Column<int>(nullable: false),
                     OrderDate = table.Column<DateTime>(nullable: false),
                     NumberOfTransportPackageUnits = table.Column<int>(nullable: false),
-                    TotalAmountOfProductNumberOrWeight = table.Column<decimal>(nullable: false)
+                    TotalAmountOfProductNumberOrWeight = table.Column<decimal>(nullable: false),
                 },
                 constraints: table =>
                 {

@@ -1,10 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
-
-namespace ErpSystem.WebApp.Controllers
+﻿namespace ErpSystem.WebApp.Controllers
 {
+    using Microsoft.AspNetCore.Mvc;
+
     public class ErrorsController : Controller
     {
-
         public IActionResult Error500()
         {
             return this.View();

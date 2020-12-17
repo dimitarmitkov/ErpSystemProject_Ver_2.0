@@ -1,30 +1,23 @@
 namespace ErpSystem.WebApp
 {
     using Microsoft.AspNetCore.Builder;
-
     using Microsoft.AspNetCore.Hosting;
-
     using Microsoft.EntityFrameworkCore;
-
     using Microsoft.Extensions.Configuration;
-
     using Microsoft.Extensions.DependencyInjection;
-
     using Microsoft.Extensions.Hosting;
-
-    using ErpSystem.Data;
-
-    using ErpSystem.Services.Services;
 
     using AutoMapper;
 
+    using ErpSystem.Data;
     using ErpSystem.Services;
+    using ErpSystem.Services.Services;
 
     public class Startup
     {
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            this.Configuration = configuration;
         }
 
         public IConfiguration Configuration { get; }
@@ -34,8 +27,9 @@ namespace ErpSystem.WebApp
         {
             services.AddDbContext<ErpSystemDbContext>(options =>
                 options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
+                    this.Configuration.GetConnectionString("DefaultConnection")));
             services.AddMvc();
+
             // services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
             //   .AddEntityFrameworkStores<ErpSystemDbContext>();
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
@@ -49,7 +43,7 @@ namespace ErpSystem.WebApp
             services.AddMemoryCache();
             services.AddDistributedSqlServerCache(options =>
             {
-                options.ConnectionString = Configuration.GetConnectionString("DefaultConnection");
+                options.ConnectionString = this.Configuration.GetConnectionString("DefaultConnection");
                 options.SchemaName = "dbo";
                 options.TableName = "CacheRecords";
             });
@@ -64,10 +58,10 @@ namespace ErpSystem.WebApp
             services.AddAutoMapper(m => m.AddProfile<AutoMapping>(), typeof(Startup));
             services.AddSingleton(this.Configuration);
 
-            //Database
+            // Database
             services.AddDbContext<ErpSystemDbContext>();
 
-            //Application services
+            // Application services
             services.AddTransient<IProductsService, ProductsService>();
             services.AddTransient<ISalesService, SalesService>();
             services.AddTransient<IUsersService, UsersService>();
@@ -91,6 +85,7 @@ namespace ErpSystem.WebApp
             else
             {
                 app.UseExceptionHandler("/Errors/Error404");
+
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }

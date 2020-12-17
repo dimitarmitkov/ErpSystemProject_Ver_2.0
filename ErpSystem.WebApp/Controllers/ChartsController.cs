@@ -1,10 +1,10 @@
-﻿using System;
-using ErpSystem.Services.Services;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Caching.Memory;
-
-namespace ErpSystem.WebApp.Controllers
+﻿namespace ErpSystem.WebApp.Controllers
 {
+    using System;
+    using ErpSystem.Services.Services;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Extensions.Caching.Memory;
+
     public class ChartsController : Controller
     {
         private readonly ISalesService salesService;
@@ -25,10 +25,10 @@ namespace ErpSystem.WebApp.Controllers
 
         public IActionResult JsonChart()
         {
-            if (!memoryCache.TryGetValue("Chart", out var viewModel))
+            if (!this.memoryCache.TryGetValue("Chart", out var viewModel))
             {
                 viewModel = this.salesService.TotalSalesPerDate();
-                memoryCache.Set("Chart", viewModel, TimeSpan.FromSeconds(20));
+                this.memoryCache.Set("Chart", viewModel, TimeSpan.FromSeconds(20));
             }
 
             return this.Json(viewModel);

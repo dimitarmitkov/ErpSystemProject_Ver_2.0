@@ -1,15 +1,13 @@
-﻿using System;
-using AutoMapper;
-using ErpSystem.Models;
-
-namespace ErpSystem.WebApp
+﻿namespace ErpSystem.WebApp
 {
+    using AutoMapper;
+    using ErpSystem.Models;
+
     public class MappingProfile : Profile
     {
         public MappingProfile()
         {
-            CreateMap<Order, FinalizedOrder>();
+            this.CreateMap<Order, FinalizedOrder>();
         }
-
     }
 }

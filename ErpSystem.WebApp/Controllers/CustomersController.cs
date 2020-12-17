@@ -1,9 +1,7 @@
 ﻿namespace ErpSystem.WebApp.Controllers
 {
     using ErpSystem.Services.Services;
-
     using ErpSystem.Services.ViewModels.Customer;
-
     using Microsoft.AspNetCore.Mvc;
 
     public class CustomersController : Controller
@@ -23,12 +21,12 @@
         [HttpPost]
         public IActionResult CreateCustomer(CustomerViewModel customerView)
         {
-            if (!ModelState.IsValid)
+            if (!this.ModelState.IsValid)
             {
                 return this.View();
             }
 
-            customersService.CreateCustomer(customerView);
+            this.customersService.CreateCustomer(customerView);
             return this.Redirect("/Home/Index");
         }
     }

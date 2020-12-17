@@ -1,7 +1,6 @@
 ﻿namespace ErpSystem.WebApp.Controllers
 {
     using System.Collections.Generic;
-
     using ErpSystem.Services.Services;
     using ErpSystem.Services.ViewModels.Product;
     using Microsoft.AspNetCore.Authorization;
@@ -31,11 +30,10 @@
             return this.View(viewModel);
         }
 
-
         [HttpPost]
         public IActionResult CreateProduct(CreateProductViewModel createProduct)
         {
-            if (!ModelState.IsValid)
+            if (!this.ModelState.IsValid)
             {
                 var viewModel = new CreateProductViewModel();
                 viewModel.PackageItems = this.productsService.ProductTransportsPackageTags();
@@ -52,7 +50,7 @@
         public IActionResult Delete()
         {
             var viewModel = new CombinedProductViewModel();
-            viewModel.ProductList = productsService.SearchByProductNameAndId(null, null);
+            viewModel.ProductList = this.productsService.SearchByProductNameAndId(null, null);
 
             return this.View(viewModel);
         }
@@ -61,15 +59,15 @@
         [Authorize(Roles = "Admin")]
         public IActionResult Delete(CombinedProductViewModel combinedProductView)
         {
-            if (!ModelState.IsValid)
+            if (!this.ModelState.IsValid)
             {
                 var viewModel = new CombinedProductViewModel();
-                viewModel.ProductList = productsService.SearchByProductNameAndId(null, null);
+                viewModel.ProductList = this.productsService.SearchByProductNameAndId(null, null);
 
                 return this.View(viewModel);
             }
 
-            productsService.DeleteExistingProduct(combinedProductView.ProductSingle.ProductId, combinedProductView.ProductSingle.ProductName);
+            this.productsService.DeleteExistingProduct(combinedProductView.ProductSingle.ProductId, combinedProductView.ProductSingle.ProductName);
 
             return this.Redirect("/Products/Delete");
         }
