@@ -6,20 +6,23 @@ This is basic ERP system. Entry point is ErpSysytem.WebApp/Program.cs
 Main functionalities:
 
 1. Dashboard
-  1.1. Dashboard shows main functionalities of application.
-  1.2. On Dashboard is placed buttons for:
-    - Create Product;
-    - Search Product;
-    - Delete Product (visible only for Users with Admin Role);
-    - Sales List;
-    - Generate Sale;
-    - Sales Charts - graphic data for sales;
-    - Order;
-    - Delivery;
-    - Add Supplier;
-    - Add Customer;
+
+    1.1. Dashboard shows main functionalities of application.
     
-  1.3. On Dashboard is presented information about current available and taken space of Warehouse. It is presented in 2 pie charts: one per pallet space (count of pallet spaces) and one per boxes space (presenting shelf length in cm).
+    1.2. On Dashboard is placed buttons for:
+    
+      - Create Product;
+      - Search Product;
+      - Delete Product (visible only for Users with Admin Role);
+      - Sales List;
+      - Generate Sale;
+      - Sales Charts - graphic data for sales;
+      - Order;
+      - Delivery;
+      - Add Supplier;
+      - Add Customer;
+    
+    1.3. On Dashboard is presented information about current available and taken space of Warehouse. It is presented in 2 pie charts: one per pallet space (count of pallet spaces) and one per boxes space (presenting shelf length in cm).
 
 2. Side bar inherits same functionalities form Dashboard, extended with additional actions. All functionalities of Side bar are wrapped in 5 main articles:
   - Dashboard calls Dashboard
@@ -89,9 +92,12 @@ Main functionalities:
 10. Sales Charts - graphic Sales data. It appears after select Sales period.
 
      
-     
-   
-   
-    
-    
-    
+11.Warehouse
+
+Warehouse is calculating current free and taken spaces separately for boxes and pallets. These calculations are based on data available in following databases:
+-	Warehouse – presents current status of pallets and boxes spaces;
+-	WarehouseProducts – presents current available products, every singlr product may have more than one position (LOT) depending on its Expire date or its LOT;  
+-	WarehousePallets – containing information about pallet space in Warehouse;
+-	WarehouseBoxes – containing information about shelf spaces and shelf sizes in Warehouse;
+
+Free and respectively taken spaces are calculated on count for pallets and on sizes for boxes. If box size for length is larger that shelf depth then taken space I calculated on size of length instead size of width.
