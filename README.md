@@ -6,20 +6,20 @@ This is basic ERP system. Entry point is ErpSysytem.WebApp/Program.cs
 Main functionalities:
 
 1. Dashboard
-  1.1. Dashboard shows main functionalities of application.
-  1.2. On Dashboard is placed buttons for:
-    - Create Product;
-    - Search Product;
-    - Delete Product (visible only for Users with Admin Role);
-    - Sales List;
-    - Generate Sale;
-    - Sales Charts - graphic data for sales;
-    - Order;
-    - Delivery;
-    - Add Supplier;
-    - Add Customer;
+    1.1. Dashboard shows main functionalities of application.
+    1.2. On Dashboard is placed buttons for:
+      - Create Product;
+      - Search Product;
+      - Delete Product (visible only for Users with Admin Role);
+      - Sales List;
+      - Generate Sale;
+      - Sales Charts - graphic data for sales;
+      - Order;
+      - Delivery;
+      - Add Supplier;
+      - Add Customer;
     
-  1.3. On Dashboard is presented information about current available and taken space of Warehouse. It is presented in 2 pie charts: one per pallet space (count of pallet spaces) and one per boxes space (presenting shelf length in cm).
+    1.3. On Dashboard is presented information about current available and taken space of Warehouse. It is presented in 2 pie charts: one per pallet space (count of pallet spaces) and one per boxes space (presenting shelf length in cm).
 
 2. Side bar inherits same functionalities form Dashboard, extended with additional actions. All functionalities of Side bar are wrapped in 5 main articles:
   - Dashboard calls Dashboard
