@@ -92,9 +92,12 @@ Main functionalities:
 10. Sales Charts - graphic Sales data. It appears after select Sales period.
 
      
-     
-   
-   
-    
-    
-    
+11.Warehouse
+
+Warehouse is calculating current free and taken spaces separately for boxes and pallets. These calculations are based on data available in following databases:
+-	Warehouse – presents current status of pallets and boxes spaces;
+-	WarehouseProducts – presents current available products, every singlr product may have more than one position (LOT) depending on its Expire date or its LOT;  
+-	WarehousePallets – containing information about pallet space in Warehouse;
+-	WarehouseBoxes – containing information about shelf spaces and shelf sizes in Warehouse;
+
+Free and respectively taken spaces are calculated on count for pallets and on sizes for boxes. If box size for length is larger that shelf depth then taken space I calculated on size of length instead size of width.
