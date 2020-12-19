@@ -81,7 +81,7 @@
 
             if (isProductInPallet)
             {
-                addPorductInWarehouseProducts.Warehouse.CurrentPalletsSpaceFree -= deliveryList.NumberOfTransportUnits;
+                addPorductInWarehouseProducts.Warehouse.CurrentPalletsSpaceFree -= deliveryList.ChangedNumberOfTransportUnits;
                 this.dbContext.Warehouses.Update(addPorductInWarehouseProducts.Warehouse);
                 this.dbContext.SaveChanges();
             }
@@ -93,7 +93,7 @@
                 var boxLenght = this.dbContext.Products.Where(p => p.Id == deliveryList.ProductId && p.IsDeleted == false).Select(x => x.ProductTransportPackageLengthSize).FirstOrDefault();
                 var shelfDepth = this.dbContext.WarehouseBoxes.Where(w => w.Id == deliveryList.ProductId).Select(x => x.ShelfDepth).FirstOrDefault();
 
-                addPorductInWarehouseProducts.Warehouse.CurrentBoxesFrontSpaceFree -= boxLenght > shelfDepth ? deliveryList.NumberOfTransportUnits * boxLenght : deliveryList.NumberOfTransportUnits * boxFront;
+                addPorductInWarehouseProducts.Warehouse.CurrentBoxesFrontSpaceFree -= boxLenght > shelfDepth ? deliveryList.ChangedNumberOfTransportUnits * boxLenght : deliveryList.ChangedNumberOfTransportUnits * boxFront;
 
                 this.dbContext.Warehouses.Update(addPorductInWarehouseProducts.Warehouse);
                 this.dbContext.SaveChanges();

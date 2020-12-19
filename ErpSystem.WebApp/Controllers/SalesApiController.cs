@@ -26,13 +26,5 @@
             var viewModel = this.salesService.ListOfSales(customerName, productName);
             return this.Json(viewModel);
         }
-
-        public IActionResult ReturnData()
-        {
-            var result = "name";
-            var name = "first";
-
-            return this.Json(result + " " + name);
-        }
     }
 }

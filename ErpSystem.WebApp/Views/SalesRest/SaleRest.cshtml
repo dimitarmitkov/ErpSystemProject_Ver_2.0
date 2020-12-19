@@ -46,22 +46,10 @@
                             <th>Sold products</th>
                             <th>Sale date</th>
                             <th>Sale price</th>
-                            <th>Has discount</th>
+                            <th>Total Sale Price</th>
                         </tr>
                     </thead>
-                    <tbody style="font-size:1vw">
-                        @foreach (var sale in Model.List)
-                        {
-                            <tr>
-                                <td>@sale.Customer</td>
-                                <td>@sale.Product </td>
-                                <td>@sale.ProductMesure</td>
-                                <td>@sale.ProductId</td>
-                                <td>@sale.SaleDate.Date.ToString("dd-MM-yyyy")</td>
-                                <td>@sale.SingleProudctSalePrice.ToString("N2")</td>
-                                <td>@sale.TotalSalePrice.ToString("N2") </td>
-                            </tr>
-                        }
+                    <tbody style="font-size:1vw" id="tableBody">
                     </tbody>
                     <tfoot>
                         <tr>

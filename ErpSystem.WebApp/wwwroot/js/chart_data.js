@@ -18,7 +18,6 @@ function eventHandler(e) {
                 let resulObjectOfDaysWithoutAmount = {};
                 let daysWithoutAmountArray = [];
 
-
                 // create result array of objects
 
                 for (var d = startDate; d <= endDate; d.setDate(d.getDate() + 1)) {

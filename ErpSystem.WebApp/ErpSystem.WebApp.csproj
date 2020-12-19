@@ -68,8 +68,6 @@
   <ItemGroup>
     <Content Remove="Views\CurrentSales\CurrentSale.cshtml" />
     <Content Remove="Views\Warehouses\Warehouse.cshtml" />
-    <Content Remove="Views\SalesRest\SaleRest.cshtml" />
-    <Content Remove="Views\Customers\CreateCustomer.cshtml" />
     <Content Remove="Views\Errors\401.cshtml" />
   </ItemGroup>
 </Project>

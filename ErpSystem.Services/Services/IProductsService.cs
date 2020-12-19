@@ -7,7 +7,7 @@
 
     public interface IProductsService
     {
-        Task CreateProduct(CreateProductViewModel createProduct);
+        void CreateProduct(CreateProductViewModel createProduct);
 
         IEnumerable<ProductViewModel> SearchByProductNameAndId(int? productId, string productName);
 

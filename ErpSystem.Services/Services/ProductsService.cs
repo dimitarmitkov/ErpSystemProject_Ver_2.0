@@ -19,7 +19,7 @@
         }
 
         // create product service, test done
-        public async Task CreateProduct(CreateProductViewModel createProduct)
+        public void CreateProduct(CreateProductViewModel createProduct)
         {
             var product = new Product
             {
@@ -31,7 +31,7 @@
                 TimeToDelivery = createProduct.TimeToDelivery,
                 IsPallet = bool.Parse(createProduct.IsPallet),
                 ProductTransportPackageWidthSize = createProduct.ProductTransportPackageWidthSize,
-                ProductTransportPackageLengthSize = createProduct.ProductTransportPackageWidthSize,
+                ProductTransportPackageLengthSize = createProduct.ProductTransportPackageLengthSize,
                 ProductTransportPackageHeightSize = createProduct.ProductTransportPackageHeightSize,
                 ProductTransportPackageWeight = createProduct.ProductTransportPackageWeight,
                 ProductTransportPackageNumberOfPieces = createProduct.ProductTransportPackageNumberOfPieces,
@@ -42,24 +42,24 @@
             };
 
             // setting production date to null, if not set
-            if (string.IsNullOrWhiteSpace(createProduct.ProductionDate.ToString()))
-            {
-                product.ProductionDate = null;
-            }
-            else
+            if (!string.IsNullOrWhiteSpace(createProduct.ProductionDate.ToString()))
             {
                 product.ProductionDate = DateTime.Parse(createProduct.ProductionDate);
             }
+            //else
+            //{
+            //    product.ProductionDate = null;
+            //}
 
             // setting expire date to null, if not set
-            if (string.IsNullOrWhiteSpace(createProduct.ExpireDate.ToString()))
-            {
-                product.ExpireDate = null;
-            }
-            else
+            if (!string.IsNullOrWhiteSpace(createProduct.ExpireDate.ToString()))
             {
                 product.ExpireDate = DateTime.Parse(createProduct.ExpireDate);
             }
+            //else
+            //{
+            //    product.ExpireDate = null;
+            //}
 
             // setting of supplier
             var supplierEntity = this.dbContext.Suppliers.FirstOrDefault(s => s.SupplierName == createProduct.Supplier);
@@ -96,8 +96,8 @@
 
             product.ProductSalePrice = product.ProductLandedPrice / (1 - resultativeGrossMargin);
 
-            await this.dbContext.Products.AddAsync(product);
-            await this.dbContext.SaveChangesAsync();
+            this.dbContext.Products.Add(product);
+            this.dbContext.SaveChanges();
         }
 
         // delete product service

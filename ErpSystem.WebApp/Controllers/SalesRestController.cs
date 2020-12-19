@@ -23,13 +23,12 @@
             return this.View(viewModel);
         }
 
-        public IActionResult SaleRestReturn()
+        public IActionResult SaleRestReturn(SalesPerCustomerOrProductViewModel salesPerCustomer)
         {
             var viewModel = new SaleRestCombinedViewModel
             {
-                List = this.salesService.ListOfSales(null, null),
+                List = this.salesService.ListOfSales(salesPerCustomer.Customer, salesPerCustomer.Product),
             };
-
             return this.Json(viewModel);
         }
     }

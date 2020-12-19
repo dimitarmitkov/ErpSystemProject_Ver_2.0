@@ -8,8 +8,6 @@ button.addEventListener("click", (e) => {
 
     var antyForgeryToken = afntyForgery.firstChild.value;
 
-    console.log(antyForgeryToken);
-
     const uri = '/api/SalesApi';
 
     fetch(uri, {
@@ -27,10 +25,30 @@ button.addEventListener("click", (e) => {
 });
 
 function getData() {
-    fetch("https://localhost:35811/SalesRest/SaleRestReturn")
+    fetch("/SalesRest/SaleRestReturn")
         .then(response => response.json())
         .then(jsonDataInput => {
-            console.log(jsonDataInput)
+            let tableElement = document.getElementById("tableBody");
+            let first = Object.entries(jsonDataInput);
+            var options = {
+                year: "numeric",
+                month: "2-digit",
+                day: "2-digit"
+            };
+
+            let listOfSales = first[0][1];
+            for (let i = 0; i < listOfSales.length; i++) {
+                tableElement.innerHTML += `<tr>
+                                <td>${listOfSales[i].customer}</td>
+                                <td>${listOfSales[i].product}</td>
+                                <td>${listOfSales[i].productMesure}</td>
+                                <td>${listOfSales[i].numberOfSoldProducts}</td>
+                                <td>${(new Date(listOfSales[i].saleDate)).toLocaleString("en", options)}</td>
+                                <td>${(listOfSales[i].singleProudctSalePrice).toLocaleString('en-US', { minimumFractionDigits: 2 })}</td>
+                                <td>${(listOfSales[i].totalSalePrice).toLocaleString('en-US', { minimumFractionDigits: 2 })}</td>
+                            </tr>`
+            }
+
         })
         .catch(err => console.log(err))
 }

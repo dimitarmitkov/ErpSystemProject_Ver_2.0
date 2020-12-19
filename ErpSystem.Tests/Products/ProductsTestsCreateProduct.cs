@@ -1,6 +1,7 @@
 ﻿namespace ErpSystem.Tests
 {
     using System;
+    using System.Linq;
     using System.Threading.Tasks;
     using ErpSystem.Data;
     using ErpSystem.Models;
@@ -75,10 +76,11 @@
             dbContext.ProductMeasurmentTags.Add(measurementTag);
             dbContext.SaveChanges();
 
-            Task result = product.CreateProduct(productVM);
-            Assert.True(result.IsCompleted);
-            Assert.True(result.IsCompletedSuccessfully);
-            Assert.False(result.IsFaulted);
+            product.CreateProduct(productVM);
+
+            var result = dbContext.Products.Select(x => x).ToList();
+            Assert.True(result.Count == 1);
+            Assert.True(result[0].ProductName == "First");
         }
     }
 }
