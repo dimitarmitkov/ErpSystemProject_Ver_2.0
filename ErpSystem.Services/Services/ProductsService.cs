@@ -42,24 +42,24 @@
             };
 
             // setting production date to null, if not set
-            if (!string.IsNullOrWhiteSpace(createProduct.ProductionDate.ToString()))
+            if (!string.IsNullOrWhiteSpace(createProduct.ProductionDate))
             {
                 product.ProductionDate = DateTime.Parse(createProduct.ProductionDate);
             }
-            //else
-            //{
-            //    product.ProductionDate = null;
-            //}
+            else
+            {
+                product.ProductionDate = null;
+            }
 
             // setting expire date to null, if not set
-            if (!string.IsNullOrWhiteSpace(createProduct.ExpireDate.ToString()))
+            if (!string.IsNullOrWhiteSpace(createProduct.ExpireDate))
             {
                 product.ExpireDate = DateTime.Parse(createProduct.ExpireDate);
             }
-            //else
-            //{
-            //    product.ExpireDate = null;
-            //}
+            else
+            {
+                product.ExpireDate = null;
+            }
 
             // setting of supplier
             var supplierEntity = this.dbContext.Suppliers.FirstOrDefault(s => s.SupplierName == createProduct.Supplier);
